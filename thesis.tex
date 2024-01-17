@@ -1,0 +1,83 @@
+\documentclass[a4paper,12pt]{jsreport}
+
+\usepackage{thesis}%				論文の体裁			(必ず付ける)
+\usepackage[dvipdfmx]{graphicx}	%	図を取り込む		(推奨)
+%\usepackage{newtxtext}%				欧文フォントを変える(お好み)
+\usepackage{enumitem}
+\usepackage{caption} % caption パッケージの追加
+\captionsetup[figure]{labelsep=colon} % 図のキャプションの形式を "図6.1:" に設定
+\usepackage{listings}
+% \usepackage{jlisting} を削除
+
+\lstset{
+  language=[ISO]C++,       % 言語の指定
+  basicstyle={\ttfamily},  % 等幅フォント
+  commentstyle={\itshape}, % コメントのスタイル
+  % classoffset=1,           % 日本語対応（削除）
+  morecomment=[l]{//},     % コメントの定義
+  % classoffset=0,           % 削除
+  frame={tb},
+  breaklines=true,
+  numbers=none,
+  xrightmargin=0zw,
+  xleftmargin=2zw,
+  keepspaces=true,
+  columns=[l]{fullflexible},
+  lineskip=-0.5ex
+}
+
+\renewcommand{\lstlistingname}{ソースコード}
+
+%ここまでソースコードの表示に関する設定
+
+%著者の情報
+\title{遅延聴覚フィードバックがもたらす影響の客観的な評価方法の検討
+と
+年齢による影響の変化の分析}
+\school{明治大学大学院\hspace{1zw}理工学研究科}% 所属
+\major{電気工学}% 専攻がない場合，\major{}にしてください
+\course{博士前期課程}% 学部生は\course{}にしてください
+\academicyear{2023}%年度 (表紙に「\academicyear年度\degree学位請求論文」と表示されます)
+\degree{修士}% 学部生は\degree{学士}にしてください
+\ymd{2023}{2}{5}%年月日
+\author{山下\hspace{1zw}一樹}% 著者
+\supervisor{村上隆啓}% 指導教員
+\labolatory{知能信号処理研究室}% 所属研究室
+
+% \bkm%				PDFにブックマークをつけるには，ここをコメントアウトしてください．
+% \chaptercover%		章の表紙を作らない場合は，ここをコメントアウトしてください．
+% \sectionclearpage%	節の終わりで改ページしない場合は，ここをコメントアウトしてください．
+
+\begin{document}
+\makecover% 表紙を作成pdflatex thesis.tex
+\tableofcontents% 目次を作成
+% \makepreface%[% 目次とかを作成
+% %ここに図目次などの追加項目を書くことができます．
+% ]
+
+\input{chapter1.tex}
+\input{chapter2.tex}
+\input{chapter3.tex}
+\input{chapter4.tex}
+\input{chapter5.tex}
+\input{chapter6.tex}
+\input{chapter7.tex}
+\input{chapter8.tex}
+
+%参考文献
+\begin{thebibliography}{99}
+	\bibitem{cf:a}著者名，``題目'' 出典論文誌名, Vol. XX, No. YY, pp.ZZ1--ZZ2, Sep,2011
+	\bibitem{cf:b}著者名，``題目'' 出典論文誌名, Vol. XX, No. YY, pp.ZZ1--ZZ2, Sep,2011
+\end{thebibliography}
+\begin{thepublished}{99}
+	\bibitem{cf:c}著者名，``題目'' 出典論文誌名, Vol. XX, No. YY, pp.ZZ1--ZZ2, Sep,2011
+	\bibitem{cf:d}著者名，``題目'' 出典論文誌名, Vol. XX, No. YY, pp.ZZ1--ZZ2, Sep,2011
+\end{thepublished}
+\newpage
+
+\input{acknowledgement.tex}
+
+\appendix
+\input{furoku.tex}
+
+\end{document}

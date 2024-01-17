@@ -1,0 +1,416 @@
+This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.sjis) (TeX Live 2023) (preloaded format=platex 2023.10.26)  17 JAN 2024 23:45
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**thesis.tex
+(./thesis.tex
+pLaTeX2e <2023-02-14>+1, based on
+LaTeX2e <2023-06-01> patch level 1
+L3 programming layer <2023-10-23>
+(c:/texlive/2023/texmf-dist/tex/platex/jsclasses/jsreport.cls
+Document Class: jsreport 2023/02/23 jsclasses (okumura, texjporg)
+Class jsreport Info: Autodetected engine: pLaTeX on input line 237.
+\jsc@mpt=\dimen156
+\jsc@mmm=\dimen157
+\jsc@smallskipamount=\skip48
+LaTeX Info: Redefining \textmc on input line 512.
+LaTeX Info: Redefining \textgt on input line 514.
+\symmincho=\mathgroup4
+LaTeX Font Info:    Overwriting symbol font `mincho' in version `bold'
+(Font)                  JY1/mc/m/n --> JY1/gt/m/n on input line 576.
+LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
+(Font)              scaled to size 9.60999pt on input line 770.
+LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
+(Font)              scaled to size 9.60999pt on input line 770.
+\fullwidth=\dimen158
+LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
+(Font)              scaled to size 7.68799pt on input line 909.
+LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
+(Font)              scaled to size 7.68799pt on input line 909.
+\c@part=\count185
+\c@chapter=\count186
+\c@section=\count187
+\c@subsection=\count188
+\c@subsubsection=\count189
+\c@paragraph=\count190
+\c@subparagraph=\count191
+\@abstractbox=\box68
+\c@figure=\count192
+\c@table=\count193
+\abovecaptionskip=\skip49
+\belowcaptionskip=\skip50
+\jsc@tocl@width=\dimen159
+\@lnumwidth=\dimen160
+\bibindent=\dimen161
+(c:/texlive/2023/texmf-dist/tex/platex/jsclasses/jslogo.sty
+Package: jslogo 2019/07/25 okumura, texjporg
+LaTeX Info: Redefining \TeX on input line 82.
+LaTeX Info: Redefining \LaTeX on input line 135.
+LaTeX Info: Redefining \LaTeXe on input line 188.
+)
+\heisei=\count194
+) (./thesis.sty
+(c:/texlive/2023/texmf-dist/tex/latex/setspace/setspace.sty
+Package: setspace 2022/12/04 v6.7b set line spacing
+)
+(c:/texlive/2023/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
+Package: fancyhdr 2022/11/09 v4.1 Extensive control of page headers and footers
+
+\f@nch@headwidth=\skip51
+\f@nch@O@elh=\skip52
+\f@nch@O@erh=\skip53
+\f@nch@O@olh=\skip54
+\f@nch@O@orh=\skip55
+\f@nch@O@elf=\skip56
+\f@nch@O@erf=\skip57
+\f@nch@O@olf=\skip58
+\f@nch@O@orf=\skip59
+))
+(c:/texlive/2023/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+
+(c:/texlive/2023/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks18
+)
+(c:/texlive/2023/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2022/03/10 v1.4e Standard LaTeX Graphics (DPC,SPQR)
+
+(c:/texlive/2023/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
+)
+(c:/texlive/2023/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: dvipdfmx.def on input line 107.
+
+(c:/texlive/2023/texmf-dist/tex/latex/graphics-def/dvipdfmx.def
+File: dvipdfmx.def 2022/09/22 v5.0m Graphics/color driver for dvipdfmx
+))
+\Gin@req@height=\dimen162
+\Gin@req@width=\dimen163
+)
+(c:/texlive/2023/texmf-dist/tex/latex/enumitem/enumitem.sty
+Package: enumitem 2019/06/20 v3.9 Customized lists
+\labelindent=\skip60
+\enit@outerparindent=\dimen164
+\enit@toks=\toks19
+\enit@inbox=\box69
+\enit@count@id=\count195
+\enitdp@description=\count196
+)
+(c:/texlive/2023/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2023/08/05 v3.6o Customizing captions (AR)
+
+(c:/texlive/2023/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
+\caption@tempdima=\dimen165
+\captionmargin=\dimen166
+\caption@leftmargin=\dimen167
+\caption@rightmargin=\dimen168
+\caption@width=\dimen169
+\caption@indent=\dimen170
+\caption@parindent=\dimen171
+\caption@hangindent=\dimen172
+Package caption Info: Unknown document class (or package),
+(caption)             standard defaults will be used.
+Package caption Info: \@makecaption = \long macro:#1#2->\vskip \abovecaptionski
+p \iftdir \sbox \@tempboxa {#1. #2}\else \sbox \@tempboxa {#1. #2}\fi \ifdim \w
+d \@tempboxa >\hsize \iftdir #1. #2\relax \par \else #1. #2\relax \par \fi \els
+e \global \@minipagefalse \hb@xt@ \hsize {\hfil \box \@tempboxa \hfil }\fi \vsk
+ip \belowcaptionskip  on input line 1175.
+)
+
+Package caption Warning: Unknown document class (or package),
+(caption)                standard defaults will be used.
+See the caption package documentation for explanation.
+
+\c@caption@flags=\count197
+\c@continuedfloat=\count198
+) (c:/texlive/2023/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count199
+\lst@gtempboxa=\box70
+\lst@token=\toks20
+\lst@length=\count266
+\lst@currlwidth=\dimen173
+\lst@column=\count267
+\lst@pos=\count268
+\lst@lostspace=\dimen174
+\lst@width=\dimen175
+\lst@newlines=\count269
+\lst@lineno=\count270
+\lst@maxwidth=\dimen176
+
+(c:/texlive/2023/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
+\c@lstnumber=\count271
+\lst@skipnumbers=\count272
+\lst@framebox=\box71
+)
+(c:/texlive/2023/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2023/02/27 1.9 listings configuration
+))
+Package: listings 2023/02/27 1.9 (Carsten Heinz)
+
+(c:/texlive/2023/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2023/02/27 1.9 listings language file
+)
+(c:/texlive/2023/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2023/02/27 1.9 listings language file
+)
+(c:/texlive/2023/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
+)
+(c:/texlive/2023/texmf-dist/tex/latex/l3backend/l3backend-dvips.def
+File: l3backend-dvips.def 2023-10-23 L3 backend support: dvips
+\l__pdf_internal_box=\box72
+\g__pdf_backend_object_int=\count273
+\l__pdf_backend_content_box=\box73
+\l__pdf_backend_model_box=\box74
+\g__pdf_backend_annotation_int=\count274
+\g__pdf_backend_link_int=\count275
+\g__pdf_backend_link_sf_int=\count276
+)
+(./thesis.aux)
+\openout1 = `thesis.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for JY1/mc/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    Checking defaults for JT1/mc/m/n on input line 51.
+LaTeX Font Info:    ... okay on input line 51.
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: listings package is loaded.
+Package caption Info: End \AtBeginDocument code.
+\c@lstlisting=\count277
+LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
+(Font)              scaled to size 16.60605pt on input line 52.
+LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
+(Font)              scaled to size 16.60605pt on input line 52.
+LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
+(Font)              scaled to size 23.90964pt on input line 52.
+LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
+(Font)              scaled to size 23.90964pt on input line 52.
+ [1
+
+]
+LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
+(Font)              scaled to size 9.60999pt on input line 53.
+LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
+(Font)              scaled to size 9.60999pt on input line 53.
+LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
+(Font)              scaled to size 23.90964pt on input line 53.
+LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
+(Font)              scaled to size 23.90964pt on input line 53.
+ (./thesis.toc
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 2.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 2.
+LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
+(Font)              scaled to size 6.72699pt on input line 2.
+LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
+(Font)              scaled to size 4.805pt on input line 2.
+LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <10> not available
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 26.
+LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
+(Font)              scaled to size 9.60999pt on input line 26.
+LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <10> not available
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 26.
+LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
+(Font)              scaled to size 9.60999pt on input line 26.
+ [1
+
+
+])
+\tf@toc=\write3
+\openout3 = `thesis.toc'.
+
+ (./chapter1.tex [2]
+第1章
+LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
+(Font)              scaled to size 19.9311pt on input line 1.
+LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
+(Font)              scaled to size 19.9311pt on input line 1.
+LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
+(Font)              scaled to size 19.9311pt on input line 1.
+LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
+(Font)              scaled to size 19.9311pt on input line 1.
+LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
+(Font)              scaled to size 13.83836pt on input line 3.
+LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
+(Font)              scaled to size 13.83836pt on input line 3.
+LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
+(Font)              scaled to size 13.83836pt on input line 3.
+LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
+(Font)              scaled to size 13.83836pt on input line 3.
+[3
+
+] [4] [5]) (./chapter2.tex
+第2章
+) (./chapter3.tex [6
+
+] [7]
+第3章
+File: figures/Syukann/gamen_1.png Graphic file (type bmp)
+<figures/Syukann/gamen_1.png>
+File: figures/Syukann/app_2.png Graphic file (type bmp)
+<figures/Syukann/app_2.png>
+[8
+
+] [9]
+LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
+(Font)              scaled to size 11.53198pt on input line 22.
+LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
+(Font)              scaled to size 11.53198pt on input line 22.
+LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
+(Font)              scaled to size 11.53198pt on input line 22.
+LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
+(Font)              scaled to size 11.53198pt on input line 22.
+ [10] [11] [12]) (./chapter4.tex [13]
+第4章
+[14
+
+]
+File: figures/system_button_click.png Graphic file (type bmp)
+<figures/system_button_click.png>
+ [15] [16] [17]
+File: figures/Apprication/App_kyakkann.png Graphic file (type bmp)
+<figures/Apprication/App_kyakkann.png>
+ [18] [19] [20]
+File: figures/System/Delay_theory.png Graphic file (type bmp)
+<figures/System/Delay_theory.png>
+ [21]
+LaTeX Font Info:    Trying to load font information for OML+cmr on input line 8
+4.
+
+(c:/texlive/2023/texmf-dist/tex/latex/base/omlcmr.fd
+File: omlcmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 84.
+File: figures/DelayCheck/DelayCheck_EX.png Graphic file (type bmp)
+<figures/DelayCheck/DelayCheck_EX.png>
+ [22]
+File: figures/DelayCheck/SuperFamicom_delayCheck.png Graphic file (type bmp)
+<figures/DelayCheck/SuperFamicom_delayCheck.png>
+ [23])
+(./chapter5.tex [24] [25]
+第5章
+[26
+
+] [27] [28]) (./chapter6.tex [29]
+第6章
+File: figures/Yobi/Var/BPM.png Graphic file (type bmp)
+<figures/Yobi/Var/BPM.png>
+[30
+
+]
+File: figures/Yobi/Var/NumberOfSamples_Sa_Sc.png Graphic file (type bmp)
+<figures/Yobi/Var/NumberOfSamples_Sa_Sc.png>
+File: figures/Yobi/Var/NumberOfSamples_Sb.png Graphic file (type bmp)
+<figures/Yobi/Var/NumberOfSamples_Sb.png>
+ [31] [32] [33] [34]
+File: figures/Yobi/Var/Normal_bunnsann.png Graphic file (type bmp)
+<figures/Yobi/Var/Normal_bunnsann.png>
+File: figures/Yobi/Var/Unique_bunsan.png Graphic file (type bmp)
+<figures/Yobi/Var/Unique_bunsan.png>
+File: figures/Yobi/Var/MSE_MedSE.png Graphic file (type bmp)
+<figures/Yobi/Var/MSE_MedSE.png>
+ [35] [36]) (./chapter7.tex [37]
+第7章
+[38
+
+] [39]
+File: figures/Production/110ms_Distribution_of_observations.png Graphic file (t
+ype bmp)
+<figures/Production/110ms_Distribution_of_observations.png>
+ [40]
+File: figures/Production/40msDistribution_of_observations.png Graphic file (typ
+e bmp)
+<figures/Production/40msDistribution_of_observations.png>
+) (./chapter8.tex [41] [42]
+第8章
+) [43
+
+] [44
+
+] [45
+
+] (./acknowledgement.tex) (./furoku.tex [46
+
+]
+付録A 
+LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <20.74> not available
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 1.
+LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
+(Font)              scaled to size 19.9311pt on input line 1.
+LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <20.74> not available
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 1.
+LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
+(Font)              scaled to size 19.9311pt on input line 1.
+File: furoku_A/douisyo_meiji.pdf Graphic file (type pdf)
+<furoku_A/douisyo_meiji.pdf>
+
+LaTeX Warning: Float too large for page by 24.56535pt on input line 9.
+
+File: furoku_A/Douisyo_Not60NotMeiji.pdf Graphic file (type pdf)
+<furoku_A/Douisyo_Not60NotMeiji.pdf>
+
+LaTeX Warning: Float too large for page by 8.2389pt on input line 14.
+
+File: furoku_A/Douisyo_60NotMeiji.pdf Graphic file (type pdf)
+<furoku_A/Douisyo_60NotMeiji.pdf>
+
+LaTeX Warning: Float too large for page by 8.2389pt on input line 19.
+
+File: furoku_A/Less60_gaiyou.pdf Graphic file (type pdf)
+<furoku_A/Less60_gaiyou.pdf>
+File: furoku_A/MoreThan60_Gaiyou.pdf Graphic file (type pdf)
+<furoku_A/MoreThan60_Gaiyou.pdf>
+File: furoku_A/MoreThan60_tyouryoku.pdf Graphic file (type pdf)
+<furoku_A/MoreThan60_tyouryoku.pdf>
+File: furoku_A/Less60_Tezyunn.pdf Graphic file (type pdf)
+<furoku_A/Less60_Tezyunn.pdf>
+File: furoku_A/Onnryou.pdf Graphic file (type pdf)
+<furoku_A/Onnryou.pdf>
+[47
+
+] [48] [49] [50] [51] [52] [53] [54] [55]
+付録B 
+) [56
+
+] (./thesis.aux)
+ ***********
+pLaTeX2e <2023-02-14>+1, based on
+LaTeX2e <2023-06-01> patch level 1
+L3 programming layer <2023-10-23>
+ ***********
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 4782 strings out of 476504
+ 82382 string characters out of 5801731
+ 1931881 words of memory out of 5000000
+ 26677 multiletter control sequences out of 15000+600000
+ 569434 words of font info for 92 fonts, out of 8000000 for 9000
+ 41 hyphenation exceptions out of 8191
+ 57i,15n,69p,1652b,444s stack positions out of 10000i,1000n,20000p,200000b,200000s
+
+Output written on thesis.dvi (57 pages, 103608 bytes).

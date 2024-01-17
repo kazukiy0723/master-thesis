@@ -1,0 +1,229 @@
+\usepackage{setspace}%				行間
+\usepackage{fancyhdr}%				ヘッダ
+
+\def\foo{called with\@ifstar{ star}{out star}}
+\def\foo{called with\@ifstar{ star 2}{out star 2}}
+
+%しおり・リンク作成---------------------------------------------------
+\newcommand\bkm{
+\usepackage[dvipdfmx]{hyperref}%	しおり・リンク作成
+%hyperref設定
+\hypersetup{%
+bookmarks=true,%				しおりをつくる
+bookmarksnumbered=true,%		しおりに節番号などを付ける
+colorlinks=true,%				しおりに色を付ける
+linkcolor=black,%				リンクの色
+citecolor=black,%
+linkbordercolor=1 1 1,%			リンクの枠の色
+setpagesize=false%
+}
+\AtBeginDvi{\special{pdf:tounicode 90ms-RKSJ-UCS2}}	%しおりの文字化け防止
+}
+
+%表紙と署名---------------------------------------------------------------
+\def\school#1{\def\@school{#1}}% 所属
+\def\major#1{\def\@major{#1}}% 専攻
+\def\course#1{\def\@course{#1}}% 課程
+\def\academicyear#1{\def\@academicyear{#1}}% 年度
+\def\degree#1{\def\@degree{#1}}% 学位
+\def\ymd#1#2#3{% 年月日
+  \def\@year{#1}
+  \def\@month{#2}
+  \def\@date{#3}
+}
+\def\labolatory#1{\def\@labolatory{#1}}%	研究室名
+\def\supervisor#1{\def\@supervisor{#1}}%	指導教員
+%表紙
+\def\makecover{%
+  {\centering%
+  \vfill%
+  {\LARGE \@school\par}%
+  {\LARGE\@academicyear 年度\@degree 学位請求論文\par}\vspace{20mm}%		卒業論文
+  {\Huge\@title\par}\vfill%								タイトル
+  {\LARGE\@year 年\@month 月\par}%										提出年月日
+  {\LARGE 指導教員\hspace{1zw}\@supervisor\par}%指導教員
+  \ifx\@major\empty\else%
+  {\LARGE 専攻\hspace{1zw}\@major 専攻\par}\fi%
+  {\LARGE 研究室名\hspace{1zw}\@labolatory\par}%
+  {\LARGE 学位請求者\hspace{1zw}\@author\par}%
+  \vfill%
+  }
+  \thispagestyle{empty}%
+  \clearpage
+  \setcounter{page}{1}
+  \def\thepage{\arabic{page}}
+}
+
+\def\makepreface[#1]{%
+\def\thepage{\roman{page}}
+\setcounter{page}{1}
+\tableofcontents%	目次
+\newpage%
+#1%	additional contents
+\setcounter{page}{1}
+\def\thepage{\arabic{page}}
+}
+
+% 署名
+\def\makesignature{%
+\def\signature##1{
+\vfill%
+\begin{list}{}{\setlength\itemsep{-0.7zh}}%
+\item \hfill \@year 年\@month 月\@date 日%
+\item \hfill \@school%
+\ifx\@major\empty\else%
+\item \hfill \@major 専攻\ifx\@course\empty\else\hspace{1zw}\@course\fi\fi%
+\item \hfill \@labolatory%
+\ifx##1\empty\else%
+\item \hfill ##1\fi
+\end{list}%
+\vspace{4zh}}%
+\@ifstar{\signature{}}{\signature\@author}%
+}
+% 余白と行間 ------------------------------------------------------------
+\setstretch{1.3}% 行間
+
+%章の表紙------------------------------------------------------------
+\newcommand\chaptercover{%
+\def\@makechapterhead##1{%
+\clearpage\thispagestyle{empty}%
+\mbox{}\vskip 12zh%
+%\hrule height 0.5pt\vskip1.5zh
+\noindent{\LARGE\headfont 第\thechapter 章\par\noindent\Huge##1\par}%
+%\vskip1.0zh\hrule height 0.25pt
+\vfill%
+\clearpage}}
+
+%節の終わりで改ページ------------------------------------------------------------
+\newcommand\sectionclearpage{%
+\renewcommand\section{%
+\ifnum\c@section<1\relax\else\clearpage\fi%
+\@startsection%
+{section}{1}{0pt}%
+{1.5\Cvs \@plus.5\Cvs \@minus.2\Cvs}%
+{.5\Cvs \@plus.3\Cvs}%
+{\reset@font\Large\bfseries}}}
+
+%ヘッダと章・節のカウンタ-------------------------------------------------------------
+\pagestyle{fancy}
+\renewcommand{\chaptermark}[1]{%
+  \markboth{%
+    \ifnum\value{chapter}>0
+      第\thechapter{}章\hspace{1em}
+    \fi
+    #1%
+  }{}%
+}
+\lhead{\leftmark}
+\rhead{}
+\renewcommand{\jsParagraphMark}{}
+\renewcommand{\sectionmark}[1]{\markright{\thesection #1}{}}
+
+%箇条書き-------------------------------------------------------------
+\renewcommand{\labelenumi}{（\theenumi）}
+\renewcommand{\labelenumii}{（\theenumii）}
+\renewcommand{\labelenumiii}{（\theenumiii）}
+\renewcommand{\labelenumiv}{（\theenumiv）}
+%キャプション-------------------------------------------------------------
+\long\def\@makecaption#1#2{%
+  \vskip\abovecaptionskip
+  \iftdir\sbox\@tempboxa{#1. #2}%
+    \else\sbox\@tempboxa{#1. #2}%
+  \fi
+  \ifdim \wd\@tempboxa >\hsize
+    \iftdir #1. #2\relax\par
+      \else #1. #2\relax\par\fi
+  \else
+    \global \@minipagefalse
+    \hb@xt@\hsize{\hfil\box\@tempboxa\hfil}%
+  \fi
+  \vskip\belowcaptionskip}
+%付録-------------------------------------------------------------
+\renewcommand{\appendix}{\par
+  \setcounter{chapter}{0}%
+  \setcounter{section}{0}%
+  \renewcommand{\@chapapp}{\appendixname}%
+  \renewcommand{\@chappos}\space%
+  \renewcommand{\thechapter}{\@Alph\c@chapter}
+  \renewcommand{\chaptermark}[1]{\markboth{付録\ \normalfont\thechapter~##1}{}}
+%
+\def\@makechapterhead##1{\hbox{}%
+  \vskip2\Cvs
+  {\parindent\z@
+   \raggedright
+   \reset@font\huge\bfseries
+   \leavevmode
+   \ifnum \c@secnumdepth >\m@ne
+     \setlength\@tempdima{\linewidth}%
+     \setbox\z@\hbox{\@chapapp\thechapter\@chappos\hskip1zw}%
+     \addtolength\@tempdima{-\wd\z@}%
+     \unhbox\z@\nobreak
+     \vtop{\hsize\@tempdima##1}%
+   \else
+     ##1\relax
+   \fi}\nobreak\vskip3\Cvs}
+}
+%参考文献-----------------------------------------------------------
+\renewcommand{\bibname}{参考文献}
+\renewenvironment{thebibliography}[1]% 再定義
+{\chapter*{\bibname\@mkboth{\bibname}{\bibname}}%
+\markright{\bibname}
+ \addcontentsline{toc}{chapter}{\bibname}% この行追加
+   \list{\@biblabel{\@arabic\c@enumiv}}%
+        {\settowidth\labelwidth{\@biblabel{#1}}%
+         \leftmargin\labelwidth
+         \advance\leftmargin\labelsep
+         \@openbib@code
+         \usecounter{enumiv}%
+         \let\p@enumiv\@empty
+         \renewcommand\theenumiv{\@arabic\c@enumiv}}%
+   \sloppy
+   \clubpenalty4000
+   \@clubpenalty\clubpenalty
+   \widowpenalty4000%
+   \sfcode`\.\@m}
+  {\def\@noitemerr
+    {\@latex@warning{Empty `thebibliography' environment}}%
+   \endlist}
+%発表論文-----------------------------------------------------------
+\def\editthepublished
+{
+\renewcommand{\bibname}{発表論文}
+\renewcommand\bibitem{\@ifnextchar[\@lbibitem\@bibitem}
+\def\bibitem{\@ifnextchar[\@lbibitem\@bibitem}
+%\def\@lbibitem[#1]#2{\item[\@biblabel{#1}\hfill]\if@filesw
+%      {\let\protect\noexpand
+%       \immediate
+%       \write\@auxout{\string\bibcite{#2}{#1}}}\fi\ignorespaces}
+\def\@bibitem##1{\item\if@filesw \immediate\write\@auxout
+       {\string\bibcite{##1}{P\@arabic\c@enumiv}}\fi\ignorespaces}
+}
+\newenvironment{thepublished}[1]% 再定義
+{%
+\editthepublished%
+\chapter*{\bibname\@mkboth{\bibname}{\bibname}}%
+\markright{\bibname}
+ \addcontentsline{toc}{chapter}{\bibname}% この行追加
+   \list{\@biblabel{P\@arabic\c@enumiv}}%
+        {\settowidth\labelwidth{\@biblabel{#1}}%
+         \leftmargin\labelwidth
+         \advance\leftmargin\labelsep
+         \@openbib@code
+         \usecounter{enumiv}%
+         \let\p@enumiv\@empty
+         \renewcommand\theenumiv{\@arabic\c@enumiv}}%
+   \sloppy
+   \clubpenalty4000
+   \@clubpenalty\clubpenalty
+   \widowpenalty4000%
+   \sfcode`\.\@m}
+  {\def\@noitemerr
+    {\@latex@warning{Empty `thebibliography' environment}}%
+   \endlist}
+%謝辞-----------------------------------------------------------
+\newenvironment{acknowledgement}
+{\chapter*{謝辞}
+\markboth{謝辞}{謝辞}
+\addcontentsline{toc}{chapter}{謝辞}
+}{}
+

@@ -1,0 +1,10 @@
+%
+% PDFの結合
+% コマンドラインからpdflatex mergepdfを実行してください
+%
+\documentclass{article}
+\usepackage{pdfpages}
+\begin{document}
+\includepdf[nup=1x1, pages=-]{cover.pdf}%   表紙のPDFファイル
+\includepdf[nup=1x1, pages=-]{thesis.pdf}%  論文本体のPDFファイル
+\end{document}
