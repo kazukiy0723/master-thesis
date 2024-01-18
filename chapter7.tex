@@ -27,7 +27,7 @@
     \hline
   \end{tabular}
 \end{table}
-\begin{table}[hbtp]
+\begin{table}[btp]
   \caption{若年者の実験Bにおける遅延時間の提示順}
   \label{table:young_b}
   \centering
@@ -83,18 +83,75 @@
 \end{table}
 \newpage
 \section{調査結果}
-\subsection{外れ値の除去}
-データの代表的な統計量，特に平均や標準偏差は，対象のデータ分布が正規分布に従っている場合にその真の特性を正確に反映する．したがって，遅延時間ごとに得られたボタンの押下時間間隔のデータが正規分布に従うかどうかを確認することが必要である．これにより，分散や標準偏差を用いてデータ分布のばらつきを評価することの妥当性を検討する．帰無仮説を「ボタン押下時間間隔のデータの母集団の分布は，正規分布に従う」として，コルモゴロフ・スミルノフ検定を用いて，有意水準5％で観測値が正規分布に従うかどうかを検定する．遅延時間に応じたボタンの押下時間間隔のデータのヒストグラムを図7.1，図7.2，図7.3，図7.4に示す．また，正規性の検定の結果を表7.1に記載する．
-外れ値の除去は，被験者ごとに各遅延時間での観測値を
-\begin{figure}[bt]
+\subsection{観測値の分布}
+% データの代表的な統計量，特に平均や標準偏差は，対象のデータ分布が正規分布に従っている場合にその真の特性を正確に反映する．
+% したがって，遅延時間ごとに得られたボタンの押下時間間隔のデータが正規分布に従うかどうかを確認することが必要である．
+% これにより，分散や標準偏差を用いてデータ分布のばらつきを評価することの妥当性を検討する．
+% 帰無仮説を「ボタン押下時間間隔のデータの母集団の分布は，正規分布に従う」として，コルモゴロフ・スミルノフ検定を用いて，有意水準5％で観測値が正規分布に従うかどうかを検定する．
+% 遅延時間に応じたボタンの押下時間間隔のデータのヒストグラムを図7.1，図7.2，図7.3，図7.4に示す．また，正規性の検定の結果を表7.1に記載する．
+% 外れ値の除去は，被験者ごとに各遅延時間での観測値を
+本節では，遅延時間ごとに得られたボタンの押下時間間隔のデータの分布について箱ひげ図を用いて示す．
+箱ひげ図は，観測値の中央値，第一四分位数，第三四分位数を示すことで，データの分布状況と中心的傾向を効果的に視覚化する．
+さらに，箱ひげ図に外れ値を示すことで，データのばらつきを直接的に評価することができる．
+これにより，データの基本的な統計的特徴を簡潔に表現し，後続の分析におけるデータの解釈を支援する．
+図\ref{fig:110ms_Distribution_of_observations}，図\ref{fig:40ms_Distribution_of_observations}，図\ref{fig:110ms_Distribution_of_observations_by_old}，図\ref{fig:40ms_Distribution_of_observations_by_old}に遅延時間ごとのボタンの押下時間間隔のデータの分布を示す．
+これらの図より，それぞれの遅延時間でのボタンの押下時間間隔のデータには，一定数の外れ値が存在することがわかる．
+そのため，本研究では，外れ値を除外したデータを用いて分析を行う．
+外れ値の除外には，各遅延時間で被験者ごとに観測値の第一四分位数-1.5×IQRを下回る値と第三四分位数+1.5×IQRを上回る値を算出し，それらを排除する方法を用いる．
+この方法は，中央値と第一・第三四分位数を用いて算出される四分位範囲(IQR)を用いて，データのばらつきを評価する方法である．
+IQRは，第一四分位数と第三四分位数の差であり，データの中央50％の範囲を示す．
+この方法により，これから行う分析において，外れ値の影響を排除したデータを用いることができ，適切な評価が可能となる．
+
+\begin{figure}[tbp]
   \centering
-  \includegraphics[scale=0.4]{figures/Production/110ms_Distribution_of_observations.png}
+  \includegraphics[scale=0.4]{figures/Honbann/BOXPLOT/BoxPlot_young_110ms.png}
   \caption{実験Aにおける遅延時間ごとの若年者のデータの分布}
+  \label{fig:110ms_Distribution_of_observations}
 \end{figure}
-\subsection{遅延時間と評価指標の関係}
-\begin{figure}[bt]
+\begin{figure}[tbp]
   \centering
-  \includegraphics[scale=0.4]{figures/Production/40msDistribution_of_observations.png}
+  \includegraphics[scale=0.4]{figures/Honbann/BOXPLOT/BoxPlot_young_40ms.png}
   \caption{実験Bにおける遅延時間ごとの若年者のデータの分布}
+  \label{fig:40ms_Distribution_of_observations}
+\end{figure}
+\begin{figure}[tbp]
+  \centering
+  \includegraphics[scale=0.4]{figures/Honbann/BOXPLOT/BoxPlot_old_110ms.png}
+  \caption{実験Aにおける遅延時間ごとの高齢者のデータの分布}
+  \label{fig:110ms_Distribution_of_observations_by_old}
+\end{figure}
+\begin{figure}[tbp]
+  \centering
+  \includegraphics[scale=0.4]{figures/Honbann/BOXPLOT/BoxPlot_old_40ms.png}
+  \caption{実験Bにおける遅延時間ごとの高齢者のデータの分布}
+  \label{fig:40ms_Distribution_of_observations_by_old}
+\end{figure}
+\newpage
+\subsection{遅延時間と評価指標の関係}
+図\ref{fig:Var_110ms_Sa_Sb}，図\ref{fig:Var_110ms_Sc}，図\ref{fig:110ms_MSE_MedSE}，図\ref{fig:Normalized_110ms_MSE_MedSE}に，遅延時間ごとの若年者と高齢者のMSEとMedSEの比較を示す．
+\begin{figure}[tbp]
+  \centering
+  \includegraphics[scale=0.5]{figures/Honbann/Comparison_young_old/Var_110ms_Sa_Sb.png}
+  \caption{実験Aにおける若年者と高齢者の評価値の遅延時間変動の比較}
+  \label{fig:Var_110ms_Sa_Sb}
+\end{figure}
+\begin{figure}[tbp]
+  \centering
+  \includegraphics[scale=0.5]{figures/Honbann/Comparison_young_old/Var_110ms_Sc.png}
+  \caption{実験Aにおける若年者と高齢者の評価値の遅延時間変動の比較}
+  \label{fig:Var_110ms_Sc}
+\end{figure}
+
+\begin{figure}[tbp]
+  \centering
+  \includegraphics[scale=0.5]{figures/Honbann/Comparison_young_old/110ms_MSE_MedSE.png}
+  \caption{実験Aにおける遅延時間ごとの若年者と高齢者のMSEとMedSEの比較}
+  \label{fig:110ms_MSE_MedSE}
+\end{figure}
+\begin{figure}[tbp]
+  \centering
+  \includegraphics[scale=0.5]{figures/Honbann/Comparison_young_old/Normalized110ms_MSE_MedSE.png}
+  \caption{実験Aにおける遅延時間ごとの若年者と高齢者の正規化したMSEとMedSEの比較}
+  \label{fig:Normalized_110ms_MSE_MedSE}
 \end{figure}
 
