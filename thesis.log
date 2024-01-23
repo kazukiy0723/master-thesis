@@ -1,4 +1,4 @@
-This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.sjis) (TeX Live 2023) (preloaded format=platex 2023.10.26)  18 JAN 2024 16:20
+This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.sjis) (TeX Live 2023) (preloaded format=platex 2023.10.26)  23 JAN 2024 16:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -321,7 +321,14 @@ File: l3backend-dvips.def 2023-10-23 L3 backend support: dvips
 \g__pdf_backend_link_int=\count289
 \g__pdf_backend_link_sf_int=\count290
 )
-(./thesis.aux)
+(./thesis.aux
+
+LaTeX Warning: Label `cf:c' multiply defined.
+
+
+LaTeX Warning: Label `cf:d' multiply defined.
+
+)
 \openout1 = `thesis.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 56.
@@ -520,7 +527,7 @@ File: figures/Honbann/BOXPLOT/BoxPlot_old_110ms.png Graphic file (type bmp)
 <figures/Honbann/BOXPLOT/BoxPlot_old_110ms.png>
 File: figures/Honbann/BOXPLOT/BoxPlot_old_40ms.png Graphic file (type bmp)
 <figures/Honbann/BOXPLOT/BoxPlot_old_40ms.png>
- [41] [42] [43]
+ [41] [42]
 File: figures/Honbann/Comparison_young_old/Var_110ms_Sa_Sb.png Graphic file (ty
 pe bmp)
 <figures/Honbann/Comparison_young_old/Var_110ms_Sa_Sb.png>
@@ -533,15 +540,15 @@ pe bmp)
 File: figures/Honbann/Comparison_young_old/Normalized110ms_MSE_MedSE.png Graphi
 c file (type bmp)
 <figures/Honbann/Comparison_young_old/Normalized110ms_MSE_MedSE.png>
-) (./chapter8.tex [44] [45] [46]
+) (./chapter8.tex [43] [44] [45]
 第8章
-) [47
+) [46
+
+] [47
 
 ] [48
 
-] [49
-
-] (./acknowledgement.tex) (./furoku.tex [50
+] (./acknowledgement.tex) (./furoku.tex [49
 
 ]
 付録A 
@@ -578,11 +585,11 @@ File: furoku_A/Less60_Tezyunn.pdf Graphic file (type pdf)
 <furoku_A/Less60_Tezyunn.pdf>
 File: furoku_A/Onnryou.pdf Graphic file (type pdf)
 <furoku_A/Onnryou.pdf>
-[51
+[50
 
-] [52] [53] [54] [55] [56] [57] [58] [59]
+] [51] [52] [53] [54] [55] [56] [57] [58]
 付録B 
-) [60
+) [59
 
 ] (./thesis.aux)
  ***********
@@ -590,16 +597,20 @@ pLaTeX2e <2023-02-14>+1, based on
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-10-23>
  ***********
+
+
+LaTeX Warning: There were multiply-defined labels.
+
 Package rerunfilecheck Info: File `thesis.out' has not changed.
 (rerunfilecheck)             Checksum: F9D05C44BE5DC4F60EC14C52264AC4CB;4880.
  ) 
 Here is how much of TeX's memory you used:
- 11955 strings out of 476504
- 193872 string characters out of 5801731
- 1930881 words of memory out of 5000000
- 33725 multiletter control sequences out of 15000+600000
+ 11957 strings out of 476504
+ 193884 string characters out of 5801731
+ 1931881 words of memory out of 5000000
+ 33727 multiletter control sequences out of 15000+600000
  569434 words of font info for 92 fonts, out of 8000000 for 9000
  41 hyphenation exceptions out of 8191
  73i,15n,79p,1652b,593s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on thesis.dvi (61 pages, 142196 bytes).
+Output written on thesis.dvi (60 pages, 143404 bytes).
