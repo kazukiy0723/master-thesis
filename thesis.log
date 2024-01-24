@@ -1,4 +1,4 @@
-This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.sjis) (TeX Live 2023) (preloaded format=platex 2023.10.26)  24 JAN 2024 21:57
+This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.sjis) (TeX Live 2023) (preloaded format=platex 2023.10.26)  24 JAN 2024 23:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -321,38 +321,31 @@ File: l3backend-dvips.def 2023-10-23 L3 backend support: dvips
 \g__pdf_backend_link_int=\count289
 \g__pdf_backend_link_sf_int=\count290
 )
-(./thesis.aux
-
-LaTeX Warning: Label `cf:f' multiply defined.
-
-
-LaTeX Warning: Label `cf:f' multiply defined.
-
-)
+(./thesis.aux)
 \openout1 = `thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for JY1/mc/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for JT1/mc/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for JY1/mc/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for JT1/mc/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
 Package caption Info: listings package is loaded.
@@ -370,31 +363,31 @@ Package color Info: Driver file: dvipdfmx.def on input line 149.
 File: dvipsnam.def 2016/06/17 v3.0m Driver-dependent file (DPC,SPQR)
 )
 (c:/texlive/2023/texmf-dist/tex/latex/graphics/mathcolor.ltx))
-Package hyperref Info: Link coloring ON on input line 56.
+Package hyperref Info: Link coloring ON on input line 57.
  (./thesis.out)
 (./thesis.out)
 \@outlinefile=\write3
 \openout3 = `thesis.out'.
 
 LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
-(Font)              scaled to size 16.60605pt on input line 57.
+(Font)              scaled to size 16.60605pt on input line 58.
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 16.60605pt on input line 57.
+(Font)              scaled to size 16.60605pt on input line 58.
 LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
-(Font)              scaled to size 23.90964pt on input line 57.
+(Font)              scaled to size 23.90964pt on input line 58.
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 23.90964pt on input line 57.
+(Font)              scaled to size 23.90964pt on input line 58.
  [1
 
 ]
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 9.60999pt on input line 58.
+(Font)              scaled to size 9.60999pt on input line 59.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 9.60999pt on input line 58.
+(Font)              scaled to size 9.60999pt on input line 59.
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 23.90964pt on input line 58.
+(Font)              scaled to size 23.90964pt on input line 59.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 23.90964pt on input line 58.
+(Font)              scaled to size 23.90964pt on input line 59.
  (./thesis.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 2.
@@ -405,21 +398,21 @@ LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
 (Font)              scaled to size 4.805pt on input line 2.
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <10> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 26.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 18.
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 9.60999pt on input line 26.
+(Font)              scaled to size 9.60999pt on input line 18.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <10> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 26.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 18.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 9.60999pt on input line 26.
+(Font)              scaled to size 9.60999pt on input line 18.
  [1
 
 
-])
+] [2])
 \tf@toc=\write4
 \openout4 = `thesis.toc'.
 
- (./chapter1.tex [2]
+ (./chapter1.tex [3]
 第1章
 LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
 (Font)              scaled to size 19.9311pt on input line 1.
@@ -437,24 +430,21 @@ LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
 (Font)              scaled to size 13.83836pt on input line 3.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
 (Font)              scaled to size 13.83836pt on input line 3.
+[4
 
-LaTeX Warning: Citation `DAF' on page 3 undefined on input line 16.
-
-[3
-
-] [4] [5]) (./chapter2.tex
+] [5] [6]) (./chapter2.tex
 第2章
-) (./chapter3.tex [6
+) (./chapter3.tex [7
 
-] [7]
+] [8]
 第3章
 File: figures/Syukann/gamen_1.png Graphic file (type bmp)
 <figures/Syukann/gamen_1.png>
 File: figures/Syukann/app_2.png Graphic file (type bmp)
 <figures/Syukann/app_2.png>
-[8
+[9
 
-] [9]
+] [10]
 LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
 (Font)              scaled to size 11.53198pt on input line 22.
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
@@ -463,20 +453,20 @@ LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
 (Font)              scaled to size 11.53198pt on input line 22.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
 (Font)              scaled to size 11.53198pt on input line 22.
- [10] [11] [12]) (./chapter4.tex [13]
+ [11] [12] [13]) (./chapter4.tex [14]
 第4章
-[14
+[15
 
 ]
 File: figures/system_button_click.png Graphic file (type bmp)
 <figures/system_button_click.png>
- [15] [16] [17]
+ [16] [17] [18]
 File: figures/Apprication/App_kyakkann.png Graphic file (type bmp)
 <figures/Apprication/App_kyakkann.png>
- [18] [19] [20]
+ [19] [20] [21]
 File: figures/System/Delay_theory.png Graphic file (type bmp)
 <figures/System/Delay_theory.png>
- [21]
+ [22]
 LaTeX Font Info:    Trying to load font information for OML+cmr on input line 8
 4.
 
@@ -492,36 +482,36 @@ Overfull \hbox (25.80067pt too wide) in paragraph at lines 92--93
  [][] 
  []
 
-[22]
+[23]
 File: figures/DelayCheck/SuperFamicom_delayCheck.png Graphic file (type bmp)
 <figures/DelayCheck/SuperFamicom_delayCheck.png>
- [23]) (./chapter5.tex [24] [25]
+ [24]) (./chapter5.tex [25] [26]
 第5章
-[26
+[27
 
-] [27] [28]) (./chapter6.tex [29]
+] [28] [29]) (./chapter6.tex [30]
 第6章
 File: figures/Yobi/Var/BPM.png Graphic file (type bmp)
 <figures/Yobi/Var/BPM.png>
-[30
+[31
 
 ]
 File: figures/Yobi/Var/NumberOfSamples_Sa_Sc.png Graphic file (type bmp)
 <figures/Yobi/Var/NumberOfSamples_Sa_Sc.png>
 File: figures/Yobi/Var/NumberOfSamples_Sb.png Graphic file (type bmp)
 <figures/Yobi/Var/NumberOfSamples_Sb.png>
- [31] [32] [33] [34]
+ [32] [33] [34] [35]
 File: figures/Yobi/Var/Normal_bunnsann.png Graphic file (type bmp)
 <figures/Yobi/Var/Normal_bunnsann.png>
 File: figures/Yobi/Var/Unique_bunsan.png Graphic file (type bmp)
 <figures/Yobi/Var/Unique_bunsan.png>
 File: figures/Yobi/Var/MSE_MedSE.png Graphic file (type bmp)
 <figures/Yobi/Var/MSE_MedSE.png>
- [35] [36]) (./chapter7.tex [37]
+ [36] [37] [38]) (./chapter7.tex [39]
 第7章
-[38
+[40
 
-] [39] [40] [41]
+] [41] [42] [43]
 File: figures/Honbann/BOXPLOT/BoxPlot_young_110ms.png Graphic file (type bmp)
 <figures/Honbann/BOXPLOT/BoxPlot_young_110ms.png>
 File: figures/Honbann/BOXPLOT/BoxPlot_young_40ms.png Graphic file (type bmp)
@@ -530,7 +520,7 @@ File: figures/Honbann/BOXPLOT/BoxPlot_old_110ms.png Graphic file (type bmp)
 <figures/Honbann/BOXPLOT/BoxPlot_old_110ms.png>
 File: figures/Honbann/BOXPLOT/BoxPlot_old_40ms.png Graphic file (type bmp)
 <figures/Honbann/BOXPLOT/BoxPlot_old_40ms.png>
- [42] [43] [44]
+ [44] [45] [46]
 File: figures/Honbann/Comparison_young_old/Var_110ms_Sa_Sb.png Graphic file (ty
 pe bmp)
 <figures/Honbann/Comparison_young_old/Var_110ms_Sa_Sb.png>
@@ -549,15 +539,15 @@ e bmp)
 File: figures/Honbann/Comparison_young_old/Normalized_40ms_MSE-MedSE.png Graphi
 c file (type bmp)
 <figures/Honbann/Comparison_young_old/Normalized_40ms_MSE-MedSE.png>
-) (./chapter8.tex [45] [46] [47] [48]
+) (./chapter8.tex [47] [48] [49] [50]
 第8章
-[49
+[51
 
-]) [50] [51
+]) [52] [53
 
-] [52
+] [54
 
-] (./acknowledgement.tex) (./furoku.tex [53
+] (./acknowledgement.tex) (./furoku.tex [55
 
 ]
 付録A 
@@ -594,11 +584,11 @@ File: furoku_A/Less60_Tezyunn.pdf Graphic file (type pdf)
 <furoku_A/Less60_Tezyunn.pdf>
 File: furoku_A/Onnryou.pdf Graphic file (type pdf)
 <furoku_A/Onnryou.pdf>
-[54
+[56
 
-] [55] [56] [57] [58] [59] [60] [61] [62]
+] [57] [58] [59] [60] [61] [62] [63] [64]
 付録B 
-) [63
+) [65
 
 ] (./thesis.aux)
  ***********
@@ -608,21 +598,24 @@ L3 programming layer <2023-10-23>
  ***********
 
 
-LaTeX Warning: There were undefined references.
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
 
-LaTeX Warning: There were multiply-defined labels.
+Package rerunfilecheck Warning: File `thesis.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
 
-Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 65D891E43DD7504BA0B373E8FB2B555D;4880.
+Package rerunfilecheck Info: Checksums for `thesis.out':
+(rerunfilecheck)             Before: 65D891E43DD7504BA0B373E8FB2B555D;4880
+(rerunfilecheck)             After:  AFE5BEFAB9C95F395A3A006F3D902388;7210.
  ) 
 Here is how much of TeX's memory you used:
  11976 strings out of 476504
- 194736 string characters out of 5801731
+ 194744 string characters out of 5801731
  1931881 words of memory out of 5000000
  33743 multiletter control sequences out of 15000+600000
  569602 words of font info for 93 fonts, out of 8000000 for 9000
  41 hyphenation exceptions out of 8191
  73i,15n,79p,1652b,593s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on thesis.dvi (64 pages, 152156 bytes).
+Output written on thesis.dvi (66 pages, 160444 bytes).
