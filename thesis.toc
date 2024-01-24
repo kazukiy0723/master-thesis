@@ -35,12 +35,12 @@
 \contentsline {section}{\numberline {7.2}調査条件及び調査対象}{40}{section.7.2}%
 \contentsline {section}{\numberline {7.3}調査結果}{41}{section.7.3}%
 \contentsline {subsection}{\numberline {7.3.1}観測値の分布}{41}{subsection.7.3.1}%
-\contentsline {subsection}{\numberline {7.3.2}遅延時間と評価指標の関係}{44}{subsection.7.3.2}%
-\contentsline {chapter}{\numberline {第8章}結論}{48}{chapter.8}%
-\contentsline {section}{\numberline {8.1}まとめ}{48}{section.8.1}%
-\contentsline {section}{\numberline {8.2}今後の展望}{49}{section.8.2}%
-\contentsline {chapter}{参考文献}{50}{chapter*.34}%
-\contentsline {chapter}{発表論文}{51}{chapter*.35}%
-\contentsline {chapter}{謝辞}{52}{chapter*.36}%
-\contentsline {chapter}{\numberline {付録A }遅延聴覚フィードバックが身体運動に与える影響の調査の資料}{53}{appendix.A}%
-\contentsline {chapter}{\numberline {付録B }主観調査におけるアプリケーションのソースコード}{62}{appendix.B}%
+\contentsline {subsection}{\numberline {7.3.2}遅延時間と評価指標の関係}{45}{subsection.7.3.2}%
+\contentsline {chapter}{\numberline {第8章}結論}{49}{chapter.8}%
+\contentsline {section}{\numberline {8.1}まとめ}{49}{section.8.1}%
+\contentsline {section}{\numberline {8.2}今後の展望}{50}{section.8.2}%
+\contentsline {chapter}{参考文献}{51}{chapter*.34}%
+\contentsline {chapter}{発表論文}{52}{chapter*.35}%
+\contentsline {chapter}{謝辞}{53}{chapter*.36}%
+\contentsline {chapter}{\numberline {付録A }遅延聴覚フィードバックが身体運動に与える影響の調査の資料}{54}{appendix.A}%
+\contentsline {chapter}{\numberline {付録B }主観調査におけるアプリケーションのソースコード}{63}{appendix.B}%

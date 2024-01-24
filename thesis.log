@@ -1,4 +1,4 @@
-This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.sjis) (TeX Live 2023) (preloaded format=platex 2023.10.26)  24 JAN 2024 11:26
+This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.sjis) (TeX Live 2023) (preloaded format=platex 2023.10.26)  24 JAN 2024 21:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -437,6 +437,9 @@ LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
 (Font)              scaled to size 13.83836pt on input line 3.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
 (Font)              scaled to size 13.83836pt on input line 3.
+
+LaTeX Warning: Citation `DAF' on page 3 undefined on input line 16.
+
 [3
 
 ] [4] [5]) (./chapter2.tex
@@ -527,7 +530,7 @@ File: figures/Honbann/BOXPLOT/BoxPlot_old_110ms.png Graphic file (type bmp)
 <figures/Honbann/BOXPLOT/BoxPlot_old_110ms.png>
 File: figures/Honbann/BOXPLOT/BoxPlot_old_40ms.png Graphic file (type bmp)
 <figures/Honbann/BOXPLOT/BoxPlot_old_40ms.png>
- [42] [43]
+ [42] [43] [44]
 File: figures/Honbann/Comparison_young_old/Var_110ms_Sa_Sb.png Graphic file (ty
 pe bmp)
 <figures/Honbann/Comparison_young_old/Var_110ms_Sa_Sb.png>
@@ -546,15 +549,15 @@ e bmp)
 File: figures/Honbann/Comparison_young_old/Normalized_40ms_MSE-MedSE.png Graphi
 c file (type bmp)
 <figures/Honbann/Comparison_young_old/Normalized_40ms_MSE-MedSE.png>
-) (./chapter8.tex [44] [45] [46] [47]
+) (./chapter8.tex [45] [46] [47] [48]
 第8章
-[48
+[49
 
-]) [49] [50
+]) [50] [51
 
-] [51
+] [52
 
-] (./acknowledgement.tex) (./furoku.tex [52
+] (./acknowledgement.tex) (./furoku.tex [53
 
 ]
 付録A 
@@ -591,11 +594,11 @@ File: furoku_A/Less60_Tezyunn.pdf Graphic file (type pdf)
 <furoku_A/Less60_Tezyunn.pdf>
 File: furoku_A/Onnryou.pdf Graphic file (type pdf)
 <furoku_A/Onnryou.pdf>
-[53
+[54
 
-] [54] [55] [56] [57] [58] [59] [60] [61]
+] [55] [56] [57] [58] [59] [60] [61] [62]
 付録B 
-) [62
+) [63
 
 ] (./thesis.aux)
  ***********
@@ -605,18 +608,21 @@ L3 programming layer <2023-10-23>
  ***********
 
 
+LaTeX Warning: There were undefined references.
+
+
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `thesis.out' has not changed.
 (rerunfilecheck)             Checksum: 65D891E43DD7504BA0B373E8FB2B555D;4880.
  ) 
 Here is how much of TeX's memory you used:
- 11974 strings out of 476504
- 194711 string characters out of 5801731
+ 11976 strings out of 476504
+ 194736 string characters out of 5801731
  1931881 words of memory out of 5000000
- 33741 multiletter control sequences out of 15000+600000
+ 33743 multiletter control sequences out of 15000+600000
  569602 words of font info for 93 fonts, out of 8000000 for 9000
  41 hyphenation exceptions out of 8191
  73i,15n,79p,1652b,593s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on thesis.dvi (63 pages, 149860 bytes).
+Output written on thesis.dvi (64 pages, 152156 bytes).
