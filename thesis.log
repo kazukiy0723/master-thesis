@@ -1,4 +1,4 @@
-This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.sjis) (TeX Live 2023) (preloaded format=platex 2023.10.26)  24 JAN 2024 00:14
+This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.sjis) (TeX Live 2023) (preloaded format=platex 2023.10.26)  24 JAN 2024 11:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -321,7 +321,14 @@ File: l3backend-dvips.def 2023-10-23 L3 backend support: dvips
 \g__pdf_backend_link_int=\count289
 \g__pdf_backend_link_sf_int=\count290
 )
-(./thesis.aux)
+(./thesis.aux
+
+LaTeX Warning: Label `cf:f' multiply defined.
+
+
+LaTeX Warning: Label `cf:f' multiply defined.
+
+)
 \openout1 = `thesis.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 56.
@@ -511,7 +518,7 @@ File: figures/Yobi/Var/MSE_MedSE.png Graphic file (type bmp)
 第7章
 [38
 
-] [39] [40]
+] [39] [40] [41]
 File: figures/Honbann/BOXPLOT/BoxPlot_young_110ms.png Graphic file (type bmp)
 <figures/Honbann/BOXPLOT/BoxPlot_young_110ms.png>
 File: figures/Honbann/BOXPLOT/BoxPlot_young_40ms.png Graphic file (type bmp)
@@ -520,7 +527,7 @@ File: figures/Honbann/BOXPLOT/BoxPlot_old_110ms.png Graphic file (type bmp)
 <figures/Honbann/BOXPLOT/BoxPlot_old_110ms.png>
 File: figures/Honbann/BOXPLOT/BoxPlot_old_40ms.png Graphic file (type bmp)
 <figures/Honbann/BOXPLOT/BoxPlot_old_40ms.png>
- [41] [42]
+ [42] [43]
 File: figures/Honbann/Comparison_young_old/Var_110ms_Sa_Sb.png Graphic file (ty
 pe bmp)
 <figures/Honbann/Comparison_young_old/Var_110ms_Sa_Sb.png>
@@ -539,15 +546,15 @@ e bmp)
 File: figures/Honbann/Comparison_young_old/Normalized_40ms_MSE-MedSE.png Graphi
 c file (type bmp)
 <figures/Honbann/Comparison_young_old/Normalized_40ms_MSE-MedSE.png>
-) (./chapter8.tex [43] [44] [45] [46]
+) (./chapter8.tex [44] [45] [46] [47]
 第8章
-[47
+[48
 
-]) [48] [49
+]) [49] [50
 
-] [50
+] [51
 
-] (./acknowledgement.tex) (./furoku.tex [51
+] (./acknowledgement.tex) (./furoku.tex [52
 
 ]
 付録A 
@@ -584,11 +591,11 @@ File: furoku_A/Less60_Tezyunn.pdf Graphic file (type pdf)
 <furoku_A/Less60_Tezyunn.pdf>
 File: furoku_A/Onnryou.pdf Graphic file (type pdf)
 <furoku_A/Onnryou.pdf>
-[52
+[53
 
-] [53] [54] [55] [56] [57] [58] [59] [60]
+] [54] [55] [56] [57] [58] [59] [60] [61]
 付録B 
-) [61
+) [62
 
 ] (./thesis.aux)
  ***********
@@ -598,18 +605,18 @@ L3 programming layer <2023-10-23>
  ***********
 
 
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `thesis.out' has not changed.
 (rerunfilecheck)             Checksum: 65D891E43DD7504BA0B373E8FB2B555D;4880.
  ) 
 Here is how much of TeX's memory you used:
  11974 strings out of 476504
- 194702 string characters out of 5801731
+ 194711 string characters out of 5801731
  1931881 words of memory out of 5000000
  33741 multiletter control sequences out of 15000+600000
  569602 words of font info for 93 fonts, out of 8000000 for 9000
  41 hyphenation exceptions out of 8191
  73i,15n,79p,1652b,593s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on thesis.dvi (62 pages, 148080 bytes).
+Output written on thesis.dvi (63 pages, 149860 bytes).
