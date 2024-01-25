@@ -1,4 +1,4 @@
-This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.sjis) (TeX Live 2023) (preloaded format=platex 2023.10.26)  24 JAN 2024 23:03
+This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.sjis) (TeX Live 2023) (preloaded format=platex 2023.10.26)  25 JAN 2024 16:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -438,21 +438,22 @@ LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
 
 ] [8]
 第3章
+[9
+
+]
 File: figures/Syukann/gamen_1.png Graphic file (type bmp)
 <figures/Syukann/gamen_1.png>
 File: figures/Syukann/app_2.png Graphic file (type bmp)
 <figures/Syukann/app_2.png>
-[9
-
-] [10]
+ [10]
 LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
-(Font)              scaled to size 11.53198pt on input line 22.
+(Font)              scaled to size 11.53198pt on input line 35.
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 11.53198pt on input line 22.
+(Font)              scaled to size 11.53198pt on input line 35.
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 11.53198pt on input line 22.
+(Font)              scaled to size 11.53198pt on input line 35.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 11.53198pt on input line 22.
+(Font)              scaled to size 11.53198pt on input line 35.
  [11] [12] [13]) (./chapter4.tex [14]
 第4章
 [15
@@ -596,26 +597,16 @@ pLaTeX2e <2023-02-14>+1, based on
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-10-23>
  ***********
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-
-Package rerunfilecheck Warning: File `thesis.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `thesis.out':
-(rerunfilecheck)             Before: 65D891E43DD7504BA0B373E8FB2B555D;4880
-(rerunfilecheck)             After:  AFE5BEFAB9C95F395A3A006F3D902388;7210.
+Package rerunfilecheck Info: File `thesis.out' has not changed.
+(rerunfilecheck)             Checksum: 55CD7C9B273A23E98E9F9E8E23F14EBB;7097.
  ) 
 Here is how much of TeX's memory you used:
- 11976 strings out of 476504
- 194744 string characters out of 5801731
+ 11983 strings out of 476504
+ 194851 string characters out of 5801731
  1931881 words of memory out of 5000000
- 33743 multiletter control sequences out of 15000+600000
+ 33750 multiletter control sequences out of 15000+600000
  569602 words of font info for 93 fonts, out of 8000000 for 9000
  41 hyphenation exceptions out of 8191
  73i,15n,79p,1652b,593s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on thesis.dvi (66 pages, 160444 bytes).
+Output written on thesis.dvi (66 pages, 162716 bytes).
