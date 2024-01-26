@@ -1,4 +1,4 @@
-This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.sjis) (TeX Live 2023) (preloaded format=platex 2023.10.26)  26 JAN 2024 11:55
+This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.sjis) (TeX Live 2023) (preloaded format=platex 2023.10.26)  26 JAN 2024 15:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -468,39 +468,39 @@ File: figures/Apprication/App_kyakkann.png Graphic file (type bmp)
 File: figures/System/Delay_theory.png Graphic file (type bmp)
 <figures/System/Delay_theory.png>
  [22]
-LaTeX Font Info:    Trying to load font information for OML+cmr on input line 8
-4.
+LaTeX Font Info:    Trying to load font information for OML+cmr on input line 1
+17.
 
 (c:/texlive/2023/texmf-dist/tex/latex/base/omlcmr.fd
 File: omlcmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 84.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 117.
 File: figures/DelayCheck/DelayCheck_EX.png Graphic file (type bmp)
 <figures/DelayCheck/DelayCheck_EX.png>
 
-Overfull \hbox (25.80067pt too wide) in paragraph at lines 92--93
+Overfull \hbox (25.80067pt too wide) in paragraph at lines 126--127
  [][] 
  []
 
 [23]
 File: figures/DelayCheck/SuperFamicom_delayCheck.png Graphic file (type bmp)
 <figures/DelayCheck/SuperFamicom_delayCheck.png>
- [24]) (./chapter5.tex [25] [26]
+) (./chapter5.tex [24] [25] [26]
 第5章
 [27
 
 ] [28] [29]) (./chapter6.tex [30]
 第6章
-File: figures/Yobi/Var/BPM.png Graphic file (type bmp)
-<figures/Yobi/Var/BPM.png>
+File: figures/Yobi/BPM_Change.png Graphic file (type bmp)
+<figures/Yobi/BPM_Change.png>
 [31
 
 ]
-File: figures/Yobi/Var/NumberOfSamples_Sa_Sc.png Graphic file (type bmp)
-<figures/Yobi/Var/NumberOfSamples_Sa_Sc.png>
-File: figures/Yobi/Var/NumberOfSamples_Sb.png Graphic file (type bmp)
-<figures/Yobi/Var/NumberOfSamples_Sb.png>
+File: figures/Yobi/NumberOfSamples_s1s3.png Graphic file (type bmp)
+<figures/Yobi/NumberOfSamples_s1s3.png>
+File: figures/Yobi/NumberOfSamples_median.png Graphic file (type bmp)
+<figures/Yobi/NumberOfSamples_median.png>
  [32] [33] [34] [35]
 File: figures/Yobi/Var/Normal_bunnsann.png Graphic file (type bmp)
 <figures/Yobi/Var/Normal_bunnsann.png>
@@ -546,9 +546,9 @@ c file (type bmp)
 
 ]) [52] [53
 
-] [54
+] [54] [55
 
-] (./acknowledgement.tex) (./furoku.tex [55
+] (./acknowledgement.tex) (./furoku.tex [56
 
 ]
 付録A 
@@ -585,11 +585,11 @@ File: furoku_A/Less60_Tezyunn.pdf Graphic file (type pdf)
 <furoku_A/Less60_Tezyunn.pdf>
 File: furoku_A/Onnryou.pdf Graphic file (type pdf)
 <furoku_A/Onnryou.pdf>
-[56
+[57
 
-] [57] [58] [59] [60] [61] [62] [63] [64]
+] [58] [59] [60] [61] [62] [63] [64] [65]
 付録B 
-) [65
+) [66
 
 ] (./thesis.aux)
  ***********
@@ -598,15 +598,15 @@ LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-10-23>
  ***********
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 55CD7C9B273A23E98E9F9E8E23F14EBB;7097.
+(rerunfilecheck)             Checksum: BA6FE32C5B7DB0B59F098D68BE2F34C2;6974.
  ) 
 Here is how much of TeX's memory you used:
- 11983 strings out of 476504
- 194851 string characters out of 5801731
+ 11991 strings out of 476504
+ 195031 string characters out of 5801731
  1931881 words of memory out of 5000000
- 33750 multiletter control sequences out of 15000+600000
+ 33756 multiletter control sequences out of 15000+600000
  569602 words of font info for 93 fonts, out of 8000000 for 9000
  41 hyphenation exceptions out of 8191
- 73i,15n,79p,1652b,593s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 73i,15n,79p,983b,619s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on thesis.dvi (66 pages, 162716 bytes).
+Output written on thesis.dvi (67 pages, 164816 bytes).
