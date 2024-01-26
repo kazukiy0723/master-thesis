@@ -13,6 +13,8 @@
 \captionsetup[figure]{labelsep=colon} % 図のキャプションの形式を "図6.1:" に設定
 \usepackage{listings}
 % \usepackage{jlisting} を削除
+% \usepackage[dvipdfmx, bookmarks=true, bookmarksnumbered=true, bookmarkstype=toc]{hyperref} % PDFにしおりをつける
+
 
 \lstset{
   language=[ISO]C++,       % 言語の指定
@@ -53,6 +55,8 @@
 % \chaptercover%		章の表紙を作らない場合は，ここをコメントアウトしてください．
 % \sectionclearpage%	節の終わりで改ページしない場合は，ここをコメントアウトしてください．
 \setcounter{tocdepth}{3}
+
+
 
 \begin{document}
 \makecover% 表紙を作成pdflatex thesis.tex
