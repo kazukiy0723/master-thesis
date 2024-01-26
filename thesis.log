@@ -1,4 +1,4 @@
-This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.sjis) (TeX Live 2023) (preloaded format=platex 2023.10.26)  26 JAN 2024 15:00
+This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.sjis) (TeX Live 2023) (preloaded format=platex 2023.10.26)  26 JAN 2024 15:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -589,7 +589,71 @@ File: furoku_A/Onnryou.pdf Graphic file (type pdf)
 
 ] [58] [59] [60] [61] [62] [63] [64] [65]
 付録B 
-) [66
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
+nput line 51.
+LaTeX Font Info:    Font shape `JT1/gt/m/it' in size <10> not available
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 52.
+LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
+(Font)              scaled to size 9.60999pt on input line 52.
+LaTeX Font Info:    Font shape `JY1/gt/m/it' in size <10> not available
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 52.
+LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
+(Font)              scaled to size 9.60999pt on input line 52.
+LaTeX Font Info:    Font shape `JT1/gt/bx/n' in size <10> not available
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 56.
+LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
+(Font)              scaled to size 9.60999pt on input line 56.
+LaTeX Font Info:    Font shape `JY1/gt/bx/n' in size <10> not available
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 56.
+LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
+(Font)              scaled to size 9.60999pt on input line 56.
+LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10> not available
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 56.
+[66
+
+] [67] [68] [69] [70]
+Overfull \hbox (288.11346pt too wide) in paragraph at lines 218--219
+[][] 
+ []
+
+[71] [72] [73] [74] [75] [76] [77] [78] [79] [80] [81] [82] [83] [84] [85]
+[86] [87] [88] [89] [90] [91] [92] [93] [94]
+Overfull \hbox (15.11584pt too wide) in paragraph at lines 990--991
+[][] 
+ []
+
+
+Overfull \hbox (15.11584pt too wide) in paragraph at lines 992--993
+[][] 
+ []
+
+[95] [96] [97] [98] [99] [100] [101] [102] [103] [104] [105] [106] [107]
+[108] [109] [110] [111] [112] [113] [114] [115] [116] [117] [118] [119]
+[120] [121] [122] [123] [124] [125] [126] [127] [128] [129] [130] [131]
+[132] [133] [134] [135] [136] [137] [138] [139] [140] [141] [142] [143]
+[144] [145] [146] [147] [148] [149]
+Overfull \hbox (25.61575pt too wide) in paragraph at lines 2646--2647
+[][] 
+ []
+
+
+Overfull \hbox (20.3658pt too wide) in paragraph at lines 2648--2649
+[][] 
+ []
+
+[150] [151] [152] [153] [154] [155] [156] [157] [158] [159] [160] [161]
+[162] [163] [164] [165] [166] [167] [168] [169] [170] [171] [172] [173]
+付録C 
+[174
+
+] [175] [176] [177] [178] [179] [180] [181] [182] [183] [184] [185]
+[186] [187] [188] [189] [190] [191] [192] [193] [194] [195] [196] [197]
+[198] [199] [200] [201] [202] [203] [204] [205] [206] [207] [208] [209]
+[210] [211] [212] [213] [214] [215] [216] [217] [218] [219] [220] [221]
+[222] [223] [224] [225] [226] [227] [228] [229] [230] [231] [232] [233]
+[234] [235]
+付録D 
+) [236
 
 ] (./thesis.aux)
  ***********
@@ -597,16 +661,20 @@ pLaTeX2e <2023-02-14>+1, based on
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-10-23>
  ***********
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: BA6FE32C5B7DB0B59F098D68BE2F34C2;6974.
+(rerunfilecheck)             Checksum: BCA15A2C48B5D1F4328DAA1B9D5294AC;7491.
  ) 
 Here is how much of TeX's memory you used:
- 11991 strings out of 476504
- 195031 string characters out of 5801731
- 1931881 words of memory out of 5000000
- 33756 multiletter control sequences out of 15000+600000
- 569602 words of font info for 93 fonts, out of 8000000 for 9000
+ 14746 strings out of 476504
+ 233862 string characters out of 5801731
+ 2201881 words of memory out of 5000000
+ 36510 multiletter control sequences out of 15000+600000
+ 569770 words of font info for 94 fonts, out of 8000000 for 9000
  41 hyphenation exceptions out of 8191
- 73i,15n,79p,983b,619s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 73i,15n,79p,983b,2183s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on thesis.dvi (67 pages, 164816 bytes).
+Output written on thesis.dvi (237 pages, 1048752 bytes).
