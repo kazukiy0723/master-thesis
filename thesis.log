@@ -1,4 +1,4 @@
-This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.sjis) (TeX Live 2023) (preloaded format=platex 2023.10.26)  28 JAN 2024 15:09
+This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.sjis) (TeX Live 2023) (preloaded format=platex 2023.10.26)  28 JAN 2024 18:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -522,7 +522,7 @@ File: figures/Honbann/BOXPLOT/BoxPlot_old_110ms.png Graphic file (type bmp)
 <figures/Honbann/BOXPLOT/BoxPlot_old_110ms.png>
 File: figures/Honbann/BOXPLOT/BoxPlot_old_40ms.png Graphic file (type bmp)
 <figures/Honbann/BOXPLOT/BoxPlot_old_40ms.png>
- [44] [45] [46]
+ [44] [45] [46] [47]
 File: figures/Honbann/Comparison_young_old/Var_110ms_Sa_Sb.png Graphic file (ty
 pe bmp)
 <figures/Honbann/Comparison_young_old/Var_110ms_Sa_Sb.png>
@@ -553,16 +553,16 @@ e bmp)
 File: figures/Honbann/Comparison_young_old/Normalized_40ms_MSE-MedSE.png Graphi
 c file (type bmp)
 <figures/Honbann/Comparison_young_old/Normalized_40ms_MSE-MedSE.png>
-) (./chapter8.tex [47] [48] [49] [50]
-[51] [52]
+) (./chapter8.tex [48] [49] [50]
+[51] [52] [53]
 第8章
-[53
+[54
 
-]) [54] [55
+]) [55] [56
 
-] [56] [57
+] [57] [58
 
-] (./acknowledgement.tex) (./furoku.tex [58
+] (./acknowledgement.tex) (./furoku.tex [59
 
 ]
 付録A 
@@ -599,9 +599,9 @@ File: furoku_A/Less60_Tezyunn.pdf Graphic file (type pdf)
 <furoku_A/Less60_Tezyunn.pdf>
 File: furoku_A/Onnryou.pdf Graphic file (type pdf)
 <furoku_A/Onnryou.pdf>
-) [59
+) [60
 
-] [60] [61] [62] [63] [64] [65] [66] [67] (./thesis.aux)
+] [61] [62] [63] [64] [65] [66] [67] [68] (./thesis.aux)
  ***********
 pLaTeX2e <2023-02-14>+1, based on
 LaTeX2e <2023-06-01> patch level 1
@@ -619,4 +619,4 @@ Here is how much of TeX's memory you used:
  41 hyphenation exceptions out of 8191
  73i,15n,79p,983b,619s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on thesis.dvi (68 pages, 171584 bytes).
+Output written on thesis.dvi (69 pages, 176684 bytes).
