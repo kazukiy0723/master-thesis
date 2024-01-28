@@ -108,7 +108,8 @@
   \item 各データと閾値を比較し，4で求めた閾値の外にある値を全て外れ値とし，点で表す．
 \end{enumerate}
 これにより，データの基本的な統計的特徴を簡潔に表現し，後続の分析におけるデータの解釈を支援する．
-図\ref{fig:110ms_Distribution_of_observations}，図\ref{fig:40ms_Distribution_of_observations}，図\ref{fig:110ms_Distribution_of_observations_by_old}，図\ref{fig:40ms_Distribution_of_observations_by_old}に遅延時間ごとのボタンの押下時間間隔のデータの分布を示す．
+図\ref{fig:110ms_Distribution_of_observations}，図\ref{fig:40ms_Distribution_of_observations}，
+図\ref{fig:110ms_Distribution_of_observations_by_old}，図\ref{fig:40ms_Distribution_of_observations_by_old}に遅延時間ごとのボタンの押下時間間隔のデータの分布を示す．
 これらの図より，それぞれの遅延時間でのボタンの押下時間間隔のデータには，一定数の外れ値が存在することがわかる．
 したがって，本研究では外れ値を除外したデータを用いて分析を行う．
 この方法により，これから行う分析において，外れ値の影響を排除し，適切な評価を行うためのデータを用いることができる．
@@ -138,8 +139,36 @@
   \label{fig:40ms_Distribution_of_observations_by_old}
 \end{figure}
 \newpage
+% 結果の考察
 \subsection{遅延時間と評価指標の関係}
-図\ref{fig:Var_110ms_Sa_Sb}，図\ref{fig:Var_110ms_Sc}，図\ref{fig:110ms_MSE_MedSE}，図\ref{fig:Normalized_110ms_MSE_MedSE}に，遅延時間ごとの若年者と高齢者のMSEとMedSEの比較を示す．
+本節では，遅延聴覚フィードバックが身体運動に与える影響の調査の結果を標本全体の分散，遅延直前後の押下間隔の差の二乗の平均値(Mean Squared Error, MSE)，遅延直前後の押下間隔の差の中央値(Median Squared Error, MedSE)の3つの評価指標を用いて示す．
+遅延時間と評価値の関係が若年者と高齢者で異なるかどうかを検証するために，若年者と高齢者それぞれの結果を同一のグラフ上に表示し，比較する．
+図\ref{fig:Var_110ms_Sa_Sb}，図\ref{fig:Var_110ms_Sc}に実験Aにおける遅延時間と評価指標の関係，
+図\ref{fig:Var_40ms_Sa_Sb}，図\ref{fig:Var_40ms_Sc}に実験Bにおける遅延時間と評価指標の関係，
+図\ref{fig:Normalized-Var_110ms_SaSbSc}，図\ref{fig:Normalized-Var_40ms_SaSbSc}に実験A，実験Bにおける遅延時間と評価指標の関係において，10ms時の評価値を基準に正規化した場合の結果を示す．
+図\ref{fig:110ms_MSE_MedSE}，図\ref{fig:Normalized_110ms_MSE_MedSE}にMSEおよびMedSEの結果を，
+図\ref{fig:40ms_MSE_MedSE}，図\ref{fig:Normalized_40ms_MSE_MedSE}にMSEおよびMedSEの結果を10ms時の評価値で正規化した場合の結果を示す．
+% 実験A
+実験Aにおける結果から，遅延時間の増加に伴い，若年者と高齢者双方の評価値に増加の傾向が認められた．
+これは，ボタン押し課題において提供される聴覚フィードバックの遅延が長くなるにつれ，遅延聴覚フィードバックの影響がより顕著になることを示唆している．
+若年者は遅延時間の増加に対して比較的一様な反応を示し，対照的に高齢者は70msまで比較的緩やかな増加を見せた後，90, 110msの遅延時間において顕著な反応の増加を示した．
+これは，高齢者が一定の遅延に対して許容度を持つことを示唆し，特に遅延時間が110msに達した際には，その差異が最も明確に表れた．
+高齢者が若年者と比較して聴覚フィードバックの遅延に対する許容度が高い可能性が示され，結果として遅延時間の増加に対する高齢者の遅延感知の鈍さが推測される．
+
+% 実験B
+実験Bでは，10msから40msの比較的短い遅延時間帯において，若年者における評価値が緩やかに増加する傾向が認められた．
+これは，若年者が遅延時間の増加に対して比較的敏感であることを示唆しており，遅延聴覚フィードバックによる影響を感じやすいことを反映している．
+一方，高齢者においては，遅延時間と評価値の間に一貫した関係が見出されず，遅延に対する感受性が低いことが示唆された．
+特に，高齢者群の評価値は遅延時間の変化に対して一定のばらつきを示しており，これは高齢者が遅延に対して鈍感である可能性を示している．
+高齢者の遅延に対する許容度が高いという結果は，遅延聴覚フィードバックの適用において，年齢に応じた遅延時間の設定が必要であることを示唆している．
+遅延時間の増加に対する若年者の反応の敏感さは，聴覚処理能力が発達していることを示しつつも，遅延聴覚フィードバックの影響を受けやすいという特性を持っていることを明らかにしている．
+
+これは，遅延処理能力や注意制御の能力において，年齢による差異が存在することが示唆される．
+高齢者の評価値が一貫して大きいことから，注意制御の能力や運動制御の能力において，年齢による差異が存在することが示唆される．
+
+%%%%%%%
+% 正規化なし
+%%%%%%%
 \begin{figure}[tbp]
   \centering
   \includegraphics[scale=0.5]{figures/Honbann/Comparison_young_old/Var_110ms_Sa_Sb.png}
@@ -152,6 +181,38 @@
   \caption{実験Aにおける若年者と高齢者の評価値の遅延時間変動の比較}
   \label{fig:Var_110ms_Sc}
 \end{figure}
+
+\begin{figure}[tbp]
+  \centering
+  \includegraphics[scale=0.5]{figures/Honbann/Comparison_young_old/Var_40ms_Sa_Sb.png}
+  \caption{実験Bにおける若年者と高齢者の分散の比較}
+  \label{fig:Var_40ms_Sa_Sb}
+\end{figure}
+
+\begin{figure}[tbp]
+  \centering
+  \includegraphics[scale=0.5]{figures/Honbann/Comparison_young_old/Var_40ms_Sc.png}
+  \caption{実験Bにおける若年者と高齢者の分散の比較}
+  \label{fig:Var_40ms_Sc}
+\end{figure}
+
+%%%%%%%
+% 正規化あり
+%%%%%%%
+\begin{figure}[tbp]
+  \centering
+  \includegraphics[scale=0.5]{figures/Honbann/Comparison_young_old/Normalized-Var_110ms_SaSbSc.png}
+  \caption{実験Aにおける若年者と高齢者の正規化した分散の比較}
+  \label{fig:Normalized-Var_110ms_SaSbSc}
+\end{figure}
+
+\begin{figure}[tbp]
+  \centering
+  \includegraphics[scale=0.5]{figures/Honbann/Comparison_young_old/Normalized-Var_40ms_SaSbSc.png}
+  \caption{実験Bにおける若年者と高齢者の正規化した分散の比較}
+  \label{fig:Normalized-Var_40ms_SaSbSc}
+\end{figure}
+ %%%%%%%%%%%%%%%%%%%%%%% ここまで
 
 \begin{figure}[tbp]
   \centering
@@ -175,6 +236,6 @@
 \begin{figure}[tbp]
   \centering
   \includegraphics[scale=0.5]{figures/Honbann/Comparison_young_old/Normalized_40ms_MSE-MedSE.png}
-  \caption{実験Aにおける遅延時間ごとの若年者と高齢者の正規化したMSEとMedSEの比較}
+  \caption{実験Bにおける遅延時間ごとの若年者と高齢者の正規化したMSEとMedSEの比較}
   \label{fig:Normalized_40ms_MSE_MedSE}
 \end{figure}
