@@ -1,0 +1,2534 @@
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % 付録c
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{ボタン押し課題におけるアプリケーションのプログラム}
+開発したボタン押し課題におけるアプリケーションを掲載する．
+本プログラムは，Microsoft Visual Studio 2022でコンパイルできるソースファイル，ヘッダファイルおよびリソースファイルである．
+関数の目的別にファイルを分けて作成している．
+
+%%%%%%%%%%%%%%%%%%%%%
+%% main.cpp
+%%%%%%%%%%%%%%%%%%%%%
+\begin{lstlisting}[caption=main.cpp]
+  //////
+//Delay Click Sound by ASIO Ver. 2 (オーバーラップなし、再生音開始点調整あり、チャタリング考慮、音声遅延あり(別チャンネル再生))
+//////
+#include<windows.h>
+#include<tchar.h>
+#include<stdio.h>
+#include<Xinput.h>
+#include"resource.h"
+#include"ginclude.h"
+#include"asio.h"
+#include"asiodrivers.h"
+
+// 追加ファイル
+#include<chrono>
+#include<iostream>
+#include<sstream>
+#include<fstream>
+#include<iomanip>
+#include<time.h>
+#include<string>
+#include<ctime>
+#include<vector>
+#include<cmath>
+#include"window.h"
+#include"main.h"
+#include"file.h"
+#include"dialogbox.h"
+
+// Visualスタイル有効化
+#pragma comment(linker,"\"/manifestdependency:type='win32' \
+name='Microsoft.Windows.Common-Controls' version='6.0.0.0' \
+processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
+
+#pragma comment(lib,"winmm.lib")
+
+using namespace std;
+
+LRESULT CALLBACK	windowfunc(HWND, UINT, WPARAM, LPARAM);
+void				bufferswitch(long, ASIOBool);
+ASIOTime* bufferswitchtimeinfo(ASIOTime*, long, ASIOBool);
+void				sampleratedidchange(ASIOSampleRate);
+long				asiomessage(long, long, void*, double*);
+
+extern AsioDrivers* asioDrivers;
+const TCHAR			szWinName[] = _T("delayclicksound2");
+TCHAR				strASIOInfo[LENSTR], strWaveFileInfo[LENSTR], strBuffInfo[LENSTR];
+ASIODriverInfo		DriverInfo;
+ASIOBufferInfo		BufInfo[MAXNUMINCHS + MAXNUMOUTCHS];
+ASIOChannelInfo		ChannelInfo[MAXNUMINCHS + MAXNUMOUTCHS];
+ASIOCallbacks		CallBacks;
+int					numInChannels, numOutChannels, idDevice, idChannelClick, idChannelSound;
+bool				SupportASIOOutputReady;
+HMMIO				hMmio;
+void* tmpWaveData, * WaveData;
+int					lenWaveData, idxWaveData, BitsPerSample;
+bool				isPlaying, isLoadedDriver, isOpenedDevice, isCreatedBuffer;
+ASIOSampleType		SampleType;
+extern long inlatency, outlatency;
+extern int lenBuffer;
+bool Finished = false; // 実験終了フラグ
+
+// 追加変数
+extern HWND hStaticNowTime, hStaticTime, hEdit1, htaticNumberOfloops, hStaticNumberOfloops2;
+HFONT hFont1, hFont2, hFont3, hFont4, hFont5;
+RECT recthEdit1 = { 198, 98, 702, 402 };
+int call_count, temp_count;
+bool wavePlayed = false;
+extern int NumberOfloops;
+// 処理時間計測用
+std::chrono::system_clock::time_point start, before_start;
+extern int Num;
+//　時間差を保存するためのベクタ
+vector<string> MarginTime;
+// ボタンの押下回数を保持する変数
+int CountButtonClicked;
+// 親ウィンドウのハンドルを保持
+HWND hParentWindow;
+// 結果の出力先のパスを保持する変数
+string CSVFILENAME;
+// 実験方法の選択
+bool LABNormal;
+int TempNumberOfLoops;
+// 試行回数を保持する変数
+int TempNumberOfTrials;
+// ファイル名
+static char FileNameCSV[MAX_PATH];
+static char FileNameINI[MAX_PATH];
+
+// タイムスタンプ
+string TimeStampButtonClicked = _T("Nothing");
+
+// dialogbox.cppと共有
+extern int DelayTiming, DelayTime_ms;
+int DelayTimeUnique;
+
+// window.cppと共有
+extern RECT rGroupIni;
+extern RECT rGroupIni2;
+//WinMain関数
+int WINAPI WinMain(_In_ HINSTANCE hThisInst, _In_opt_ HINSTANCE hPrevInst, _In_ LPSTR lpszArgs, _In_ int nWinMode)
+{
+	HWND			hwnd;
+	MSG				msg;
+	WNDCLASSEX		wcl;
+	HACCEL			haccel;
+
+	//// 二重起動防止
+	//HANDLE hMutex = CreateMutex(NULL, TRUE, _T("MyAppMutex"));
+	//if (GetLastError() == ERROR_ALREADY_EXISTS) {
+	//	MessageBox(NULL, _T("This Application is already running!"), _T("警告"), MB_OK |  MB_ICONWARNING);
+	//	return 0;
+	//}
+
+	//ウィンドウクラスの定義
+	wcl.cbSize = sizeof(WNDCLASSEX);				//WNDCLASSEX構造体のサイズ
+	wcl.style = 0;									//ウィンドウクラススタイル
+	wcl.lpfnWndProc = windowfunc;					//ウィンドウ関数
+	wcl.cbClsExtra = 0;								//ウィンドウクラスのエキストラ
+	wcl.cbWndExtra = 0;								//ウィンドウインスタンスのエキストラ
+	wcl.hInstance = hThisInst;						//このプログラムのインスタンスへのハンドル
+	wcl.hIcon = LoadIcon(NULL, IDI_APPLICATION);	//アイコンへのハンドル
+	wcl.hCursor = LoadCursor(NULL, IDC_ARROW);		//カーソルへのハンドル
+	wcl.hbrBackground = (HBRUSH)COLOR_WINDOW;		//背景ブラシへのハンドル
+	wcl.lpszMenuName = MAKEINTRESOURCE(IDR_MENU1);	//メニュー
+	wcl.lpszClassName = szWinName;					//ウィンドウクラス名
+	wcl.hIconSm = LoadIcon(NULL, IDI_WINLOGO);		//スモールアイコンへのハンドル
+
+	//ウィンドウクラスの登録
+	if (!RegisterClassEx(&wcl)) {
+		return(0);
+	}
+
+	//ウィンドウの生成
+	hwnd = CreateWindow(
+		szWinName,				//ウィンドウクラス名
+		szWinName,				//ウィンドウ名
+		WS_OVERLAPPEDWINDOW,	//ウィンドウスタイル
+		CW_USEDEFAULT,			//x座標
+		CW_USEDEFAULT,			//y座標
+		CW_USEDEFAULT,			//幅
+		CW_USEDEFAULT,			//高さ
+		HWND_DESKTOP,			//親ウィンドウへのハンドル
+		NULL,					//メニューへのハンドル
+		hThisInst,				//このプログラムのインスタンスへのハンドル	
+		NULL					//追加引数
+	);
+
+	// 親ウィンドウハンドルの記憶
+	hParentWindow = hwnd;
+
+	//ウィンドウの表示
+	ShowWindow(hwnd, nWinMode);
+	UpdateWindow(hwnd);
+
+	//キーボードアクセラレータのロード
+	haccel = LoadAccelerators(hThisInst, MAKEINTRESOURCE(IDR_ACCELERATOR1));
+
+	//メッセージループの生成
+	while (GetMessage(&msg, NULL, 0, 0)) {
+		if (!TranslateAccelerator(hwnd, haccel, &msg)) {
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
+		}
+	}
+
+	return((int)msg.wParam);
+}
+
+//ウィンドウ関数
+LRESULT CALLBACK windowfunc(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam)
+{
+	ASIOError		asioresult;
+	ASIOSampleRate	rate;
+	char			devnames[MAXNUMDEVS][LENDEVNAME], * tmpnames[MAXNUMDEVS];
+	TCHAR			str[LENSTR];
+	long			numinchs, numoutchs, minlenbuffer, maxlenbuffer, preflenbuffer, granularity, tmplong;
+	int				numdevs, idev, ich, ibuf, isample;
+	bool			boolresult;
+	double			tmpdouble;
+	TCHAR			wavefilename[] = WAVEFILENAME;
+	MMCKINFO		mmckinfoparent, mmckinfosubchunk;
+	WAVEFORMATEX	wf;
+
+	switch (message) {
+	case WM_CREATE:
+		//ウィンドウの初期化
+		// ウィンドウの作成
+		CreateControl(hwnd, wparam, lparam);
+		// 実行ファイルのパス名の取得
+		TCHAR lpFileName[MAX_PATH];
+		GetModuleFileName(NULL, lpFileName, sizeof(lpFileName));
+		// ウィンドウのタイトルを実行ファイルのパス名に変更
+		SetWindowText(hwnd, lpFileName);
+		//パラメータの初期化
+		idDevice = -1;
+		hMmio = NULL;
+		tmpWaveData = NULL;
+		WaveData = NULL;
+		isPlaying = false;
+		isLoadedDriver = false;
+		isOpenedDevice = false;
+		isCreatedBuffer = false;
+		idxWaveData = 0;
+		// 追加
+		call_count = 1;
+		temp_count = 0;
+		NumberOfloops = 3;
+		TempNumberOfLoops = 1;
+		CountButtonClicked = 0;
+		//LABNormal = true;
+		TempNumberOfTrials = 34;
+		//ASIOデバイス用メモリ領域の確保
+		if (asioDrivers == NULL) {
+			asioDrivers = new AsioDrivers();
+		}
+
+		//ASIOデバイス名の取得
+		for (idev = 0; idev < MAXNUMDEVS; idev++) {
+			tmpnames[idev] = devnames[idev];
+		}
+		numdevs = asioDrivers->getDriverNames(tmpnames, MAXNUMDEVS);
+		if (numdevs == 0) {
+			MessageBox(NULL, _T("asioDrivers->getDriverNames"), _T("Error"), MB_ICONSTOP | MB_OK);
+		}
+
+		//ASIOデバイスのドライバのロード
+		boolresult = asioDrivers->loadDriver(devnames[IDDEV]);
+		if (boolresult == false) {
+			isLoadedDriver = false;
+			_stprintf_s(str, LENSTR, _T("asioDrivers->loadDriver\nDevice Name: %s\n"), devnames[IDDEV]);
+			MessageBox(NULL, str, _T("Error"), MB_ICONSTOP | MB_OK);
+		}
+		else {
+			isLoadedDriver = true;
+		}
+
+		//ASIOデバイスのオープン
+		memset(&DriverInfo, 0, sizeof(ASIODriverInfo));
+		asioresult = ASIOInit(&DriverInfo);
+		if (asioresult != ASE_OK) {
+			isOpenedDevice = false;
+			_stprintf_s(str, LENSTR, _T("ASIOInit\nDevice Name: %s\n"), devnames[IDDEV]);
+			MessageBox(NULL, str, _T("Error"), MB_ICONSTOP | MB_OK);
+
+			//ASIOデバイスのドライバのアンロード
+			if (isLoadedDriver == true) {
+				asioDrivers->removeCurrentDriver();
+				isLoadedDriver = false;
+			}
+		}
+		else {
+			isOpenedDevice = true;
+		}
+
+		if (isOpenedDevice == false) {
+			for (idev = 0; idev < numdevs; idev++) {
+				//				for (idev = numdevs-1; idev >=0; idev--) {
+				if (idev != IDDEV) {
+					boolresult = asioDrivers->loadDriver(devnames[idev]);
+					if (boolresult == false) {
+						isLoadedDriver = false;
+						_stprintf_s(str, LENSTR, _T("asioDrivers->loadDriver\nDevice Name: %s\n"), devnames[idev]);
+						MessageBox(NULL, str, _T("Error"), MB_ICONSTOP | MB_OK);
+					}
+					else {
+						isLoadedDriver = true;
+					}
+
+					//ASIOデバイスのオープン
+					memset(&DriverInfo, 0, sizeof(ASIODriverInfo));
+					asioresult = ASIOInit(&DriverInfo);
+					if (asioresult != ASE_OK) {
+						isOpenedDevice = false;
+						_stprintf_s(str, LENSTR, _T("ASIOInit\nDevice Name: %s\n"), devnames[idev]);
+						MessageBox(NULL, str, _T("Error"), MB_ICONSTOP | MB_OK);
+
+						//ASIOデバイスのドライバのアンロード
+						if (isLoadedDriver == true) {
+							asioDrivers->removeCurrentDriver();
+							isLoadedDriver = false;
+						}
+					}
+					else {
+						isOpenedDevice = true;
+						break;
+					}
+				}
+			}
+		}
+
+		//ASIOデバイスのサンプリング周波数のサポートの確認
+		rate = FS;
+		asioresult = ASIOCanSampleRate(rate);
+		if (asioresult != ASE_OK) {
+			MessageBox(NULL, _T("ASIOCanSampleRate"), _T("Error"), MB_ICONSTOP | MB_OK);
+		}
+
+		//ASIOデバイスのサンプリング周波数の設定
+		asioresult = ASIOSetSampleRate(rate);
+		if (asioresult != ASE_OK) {
+			MessageBox(NULL, _T("ASIOSetSampleRate"), _T("Error"), MB_ICONSTOP | MB_OK);
+		}
+
+		//ASIOデバイスのチャンネル数の取得
+		asioresult = ASIOGetChannels(&numinchs, &numoutchs);
+		if (asioresult != ASE_OK) {
+			MessageBox(NULL, _T("ASIOGetChannels"), _T("Error"), MB_ICONSTOP | MB_OK);
+		}
+
+		//ASIOデバイスの録音チャンネル数の設定
+		if (numinchs <= MAXNUMINCHS) {
+			numInChannels = numinchs;
+		}
+		else {
+			numInChannels = MAXNUMINCHS;
+		}
+
+		//ASIOデバイスの再生用チャンネル数の設定
+		if (numoutchs <= MAXNUMOUTCHS) {
+			numOutChannels = numoutchs;
+		}
+		else {
+			numOutChannels = MAXNUMOUTCHS;
+		}
+		if (CHCLICK <= numOutChannels) {
+			idChannelClick = CHCLICK - 1;
+		}
+		else {
+			idChannelClick = 0;
+		}
+		if (CHSOUND <= numOutChannels) {
+			idChannelSound = CHSOUND - 1;
+		}
+		else {
+			idChannelSound = 0;
+		}
+
+		//ASIOデバイスのバッファサイズの取得
+		asioresult = ASIOGetBufferSize(&minlenbuffer, &maxlenbuffer, &preflenbuffer, &granularity);
+		if (asioresult != ASE_OK) {
+			MessageBox(NULL, _T("ASIOGetBufferSize"), _T("Error"), MB_ICONSTOP | MB_OK);
+		}
+
+		//ASIOデバイスのバッファサイズの設定
+		lenBuffer = preflenbuffer;
+		// ASIOバッファサイズが16ではない場合、メッセージボックスにて警告を出す
+		if (lenBuffer != 16) {
+			_stprintf_s(strBuffInfo, LENSTR, _T("ASIOバッファサイズが「%d」に設定されています。\r\n一度ウィンドウを閉じてから「16」に設定しなおしてください。"), lenBuffer);
+			MessageBox(NULL, strBuffInfo, _T("ASIOバッファサイズ"), MB_OK | MB_ICONWARNING);
+		}
+
+		//ASIOデバイスの録音用バッファの初期化
+		for (ich = 0; ich < numInChannels; ich++) {
+			memset(&(BufInfo[ich]), 0, sizeof(ASIOBufferInfo));
+			BufInfo[ich].isInput = ASIOTrue;
+			BufInfo[ich].channelNum = ich;
+		}
+
+		//ASIOデバイスの再生用バッファの初期化
+		for (ich = 0; ich < numOutChannels; ich++) {
+			memset(&(BufInfo[numInChannels + ich]), 0, sizeof(ASIOBufferInfo));
+			BufInfo[numInChannels + ich].isInput = ASIOFalse;
+			BufInfo[numInChannels + ich].channelNum = ich;
+		}
+
+		//ASIOデバイス用コールバック関数の設定
+		CallBacks.bufferSwitch = &bufferswitch;
+		CallBacks.bufferSwitchTimeInfo = &bufferswitchtimeinfo;
+		CallBacks.sampleRateDidChange = &sampleratedidchange;
+		CallBacks.asioMessage = &asiomessage;
+
+		//ASIOデバイスのバッファの生成
+		asioresult = ASIOCreateBuffers(BufInfo, numInChannels + numOutChannels, lenBuffer, &CallBacks);
+		if (asioresult != ASE_OK) {
+			isCreatedBuffer = false;
+			MessageBox(NULL, _T("ASIOCreateBuffers"), _T("Error"), MB_ICONSTOP | MB_OK);
+		}
+		else {
+			isCreatedBuffer = true;
+		}
+
+		//ASIOデバイスのチャンネル情報の取得
+		for (ich = 0; ich < numInChannels + numOutChannels; ich++) {
+			memset(&(ChannelInfo[ich]), 0, sizeof(ASIOChannelInfo));
+			ChannelInfo[ich].isInput = BufInfo[ich].isInput;
+			ChannelInfo[ich].channel = BufInfo[ich].channelNum;
+			asioresult = ASIOGetChannelInfo(&(ChannelInfo[ich]));
+			if (asioresult != ASE_OK) {
+				MessageBox(NULL, _T("ASIOGetChannelInfo"), _T("Error"), MB_ICONSTOP | MB_OK);
+			}
+		}
+		SampleType = ChannelInfo[0].type;
+		switch (SampleType) {
+		case ASIOSTInt16LSB:
+			BitsPerSample = 16;
+			break;
+		case ASIOSTInt24LSB:
+			BitsPerSample = 24;
+			break;
+		case ASIOSTInt32LSB:
+			BitsPerSample = 32;
+			break;
+		default:
+			break;
+		}
+
+		//ASIOデバイスのレイテンシの取得
+		asioresult = ASIOGetLatencies(&inlatency, &outlatency);
+		if (asioresult != ASE_OK) {
+			MessageBox(NULL, _T("ASIOGetLatencies"), _T("Error"), MB_ICONSTOP | MB_OK);
+		}
+
+		//ASIOOutputReady関数のサポートの確認
+		asioresult = ASIOOutputReady();
+		if (asioresult == ASE_OK) {
+			SupportASIOOutputReady = true;
+		}
+		else {
+			SupportASIOOutputReady = false;
+		}
+
+		//ASIOデバイスの設定内容の確認
+		ASIOGetSampleRate(&rate);
+		_stprintf_s(strASIOInfo, LENSTR,
+			_T("Device Name: %s\n")
+			_T("Max. No. Input Channels: %d\n")
+			_T("Max. No. Output Channels: %d\n")
+			_T("Sampling Frequency: %f Hz\n")
+			_T("Min. Buffer Size: %d points = %f ms\n")
+			_T("Max. Buffer Size: %d points = %f ms\n")
+			_T("Preferred Buffer Size: %d points = %f ms\n")
+			_T("Allocated Buffer Size: %d points = %f ms\n")
+			_T("Input Latency: %d points = %f ms\n")
+			_T("Output Latency: %d points = %f ms\n")
+			_T("Total Latency: %d points = %f ms\n")
+			_T("Support \"ASIOOutputReady\": %s"),
+			DriverInfo.name,
+			numinchs,
+			numoutchs,
+			rate,
+			minlenbuffer, (double)minlenbuffer * 1000.0 / rate,
+			maxlenbuffer, (double)maxlenbuffer * 1000.0 / rate,
+			preflenbuffer, (double)preflenbuffer * 1000.0 / rate,
+			lenBuffer, (double)lenBuffer * 1000.0 / rate,
+			inlatency, (double)inlatency * 1000.0 / rate,
+			outlatency, (double)outlatency * 1000.0 / rate,
+			inlatency + outlatency, ((double)inlatency + (double)outlatency) * 1000.0 / rate,
+			SupportASIOOutputReady == true ? _T("Supported.") : _T("Not Supported."));
+		//MessageBox(NULL, strASIOInfo, _T("ASIO"), MB_OK);
+
+		// 遅延時間の設定用コンボボックスの作成とiniファイルの読み込み
+		ReadIniFile(hwnd, lparam, NULL);
+		// ループ回数の更新
+		LateIniFunc(hwnd, wparam);
+
+		//WAVEファイルのオープン
+		if ((hMmio = mmioOpen(wavefilename, NULL, MMIO_READ)) == NULL) {
+			//ファイルをオープンできなかった場合の処理
+			_stprintf_s(str, LENSTR, _T("エラー: ファイルを開くことができません\nファイル名: %s"), wavefilename);
+			MessageBox(hwnd, str, _T("ファイルを開く"), MB_ICONSTOP | MB_OK);
+			return(0);
+		}
+
+		//ファイルのWAVEチャンクへ移動
+		memset(&mmckinfoparent, 0, sizeof(MMCKINFO));
+		mmckinfoparent.fccType = mmioFOURCC('W', 'A', 'V', 'E');
+		if (mmioDescend(hMmio, &mmckinfoparent, NULL, MMIO_FINDRIFF) != MMSYSERR_NOERROR) {
+			//チャンクを移動できなかった場合の処理
+			_stprintf_s(str, LENSTR, _T("エラー: データを読み込むことができません\nファイル名: %s"), wavefilename);
+			MessageBox(hwnd, str, _T("ファイルを開く"), MB_ICONSTOP | MB_OK);
+			return(0);
+		}
+
+		//ファイルのfmtチャンクへ移動
+		memset(&mmckinfosubchunk, 0, sizeof(MMCKINFO));
+		mmckinfosubchunk.ckid = mmioFOURCC('f', 'm', 't', ' ');
+		if (mmioDescend(hMmio, &mmckinfosubchunk, &mmckinfoparent, MMIO_FINDCHUNK) != MMSYSERR_NOERROR) {
+			//チャンクを移動できなかった場合の処理
+			_stprintf_s(str, LENSTR, _T("エラー: データを読み込むことができません\nファイル名: %s"), wavefilename);
+			MessageBox(hwnd, str, _T("ファイルを開く"), MB_ICONSTOP | MB_OK);
+			return(0);
+		}
+
+		//ファイルのデータ形式の読み込み
+		memset(&wf, 0, sizeof(WAVEFORMATEX));
+		if (mmioRead(hMmio, (HPSTR)&wf, mmckinfosubchunk.cksize) == -1) {
+			//ファイルのデータ形式を読み込めなかった場合の処理
+			_stprintf_s(str, LENSTR, _T("エラー: データを読み込むことができません\nファイル名: %s"), wavefilename);
+			MessageBox(hwnd, str, _T("ファイルを開く"), MB_ICONSTOP | MB_OK);
+			return(0);
+		}
+
+		//ファイルのデータ形式の確認
+		if (wf.wFormatTag != WAVE_FORMAT_PCM) {
+			//ファイルのデータ形式がPCMではなかった場合の処理
+			_stprintf_s(str, LENSTR, _T("エラー: PCM形式WAVEデータではないので読み込むことができません\nファイル名: %s"), wavefilename);
+			MessageBox(hwnd, str, _T("ファイルを開く"), MB_ICONSTOP | MB_OK);
+			return(0);
+		}
+
+		//ファイルのdataチャンクへ移動
+		if (mmioAscend(hMmio, &mmckinfosubchunk, 0) != MMSYSERR_NOERROR) {
+			//チャンクを移動できなかった場合の処理
+			_stprintf_s(str, LENSTR, _T("エラー: データを読み込むことができません\nファイル名: %s"), wavefilename);
+			MessageBox(hwnd, str, _T("ファイルを開く"), MB_ICONSTOP | MB_OK);
+			return(0);
+		}
+		memset(&mmckinfosubchunk, 0, sizeof(MMCKINFO));
+		mmckinfosubchunk.ckid = mmioFOURCC('d', 'a', 't', 'a');
+		if (mmioDescend(hMmio, &mmckinfosubchunk, &mmckinfoparent, MMIO_FINDCHUNK) != MMSYSERR_NOERROR) {
+			//チャンクを移動できなかった場合の処理
+			_stprintf_s(str, LENSTR, _T("エラー: データを読み込むことができません\nファイル名: %s"), wavefilename);
+			MessageBox(hwnd, str, _T("ファイルを開く"), MB_ICONSTOP | MB_OK);
+			return(0);
+		}
+		lenWaveData = mmckinfosubchunk.cksize / wf.nBlockAlign;
+
+		//メッセージボックスへのテキストの出力
+		_stprintf_s(strWaveFileInfo, LENSTR,
+			_T("File Name: %s\n")
+			_T("Sampling Frequency: %d Hz\n")
+			_T("Bits per Sample: %d bits\n")
+			_T("Number of Channels: %d channels\n")
+			_T("Length of Data: %d samples"),
+			wavefilename, wf.nSamplesPerSec, wf.wBitsPerSample, wf.nChannels, lenWaveData);
+		//MessageBox(NULL, strWaveFileInfo, _T("Read a Wave File"), MB_OK);
+
+		//WAVEデータ用バッファの生成
+		tmpWaveData = (void*)malloc(mmckinfosubchunk.cksize);
+		WaveData = (void*)malloc(lenWaveData * (BitsPerSample / 8));
+		if (tmpWaveData == NULL || WaveData == NULL) {
+			//バッファを生成できなかった場合の処理
+			MessageBox(hwnd, _T("エラー: メモリーが足りません"), _T("ファイルを開く"), MB_ICONSTOP | MB_OK);
+			return(0);
+		}
+
+		//WAVEデータの読み込み
+		if (mmioRead(hMmio, (HPSTR)tmpWaveData, mmckinfosubchunk.cksize) <= 0) {
+			//データを読み込めなかった場合の処理
+			_stprintf_s(str, LENSTR, _T("エラー: データを読み込むことができません\nファイル名: %s"), wavefilename);
+			MessageBox(hwnd, str, _T("ファイルを開く"), MB_ICONSTOP | MB_OK);
+			return(0);
+		}
+
+		//WAVEファイルのクローズ
+		if (hMmio != NULL) {
+			mmioClose(hMmio, 0);
+			hMmio = NULL;
+		}
+
+		//WAVEデータの変換
+		for (isample = 0; isample < lenWaveData; isample++) {
+			tmpdouble = 0.0;
+			for (ich = 0; ich < wf.nChannels; ich++) {
+				//WAVEデータのshort int型への変換
+				switch (wf.wBitsPerSample) {
+				case 8:
+					tmplong = ((long)((unsigned char*)tmpWaveData)[isample * wf.nChannels + ich] - 0x80L) * 0x100L;
+					break;
+				case 16:
+					tmplong = (long)((short int*)tmpWaveData)[isample * wf.nChannels + ich];
+					break;
+				}
+				if (wf.nChannels > 1) {
+					tmpdouble += (double)tmplong;
+				}
+			}
+			if (wf.nChannels > 1) {
+				tmplong = (long)(tmpdouble / (double)wf.nChannels);
+			}
+
+			//WAVEデータのshort int型からの変換
+			switch (SampleType) {
+			case ASIOSTInt16LSB:
+				((char*)WaveData)[isample * 2] = (char)tmplong;
+				tmplong >>= 8;
+				((char*)WaveData)[isample * 2 + 1] = (char)tmplong;
+				break;
+			case ASIOSTInt24LSB:
+				tmplong *= 0x100L;
+				((char*)WaveData)[isample * 3] = (char)tmplong;
+				tmplong >>= 8;
+				((char*)WaveData)[isample * 3 + 1] = (char)tmplong;
+				tmplong >>= 8;
+				((char*)WaveData)[isample * 3 + 2] = (char)tmplong;
+				break;
+			case ASIOSTInt32LSB:
+				tmplong *= 0x10000L;
+				((char*)WaveData)[isample * 4] = (char)tmplong;
+				tmplong >>= 8;
+				((char*)WaveData)[isample * 4 + 1] = (char)tmplong;
+				tmplong >>= 8;
+				((char*)WaveData)[isample * 4 + 2] = (char)tmplong;
+				tmplong >>= 8;
+				((char*)WaveData)[isample * 4 + 3] = (char)tmplong;
+				break;
+			default:
+				break;
+			}
+		}
+
+		//WAVEデータ用バッファの解放
+		if (tmpWaveData != NULL) {
+			free(tmpWaveData);
+			tmpWaveData = NULL;
+		}
+
+		// フォントの初期設定
+		OnFont(hwnd);
+
+		//ASIOデバイスの再生用バッファの初期化
+		for (ich = 0; ich < numOutChannels; ich++) {
+			for (ibuf = 0; ibuf < NUMASIOBUFFERS; ibuf++) {
+				switch (SampleType) {
+				case ASIOSTInt16LSB:
+					memset(BufInfo[numInChannels + ich].buffers[ibuf], 0, lenBuffer * 2);
+					break;
+				case ASIOSTInt24LSB:
+					memset(BufInfo[numInChannels + ich].buffers[ibuf], 0, lenBuffer * 3);
+					break;
+				case ASIOSTInt32LSB:
+					memset(BufInfo[numInChannels + ich].buffers[ibuf], 0, lenBuffer * 4);
+					break;
+				default:
+					break;
+				}
+			}
+		}
+
+		//ASIOデバイスの開始
+		asioresult = ASIOStart();
+		if (asioresult != ASE_OK) {
+			MessageBox(NULL, _T("ASIOStart"), _T("Error"), MB_ICONSTOP | MB_OK);
+		}
+		break;
+
+	case WM_COMMAND:
+		OnCommand(hwnd, wparam, lparam);
+		break;
+	case WM_CLOSE:
+		//プログラムの終了
+		if (IDYES == MessageBox(hwnd, _T("終了しますか？"), _T("終了確認"), MB_YESNO)) {
+			DestroyWindow(hwnd);
+		}
+		break;
+	case WM_PAINT:
+	{
+		PAINTSTRUCT ps;
+		HDC hdc = BeginPaint(hwnd, &ps);
+		OnPaint(hwnd, hdc);
+
+		EndPaint(hwnd, &ps);
+	}
+	break;
+
+	case WM_DESTROY:
+
+		// 後始末
+		DeleteObject(hFont1);
+		DeleteObject(hFont2);
+		DeleteObject(hFont3);
+		DeleteObject(hFont4);
+		DeleteObject(hFont5);
+
+		//ASIOデバイスの停止
+		asioresult = ASIOStop();
+		if (asioresult != ASE_OK) {
+			MessageBox(NULL, _T("ASIOStop"), _T("Error"), MB_ICONSTOP | MB_OK);
+		}
+
+		//ASIOデバイスのバッファの解放
+		asioresult = ASIODisposeBuffers();
+		if (asioresult != ASE_OK) {
+			MessageBox(NULL, _T("ASIODisposeBuffers"), _T("Error"), MB_ICONSTOP | MB_OK);
+		}
+
+		//ASIOデバイスのクローズ
+		if (isOpenedDevice == true) {
+			asioresult = ASIOExit();
+			if (asioresult != ASE_OK) {
+				MessageBox(NULL, _T("ASIOExit"), _T("Error"), MB_ICONSTOP | MB_OK);
+			}
+			isOpenedDevice = false;
+		}
+
+		//ASIOデバイスのドライバのアンロード
+		if (isLoadedDriver == true) {
+			asioDrivers->removeCurrentDriver();
+			isLoadedDriver = false;
+		}
+
+		//ASIOデバイス用メモリ領域の解放
+		if (asioDrivers != NULL) {
+			delete asioDrivers;
+		}
+
+		//WAVEデータ用バッファの解放
+		if (tmpWaveData != NULL) {
+			free(tmpWaveData);
+			tmpWaveData = NULL;
+		}
+		if (WaveData != NULL) {
+			free(WaveData);
+			WaveData = NULL;
+		}
+
+		//WAVEファイルのクローズ
+		if (hMmio != NULL) {
+			mmioClose(hMmio, 0);
+			hMmio = NULL;
+		}
+
+		PostQuitMessage(0);
+		break;
+
+	default:
+		return(DefWindowProc(hwnd, message, wparam, lparam));
+	}
+
+	return(0);
+}
+
+
+
+//ASIOデバイスのバッファ処理用コールバック関数
+void bufferswitch(long index, ASIOBool processNow) {
+	ASIOError	asioresult;
+	int			tmplenbuffer, isample, position;
+	double	tmpdouble;
+	long		tmplong;
+	
+
+	//録音データ(クリック信号)の変換
+	for (isample = 0; isample < lenBuffer; isample++) {
+		switch (SampleType) {
+		case ASIOSTInt16LSB:
+			tmplong = 0L;
+			tmplong += ((unsigned char*)(BufInfo[idChannelClick].buffers[index]))[isample * 2 + 1];
+			tmplong <<= 8;
+			tmplong += ((unsigned char*)(BufInfo[idChannelClick].buffers[index]))[isample * 2];
+			tmpdouble = (double)tmplong / (double)0x8000L;
+			break;
+		case ASIOSTInt24LSB:
+			tmplong = 0L;
+			tmplong += ((unsigned char*)(BufInfo[idChannelClick].buffers[index]))[isample * 3 + 2];
+			tmplong <<= 8;
+			tmplong += ((unsigned char*)(BufInfo[idChannelClick].buffers[index]))[isample * 3 + 1];
+			tmplong <<= 8;
+			tmplong += ((unsigned char*)(BufInfo[idChannelClick].buffers[index]))[isample * 3];
+			tmpdouble = (double)tmplong / (double)0x800000L;
+			break;
+		case ASIOSTInt32LSB:
+			tmplong = 0L;
+			tmplong += ((unsigned char*)(BufInfo[idChannelClick].buffers[index]))[isample * 4 + 3];
+			tmplong <<= 8;
+			tmplong += ((unsigned char*)(BufInfo[idChannelClick].buffers[index]))[isample * 4 + 2];
+			tmplong <<= 8;
+			tmplong += ((unsigned char*)(BufInfo[idChannelClick].buffers[index]))[isample * 4 + 1];
+			tmplong <<= 8;
+			tmplong += ((unsigned char*)(BufInfo[idChannelClick].buffers[index]))[isample * 4];
+			tmpdouble = (double)tmplong / (double)0x80000000UL;
+			break;
+		default:
+			tmpdouble = 0.0;
+			break;
+		}
+
+		if (tmpdouble >= THRESH || -tmpdouble >= THRESH) {
+			if (isPlaying == false || idxWaveData + isample > (FS * LENCHATTERING) / 1000) {
+				// パラメータの設定
+				isPlaying = true;
+				idxWaveData = 0;
+				position = isample;
+				call_count = 1;
+				// 前回のボタン押下時刻の取得
+				if (CountButtonClicked)  before_start = start;
+				// 現在時刻の取得
+				start = std::chrono::system_clock::now();
+				// エディットボックスにボタンの押下時刻を表示
+				SendNowTimeToEdit(hEdit1, getMilliTime(start));
+				if (CountButtonClicked) {
+					// 前回のボタン押下時刻との時間差を計算し、表示
+					auto time = start - before_start;
+					SendMarginTimeToEdit(time);
+					// ベクター配列に結果を保存
+					GetMarginTime(time);
+					// テキストの最後にカーソルを移動
+					ScrollToBottom(hEdit1);
+				}
+				if (!LABNormal) {
+					/////////////////////////
+					// 実験方法が変則の場合
+					// ///////////////////////
+					/*ここにクリック音の再生タイミングをずらすためのプログラムを書く。*/
+					if (!((CountButtonClicked+1) % DelayTiming)) {
+						// 再生タイミングをずらす（1回目以外）
+						CalcLateNumberOfloops(hParentWindow, &DelayTimeUnique, DelayTime_ms, lenBuffer, FS, inlatency, outlatency);
+						NumberOfloops = NumberOfloops + DelayTimeUnique;
+					}
+					else if(NumberOfloops != TempNumberOfLoops) {
+						NumberOfloops = TempNumberOfLoops;
+					}
+				}
+				// 実験終了のためのメッセージボックスを出力
+				if (CountButtonClicked == TempNumberOfTrials) {
+					string TempNumberString = _T("指定回数に達しました。");
+					MessageBox(NULL, TempNumberString.c_str(), _T("終了の合図"), MB_OK);
+					SetStddev2Window(MarginTime);                                                   // 標準偏差を計算し、ウィンドウに表示
+					
+					// 無効化
+					EnableWindow(GetDlgItem(hParentWindow, ID_LATESETTING), FALSE);
+					EnableWindow(GetDlgItem(hParentWindow, ID_LATESETTING_2), FALSE);
+					EnableWindow(GetDlgItem(hParentWindow, ID_LATEINI_2), FALSE);
+					EnableWindow(GetDlgItem(hParentWindow, ID_EDIT_LATEDATA_TIMING), FALSE);
+					EnableWindow(GetDlgItem(hParentWindow, ID_LATEINI), FALSE);
+				}
+				// ボタンの押下回数を更新
+				SendCountButtonClicked(GetDlgItem(hParentWindow, ID_STATIC_COUNTBUTTONCLICKED_2), CountButtonClicked);
+				Finished = true; // 音が鳴らないようにするための変数
+				break;
+			}
+		}
+	}
+	if (isample == lenBuffer) {
+		position = 0;
+	}
+
+	//ASIOデバイスのクリック音再生用バッファのクリア
+	switch (SampleType) {
+	case ASIOSTInt16LSB:
+		memset(BufInfo[numInChannels + idChannelClick].buffers[index], 0, lenBuffer * 2);
+		break;
+	case ASIOSTInt24LSB:
+		memset(BufInfo[numInChannels + idChannelClick].buffers[index], 0, lenBuffer * 3);
+		break;
+	case ASIOSTInt32LSB:
+		memset(BufInfo[numInChannels + idChannelClick].buffers[index], 0, lenBuffer * 4);
+		break;
+	default:
+		break;
+	}
+
+	if (isPlaying == true) {
+		if (lenBuffer - position > lenWaveData - idxWaveData) {
+			tmplenbuffer = lenWaveData - idxWaveData;
+		}
+		else {
+			tmplenbuffer = lenBuffer - position;
+		}
+		// ボタンが押されてから(NumberOfloops)回目のbufferswitch呼び出し時にWaveデータをコピー
+		if (call_count % NumberOfloops != 0) {
+			// 録音データ(音声信号)のコピー（出力バッファー2にコピー）
+			switch (SampleType) {
+			case ASIOSTInt16LSB:
+				memcpy_s(BufInfo[numInChannels + idChannelClick].buffers[index], lenBuffer * 2, BufInfo[idChannelSound].buffers[index], lenBuffer * 2);
+				break;
+			case ASIOSTInt24LSB:
+				memcpy_s(BufInfo[numInChannels + idChannelClick].buffers[index], lenBuffer * 3, BufInfo[idChannelSound].buffers[index], lenBuffer * 3);
+				break;
+			case ASIOSTInt32LSB:
+				memcpy_s(BufInfo[numInChannels + idChannelClick].buffers[index], lenBuffer * 4, BufInfo[idChannelSound].buffers[index], lenBuffer * 4);
+				break;
+			default:
+				break;
+			}
+			call_count++;
+		}
+		else {
+			//WAVEデータのクリック音再生用バッファへのコピー（出力バッファー1と2にコピー）
+			switch (SampleType) {
+			case ASIOSTInt16LSB:
+				memcpy_s((void*)&(((char*)(BufInfo[numInChannels + idChannelClick].buffers[index]))[position * 2]), tmplenbuffer * 2, (void*)&(((char*)WaveData)[idxWaveData * 2]), tmplenbuffer * 2);
+				memcpy_s((void*)&(((char*)(BufInfo[numInChannels + idChannelSound].buffers[index]))[position * 2]), tmplenbuffer * 2, (void*)&(((char*)WaveData)[idxWaveData * 2]), tmplenbuffer * 2);
+				break;
+			case ASIOSTInt24LSB:
+				memcpy_s((void*)&(((char*)(BufInfo[numInChannels + idChannelClick].buffers[index]))[position * 3]), tmplenbuffer * 3, (void*)&(((char*)WaveData)[idxWaveData * 3]), tmplenbuffer * 3);
+				memcpy_s((void*)&(((char*)(BufInfo[numInChannels + idChannelSound].buffers[index]))[position * 3]), tmplenbuffer * 3, (void*)&(((char*)WaveData)[idxWaveData * 3]), tmplenbuffer * 3);
+				break;
+			case ASIOSTInt32LSB:
+				memcpy_s((void*)&(((char*)(BufInfo[numInChannels + idChannelClick].buffers[index]))[position * 4]), tmplenbuffer * 4, (void*)&(((char*)WaveData)[idxWaveData * 4]), tmplenbuffer * 4);
+				memcpy_s((void*)&(((char*)(BufInfo[numInChannels + idChannelSound].buffers[index]))[position * 4]), tmplenbuffer * 4, (void*)&(((char*)WaveData)[idxWaveData * 4]), tmplenbuffer * 4);
+				break;
+			default:
+				break;
+			}
+			idxWaveData += tmplenbuffer;
+			if (idxWaveData >= lenWaveData) {
+				/////////////////////
+				//パラメータの設定
+				////////////////////
+				isPlaying = false;
+				idxWaveData = 0;
+				call_count = 1;
+			}
+			
+		}
+	}
+		//録音データ(音声信号)のコピー（出力バッファー1にコピー）
+		switch (SampleType) {
+		case ASIOSTInt16LSB:
+			memcpy_s(BufInfo[numInChannels + idChannelSound].buffers[index], lenBuffer * 2, BufInfo[idChannelSound].buffers[index], lenBuffer * 2);
+			break;
+		case ASIOSTInt24LSB:
+			memcpy_s(BufInfo[numInChannels + idChannelSound].buffers[index], lenBuffer * 3, BufInfo[idChannelSound].buffers[index], lenBuffer * 3);
+			break;
+		case ASIOSTInt32LSB:
+			memcpy_s(BufInfo[numInChannels + idChannelSound].buffers[index], lenBuffer * 4, BufInfo[idChannelSound].buffers[index], lenBuffer * 4);
+			break;
+		default:
+			break;
+		}
+	
+
+	//再生用バッファの準備完了の通知
+	if (SupportASIOOutputReady == true) {
+		asioresult = ASIOOutputReady();
+		if (asioresult != ASE_OK) {
+			MessageBox(NULL, _T("ASIOOutputReady"), _T("Error"), MB_ICONSTOP | MB_OK);
+		}
+	}
+}
+
+// 遅延時間[ms]を表示
+bool SendMarginTimeToEdit(std::chrono::system_clock::duration time) {
+
+	auto msec = std::chrono::duration_cast<std::chrono::milliseconds>(time).count();
+	std::string string_msec = std::to_string(msec);
+	std::string b = _T("時間差[ms]: ");
+	string_msec = b + string_msec;
+	const char* str_msec = string_msec.c_str();
+	SendNowTimeToEdit(hEdit1, str_msec);
+	
+
+	return true;
+}
+
+// 時間差を配列に代入していくための関数
+bool GetMarginTime(std::chrono::system_clock::duration time) {
+
+	string stringTime;
+
+	auto msec = std::chrono::duration_cast<std::chrono::milliseconds>(time).count();
+	
+	stringTime = to_string(msec);
+	//else stringTime = _T("false"); 
+
+	MarginTime.push_back(stringTime);
+
+	return true;
+}
+
+// 得られた時間差をcsvファイルに書き込むための関数
+bool WriteToCSV(HWND hwnd, vector<string>& MarginTime, const string& filename) {
+	char Temp[MAX_PATH];
+	_stprintf_s(Temp, MAX_PATH,
+		_T("以下のファイルに書き込みました。\r\n%s"),
+		filename.c_str());
+
+	// 出力ファイルストリームオブジェクトを作成
+	// ファイルが存在しない場合は新たにファイルを作成、存在する場合はファイルの末尾に書き込み
+		ofstream file(filename, ios::app);
+		// カンマ区切りでストリームに送る
+		for (size_t i = 0; i < MarginTime.size(); ++i) {
+			file << MarginTime[i];
+			if (i != MarginTime.size() - 1) {
+				file << ",";
+			}
+		}
+		file << "\n";
+		file.close();
+
+		// ベクターの中身の削除
+		MarginTime.clear();
+		// 書き込み確認
+		MessageBox(hwnd, Temp, _T("結果の出力先の確認"), MB_OK);
+		// 押下回数の更新
+		CountButtonClicked = 0;
+		SetWindowText(GetDlgItem(hwnd, ID_STATIC_COUNTBUTTONCLICKED_2), _T("0"));
+		// エディットボックスの表示内容をクリア
+		SetWindowText(hEdit1, _T(""));
+
+	return true;
+}
+
+// ベクターの中身を削除
+bool ClearMarginTime(HWND hwnd, vector<string>& MarginTime) {
+
+	// ベクターの中身の削除
+	if (!MarginTime.empty()) {
+		MarginTime.clear();
+		// ボタンの押下回数の更新
+		CountButtonClicked = 0;
+		SetWindowText(GetDlgItem(hwnd, ID_STATIC_COUNTBUTTONCLICKED_2), _T("0"));
+		// エディットボックスの表示内容をクリア
+		SetWindowText(hEdit1, _T(""));
+	}
+	else
+	{
+		MessageBox(hwnd, _T("配列には何も入ってません。"), NULL, MB_OK);
+	}
+	return true;
+}
+
+// ボタンの押下回数の更新
+bool SendCountButtonClicked(HWND hStatic, int& CountButtonClicked) {
+	// ボタンの押下回数の送信
+	CountButtonClicked++;
+	string CountString = to_string(CountButtonClicked);
+	SetWindowText(hStatic, CountString.c_str());
+	return true;
+}
+
+// エディットボックスに時刻を表示
+bool SendNowTimeToEdit(HWND hwndEdit, const char* timeStr) {
+
+	// エディットボックス内の現在の文字列を取得
+	int length = GetWindowTextLength(hwndEdit);
+	char* existingText = new char[length + 1];
+	GetWindowText(hwndEdit, existingText, length + 1);
+
+	char* newText = new char[length + strlen(timeStr) + 3];
+	sprintf(newText, "%s\r\n%s", existingText, timeStr);
+
+	// 新しくエディットボックスに文字をセット
+	SetWindowText(hwndEdit, newText);
+
+	// 後始末
+	delete[] existingText;
+	delete[] newText;
+
+	return true;
+}
+
+// 現在時刻をミリ秒まで取得（同時に呼び出されないようにする）
+const char* getMilliTime(std::chrono::system_clock::time_point now) {
+	// 現在の時刻を取得
+	//auto now = std::chrono::system_clock::now();
+
+	// エポックからの経過時間を秒とミリ秒に分割
+	auto seconds = std::chrono::time_point_cast<std::chrono::seconds>(now);
+	auto milliseconds = std::chrono::duration_cast<std::chrono::milliseconds>(now - seconds);
+
+	// std::time_tに変換
+	std::time_t tt = std::chrono::system_clock::to_time_t(seconds);
+
+	// 時刻をローカルタイムに変換
+	std::tm* tm = std::localtime(&tt); // この関数はスレッドセーフではない
+
+	// 指定された形式で出力
+	std::ostringstream oss, oss2;
+	oss << std::put_time(tm, "%H:%M:%S") << '.'
+		<< std::setfill('0') << std::setw(3) << milliseconds.count();
+
+	// ファイル出力用
+	oss2 << put_time(tm, "%m-%d");
+
+	// 結果をstatic std::stringに変換
+	static string str, str2, a;
+	
+	str = oss.str();
+	str2 = oss2.str();
+
+	// グローバル変数に時刻を記憶（csvファイルに書き込む際に必要)
+	TimeStampButtonClicked = str2;
+	a = _T("ボタン押下時刻: ");
+	// 結果のconst char*を返す
+	str = a + str;
+	return str.c_str();
+}
+
+
+
+
+//ASIOデバイスのバッファ処理時のタイムスタンプ用コールバック関数
+ASIOTime* bufferswitchtimeinfo(ASIOTime* params, long doubleBufferIndex, ASIOBool directProcess)
+{
+	
+	return(0L);
+}
+
+//ASIOデバイスのサンプリング周波数変更検出用コールバック関数
+void sampleratedidchange(ASIOSampleRate sRate)
+{
+	return;
+}
+
+//ASIOデバイスからのメッセージの処理用コールバック関数
+long asiomessage(long selector, long value, void* message, double* opt)
+{
+	return(0L);
+}
+
+
+
+// NumberOfloopsの表示
+bool DispNumberOfloops() {
+
+	return true;
+}
+// フォントの設定
+bool OnFont(HWND hwnd) {
+
+	hFont1 = CreateFont(25, 0, 0, 0, FW_MEDIUM, false, false, false, SHIFTJIS_CHARSET, OUT_DEFAULT_PRECIS,
+		CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, (VARIABLE_PITCH | FF_DONTCARE), _T("メイリオ"));
+
+	hFont2 = CreateFont(22, 0, 0, 0, FW_MEDIUM, false, false, false, SHIFTJIS_CHARSET, OUT_DEFAULT_PRECIS,
+		CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, (VARIABLE_PITCH | FF_DONTCARE), _T("メイリオ"));
+
+	hFont3 = CreateFont(45, 0, 0, 0, FW_BOLD, false, false, false, SHIFTJIS_CHARSET, OUT_DEFAULT_PRECIS,
+		CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, (VARIABLE_PITCH | FF_DONTCARE), _T("メイリオ"));
+
+	hFont4 = CreateFont(18, 0, 0, 0, FW_MEDIUM, false, false, false, SHIFTJIS_CHARSET, OUT_DEFAULT_PRECIS,
+		CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, (VARIABLE_PITCH | FF_DONTCARE), _T("メイリオ"));
+
+	hFont5 = CreateFont(30, 0, 0, 0, FW_BOLD, false, false, false, SHIFTJIS_CHARSET, OUT_DEFAULT_PRECIS,
+		CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, (VARIABLE_PITCH | FF_DONTCARE), _T("メイリオ"));
+
+	SendMessage(hEdit1, WM_SETFONT, (WPARAM)hFont1, MAKELPARAM(false, 0));
+	SendMessage(hStaticTime, WM_SETFONT, (WPARAM)hFont1, MAKELPARAM(false, 0));
+	// ステティックコントロール
+	SendMessage(GetDlgItem(hwnd, ID_STATIC_NUMBERDELAY1), WM_SETFONT, (WPARAM)hFont2, MAKELPARAM(false, 0));
+	SendMessage(GetDlgItem(hwnd, ID_STATIC_NUMBERDELAY2), WM_SETFONT, (WPARAM)hFont2, MAKELPARAM(false, 0));
+	SendMessage(GetDlgItem(hwnd, ID_STATIC_COUNTBUTTONCLICKED), WM_SETFONT, (WPARAM)hFont2, MAKELPARAM(false, 0));
+	SendMessage(GetDlgItem(hwnd, ID_STATIC_COUNTBUTTONCLICKED_2), WM_SETFONT, (WPARAM)hFont3, MAKELPARAM(false, 0));
+	SendMessage(GetDlgItem(hwnd, ID_STATIC_NUMBERDELAY1), WM_SETFONT, (WPARAM)hFont2, MAKELPARAM(false, 0));
+	SendMessage(GetDlgItem(hwnd, ID_STATIC_NUMBERDELAY2), WM_SETFONT, (WPARAM)hFont2, MAKELPARAM(false, 0));
+	SendMessage(GetDlgItem(hwnd, ID_GROUP_SETTING), WM_SETFONT, (WPARAM)hFont2, MAKELPARAM(false, 0));
+	SendMessage(GetDlgItem(hwnd, ID_STATIC_BPM), WM_SETFONT, (WPARAM)hFont2, MAKELPARAM(false, 0));
+	SendMessage(GetDlgItem(hwnd, ID_STATIC_BPMNUM), WM_SETFONT, (WPARAM)hFont2, MAKELPARAM(false, 0));
+	SendMessage(GetDlgItem(hwnd, ID_STATIC_TRIALS), WM_SETFONT, (WPARAM)hFont2, MAKELPARAM(false, 0));
+	SendMessage(GetDlgItem(hwnd, ID_STATIC_TRIALS_NUM), WM_SETFONT, (WPARAM)hFont2, MAKELPARAM(false, 0));
+	SendMessage(GetDlgItem(hwnd, ID_STATIC_LAB), WM_SETFONT, (WPARAM)hFont2, MAKELPARAM(false, 0));
+	SendMessage(GetDlgItem(hwnd, ID_STATIC_NORMALORIRREG), WM_SETFONT, (WPARAM)hFont2, MAKELPARAM(false, 0));
+	SendMessage(GetDlgItem(hwnd, ID_GROUP_LATEDATA), WM_SETFONT, (WPARAM)hFont2, MAKELPARAM(false, 0));
+	SendMessage(GetDlgItem(hwnd, ID_GROUP_LATEDATA_2), WM_SETFONT, (WPARAM)hFont2, MAKELPARAM(false, 0));
+	SendMessage(GetDlgItem(hwnd, ID_STATIC_FILENAME), WM_SETFONT, (WPARAM)hFont2, MAKELPARAM(false, 0));
+	SendMessage(GetDlgItem(hwnd, ID_STATIC_OLD), WM_SETFONT, (WPARAM)hFont2, MAKELPARAM(false, 0));
+	SendMessage(GetDlgItem(hwnd, ID_STATIC_NAME), WM_SETFONT, (WPARAM)hFont2, MAKELPARAM(false, 0));
+	SendMessage(GetDlgItem(hwnd, ID_GROUP_SUBJECTINFO), WM_SETFONT, (WPARAM)hFont2, MAKELPARAM(false, 0));
+	SendMessage(GetDlgItem(hwnd, ID_EDIT_OLD), WM_SETFONT, (WPARAM)hFont2, MAKELPARAM(false, 0));
+	SendMessage(GetDlgItem(hwnd, ID_EDIT_NAME), WM_SETFONT, (WPARAM)hFont2, MAKELPARAM(false, 0));
+	SendMessage(GetDlgItem(hwnd, ID_STATIC_COMBO_MS), WM_SETFONT, (WPARAM)hFont2, MAKELPARAM(false, 0));
+	SendMessage(GetDlgItem(hwnd, ID_STATIC_COMBO_MS_2), WM_SETFONT, (WPARAM)hFont2, MAKELPARAM(false, 0));
+	SendMessage(GetDlgItem(hwnd, ID_STATIC_LATEDATATIMING), WM_SETFONT, (WPARAM)hFont2, MAKELPARAM(false, 0));
+	SendMessage(GetDlgItem(hwnd, ID_STATIC_STDDEV), WM_SETFONT, (WPARAM)hFont2, MAKELPARAM(false, 0));
+
+	// コンボボックス
+	SendMessage(GetDlgItem(hwnd, ID_LATEINI), WM_SETFONT, (WPARAM)hFont1, MAKELPARAM(false, 0));
+	SendMessage(GetDlgItem(hwnd, ID_LATEINI_2), WM_SETFONT, (WPARAM)hFont4, MAKELPARAM(false, 0));
+	SendMessage(GetDlgItem(hwnd, ID_LATESETTING), WM_SETFONT, (WPARAM)hFont1, MAKELPARAM(false, 0));
+	SendMessage(GetDlgItem(hwnd, ID_LATESETTING_2), WM_SETFONT, (WPARAM)hFont1, MAKELPARAM(false, 0));
+	SendMessage(GetDlgItem(hwnd, ID_STATIC_LATESETTING_2), WM_SETFONT, (WPARAM)hFont2, MAKELPARAM(false, 0));
+
+	// プッシュボタン
+	SendMessage(GetDlgItem(hwnd, ID_BUTTON_CSV), WM_SETFONT, (WPARAM)hFont5
+		, MAKELPARAM(false, 0));
+	
+	// エディットボックス
+	SendMessage(GetDlgItem(hwnd, ID_EDIT_LATEDATA_TIMING), WM_SETFONT, (WPARAM)hFont2, MAKELPARAM(false, 0));
+	SendMessage(GetDlgItem(hwnd, ID_EDIT_FILEPATH), WM_SETFONT, (WPARAM)hFont2, MAKELPARAM(false, 0));
+
+	return true;
+}
+
+
+
+// コンボボックスにフォーカスが来た時
+bool LateIniFunc(HWND hWnd, WPARAM wParam) {
+
+		//コンボボックスで現在選択されている項目のインデックスを取得
+		Num = GetNowComboStr(hWnd, ID_LATESETTING);
+		// NumberOfloopsを計算
+		CalcLateNumberOfloops(hWnd, &NumberOfloops, Num, lenBuffer, FS, inlatency, outlatency);
+		// NumberOfloopsをstd::string型に変換
+		string stringnum = to_string(NumberOfloops);
+		// 画面上に表示
+		SetWindowText(hStaticNumberOfloops2, stringnum.c_str());
+		// グローバル変数にNumberOfLoopsの値を記憶させる
+		TempNumberOfLoops = NumberOfloops;
+
+	return true;
+}
+
+// コンボボックス(変則var)の項目が変更された時
+bool LateIniFunc_2(HWND hWnd, WPARAM wParam) {
+
+	//コンボボックスで現在選択されている項目のインデックスを取得
+	int LocalDelayTIme = GetNowComboStr(hWnd, ID_LATESETTING_2);
+	// 遅延のタイミング
+	char* lpstringDelayTiming = new char[50];
+	GetWindowText(GetDlgItem(hWnd, ID_EDIT_LATEDATA_TIMING), lpstringDelayTiming, 50);
+	DelayTiming = atoi(lpstringDelayTiming);
+
+	DelayTime_ms = LocalDelayTIme;
+
+	delete[] lpstringDelayTiming;
+
+	return true;
+}
+
+// コンボボックス1で選択されたキー名に対応した遅延時間をコンボボックスに詰める。
+bool SendLate2Combo(HWND hwnd, WPARAM wParam, char* IniFilepath) {
+		//コンボボックスで現在選択されている項目のインデックスを取得
+		int intCurrentIndex = SendMessage(GetDlgItem(hwnd, (int)ID_LATEINI), CB_GETCURSEL, 0, 0);
+
+		// 現在選択されている項目のの文字列の長さを取得
+		int intTxtLen = SendMessage(GetDlgItem(hwnd, (int)ID_LATEINI), CB_GETLBTEXTLEN, intCurrentIndex, 0);
+
+		if (intTxtLen != CB_ERR){
+			char* pszBuf = new char[intTxtLen + 1];
+			if (SendMessage(GetDlgItem(hwnd, ID_LATEINI), CB_GETLBTEXT, intCurrentIndex, (LPARAM)pszBuf) != CB_ERR) {
+				char latedata[256];
+				int len = strlen(IniFilepath);
+				// IniFileを指定していない場合は、変数の長さが0になるので、デフォルトのIniFileを指定する
+				if (len == 0){
+					char Path[MAX_PATH + 1];
+					char settingpath[MAX_PATH + 1];
+					if (GetModuleFileName(NULL, Path, MAX_PATH) != 0) {
+						char drive[MAX_PATH + 1], dir[MAX_PATH + 1], fname[MAX_PATH + 1], ext[MAX_PATH + 1];
+						// パス名を分解
+						_splitpath(Path, drive, dir, fname, ext);
+						_stprintf_s(settingpath, MAX_PATH + 1, INIFILEDEFNAME, drive, dir);
+						//MessageBox(hwnd, settingpath, _T("結果の出力先の確認"), MB_OK);
+					}
+					// iniファイルの読み込み
+					GetPrivateProfileString(pszBuf, _T("data"), _T("Error"), latedata, sizeof(latedata), settingpath);
+				}
+				else {
+					GetPrivateProfileString(pszBuf, _T("data"), _T("Error"), latedata, sizeof(latedata), IniFilepath);
+				}
+
+				// コンボボックスの中身を消去
+				while (SendMessage(GetDlgItem(hwnd, (int)ID_LATESETTING), CB_GETCOUNT, 0, 0)){
+					SendMessage(GetDlgItem(hwnd, (int)ID_LATESETTING), CB_DELETESTRING, 0, 0);
+				}
+
+				stringstream ss, tt;
+				ss << latedata;
+				string s, t;
+
+				int i = 0;
+				while (getline(ss, s, ',')) {
+					char* cstr = new char[s.size() + 1];
+					char_traits<char>::copy(cstr, s.c_str(), s.size() + 1);
+					// コンボボックスに文字列を挿入
+					SendMessage(GetDlgItem(hwnd, ID_LATESETTING), CB_INSERTSTRING, i, (LPARAM)cstr);
+					i++;
+				}
+				// コンボボックスに先頭の要素をセット
+				SendMessage(GetDlgItem(hwnd, ID_LATESETTING), CB_SETCURSEL, 0, 0);
+			}
+			
+			delete[] pszBuf;
+		}
+	
+	return true;
+}
+// コンボボックス1で選択されたキー名に対応した遅延時間をコンボボックスに詰める。
+bool SendLate2Combo_2(HWND hwnd, WPARAM wParam, char* IniFilepath) {
+
+
+	//コンボボックスで現在選択されている項目のインデックスを取得
+	int intCurrentIndex = SendMessage(GetDlgItem(hwnd, (int)ID_LATEINI_2), CB_GETCURSEL, 0, 0);
+
+	// 現在選択されている項目のの文字列の長さを取得
+	int intTxtLen = SendMessage(GetDlgItem(hwnd, (int)ID_LATEINI_2), CB_GETLBTEXTLEN, intCurrentIndex, 0);
+
+	if (intTxtLen != CB_ERR) {
+		char* pszBuf = new char[intTxtLen + 1];
+		if (SendMessage(GetDlgItem(hwnd, ID_LATEINI_2), CB_GETLBTEXT, intCurrentIndex, (LPARAM)pszBuf) != CB_ERR) {
+			char latedata[256];
+			if (IniFilepath[0] == _T('\0')) {
+				char Path[MAX_PATH + 1];
+				char settingpath[MAX_PATH + 1];
+				if (GetModuleFileName(NULL, Path, MAX_PATH) != 0) {
+					char drive[MAX_PATH + 1], dir[MAX_PATH + 1], fname[MAX_PATH + 1], ext[MAX_PATH + 1];
+					// パス名を分解
+					_splitpath(Path, drive, dir, fname, ext);
+					_stprintf_s(settingpath, MAX_PATH + 1, INIFILEDEFNAME, drive, dir);
+				}
+				// iniファイルの読み込み
+				GetPrivateProfileString(pszBuf, _T("data"), _T("Error"), latedata, sizeof(latedata), settingpath);
+			}
+			else {
+				GetPrivateProfileString(pszBuf, _T("data"), _T("Error"), latedata, sizeof(latedata), IniFilepath);
+			}
+			// コンボボックスの中身を消去
+			while (SendMessage(GetDlgItem(hwnd, (int)ID_LATESETTING_2), CB_GETCOUNT, 0, 0)) {
+				SendMessage(GetDlgItem(hwnd, (int)ID_LATESETTING_2), CB_DELETESTRING, 0, 0);
+			}
+
+			stringstream ss, tt;
+			ss << latedata;
+			string s, t;
+
+			int i = 0;
+			while (getline(ss, s, ',')) {
+				char* cstr = new char[s.size() + 1];
+				char_traits<char>::copy(cstr, s.c_str(), s.size() + 1);
+				// コンボボックスに文字列を挿入
+				SendMessage(GetDlgItem(hwnd, ID_LATESETTING_2), CB_INSERTSTRING, i, (LPARAM)cstr);
+				i++;
+			}
+			// コンボボックスに先頭の要素をセット
+			SendMessage(GetDlgItem(hwnd, ID_LATESETTING_2), CB_SETCURSEL, 0, 0);
+		}
+
+		delete[] pszBuf;
+	}
+
+	return true;
+}
+
+// コンボボックスで現在選択されている項目の文字列を取得する関数
+int GetNowComboStr(HWND hWnd, int comboID) {
+
+	int LocalNum;
+	//コンボボックスで現在選択されている項目のインデックスを取得
+	int intCurrentIndex = SendMessage(GetDlgItem(hWnd, (int)comboID), CB_GETCURSEL, 0, 0);
+
+	// コンボボックスの現在選択されている項目の文字列の長さを取得
+	int intTxtLen = SendMessage(GetDlgItem(hWnd, (int)comboID), CB_GETLBTEXTLEN, intCurrentIndex, 0);
+
+	if (intTxtLen != CB_ERR) {
+		char* pszBuf = new char[intTxtLen + 1];
+		// コンボボックスの一覧から選択した項目の文字列を取得
+		if (SendMessage(GetDlgItem(hWnd, (int)comboID), CB_GETLBTEXT, intCurrentIndex, (LPARAM)pszBuf) != CB_ERR) {
+			// char*型をint型に変換
+			 LocalNum = atoi(pszBuf);
+		}
+
+		delete[] pszBuf;
+	}
+	return LocalNum;
+}
+
+
+// コンボボックスの選択項目から遅延時間を算出
+bool CalcLateNumberOfloops(HWND hwnd, int* NumberOfloops, int  Num, int lenbuffer, int rate, long inlatency, long outlatency){
+	/* 引数: ウィンドウハンドル, コンボボックスから得る文字列, バッファ長, サンプリング周波数, 
+	*          インプットレイテンシ, アウトプットレイテンシ
+	*/
+	////////////////////////
+	// 変数をms単位に変換
+	//////////////////////////
+	TCHAR NumberOfloopsInfo[LENSTR];
+	// 入力レイテンシー（バッファ2個分の時間を減算）
+	double inlatency_ms = (double)inlatency * 1000.0 / (double)rate - (double)lenbuffer * 2.0 * 1000.0 / (double)rate;
+	// 出力レイテンシー
+	double outlatency_ms = (double)outlatency * 1000.0 / (double)rate;
+	// マイコンでの遅延
+	double kairo = (double)KAIROLATE;
+
+	// NumberOfloopsの計算
+	*NumberOfloops = ((double)Num - (inlatency_ms + outlatency_ms + kairo)) * (double)rate / ((double)lenbuffer * 1000.0);
+
+	// NumberOfloops == 0のとき、1に更新
+	if (*NumberOfloops < 1) *NumberOfloops = 1;
+
+
+	////メッセージボックスへの出力
+	//_stprintf_s(NumberOfloopsInfo, LENSTR,
+	//	_T("入力レイテンシ: %f [ms]\n"
+	//	"出力レイテンシ: %f [ms]\n"
+	//	"入出力レイテンシ: %f [ms]\n"
+	//	"遅延させたい時間: %d [ms]\n"
+	//	"回路による遅延: %f [ms]\n"
+	//	"バッファ長: %d [points]\n"
+	//	"Fs: %d [Hz]\n"
+	//	"NumberOfloops = %d\n"
+	//	"NumberOfloops(double) = %f"),
+	//	inlatency_ms, outlatency_ms, inlatency_ms + outlatency_ms, Num, kairo, lenbuffer, rate, *NumberOfloops,
+	//	((double)Num - (inlatency_ms + outlatency_ms + kairo)) * (double)rate / ((double)lenbuffer * 1000.0));
+
+	//MessageBox(hwnd, NumberOfloopsInfo, _T("計算結果"), MB_OK);
+
+	return true;
+
+}
+
+// エディットボックスを自動的に下までスクロールする
+bool ScrollToBottom(HWND hEditBox) {
+	// エディットボックス内の文字列の長さを取得
+	int len = GetWindowTextLength(hEditBox);
+	// 何も選択せずにエディットボックス内のテキストの最後にキャレットを移動
+	SendMessage(hEditBox, EM_SETSEL, (WPARAM)len, (LPARAM)len);
+	// エディットボックスをカーソルまでスクロールする
+	SendMessage(hEditBox, EM_SCROLLCARET, 0, 0);
+
+	return true;
+}
+
+// 被験者情報をベクタに保存
+bool GetEditBoxTextFunc(HWND hwnd) {
+	char* lpstringOld = new char[10];
+	char* lpstringName = new char[50];
+
+	GetWindowText(GetDlgItem(hwnd, ID_EDIT_OLD), lpstringOld, 10);
+	GetWindowText(GetDlgItem(hwnd, ID_EDIT_NAME), lpstringName, 50);
+
+	string Old = lpstringOld;
+	string Name = lpstringName;
+
+	MarginTime.insert(MarginTime.begin(), Old);
+	MarginTime.insert(MarginTime.begin(), Name);
+
+	delete[] lpstringOld;
+	delete[] lpstringName;
+
+	return true;
+}
+
+bool OnPaint(HWND hWnd, HDC hdc) {
+	HPEN hBluePen = CreatePen(PS_SOLID, 5, (RGB(0, 150, 215)));
+	RECT rButtonSendCSV = {rGroupIni.left + 294 , 374, rGroupIni.left + 294  + rGroupIni2.right - rGroupIni2.left + 52, 373 + 52
+	};
+	HPEN hOldPen = (HPEN)SelectObject(hdc, hBluePen);
+	Rectangle(hdc, rButtonSendCSV.left, rButtonSendCSV.top, rButtonSendCSV.right, rButtonSendCSV.bottom);
+	SelectObject(hdc, hOldPen);
+
+	DeleteObject(hBluePen);
+	return true;
+}
+bool OnCommand(HWND hwnd, WPARAM wparam, LPARAM lparam) {
+
+	switch (LOWORD(wparam)) {
+	case ID_ASIOINFORMATION:
+		//ASIO情報の表示
+		MessageBox(NULL, strASIOInfo, _T("ASIO"), MB_OK);
+		break;
+
+	case ID_WAVEFILEINFORMATION:
+		//Waveファイル情報の表示
+		MessageBox(NULL, strWaveFileInfo, _T("Wave File"), MB_OK);
+		break;
+
+	case ID_EXIT:
+		//プログラムの終了
+		if (IDYES == MessageBox(hwnd, _T("終了しますか？"), _T("終了確認"), MB_YESNO)) {
+			DestroyWindow(hwnd);
+		}
+		break;
+		
+		// 遅延時間の設定
+		// 配列の削除
+	case ID_MENU_RESTART:
+		if (MessageBox(hwnd, _T("結果をファイルに書き込みましたか？"), _T("確認"), MB_YESNO) == IDYES) {
+			if (ClearMarginTime(hwnd, MarginTime)) {
+				MessageBox(hwnd, _T("結果を削除しました。"), _T("削除完了"), MB_OK);
+			}
+			// コンボボックスの有効化
+			if (!LABNormal)
+			{
+				EnableWindow(GetDlgItem(hwnd, ID_EDIT_LATEDATA_TIMING), TRUE);
+				EnableWindow(GetDlgItem(hwnd, ID_LATEINI_2), TRUE);
+				EnableWindow(GetDlgItem(hwnd, ID_LATESETTING_2), TRUE);
+			}
+			else {
+				EnableWindow(GetDlgItem(hwnd, ID_LATESETTING), TRUE);        
+				EnableWindow(GetDlgItem(hParentWindow, ID_LATEINI), TRUE);
+			}
+			if (Finished == true) { Finished = false; }
+		}
+		break;
+
+	case ID_MENU_INI_FILE:
+		// ファイル選択のためのダイアログボックスを表示
+	{
+		bool ReadIniFileFlag = SelectIniFile(hwnd, FileNameINI);
+		if (ReadIniFileFlag) {
+			// Iniファイルの更新
+			ReadIniFile(hwnd, lparam, FileNameINI);
+			// ループ回数の設定
+			LateIniFunc(hwnd, wparam);
+			// ウィンドウに表示されるファイル名の更新
+			RelativepathFromAbsolutepath(FileNameINI, hwnd, ID_GROUP_LATEDATA, false);
+			RelativepathFromAbsolutepath(FileNameINI, hwnd, ID_GROUP_LATEDATA_2, true);
+
+		}
+		break;
+	}
+	case ID_DELETE_ARRAY:
+		/*NumberOfloops = 1;
+		SetWindowText(hStaticNumberOfloops2, _T("1"));*/
+		if (ClearMarginTime(hwnd, MarginTime)) {
+			MessageBox(hwnd, _T("結果を削除しました。"), _T("削除完了"), MB_OK);
+		}
+		break;
+		///////////////////
+		// コンボボックス
+		///////////////////
+	case ID_LATEINI:
+		// 基本情報
+		if (HIWORD(wparam) == CBN_SELCHANGE) {
+			SendLate2Combo(hwnd, wparam, FileNameINI);
+			LateIniFunc(hwnd, wparam);
+		}
+		break;
+		
+	case ID_LATESETTING:
+		// 詳細情報
+		if (HIWORD(wparam) == CBN_SELCHANGE) {
+			LateIniFunc(hwnd, wparam);
+		}
+		break;		break;
+		////////////////////
+		// コンボボックス(変則var)
+		////////////////////
+
+	case ID_LATEINI_2:
+		// 基本情報(変則var)
+		if (HIWORD(wparam) == CBN_SELCHANGE) {
+			SendLate2Combo_2(hwnd, wparam, FileNameINI);
+			LateIniFunc_2(hwnd, wparam);
+		}
+		break;
+	case ID_LATESETTING_2:
+		//　詳細情報(変則var)
+		if (HIWORD(wparam) == CBN_SELCHANGE) {
+			LateIniFunc_2(hwnd, wparam);
+		}
+		break;
+
+	// 取得回数の設定
+	case ID_STATIC_TRIALS_NUM:
+		if (HIWORD(wparam) == CBN_SELCHANGE) {
+			int itemIndex = SendMessage(GetDlgItem(hwnd, ID_STATIC_TRIALS_NUM), CB_GETCURSEL, 0, 0);
+			if (itemIndex != CB_ERR) {
+				char itemData[10] = {0};
+				SendMessage(GetDlgItem(hwnd, ID_STATIC_TRIALS_NUM), CB_GETLBTEXT, itemIndex, (LPARAM)itemData);
+				int Temp = _ttol(itemData);
+				TempNumberOfTrials = Temp;
+			}
+		}
+		break;
+		// 実験方法の選択
+	case ID_STATIC_NORMALORIRREG:
+		if (HIWORD(wparam) == CBN_SELCHANGE) {
+			int itemIndex = SendMessage(GetDlgItem(hwnd, ID_STATIC_NORMALORIRREG), CB_GETCURSEL, 0, 0);
+			if (itemIndex != CB_ERR) {
+				if (itemIndex) {
+					/*if (DialogBox(GetModuleHandle(NULL), MAKEINTRESOURCE(IDD_MYDIALOG), hwnd, DialogProc) == -1) {
+						MessageBox(hwnd, _T("ダイアログボックスの作成に失敗しました。"), _T("エラー"), MB_OK);
+					}*/
+					EnableWindow(GetDlgItem(hwnd, ID_EDIT_LATEDATA_TIMING), TRUE);
+					EnableWindow(GetDlgItem(hwnd, ID_LATEINI_2), TRUE);
+					EnableWindow(GetDlgItem(hwnd, ID_LATESETTING_2), TRUE);
+					EnableWindow(GetDlgItem(hwnd, ID_LATESETTING), FALSE);
+					EnableWindow(GetDlgItem(hParentWindow, ID_LATEINI), FALSE);
+					// 遅延のタイミング
+					char* lpstringDelayTiming = new char[50];
+					GetWindowText(GetDlgItem(hwnd, ID_EDIT_LATEDATA_TIMING), lpstringDelayTiming, 50);
+					DelayTiming = atoi(lpstringDelayTiming);
+					//コンボボックスで現在選択されている項目のインデックスを取得
+					int LocalDelayTIme = GetNowComboStr(hwnd, ID_LATESETTING_2);
+					DelayTime_ms = LocalDelayTIme;
+
+					LABNormal = false;
+					delete[] lpstringDelayTiming;
+				}
+				else {
+					EnableWindow(GetDlgItem(hwnd, ID_EDIT_LATEDATA_TIMING), FALSE);
+					EnableWindow(GetDlgItem(hwnd, ID_LATEINI_2), FALSE);
+					EnableWindow(GetDlgItem(hwnd, ID_LATESETTING_2), FALSE);
+					EnableWindow(GetDlgItem(hwnd, ID_LATESETTING), TRUE);
+					EnableWindow(GetDlgItem(hParentWindow, ID_LATEINI), TRUE);
+
+					DelayTiming = 1;
+					LABNormal = true;
+				}
+			}
+		}
+		break;
+		// BPMの選択
+	case ID_STATIC_BPMNUM:
+		if (HIWORD(wparam) == CBN_SELCHANGE) {
+			int itemIndex = SendMessage(GetDlgItem(hwnd, ID_STATIC_BPMNUM), CB_GETCURSEL, 0, 0);
+			if (itemIndex != CB_ERR) {
+				/*BPMの変更に伴う処理をここに書く*/
+			}
+		}
+		break;
+	////////////////////////////////
+	// 「メニュー」→「実験方法」
+	// /////////////////////////////
+	case ID_MENU_NORMAL:
+		SetWindowText(GetDlgItem(hParentWindow, ID_STATIC_NORMALORIRREG), _T("通常"));
+		LABNormal = true;
+		break;
+	case ID_MENU_IRREG:
+		SetWindowText(GetDlgItem(hParentWindow, ID_STATIC_NORMALORIRREG), _T("変則"));
+		LABNormal = false;
+		break;
+	
+		///////////////
+	// ファイルの指定
+		////////////////
+	case ID_MENU_CSV_OUTPUT:
+	{
+		// ファイル選択用ダイアログの表示
+		bool MadeFile = SelectFile(hwnd, FileNameCSV);
+		if (MadeFile)
+		{
+			// パス名をstring型に変換
+			CSVFILENAME = FileNameCSV;
+			// 出力先ファイルをウィンドウ上に表示
+			RelativepathFromAbsolutepath(FileNameCSV, hwnd, ID_EDIT_FILEPATH, false);
+		}
+	}
+		break;
+		// プッシュボタン
+	case ID_BUTTON_CSV:
+		if (HIWORD(wparam) == BN_CLICKED) {
+			Finished = false; // ファイルに書き込んだらtrueにする
+			// 年齢と名前が書かれているかチェック
+			short length_1 = GetWindowTextLength(GetDlgItem(hwnd, ID_EDIT_OLD));
+			short length_2 = GetWindowTextLength(GetDlgItem(hwnd, ID_EDIT_NAME));
+			if (length_1 * length_2 == 0) {
+				// Edit Boxが空
+				MessageBox(hwnd, _T("名前と年齢のどちらか、もしくはその両方が未入力です。"), _T("警告"), MB_OK | MB_ICONWARNING);
+				break;
+			}
+			// 既に開かれているかをチェック
+			if (!CheckCanWriteFile(hwnd, FileNameCSV)) {
+				// ファイルを開くのに失敗した場合、書き込みが不可能である可能性が高い
+				MessageBox(hwnd, _T("ファイルに書き込めません。ファイルが選択されていないか既に開かれている可能性があります。"), _T("警告"), MB_OK | MB_ICONWARNING);
+				break;
+			}
+			// 遅延時間のグループ名とBPMを出力
+			 // リサイズ。書き込み可能となるようにメモリを確保
+			string delay_group,bpm;
+			delay_group.resize(10);  
+			bpm.resize(10);
+			// null文字を除いた書き込んだ文字数を返す
+			int NumWritten=0;
+			if (!LABNormal) {
+				NumWritten = GetWindowText(GetDlgItem(hwnd, ID_LATEINI_2), &delay_group[0], sizeof(delay_group));
+			}else{
+				NumWritten = GetWindowText(GetDlgItem(hwnd, ID_LATEINI), &delay_group[0], sizeof(delay_group));
+			}
+			int NumBpm = GetWindowText(GetDlgItem(hwnd, ID_STATIC_BPMNUM), &bpm[0], sizeof(bpm));
+			// null文字を除いた要素数にresizeする
+			delay_group.resize(NumWritten);       
+			bpm.resize(NumBpm);
+			
+			MarginTime.insert(MarginTime.begin(), bpm);                                // BPMをベクタの先頭に代入
+			GetEditBoxTextFunc(hParentWindow);                                            // 被験者情報をベクタの先頭に代入
+			MarginTime.insert(MarginTime.begin(), delay_group);                     // 遅延時間のグループ名をベクタの先頭に代入
+			MarginTime.insert(MarginTime.begin(), to_string(Num));                 // 遅延時間をベクタの先頭に代入
+			MarginTime.insert(MarginTime.begin(), TimeStampButtonClicked);   // 押下時刻をベクタの先頭に代入
+			if (!LABNormal) {
+				string tempunique = _T("irregular");
+				string stringDelayTiming = to_string(DelayTiming);
+				string stringDelayTime_ms = to_string(DelayTime_ms);
+
+				// 実験条件が変則の場合、ベクタの先頭に文字列を代入
+				MarginTime.insert(MarginTime.begin(), stringDelayTiming);        // 遅延のタイミング
+				MarginTime.insert(MarginTime.begin(), stringDelayTime_ms);    // 遅延時間
+				MarginTime.insert(MarginTime.begin(), tempunique);                // irregular
+				EnableWindow(GetDlgItem(hwnd, ID_LATESETTING_2), TRUE);
+				EnableWindow(GetDlgItem(hParentWindow, ID_LATEINI_2), TRUE);
+				EnableWindow(GetDlgItem(hParentWindow, ID_EDIT_LATEDATA_TIMING), TRUE);
+			}
+			// コンボボックスの更新
+			// コンボボックスの表示を次の選択肢に更新
+			//if (LABNormal) {
+			//	int NumberOfCursel = SendMessage(GetDlgItem(hParentWindow, ID_LATESETTING), CB_GETCOUNT, 0, 0); // 選択肢の数
+			//	int NowCursel = SendMessage(GetDlgItem(hParentWindow, ID_LATESETTING), CB_GETCURSEL, 0, 0);        // 現在の選択項目
+			//	if (NowCursel == NumberOfCursel - 1)
+			//		SendMessage(GetDlgItem(hParentWindow, ID_LATESETTING), CB_SETCURSEL, 0, 0); // 先頭項目に戻す
+			//	else SendMessage(GetDlgItem(hParentWindow, ID_LATESETTING), CB_SETCURSEL, NowCursel + 1, 0); // 次の項目に更新
+			//}
+			//else
+			//{
+			//	int NumberOfCursel = SendMessage(GetDlgItem(hParentWindow, ID_LATESETTING_2), CB_GETCOUNT, 0, 0); // 選択肢の数
+			//	int NowCursel = SendMessage(GetDlgItem(hParentWindow, ID_LATESETTING_2), CB_GETCURSEL, 0, 0);        // 現在の選択項目
+			//	if (NowCursel == NumberOfCursel - 1)
+			//		SendMessage(GetDlgItem(hParentWindow, ID_LATESETTING_2), CB_SETCURSEL, 0, 0); // 先頭項目に戻す
+			//	else SendMessage(GetDlgItem(hParentWindow, ID_LATESETTING_2), CB_SETCURSEL, NowCursel + 1, 0); // 次の項目に更新
+			//}
+			WriteToCSV(hwnd, MarginTime, CSVFILENAME);
+			EnableWindow(GetDlgItem(hwnd, ID_LATESETTING), TRUE);        // コンボボックスの有効化
+			EnableWindow(GetDlgItem(hParentWindow, ID_LATEINI), TRUE);
+
+		}
+		break;
+	}
+
+	return true;
+}
+
+// 標準偏差を計算するための関数
+double calculate_unbiased_stddev(const vector<double>& numbers) {
+
+	// データの平均値を算出
+	double ave = 0.0;
+	for (const auto& num : numbers) {
+		ave += num;
+	}
+	ave /= numbers.size();
+
+	double variance = 0.0;
+	for (const auto& num : numbers) {
+		variance += (num - ave) * (num - ave);
+	}
+	// n-1で割り不偏分散を計算
+	variance /= (numbers.size() - 1);
+	
+	// 最後に不偏分散の平方根をとる
+	return sqrt(variance);
+}
+
+// string vectorから標準偏差を計算するための関数
+bool SetStddev2Window(const vector<string> mTime) {
+
+	vector<double> numbers;
+
+	// 文字列を数値に変換、vectorに格納
+	for (const auto& str : mTime) {
+		if (str == "false" ) {
+			// "false"だった場合はスキップ
+			continue;
+		}
+		numbers.push_back(stod(str));
+	}
+	// 標準偏差を取得
+	double std_dev = calculate_unbiased_stddev(numbers);
+	// 小数点以下1桁までに丸める（中間の値（2.5や3.5など）は、最も近い偶数整数に四捨五入される）
+	std_dev = round(std_dev * 10.0) / 10.0;
+
+	// string型の文字列に変換
+	stringstream ss;
+	ss << std_dev;
+	string std_dev_str = ss.str();
+
+	// ウィンドウに結果を表示
+	std_dev_str = _T("Std[ms]: ") + std_dev_str;
+	SetWindowText(GetDlgItem(hParentWindow, ID_STATIC_STDDEV), std_dev_str.c_str());
+
+	return true;
+}
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% window.cpp
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{lstlisting}[caption=window.cpp]
+  #include<tchar.h>
+  #include<sstream>
+  #include<fstream>
+  #include"resource.h"
+  #include"window.h"
+  #include"main.h"
+
+  using namespace std;
+  // RECT構造体の定義
+  RECT rButtonClickedTime = {30, 70, 530, 430};
+  RECT rGroupIni = {rButtonClickedTime.right + 15, rButtonClickedTime.top, 725, 260};
+  RECT rGroupSetting = {rGroupIni.right + 5, rGroupIni.top, rGroupIni.right + 5 + 190, 260};
+  RECT rGroupIni2 = { rGroupSetting.right + 5, rGroupSetting.top, rGroupSetting.right + 5 + 190, 260 };
+
+  HWND hStaticNowTime, hStaticTime, hEdit1, htaticNumberOfloops, hStaticNumberOfloops2;
+
+  // ソース.cppと共有する変数
+  int Num = 0;
+  long inlatency, outlatency;
+  int lenBuffer, NumberOfloops;
+
+  //ウィンドウの作成
+  bool CreateControl(HWND hWnd, WPARAM wParam, LPARAM lParam) {
+
+    hStaticTime = CreateWindow(
+      _T("STATIC"),
+      _T("カウント"),
+      WS_CHILD | WS_VISIBLE | SS_LEFT,
+      rButtonClickedTime.left,rButtonClickedTime.top - 40, 100, 30,
+      hWnd, (HMENU)ID_STATIC2, 
+      ((LPCREATESTRUCT)(lParam))->hInstance, NULL
+    );
+
+    hEdit1 = CreateWindow(
+      _T("EDIT"),
+      _T(""),
+      WS_CHILD | WS_VISIBLE | WS_VSCROLL |
+      ES_LEFT | ES_MULTILINE | ES_AUTOVSCROLL| WS_BORDER,
+      rButtonClickedTime.left, rButtonClickedTime.top, 
+      rButtonClickedTime.right - rButtonClickedTime.left, rButtonClickedTime.bottom - rButtonClickedTime.top,
+      hWnd,
+      NULL,
+      ((LPCREATESTRUCT)(lParam))->hInstance,
+      NULL
+    );
+
+    htaticNumberOfloops = CreateWindow(
+      _T("STATIC"),
+      _T("ループ:"),
+      WS_CHILD | WS_VISIBLE | SS_RIGHT,
+      rGroupSetting.left + 10, rGroupSetting.top + 145, 65, 25,
+      hWnd, (HMENU)ID_STATIC_NUMBERDELAY1,
+      ((LPCREATESTRUCT)(lParam))->hInstance, NULL
+    );
+
+    hStaticNumberOfloops2 = CreateWindow(
+      _T("STATIC"),
+      _T("1"),
+      WS_CHILD | WS_VISIBLE | SS_LEFT,
+      rGroupSetting.left + 100, rGroupSetting.top + 145, 50, 25, 
+      hWnd, (HMENU)ID_STATIC_NUMBERDELAY2,
+      ((LPCREATESTRUCT)(lParam))->hInstance, NULL
+    );
+
+    HWND hButtonSendCSV = CreateWindow(
+      _T("BUTTON"),
+      _T("↓ファイルを出力"),
+      WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
+      rGroupIni.left + 260 + 35, 375, rGroupIni2.right - rGroupIni2.left + 50, 50,
+      hWnd, (HMENU)ID_BUTTON_CSV,
+      ((LPCREATESTRUCT)(lParam))->hInstance, NULL
+    );
+    HWND hStaticFilename = CreateWindow(
+      _T("STATIC"),
+      _T("保存先:"),
+      WS_CHILD | WS_VISIBLE | SS_LEFT,
+      rGroupIni.left + 10, 390, 65, 25,
+      hWnd, (HMENU)ID_STATIC_FILENAME,
+      ((LPCREATESTRUCT)(lParam))->hInstance, NULL
+    );
+
+    // ファイルの場所を示すエディットボックス
+    HWND hEditFilePath = CreateWindow(
+      _T("EDIT"),
+      _T("No file selected"),
+      WS_CHILD | WS_VISIBLE | ES_LEFT | WS_BORDER | ES_AUTOHSCROLL | ES_READONLY,
+      rGroupIni.left + 70, 390, 200, 25,
+      hWnd,
+      (HMENU)ID_EDIT_FILEPATH,
+      ((LPCREATESTRUCT)(lParam))->hInstance,
+      NULL
+    );
+
+    // ボタンの押下回数を表示するウィンドウ
+    HWND hCountButtonClicked_2 = CreateWindow(
+      _T("STATIC"),
+      _T("0"),
+      WS_CHILD | WS_VISIBLE | SS_LEFT,
+      120, 15, 60, 50,
+      hWnd, (HMENU)ID_STATIC_COUNTBUTTONCLICKED_2,
+      ((LPCREATESTRUCT)(lParam))->hInstance, NULL
+    );
+    
+    // データ出力後に標準偏差を表示するウィンドウ
+    HWND hStdDev = CreateWindow(
+      _T("STATIC"),
+      _T("Std[ms]: None"),
+      WS_CHILD | WS_VISIBLE | SS_LEFT,
+      370, 30, 120, 30,
+      hWnd, (HMENU)ID_STATIC_STDDEV,
+      ((LPCREATESTRUCT)(lParam))->hInstance, NULL
+    );
+
+    // 各設定値の表示
+    HWND hGruoplatedata = CreateWindow(
+      _T("BUTTON"),
+      _T("実験条件"),
+      WS_CHILD | WS_VISIBLE | BS_GROUPBOX,
+      rGroupSetting.left, rGroupSetting.top,
+      rGroupSetting.right - rGroupSetting.left, rGroupSetting.bottom - rGroupSetting.top,
+      hWnd, (HMENU)ID_GROUP_SETTING,
+      ((LPCREATESTRUCT)(lParam))->hInstance, NULL
+    );
+
+    HWND hBPM = CreateWindow(
+      _T("STATIC"),
+      _T("BPM:"),
+      WS_CHILD | WS_VISIBLE | SS_RIGHT,
+        rGroupSetting.left + 10, rGroupSetting.top + 35, 65, 25,
+      hWnd, (HMENU)ID_STATIC_BPM,
+      ((LPCREATESTRUCT)(lParam))->hInstance, NULL
+    );
+    // 被験者情報の設定
+    HWND hSubject = CreateWindow(
+      _T("BUTTON"),
+      _T("被験者情報"),
+      WS_CHILD | WS_VISIBLE | BS_GROUPBOX,
+      rGroupIni.left, rGroupIni.bottom + 10,
+      rGroupIni2.right - rGroupIni.left, 90,
+      hWnd, (HMENU)ID_GROUP_SUBJECTINFO,
+      ((LPCREATESTRUCT)(lParam))->hInstance, NULL
+    );
+    // 年齢
+    HWND hStaticOld = CreateWindow(
+      _T("STATIC"),
+      _T("年齢:"),
+      WS_CHILD | WS_VISIBLE | SS_LEFT,
+      rGroupIni.left + 10, rGroupIni.bottom + 45, 50, 25,
+      hWnd, (HMENU)ID_STATIC_OLD,
+      ((LPCREATESTRUCT)(lParam))->hInstance, NULL
+    );
+
+    HWND hEditOld = CreateWindow(
+      _T("EDIT"),
+      _T(""),
+      WS_CHILD | WS_VISIBLE | ES_LEFT | WS_BORDER | ES_NUMBER,
+      rGroupIni.left + 60, rGroupIni.bottom + 45, 70, 25,
+      hWnd,
+      (HMENU)ID_EDIT_OLD,
+      ((LPCREATESTRUCT)(lParam))->hInstance,
+      NULL
+    );
+    // 名前
+      // 年齢
+    HWND hStaticName = CreateWindow(
+      _T("STATIC"),
+      _T("名前:"),
+      WS_CHILD | WS_VISIBLE | SS_LEFT,
+      rGroupIni.left + 150, rGroupIni.bottom + 45, 50, 25,
+      hWnd, (HMENU)ID_STATIC_NAME,
+      ((LPCREATESTRUCT)(lParam))->hInstance, NULL
+    );
+
+    HWND hEditName = CreateWindow(
+      _T("EDIT"),
+      _T(""),
+      WS_CHILD | WS_VISIBLE | ES_LEFT | WS_BORDER | ES_AUTOHSCROLL,
+      rGroupIni.left + 200, rGroupIni.bottom + 45, rGroupIni2.right - (rGroupIni.left + 210) - 10, 25,
+      hWnd,
+      (HMENU)ID_EDIT_NAME,
+      ((LPCREATESTRUCT)(lParam))->hInstance,
+      NULL
+    );
+    /*HWND hBPM_NUM = CreateWindow(
+      _T("STATIC"),
+      _T("未選択"),
+      WS_CHILD | WS_VISIBLE | SS_LEFT,
+      rGroupSetting.left + 100, rGroupSetting.top + 35, 80, 25,
+      hWnd, (HMENU)ID_STATIC_BPMNUM,
+      ((LPCREATESTRUCT)(lParam))->hInstance, NULL
+    );*/
+
+    // BPMの選択用コンボボックス
+    HWND hComboBPM = CreateWindow(
+      _T("COMBOBOX"),
+      NULL,
+      WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST,
+      rGroupSetting.left + 100, rGroupSetting.top + 35, 70, 25,
+      hWnd, (HMENU)ID_STATIC_BPMNUM,
+      ((LPCREATESTRUCT)(lParam))->hInstance, NULL
+    );
+
+    // 項目追加
+    SendMessage(hComboBPM, CB_ADDSTRING, 0, (LPARAM)_T("60"));
+    SendMessage(hComboBPM, CB_ADDSTRING, 0, (LPARAM)_T("70"));
+    SendMessage(hComboBPM, CB_ADDSTRING, 0, (LPARAM)_T("80"));
+    SendMessage(hComboBPM, CB_ADDSTRING, 0, (LPARAM)_T("85"));
+    SendMessage(hComboBPM, CB_ADDSTRING, 0, (LPARAM)_T("90"));
+    SendMessage(hComboBPM, CB_ADDSTRING, 0, (LPARAM)_T("100"));
+    SendMessage(hComboBPM, CB_ADDSTRING, 0, (LPARAM)_T("110"));
+    // 初期選択項目を"80"に設定
+    SendMessage(hComboBPM, CB_SETCURSEL, 2, 0);
+
+
+    HWND hTrials = CreateWindow(
+      _T("STATIC"),
+      _T("取得回数:"),
+      WS_CHILD | WS_VISIBLE | SS_LEFT,
+      rGroupSetting.left + 10, rGroupSetting.top + 75, 80, 25,
+      hWnd, (HMENU)ID_STATIC_TRIALS,
+      ((LPCREATESTRUCT)(lParam))->hInstance, NULL
+    );
+
+    //HWND hTrialsNum = CreateWindow(
+    //	_T("STATIC"),
+    //	_T("30"),
+    //	WS_CHILD | WS_VISIBLE | SS_LEFT,
+    //	rGroupSetting.left + 100, rGroupSetting.top + 75, 30, 25,
+    //	hWnd, (HMENU)ID_STATIC_TRIALS_NUM,
+    //	((LPCREATESTRUCT)(lParam))->hInstance, NULL
+    //);
+
+    // 取得回数の選択用コンボボックス
+    HWND hComboTraialsNum = CreateWindow(
+      _T("COMBOBOX"),
+      NULL,
+      WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST,
+      rGroupSetting.left + 100, rGroupSetting.top + 75, 70, 25,
+      hWnd, (HMENU)ID_STATIC_TRIALS_NUM,
+      ((LPCREATESTRUCT)(lParam))->hInstance, NULL
+    );
+    // 項目追加
+    SendMessage(hComboTraialsNum, CB_ADDSTRING, 0, (LPARAM)_T("20"));
+    SendMessage(hComboTraialsNum, CB_ADDSTRING, 0, (LPARAM)_T("30"));
+    SendMessage(hComboTraialsNum, CB_ADDSTRING, 0, (LPARAM)_T("40"));
+    SendMessage(hComboTraialsNum, CB_ADDSTRING, 0, (LPARAM)_T("18"));
+    SendMessage(hComboTraialsNum, CB_ADDSTRING, 0, (LPARAM)_T("34"));
+    SendMessage(hComboTraialsNum, CB_ADDSTRING, 0, (LPARAM)_T("38"));
+
+
+    // 初期選択項目を"34"に設定
+    SendMessage(hComboTraialsNum, CB_SETCURSEL, 4, 0);
+    
+    HWND hBPM_LAB = CreateWindow(
+      _T("STATIC"),
+      _T("実験方法:"),
+      WS_CHILD | WS_VISIBLE | SS_LEFT,
+      rGroupSetting.left + 10, rGroupSetting.top + 110, 80, 25,
+      hWnd, (HMENU)ID_STATIC_LAB,
+      ((LPCREATESTRUCT)(lParam))->hInstance, NULL
+    );
+
+    //HWND hBPM_IRREG = CreateWindow(
+    //	_T("STATIC"),
+    //	_T("通常"),
+    //	WS_CHILD | WS_VISIBLE | SS_LEFT,
+    //	rGroupSetting.left + 100, rGroupSetting.top + 110, 60, 25,
+    //	hWnd, (HMENU)ID_STATIC_NORMALORIRREG,
+    //	((LPCREATESTRUCT)(lParam))->hInstance, NULL
+    //);
+    
+    // 実験方法の選択用コンボボックス
+    HWND hComboLAB = CreateWindow(
+      _T("COMBOBOX"),
+      NULL,
+      WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST,
+      rGroupSetting.left + 100, rGroupSetting.top + 110, 70, 25,
+      hWnd, (HMENU)ID_STATIC_NORMALORIRREG,
+      ((LPCREATESTRUCT)(lParam))->hInstance, NULL
+    );
+    // 項目追加
+    SendMessage(hComboLAB, CB_ADDSTRING, 0, (LPARAM)_T("通常"));
+    SendMessage(hComboLAB, CB_ADDSTRING, 0, (LPARAM)_T("変則"));
+    // 初期選択項目を"変則"に設定
+    SendMessage(hComboLAB, CB_SETCURSEL, 1, 0);
+
+
+    return true;
+  }
+
+  //コンボボックス、 iniファイル読み込み
+  bool ReadIniFile(HWND hWnd, LPARAM lParam, char* IniFilePath) {
+    char Path[MAX_PATH + 1];
+    char settingpath[MAX_PATH + 1];
+    char lateName[256];
+
+
+    lateName[0] = '\0';
+    settingpath[0] = '\0';
+
+    if (!IniFilePath) {
+      // IniFIlepathがNULLの場合は、exeファイルと同じ場所にあるiniファイルを読み込む
+      if (GetModuleFileName(NULL, Path, MAX_PATH) != 0) {
+        char drive[MAX_PATH + 1], dir[MAX_PATH + 1], fname[MAX_PATH + 1], ext[MAX_PATH + 1];
+        // パス名を分解
+        _splitpath(Path, drive, dir, fname, ext);
+        _stprintf_s(settingpath, MAX_PATH + 1, INIFILEDEFNAME, drive, dir);
+      }
+      else {
+        MessageBox(hWnd, _T("iniファイルが見つかりませんでした。"), _T("警告"), MB_OK | MB_ICONERROR);
+        return false;
+      }
+      // iniファイルの読み込み
+      GetPrivateProfileString(_T("setting"), _T("latedataname"), _T("Error"), lateName, sizeof(lateName), settingpath);
+    }
+    else{
+      // IniFIlePathがNULLでない場合は、IniFilePathで指定されたiniファイルを読み込む
+      GetPrivateProfileString(_T("setting"), _T("latedataname"), _T("Error"), lateName, sizeof(lateName), IniFilePath);
+    }
+    std::stringstream ss, tt;
+    ss << lateName;
+    string s, t;
+
+    // IniFilePathがNULLの場合は、子ウィンドウを作成する
+    if (!IniFilePath) {
+
+      // 遅延時間設定グループボックスの作成
+      HWND hGruoplatedata = CreateWindow(
+        _T("BUTTON"),
+        _T("setting_110.ini"),
+        WS_CHILD | WS_VISIBLE | BS_GROUPBOX,
+        rGroupIni.left, rGroupIni.top, rGroupIni.right - rGroupIni.left, rGroupIni.bottom - rGroupIni.top,
+        hWnd, (HMENU)ID_GROUP_LATEDATA,
+        ((LPCREATESTRUCT)(lParam))->hInstance, NULL
+      );
+      //-------------------------------------------------------------------------
+      //*遅延時間設定用グループボックスの作成1（変則var)*/
+      HWND hGruoplatedata_2 = CreateWindow(
+        _T("BUTTON"),
+        _T("setting_110.ini（変則)"),
+        WS_CHILD | WS_VISIBLE | BS_GROUPBOX,
+        rGroupIni2.left, rGroupIni2.top, rGroupIni2.right - rGroupIni2.left, rGroupIni2.bottom - rGroupIni2.top,
+        hWnd, (HMENU)ID_GROUP_LATEDATA_2,
+        ((LPCREATESTRUCT)(lParam))->hInstance, NULL
+      );
+
+      HWND hStaticlatedataTiming = CreateWindow(
+        _T("STATIC"),
+        _T("タイミング:"),
+        WS_CHILD | WS_VISIBLE | SS_LEFT,
+        rGroupIni2.left + 10, rGroupIni2.top + 35, 100, 25,
+        hWnd, (HMENU)ID_STATIC_LATEDATATIMING,
+        ((LPCREATESTRUCT)(lParam))->hInstance, NULL
+      );
+      HWND hEditLateDataTiming = CreateWindow(
+        _T("EDIT"),
+        _T("4"),
+        WS_CHILD | WS_VISIBLE | ES_LEFT | WS_BORDER | ES_NUMBER,
+        rGroupIni2.left + 115, rGroupIni2.top + 35, 40, 25,
+        hWnd,
+        (HMENU)ID_EDIT_LATEDATA_TIMING,
+        ((LPCREATESTRUCT)(lParam))->hInstance,
+        NULL
+      );
+
+      HWND hStaticlatedataCombo_2 = CreateWindow(
+        _T("STATIC"),
+        _T("基本:"),
+        WS_CHILD | WS_VISIBLE | SS_LEFT,
+        rGroupIni2.left + 10, rGroupIni2.top + 85, 50, 25,
+        hWnd, (HMENU)ID_STATIC_LATEDATACOMBO_2,
+        ((LPCREATESTRUCT)(lParam))->hInstance, NULL
+      );
+      HWND lateDataCombo_2 = CreateWindow(
+        _T("COMBOBOX"), NULL, WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST,
+        rGroupIni2.left + 65, rGroupIni2.top + 85, 85, 50,
+        hWnd, (HMENU)ID_LATEINI_2,
+        ((LPCREATESTRUCT)(lParam))->hInstance, NULL
+      );
+
+      HWND hStaticlatesetting_2 = CreateWindow(
+        _T("STATIC"),
+        _T("詳細: "),
+        WS_CHILD | WS_VISIBLE | SS_LEFT,
+        rGroupIni2.left + 10, rGroupIni2.top + 135, 50, 25,
+        hWnd, (HMENU)ID_STATIC_LATESETTING_2,
+        ((LPCREATESTRUCT)(lParam))->hInstance, NULL
+      );
+      HWND hStaticlatedataCombo_MS_2 = CreateWindow(
+        _T("STATIC"),
+        _T("[ms]"),
+        WS_CHILD | WS_VISIBLE | SS_LEFT,
+        rGroupIni2.right - 37, rGroupIni2.top + 141, 35, 25,
+        hWnd, (HMENU)ID_STATIC_COMBO_MS_2,
+        ((LPCREATESTRUCT)(lParam))->hInstance, NULL
+      );
+
+      CreateWindow(
+        _T("COMBOBOX"), NULL,
+        WS_CHILD | WS_VISIBLE | CBS_SORT | CBS_DROPDOWN | ES_NUMBER,
+        rGroupIni2.left + 65, rGroupIni2.top + 135, 85, 50,
+        hWnd, (HMENU)ID_LATESETTING_2,
+        ((LPCREATESTRUCT)(lParam))->hInstance, NULL);
+
+      /*-----------------------------------------------------------------------------------*/
+      HWND hStaticlatedataCombo = CreateWindow(
+        _T("STATIC"),
+        _T("基本:"),
+        WS_CHILD | WS_VISIBLE | SS_LEFT,
+        rGroupIni.left + 10, rGroupIni.top + 30, 100, 25,
+        hWnd, (HMENU)ID_STATIC_LATEDATACOMBO,
+        ((LPCREATESTRUCT)(lParam))->hInstance, NULL
+      );
+
+      HWND lateDataCombo = CreateWindow(
+        _T("COMBOBOX"), NULL, WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST | WS_DISABLED,
+        rGroupIni.left + 10, rGroupIni.top + 55, 130, 50,
+        hWnd, (HMENU)ID_LATEINI,
+        ((LPCREATESTRUCT)(lParam))->hInstance, NULL
+      );
+
+    }
+    // コンボボックスに文字列が既に存在する場合は、すべて削除する
+    SendMessage(GetDlgItem(hWnd, ID_LATEINI), CB_RESETCONTENT, 0, 0);
+    SendMessage(GetDlgItem(hWnd, ID_LATEINI_2), CB_RESETCONTENT, 0, 0);
+    SendMessage(GetDlgItem(hWnd, ID_LATESETTING), CB_RESETCONTENT, 0, 0);
+    SendMessage(GetDlgItem(hWnd, ID_LATESETTING_2), CB_RESETCONTENT, 0, 0);
+
+    int i = 0;
+    while (getline(ss, s, ',')){
+      char* cstr = new char[s.size() + 1];
+      char_traits<char>::copy(cstr, s.c_str(), s.size() + 1);
+      // コンボボックスに文字列を挿入
+      SendMessage(GetDlgItem(hWnd, ID_LATEINI), CB_INSERTSTRING, i, (LPARAM)cstr);
+      SendMessage(GetDlgItem(hWnd, ID_LATEINI_2), CB_INSERTSTRING, i, (LPARAM)cstr);
+      i++;
+    }
+    // コンボボックスに先頭の要素をセット
+    SendMessage(GetDlgItem(hWnd, ID_LATEINI), CB_SETCURSEL, 0, 0);
+    SendMessage(GetDlgItem(hWnd, ID_LATEINI_2), CB_SETCURSEL, 0, 0);
+
+    // IniFilePathがNULLの場合は、子ウィンドウを作成する
+    if (!IniFilePath) {
+      // 2個目のコンボボックス
+      HWND hStaticlatesetting = CreateWindow(
+        _T("STATIC"),
+        _T("詳細: "),
+        WS_CHILD | WS_VISIBLE | SS_LEFT,
+        rGroupIni.left + 10, rGroupIni.top + 115, 100, 25,
+        hWnd, (HMENU)ID_STATIC_LATESETTING,
+        ((LPCREATESTRUCT)(lParam))->hInstance, NULL
+      );
+      HWND hStaticlatedataCombo_MS = CreateWindow(
+        _T("STATIC"),
+        _T("[ms]"),
+        WS_CHILD | WS_VISIBLE | SS_LEFT,
+        rGroupIni.right - 37, rGroupIni.top + 146, 35, 25,
+        hWnd, (HMENU)ID_STATIC_COMBO_MS,
+        ((LPCREATESTRUCT)(lParam))->hInstance, NULL
+      );
+      CreateWindow(
+        _T("COMBOBOX"), NULL,
+        WS_CHILD | WS_VISIBLE | CBS_SORT | CBS_DROPDOWN | ES_NUMBER | WS_DISABLED,
+        rGroupIni.left + 10, rGroupIni.top + 140, 130, 50,
+        hWnd, (HMENU)ID_LATESETTING,
+        ((LPCREATESTRUCT)(lParam))->hInstance, NULL);
+
+    }
+
+    // コンボボックスの一覧内の文字列の長さを取得
+    int intTxtLen = SendMessage(GetDlgItem(hWnd, (int)ID_LATEINI), CB_GETLBTEXTLEN, 0, 0);
+    if (intTxtLen != CB_ERR){
+      char* pszBuf = new char[intTxtLen + 1];
+      // コンボボックスの一覧から選択した文字列を取得
+      if (SendMessage(GetDlgItem(hWnd, (int)ID_LATEINI), CB_GETLBTEXT, 0, (LPARAM)pszBuf) != CB_ERR) {
+        char   latedata[256];
+        if (!IniFilePath) {
+          GetPrivateProfileString(pszBuf, _T("data"), _T("Error"), latedata, sizeof(latedata), settingpath);
+        }
+        else{
+          GetPrivateProfileString(pszBuf, _T("data"), _T("Error"), latedata, sizeof(latedata), IniFilePath);
+        }
+        tt.str("");
+        tt.clear(stringstream::goodbit);
+        tt << latedata;
+        i = 0;
+        while (getline(tt, t, ',')) {
+          char* tstr = new char[t.size() + 1];
+          std::char_traits<char>::copy(tstr, t.c_str(), t.size() + 1);
+          SendMessage(GetDlgItem(hWnd, (int)ID_LATESETTING), CB_INSERTSTRING, i, (LPARAM)tstr);
+          SendMessage(GetDlgItem(hWnd, (int)ID_LATESETTING_2), CB_INSERTSTRING, i, (LPARAM)tstr);
+          i++;
+        }
+      }
+
+      delete[] pszBuf;
+    }
+    SendMessage(GetDlgItem(hWnd, (int)ID_LATESETTING), CB_SETCURSEL, 0, 0);
+    SendMessage(GetDlgItem(hWnd, (int)ID_LATESETTING_2), CB_SETCURSEL, 0, 0);
+
+    //コンボボックスで現在選択されている項目のインデックスを取得
+    GetNowComboStr(hWnd, ID_LATESETTING);
+    // NumberOfloopsを計算
+    CalcLateNumberOfloops(hWnd, &NumberOfloops, Num, lenBuffer, FS, inlatency, outlatency);
+
+    return true;
+  }
+
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% file.cpp
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{lstlisting}[caption=file.cpp]
+  #include<Windows.h>
+  #include<tchar.h>
+  #include<string>
+  #include<Shlwapi.h>
+  #include"file.h"
+  #include"window.h"
+
+  using namespace std;
+
+  #pragma comment(lib, "shlwapi.lib")
+
+  //////////////////////////////////////////////
+  // [名前を付けて保存]ダイアログボックスの作成（CSVファイル）
+  //////////////////////////////////////////////
+  bool SelectFile(HWND hWnd, char* FileName) {
+
+    static OPENFILENAME ofn;
+    memset(&ofn, 0, sizeof(ofn));
+    memset(FileName, 0, sizeof(char) * MAX_PATH);
+
+    // OPENFILENAME 構造体の初期化
+    ofn.lStructSize = sizeof(ofn);
+    ofn.hwndOwner = hWnd;
+    //ofn.lpstrFilter = _T("Text Files(*.txt)\0*.txt\0All Files(*.*)\0*.*\0\0"); 
+    ofn.lpstrFilter = _T("CSV Files(*.csv)\0*.csv\0All Files(*.*)\0*.*\0\0");
+    ofn.lpstrFile = FileName;
+    ofn.nMaxFile = MAX_PATH;
+    ofn.lpstrDefExt = _T("csv");
+    ofn.Flags = OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT | OFN_PATHMUSTEXIST;
+    ofn.lpstrTitle = _T("名前を付けて保存");
+
+    if (!GetSaveFileName(&ofn)) {
+      MessageBox(hWnd, _T("CSVファイルを作成できていません。"), _T("警告"), MB_OK | MB_ICONERROR);
+      return false;
+    }
+
+    return true;
+  }
+
+  //////////////////////////////////////////////
+  // [名前を付けて保存]ダイアログボックスの作成（INIファイル）
+  // //////////////////////////////////////////
+  bool SelectIniFile(HWND hWnd, char* Filename) {
+
+    static OPENFILENAME ofn;
+    memset(&ofn, 0, sizeof(ofn));
+    memset(Filename, 0, sizeof(char) * MAX_PATH);
+
+    // OPENFILENAME 構造体の初期化
+    ofn.lStructSize = sizeof(ofn);
+    ofn.hwndOwner = hWnd;
+    ofn.lpstrFilter = _T("INI Files(*.ini)\0*.ini\0All Files(*.*)\0*.*\0\0");
+    ofn.lpstrFile = Filename;
+    ofn.nMaxFile = MAX_PATH;
+    ofn.lpstrDefExt = _T("ini");
+    ofn.Flags = OFN_HIDEREADONLY | OFN_PATHMUSTEXIST;
+    ofn.lpstrTitle = _T("名前を付けて保存");
+
+    if (!GetSaveFileName(&ofn)) {
+      MessageBox(hWnd, _T("INIファイルを作成できていません。"), _T("警告"), MB_OK | MB_ICONERROR);
+      return false;
+    }
+
+    return true;
+  }
+
+  // ファイルが書き込み可能かをチェック
+  bool CheckCanWriteFile(HWND hWnd, char* FileName) {
+    HANDLE hFile = CreateFile(FileName, GENERIC_WRITE, 0, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+    if (hFile == INVALID_HANDLE_VALUE) {
+      return false;
+    } else {
+      CloseHandle(hFile);
+    }
+    return true;
+  }
+
+  // 出力先ファイルを絶対パスからカレントディレクトリからの相対パスに変換
+  bool RelativepathFromAbsolutepath(char* absolutePath, HWND hwnd, int ID, bool flag) {
+
+    // カレントディレクトリの取得
+    char currentDirectory[MAX_PATH];
+    GetCurrentDirectory(MAX_PATH, currentDirectory);
+
+    char relativePath[MAX_PATH];
+    PathRelativePathTo(
+      relativePath,
+      currentDirectory,
+      FILE_ATTRIBUTE_DIRECTORY,
+      absolutePath,
+      FILE_ATTRIBUTE_NORMAL
+    );
+
+    string temp = relativePath;
+    // ".\\"を削除
+    temp.erase(temp.begin() + 0, temp.begin() + 2);
+    if (flag) {
+      temp += _T(" (変則)");
+    }
+    SetWindowText(GetDlgItem(hwnd, ID), temp.c_str());
+    return true;
+  }
+
+  \end{lstlisting}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% main.h
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{lstlisting}[caption=main.h]
+  #pragma once
+  // ソース.cppとwindow.cppで使用
+  // 定数
+
+  #define FS				48000	//ASIOデバイスのサンプリング周波数[Hz]
+  #define MAXNUMINCHS		2		//ASIOデバイスの録音用チャンネル数
+  #define MAXNUMOUTCHS	2		//ASIOデバイスの再生用チャンネル数
+  #define LENDEVNAME		32		//ASIOデバイスの名前の最大の長さ
+  #define MAXNUMDEVS		16		//ASIOデバイスの最大数
+  #define NUMASIOBUFFERS	2		//ASIOデバイスのバッファ数
+  #define THRESH			0.1		//トリガー用しきい値(0.0～1.0)
+  #define CHCLICK			2		//クリック信号受信チャンネル(1から始まるインデックス)
+  #define CHSOUND			1		//音声信号受信チャンネル(1から始まるインデックス)
+  #define LENCHATTERING	50		//チャタリングの最長継続時間[ms]
+  #define LENSTR			1024	//文字列の最大長
+
+  #define IDDEV			2		//ASIOデバイスのID(「devnames」に格納されるデバイス名リストで要確認)
+  #define N 1               // waveデータをコピーするタイミング
+  #define KAIROLATE 1  // 回路で発生する遅延[ms]
+
+  #define INIFILEDEFNAME _T("%s%sSetting\\setting_110.ini")  //iniファイルの名前
+
+
+  #define WAVEFILENAME	_T("Accent08-1_OtoLogic_short.wav")
+
+  //#define WAVEFILENAME	_T("Accent08-1_OtoLogic.wav")
+  //#define WAVEFILENAME	_T("VSQSE_0527_kiran_02_VSQ.wav")
+  //#define WAVEFILENAME	_T("スイッチ05_On-Jin.wav")
+  //#define WAVEFILENAME	_T("決定、ボタン押下34_効果音ラボ.wav")
+
+
+  //#define CSVFILENAME _T("RESULT\\ResultCSV60.csv")
+  //#define CSVFILENAME _T("RESULT\\ResultCSV70.csv")
+  //#define CSVFILENAME _T("RESULT\\ResultCSV80.csv")
+  //#define CSVFILENAME _T("RESULT\\ResultCSV90.csv")
+  //#define CSVFILENAME _T("RESULT\\ResultCSV100.csv")
+  //#define CSVFILENAME _T("RESULT\\ResultCSV110.csv")
+  //#define CSVFILENAME _T("RESULT\\ResultDelay\\r200ms90bpm.csv")
+  #define	SHIKOUKAISUU 44 // ボタンの押下回数（ソース.cppで使用）
+
+  \end{lstlisting}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% window.h
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{lstlisting}[caption=window.h]
+  #pragma once
+  // プロトタイプ宣言
+
+  #include<Windows.h>
+  #include<chrono>
+  #include<vector>
+  #include<string>
+
+  using namespace std;
+
+  bool CreateControl(HWND, WPARAM, LPARAM);
+  bool OnCreate(HWND, WPARAM, LPARAM);
+  bool OnCommand(HWND, WPARAM, LPARAM);
+  bool SendNowTimeToEdit(HWND, const char*);
+  bool OnFont(HWND);
+  bool OnPaint(HWND, HDC);
+  const char* getMilliTime(std::chrono::system_clock::time_point);
+  bool SendMarginTimeToEdit(std::chrono::system_clock::duration);
+
+  bool ReadIniFile(HWND, LPARAM, char*);
+  bool LateIniFunc(HWND, WPARAM);
+  // コンボボックスの選択項目をNuberDelayに変換
+  bool CalcLateNumberOfloops(HWND, int*, int, int, int, long, long);
+  bool SendLate2Combo(HWND, WPARAM, char*);
+  bool SendLate2Combo_2(HWND, WPARAM, char*);
+
+  //コンボボックスで現在選択されている項目のインデックスを取得
+  int GetNowComboStr(HWND, int);
+  // エディットボックスを自動的に下までスクロールする
+  bool ScrollToBottom(HWND);
+  // 得られた時間差をcsvファイルに書き込むための関数
+  bool WriteToCSV(HWND, vector<string>& MarginTime, const string& filename);
+  bool GetMarginTime(std::chrono::system_clock::duration);
+  bool ClearMarginTime(HWND, vector<string>& MarginTime);
+  bool SendCountButtonClicked(HWND, int&);
+
+  bool GetEditBoxTextFunc(HWND);
+  double calculate_unbiased_stddev(const vector<double>& numbers);  // 不偏標準偏差を計算
+  bool SetStddev2Window(const vector<string>);
+
+  #define ID_STATIC1 2001
+  #define ID_STATIC2 2002
+  #define ID_STATIC_NUMBERDELAY1 2003
+  #define ID_STATIC_NUMBERDELAY2 2004
+  #define ID_STATIC_COUNTBUTTONCLICKED 2005
+  #define ID_STATIC_COUNTBUTTONCLICKED_2 2006
+  #define ID_STATIC_LATEDATACOMBO 2007
+  #define ID_STATIC_LATESETTING         2008
+  #define ID_STATIC_BPM  2009
+  #define ID_STATIC_BPMNUM 2010
+  #define ID_STATIC_LAB 2011
+  #define ID_STATIC_NORMALORIRREG 2012
+  #define ID_STATIC_COMBO_MS  2013
+  #define ID_STATIC_TRIALS 2014
+  #define ID_STATIC_TRIALS_NUM 2015
+  #define ID_STATIC_OUTPUTFILE 2016
+  #define ID_STATIC_FILENAME 2017
+  #define ID_STATIC_OLD 2018
+  #define ID_STATIC_NAME 2019
+  #define ID_STATIC_LATEDATACOMBO_2 2020
+  #define ID_STATIC_LATEDATATIMING 2021
+  #define ID_STATIC_LATESETTING_2 2022
+  #define ID_STATIC_COMBO_MS_2 2023
+  #define ID_LATESETTING_2 2024
+  #define ID_STATIC_STDDEV 2025
+
+
+  // コンボボックス
+  #define ID_LATEINI  3001
+  #define ID_LATESETTING 3002
+  #define ID_LATEINI_2 3003
+
+  // プッシュボタン
+  #define ID_BUTTON_CSV 4001
+
+  // グループボックス
+  #define ID_GROUP_LATEDATA 5001
+  #define ID_GROUP_SETTING 5002
+  #define ID_GROUP_SUBJECTINFO 5003
+  #define ID_GROUP_LATEDATA_2 5004
+
+  // エディットボックス
+  #define ID_EDIT_OLD 6001
+  #define ID_EDIT_NAME 6002
+  #define ID_EDIT_LATEDATA_TIMING 6003
+  #define ID_EDIT_FILEPATH 6004
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% file.h
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{lstlisting}[caption=file.h]
+  #pragma once
+  /// file.cppで使用
+  #include<Windows.h>
+  #include<string>
+
+  using namespace std;
+
+  // Function
+  bool SelectFile(HWND, TCHAR*);
+  bool SelectIniFile(HWND, TCHAR*);
+  bool RelativepathFromAbsolutepath(char*, HWND, int, bool);
+  bool CheckCanWriteFile(HWND, char*);
+\end{lstlisting}
