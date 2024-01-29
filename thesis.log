@@ -1,4 +1,4 @@
-This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.sjis) (TeX Live 2023) (preloaded format=platex 2023.10.26)  29 JAN 2024 18:05
+This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.sjis) (TeX Live 2023) (preloaded format=platex 2023.10.26)  29 JAN 2024 22:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -459,14 +459,14 @@ LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
 [15
 
 ] [16]
-File: figures/system_button_click.png Graphic file (type bmp)
-<figures/system_button_click.png>
+File: figures/system_button_click.pdf Graphic file (type pdf)
+<figures/system_button_click.pdf>
  [17] [18]
 File: figures/Apprication/App_kyakkann.png Graphic file (type bmp)
 <figures/Apprication/App_kyakkann.png>
  [19] [20] [21]
-File: figures/System/Delay_theory.png Graphic file (type bmp)
-<figures/System/Delay_theory.png>
+File: figures/System/Delay_theory.pdf Graphic file (type pdf)
+<figures/System/Delay_theory.pdf>
  [22]
 LaTeX Font Info:    Trying to load font information for OML+cmr on input line 1
 35.
@@ -476,17 +476,13 @@ File: omlcmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
 (Font)              Font shape `OML/cmm/m/it' tried instead on input line 135.
-File: figures/DelayCheck/DelayCheck_EX.png Graphic file (type bmp)
-<figures/DelayCheck/DelayCheck_EX.png>
-
-Overfull \hbox (25.80067pt too wide) in paragraph at lines 145--146
- [][] 
- []
-
-[23]
+File: figures/DelayCheck/DelayCheck_EX.pdf Graphic file (type pdf)
+<figures/DelayCheck/DelayCheck_EX.pdf>
+ [23]
 File: figures/DelayCheck/SuperFamicom_delayCheck.png Graphic file (type bmp)
 <figures/DelayCheck/SuperFamicom_delayCheck.png>
- [24]) (./chapter5.tex [25] [26]
+ [24])
+(./chapter5.tex [25] [26]
 第5章
 [27
 
@@ -523,36 +519,36 @@ File: figures/Honbann/BOXPLOT/BoxPlot_old_110ms.png Graphic file (type bmp)
 File: figures/Honbann/BOXPLOT/BoxPlot_old_40ms.png Graphic file (type bmp)
 <figures/Honbann/BOXPLOT/BoxPlot_old_40ms.png>
  [44] [45] [46] [47]
-File: figures/Honbann/Comparison_young_old/Var_110ms_Sa_Sb.png Graphic file (ty
-pe bmp)
-<figures/Honbann/Comparison_young_old/Var_110ms_Sa_Sb.png>
-File: figures/Honbann/Comparison_young_old/Var_110ms_Sc.png Graphic file (type 
-bmp)
-<figures/Honbann/Comparison_young_old/Var_110ms_Sc.png>
-File: figures/Honbann/Comparison_young_old/Var_40ms_Sa_Sb.png Graphic file (typ
-e bmp)
-<figures/Honbann/Comparison_young_old/Var_40ms_Sa_Sb.png>
-File: figures/Honbann/Comparison_young_old/Var_40ms_Sc.png Graphic file (type b
-mp)
-<figures/Honbann/Comparison_young_old/Var_40ms_Sc.png>
-File: figures/Honbann/Comparison_young_old/Normalized-Var_110ms_SaSbSc.png Grap
-hic file (type bmp)
-<figures/Honbann/Comparison_young_old/Normalized-Var_110ms_SaSbSc.png>
-File: figures/Honbann/Comparison_young_old/Normalized-Var_40ms_SaSbSc.png Graph
-ic file (type bmp)
-<figures/Honbann/Comparison_young_old/Normalized-Var_40ms_SaSbSc.png>
-File: figures/Honbann/Comparison_young_old/110ms_MSE_MedSE.png Graphic file (ty
-pe bmp)
-<figures/Honbann/Comparison_young_old/110ms_MSE_MedSE.png>
-File: figures/Honbann/Comparison_young_old/Normalized110ms_MSE_MedSE.png Graphi
-c file (type bmp)
-<figures/Honbann/Comparison_young_old/Normalized110ms_MSE_MedSE.png>
-File: figures/Honbann/Comparison_young_old/40ms_MSE-MedSE.png Graphic file (typ
-e bmp)
-<figures/Honbann/Comparison_young_old/40ms_MSE-MedSE.png>
-File: figures/Honbann/Comparison_young_old/Normalized_40ms_MSE-MedSE.png Graphi
-c file (type bmp)
-<figures/Honbann/Comparison_young_old/Normalized_40ms_MSE-MedSE.png>
+File: figures/Honbann/Comparison_young_old/110_var_SaSb.pdf Graphic file (type 
+pdf)
+<figures/Honbann/Comparison_young_old/110_var_SaSb.pdf>
+File: figures/Honbann/Comparison_young_old/110_var_Sc.pdf Graphic file (type pd
+f)
+<figures/Honbann/Comparison_young_old/110_var_Sc.pdf>
+File: figures/Honbann/Comparison_young_old/40_var_SaSb.pdf Graphic file (type p
+df)
+<figures/Honbann/Comparison_young_old/40_var_SaSb.pdf>
+File: figures/Honbann/Comparison_young_old/40_var_Sc.pdf Graphic file (type pdf
+)
+<figures/Honbann/Comparison_young_old/40_var_Sc.pdf>
+File: figures/Honbann/Comparison_young_old/110_var_normalized.pdf Graphic file 
+(type pdf)
+<figures/Honbann/Comparison_young_old/110_var_normalized.pdf>
+File: figures/Honbann/Comparison_young_old/40_var_normalized.pdf Graphic file (
+type pdf)
+<figures/Honbann/Comparison_young_old/40_var_normalized.pdf>
+File: figures/Honbann/Comparison_young_old/110_MSE-MedSE.pdf Graphic file (type
+ pdf)
+<figures/Honbann/Comparison_young_old/110_MSE-MedSE.pdf>
+File: figures/Honbann/Comparison_young_old/110_MSE-MedSE_normalized.pdf Graphic
+ file (type pdf)
+<figures/Honbann/Comparison_young_old/110_MSE-MedSE_normalized.pdf>
+File: figures/Honbann/Comparison_young_old/40_MSE-MedSE.pdf Graphic file (type 
+pdf)
+<figures/Honbann/Comparison_young_old/40_MSE-MedSE.pdf>
+File: figures/Honbann/Comparison_young_old/40_MSE-MedSE_normalized.pdf Graphic 
+file (type pdf)
+<figures/Honbann/Comparison_young_old/40_MSE-MedSE_normalized.pdf>
 ) (./chapter8.tex [48] [49] [50]
 [51] [52] [53]
 第8章
@@ -627,11 +623,11 @@ Package rerunfilecheck Info: File `thesis.out' has not changed.
  ) 
 Here is how much of TeX's memory you used:
  12583 strings out of 476504
- 202159 string characters out of 5801731
+ 201949 string characters out of 5801731
  2116881 words of memory out of 5000000
  34340 multiletter control sequences out of 15000+600000
  569602 words of font info for 93 fonts, out of 8000000 for 9000
  41 hyphenation exceptions out of 8191
  73i,15n,79p,670b,2136s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on thesis.dvi (73 pages, 204660 bytes).
+Output written on thesis.dvi (73 pages, 204592 bytes).

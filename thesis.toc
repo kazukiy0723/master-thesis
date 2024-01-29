@@ -12,7 +12,7 @@
 \contentsline {chapter}{\numberline {第4章}ボタン押し課題のシステム}{15}{chapter.4}%
 \contentsline {section}{\numberline {4.1}ボタン押し課題}{15}{section.4.1}%
 \contentsline {section}{\numberline {4.2}音響信号への遅延生成アプリケーション}{18}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}ASIOにおける音声の入出力}{20}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.1}ASIOにおける音声の入出力}{19}{subsection.4.2.1}%
 \contentsline {subsection}{\numberline {4.2.2}任意の遅延時間後にボタン押下の合図音を再生させる機能}{21}{subsection.4.2.2}%
 \contentsline {subsection}{\numberline {4.2.3}ボタンの押下時間間隔を記録する機能}{22}{subsection.4.2.3}%
 \contentsline {section}{\numberline {4.3}生成する遅延時間の正確性の調査}{23}{section.4.3}%
