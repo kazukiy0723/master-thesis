@@ -1,4 +1,4 @@
-This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.sjis) (TeX Live 2023) (preloaded format=platex 2023.10.26)  29 JAN 2024 10:02
+This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.sjis) (TeX Live 2023) (preloaded format=platex 2023.10.26)  29 JAN 2024 12:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -469,17 +469,17 @@ File: figures/System/Delay_theory.png Graphic file (type bmp)
 <figures/System/Delay_theory.png>
  [22]
 LaTeX Font Info:    Trying to load font information for OML+cmr on input line 1
-17.
+31.
 
 (c:/texlive/2023/texmf-dist/tex/latex/base/omlcmr.fd
 File: omlcmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 117.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 131.
 File: figures/DelayCheck/DelayCheck_EX.png Graphic file (type bmp)
 <figures/DelayCheck/DelayCheck_EX.png>
 
-Overfull \hbox (25.80067pt too wide) in paragraph at lines 126--127
+Overfull \hbox (25.80067pt too wide) in paragraph at lines 140--141
  [][] 
  []
 
@@ -606,12 +606,12 @@ Package rerunfilecheck Info: File `thesis.out' has not changed.
 (rerunfilecheck)             Checksum: E63FEB28C4C4584EA69C44D34DCD658A;6761.
  ) 
 Here is how much of TeX's memory you used:
- 12023 strings out of 476504
- 196720 string characters out of 5801731
+ 12024 strings out of 476504
+ 196733 string characters out of 5801731
  1930881 words of memory out of 5000000
- 33783 multiletter control sequences out of 15000+600000
+ 33784 multiletter control sequences out of 15000+600000
  569602 words of font info for 93 fonts, out of 8000000 for 9000
  41 hyphenation exceptions out of 8191
- 73i,15n,79p,983b,619s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 73i,15n,79p,729b,619s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on thesis.dvi (69 pages, 181284 bytes).
+Output written on thesis.dvi (69 pages, 182448 bytes).
