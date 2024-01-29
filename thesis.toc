@@ -17,7 +17,7 @@
 \contentsline {subsection}{\numberline {4.2.3}ボタンの押下時間間隔を記録する機能}{22}{subsection.4.2.3}%
 \contentsline {section}{\numberline {4.3}生成する遅延時間の正確性の調査}{23}{section.4.3}%
 \contentsline {subsection}{\numberline {4.3.1}遅延時間の測定方法}{23}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}測定結果}{25}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.2}測定結果}{26}{subsection.4.3.2}%
 \contentsline {chapter}{\numberline {第5章}遅延聴覚フィードバックが身体運動に与える影響の評価方法}{27}{chapter.5}%
 \contentsline {section}{\numberline {5.1}分散}{28}{section.5.1}%
 \contentsline {section}{\numberline {5.2}二乗誤差}{29}{section.5.2}%

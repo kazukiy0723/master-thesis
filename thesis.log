@@ -1,4 +1,4 @@
-This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.sjis) (TeX Live 2023) (preloaded format=platex 2023.10.26)  29 JAN 2024 12:15
+This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.sjis) (TeX Live 2023) (preloaded format=platex 2023.10.26)  29 JAN 2024 13:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -479,14 +479,14 @@ LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
 File: figures/DelayCheck/DelayCheck_EX.png Graphic file (type bmp)
 <figures/DelayCheck/DelayCheck_EX.png>
 
-Overfull \hbox (25.80067pt too wide) in paragraph at lines 140--141
+Overfull \hbox (25.80067pt too wide) in paragraph at lines 141--142
  [][] 
  []
 
 [23]
 File: figures/DelayCheck/SuperFamicom_delayCheck.png Graphic file (type bmp)
 <figures/DelayCheck/SuperFamicom_delayCheck.png>
-) (./chapter5.tex [24] [25] [26]
+ [24]) (./chapter5.tex [25] [26]
 第5章
 [27
 
@@ -614,4 +614,4 @@ Here is how much of TeX's memory you used:
  41 hyphenation exceptions out of 8191
  73i,15n,79p,729b,619s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on thesis.dvi (69 pages, 182448 bytes).
+Output written on thesis.dvi (69 pages, 184172 bytes).
