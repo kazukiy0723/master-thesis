@@ -51,7 +51,7 @@ f(n) = \left\lfloor \frac{n-t-1}{t} \right\rfloor + 1
 \begin{equation}
 s(n) = \left\lfloor \frac{n-t-2}{t-1} \right\rfloor
 \end{equation}
-ここで，$\left\lfloor x \right\rfloor$は$x$を超えない最大の整数を表す．
+ここで，$t$は2以上の自然数，$\left\lfloor x \right\rfloor$は$x$を超えない最大の整数を表す．
 これらの関数を用いて，$MSE$は次の式で定義される．
 \begin{equation}
 MSE = \frac{1}{f(n)} \sum_{i=0}^{s(n)} (d_{t-1+ti} - d_{t+ti})^2
@@ -59,7 +59,7 @@ MSE = \frac{1}{f(n)} \sum_{i=0}^{s(n)} (d_{t-1+ti} - d_{t+ti})^2
 ここで，$d_{t-1+ti}$は$t$の倍数に達する直前のボタン押下間隔，$d_{t+ti}$は$t$の倍数に達した直後のボタン押下間隔のデータを示す．
 これにより，聴覚フィードバックの遅延による影響を定量的に評価することが可能となると考えられる．
 さらに，$t$の倍数に到達する直前のボタン押下時間間隔と到達した直後の間隔との誤差の中央値（Median Squared Error, MedSE）での評価を検討する．
-この計算法により，誤差の極端な値が存在しても適切なばらつきの評価が行える可能性がある．
+この計算法により，誤差の中に極端な値が存在しても適切なばらつきの評価が行える可能性がある．
 誤差の中央値$MedSE$は以下の式で定義される．
 \begin{equation}
 MedSE = Med((d_{3}-d_{4})^2, (d_{7}-d_{8})^2, \ldots, (d_{t-1+ts(n)}-d_{t+ts(n)})^2)

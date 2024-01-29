@@ -9,21 +9,25 @@
 この実験では，1分間にボタンを押下する回数を70回から110回までの5種類に変化させる．20代の被験者8人を対象に調査を行った．図\ref{fig:bpm}にボタンを押下する間隔と評価指標の関係を示す．この図から1分間に80回の間隔でボタンを押下するときが最も標準偏差が小さいことがわかる．このため，これ以降の実験では，ボタンを押下する時間間隔を1分間に80回とする．
 \begin{figure}[b]
   \centering
-  \includegraphics[scale=0.6]{figures/Yobi/BPM_Change.png}
+  \includegraphics[scale=0.6]{figures/Yobi/Var/BPM-Change-Var.pdf}
   \caption{ボタンを押下する間隔と評価指標の関係}
   \label{fig:bpm}
 \end{figure}
 \section{ボタンを押下する回数の最適な条件}
-本節では，遅延時間を10[ms]，kを9に固定する．図\ref{fig:NumberofSamples_Sa_Sc}lを10から30まで1ずつ変化させながら$s^2_{a}$および$s^2_{c}$を算出し，被験者数で平均している．図\ref{fig:Numberofsamples_Sb}では同様に$s^2_{b}$を算出し，被験者数で平均している．これらの図から，評価指標の値の算出に使用するデータの個数が20を超えると，値がデータの個数の増加に伴い，大きくなっていくことがわかる．そのため，実験条件によって発生するばらつきを最小限に抑えるためには分析するデータの個数を20個以下とすればよいと考えられる．以降の実験では，観測値全体のばらつきを評価するときのデータのサイズは，20個とする．
+本節では，遅延時間を10[ms]，kを9に固定する．図\ref{fig:NumberofSamples_Sa_Sc}lを10から30まで1ずつ変化させながら$s^2_{a}$および$s^2_{c}$を算出し，被験者数で平均している．
+図\ref{fig:Numberofsamples_Sb}では同様に$s^2_{b}$を算出し，被験者数で平均している．これらの図から，評価指標の値の算出に使用するデータの個数が20を超えると，
+値がデータの個数の増加に伴い，大きくなっていくことがわかる．
+そのため，実験条件によって発生するばらつきを最小限に抑えるためには分析するデータの個数を20個以下とすればよいと考えられる．
+以降の実験では，観測値全体のばらつきを評価するときのデータのサイズは，20個とする．
 \begin{figure}[bt]
   \centering
-  \includegraphics[scale=0.6]{figures/Yobi/NumberOfSamples_s1s3.png}
+  \includegraphics[scale=0.6]{figures/Yobi/Var/NumberOfSamples_varSaSc.pdf}
   \caption{使用するボタンの押下時間間隔のデータ個数と評価指標の関係}
   \label{fig:NumberofSamples_Sa_Sc}
 \end{figure}
 \begin{figure}[bt]
   \centering
-  \includegraphics[scale=0.6]{figures/Yobi/NumberOfSamples_median.png}
+  \includegraphics[scale=0.6]{figures/Yobi/Var/NumberOfSamples_varSb.pdf}
   \caption{使用するボタンの押下時間間隔のデータ個数と評価指標の関係}
   \label{fig:Numberofsamples_Sb}
 \end{figure}
@@ -74,10 +78,10 @@
 遅延時間を10, 30, 50, 70, 90, 110[ms]の6つに設定した．遅延時間の提示順序は，初めに10[ms]を提示し，次に10[ms]以外の中からランダムに選択し提示する．
 その後，残る遅延時間に10[ms]を加えたものをランダムに提示する．
 10[ms]の条件については，最初に提示したものではなくランダムに提示したものの結果を用いる．
-表\ref{table:A_delay_time}に実験Aにおける遅延時間の提示順序，被験者数，被験者の年齢の平均及び標準偏差を示し，表\ref{table:B_delay_time}に実験Bの同様の情報を示す．
+表\ref{table:A_delay_time}に実験(1)における遅延時間の提示順序，被験者数，被験者の年齢の平均及び標準偏差を示し，表\ref{table:B_delay_time}に実験(2)の同様の情報を示す．
 調査結果は，提示する遅延時間ごとに5.1節の$s^2_{a}$，$s^2_{b}$及び$s^2_{c}$を算出する．
 \begin{table}[btp]
-  \caption{実験1における遅延時間の提示順}
+  \caption{実験(1)における遅延時間の提示順}
   \label{table:A_delay_time}
   \centering
   \begin{tabular}{lccc}
@@ -96,7 +100,7 @@
 \end{table}
 
 \begin{table}[btp]
-  \caption{実験2における遅延時間の提示順}
+  \caption{実験(2)における遅延時間の提示順}
   \label{table:B_delay_time}
   \centering
   \begin{tabular}{lccc}
@@ -116,32 +120,32 @@
 \subsection{調査結果}
 \begin{figure}[tbp]
   \centering
-  \includegraphics[scale=0.5]{figures/Yobi/Var/Normal_bunnsann.png}
+  \includegraphics[scale=0.5]{figures/Yobi/Var/Var-Normal.pdf}
   \caption{実験(1)における遅延時間と評価指標の関係}
   \label{fig:Normal_bunsan}
 \end{figure}
 \begin{figure}[bt]
   \centering
-  \includegraphics[scale=0.5]{figures/Yobi/Var/Unique_bunsan.png}
+  \includegraphics[scale=0.5]{figures/Yobi/Var/Var-Yobi-Unique.pdf}
   \caption{実験(2)における遅延時間と評価指標の関係}
   \label{fig:Unique_bunsan}
 \end{figure}
 \begin{figure}[bt]
   \centering
-  \includegraphics[scale=0.5]{figures/Yobi/Var/MSE_MedSE.png}
+  \includegraphics[scale=0.5]{figures/Yobi/Var/Yobi-MSE-MedSE.pdf}
   \caption{実験(2)における遅延時間とMSEおよびMedSEの関係}
   \label{fig:Yobi_MSE_MedSE}
 \end{figure}
 図\ref{fig:Normal_bunsan}における実験Aによる遅延聴覚フィードバックの身体運動への影響の調査結果と，
 図\ref{fig:Unique_bunsan}における提示順1による同様の影響調査結果を提示する．
-図\ref{fig:Normal_bunsan}に示される結果から，10[ms]から70[ms]の間で評価指標が減少傾向を示し，
+図\ref{fig:Normal_bunsan}に示される結果から，10[ms]から90[ms]の間で評価指標が減少傾向を示し，
 90[ms]から110[ms]の範囲では評価指標が急激に増加していることが観察される．
-30[ms]から90[ms]の間で評価指標が減少した原因としては，被験者の馴化が挙げられる．
+10[ms]から90[ms]の間で評価指標が減少した原因としては，被験者の馴化が挙げられる．
 合図音の遅延が一貫しているシステム設計においては，ボタン押し課題の繰り返しにより，被験者は課題に慣れ，
 大きな遅延にも順応してしまうことが示唆される．
 対照的に，図\ref{fig:Unique_bunsan}では，10[ms]の評価値が最小であり，
 遅延時間の増加に伴い評価値が上昇する傾向が見られる．
-これは，4回に1回の遅延が身体運動に与える影響を示唆する結果である．
+これは，4回に1度の遅延が身体運動に与える影響を示唆する結果である．
 したがって，本研究では「ボタン押下時の合図音の遅延が一定であれば，被験者は遅延に馴染み，
 ボタン押下時間間隔に及ぼす影響が減少する」という仮説を支持し，次回以降の実験では，実験(2)の条件下での調査を実施することとする．
 
