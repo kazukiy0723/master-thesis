@@ -1,4 +1,4 @@
-This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.sjis) (TeX Live 2023) (preloaded format=platex 2023.10.26)  30 JAN 2024 12:39
+This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.sjis) (TeX Live 2023) (preloaded format=platex 2023.10.26)  30 JAN 2024 15:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -464,20 +464,17 @@ LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
 ] [17]
 File: figures/system_button_click.pdf Graphic file (type pdf)
 <figures/system_button_click.pdf>
- [18]
+ [18] [19]
 File: figures/Apprication/App_kyakkann.pdf Graphic file (type pdf)
 <figures/Apprication/App_kyakkann.pdf>
- [19] [20] [21]
+ [20] [21] [22]
 File: figures/System/Delay_theory.pdf Graphic file (type pdf)
 <figures/System/Delay_theory.pdf>
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[22] [23]
+ [23]
 LaTeX Font Info:    Trying to load font information for OML+cmr on input line 1
 35.
- (c:/texlive/2023/texmf-dist/tex/latex/base/omlcmr.fd
+
+(c:/texlive/2023/texmf-dist/tex/latex/base/omlcmr.fd
 File: omlcmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
@@ -485,10 +482,10 @@ LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
 File: figures/DelayCheck/DelayCheck_EX.pdf Graphic file (type pdf)
 <figures/DelayCheck/DelayCheck_EX.pdf>
  [24]
-File: figures/DelayCheck/SuperFamicom_delayCheck.png Graphic file (type bmp)
-
-<figures/DelayCheck/SuperFamicom_delayCheck.png> [25]) (./chapter5.tex [26]
-[27]
+File: figures/DelayCheck/SuperFamicom_delayCheck.pdf Graphic file (type pdf)
+<figures/DelayCheck/SuperFamicom_delayCheck.pdf>
+ [25])
+(./chapter5.tex [26] [27]
 第5章
 [28
 
@@ -640,20 +637,16 @@ pLaTeX2e <2023-02-14>+1, based on
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-10-23>
  ***********
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 7F9BD65D9D81E5CA378B27EB43CAAA0C;7009.
+(rerunfilecheck)             Checksum: 53C65D066F575A84C0315104BFD6739C;7023.
  ) 
 Here is how much of TeX's memory you used:
  14092 strings out of 476504
- 224656 string characters out of 5801731
+ 224662 string characters out of 5801731
  2210881 words of memory out of 5000000
- 35844 multiletter control sequences out of 15000+600000
+ 35845 multiletter control sequences out of 15000+600000
  569937 words of font info for 94 fonts, out of 8000000 for 9000
  41 hyphenation exceptions out of 8191
  73i,15n,79p,670b,2181s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on thesis.dvi (178 pages, 756772 bytes).
+Output written on thesis.dvi (178 pages, 758864 bytes).
