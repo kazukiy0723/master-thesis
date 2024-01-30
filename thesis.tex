@@ -14,11 +14,12 @@
 % \usepackage[utf8]{inputenc} % UTF-8エンコーディングを使用
 \usepackage{color} % いろいろな色を使えるようにする
 \usepackage{listings}
+\usepackage{fancyvrb}
 % % \usepackage{jlisting} を削除
 
 % \usepackage{url} % URLを使えるようにする
 \lstset{
-  % language=[ISO]C++,       % 言語の指定
+  language=[ISO]C++,       % 言語の指定
   language={C++},
   basicstyle={\ttfamily},  % 等幅フォント
   commentstyle={\rmfamily}, % コメントのスタイル
@@ -29,7 +30,7 @@
   breaklines=true,
   numbers=none,
   xrightmargin=0zw,
-  xleftmargin=2zw,
+  xleftmargin=0zw,
   keepspaces=true,
   columns=[l]{fullflexible},
   lineskip=-0.5ex

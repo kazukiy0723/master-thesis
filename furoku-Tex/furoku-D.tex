@@ -2,8 +2,9 @@
 %MATLABコードの表示
 %%%%%
 \chapter{遅延時間の測定に用いたプログラム}
-\section{CPU負荷を100％に保つためのPythonファイル: cpu100.py}
-\begin{verbatim}
+遅延時間測定のために用いたMATLABファイルとCPUの利用率を100％にするために用いたPythonファイルを以下に示す．
+
+\begin{lstlisting}[caption=cpu100.py]
     import multiprocessing
     import time
     import numpy as np
@@ -30,11 +31,9 @@
             for p in processes:
                 p.terminate()
 
-
-\end{verbatim}
-
-\section{遅延時間測定のためのMATLABファイル: main.m}
-\begin{verbatim}
+\end{lstlisting}
+    
+\begin{lstlisting}[caption=MeasureDelayTime.m]
     clear all
 
     filename = 'delayTime_test2.csv'; % 出力先ファイル
@@ -113,4 +112,5 @@
 
     hold off;
 
-\end{verbatim}
+\end{lstlisting}
+    

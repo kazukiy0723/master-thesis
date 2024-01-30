@@ -6,8 +6,7 @@
 本プログラムは，Microsoft Visual Studio 2022でコンパイルできるソースファイル，ヘッダファイルおよびリソースファイルである．
 関数の目的別にファイルを分けて作成している．
 
-\section{main.cpp}
-\begin{verbatim}
+\begin{lstlisting}[caption=main.cpp]
 	#include<windows.h>
 #include<tchar.h>
 #include<stdio.h>
@@ -352,7 +351,8 @@ LRESULT CALLBACK windowfunc(HWND hwnd, UINT message, WPARAM wparam, LPARAM lpara
 		lenBuffer = preflenbuffer;
 		// ASIOバッファサイズが16ではない場合、メッセージボックスにて警告を出す
 		if (lenBuffer != 16) {
-			_stprintf_s(strBuffInfo, LENSTR, _T("ASIOバッファサイズが「%d」に設定されています。\r\n一度ウィンドウを閉じてから「16」に設定しなおしてください。"), lenBuffer);
+			_stprintf_s(strBuffInfo, LENSTR,
+			 _T("ASIOバッファサイズが「%d」に設定されています。\r\n一度ウィンドウを閉じてから「16」に設定しなおしてください。"), lenBuffer);
 			MessageBox(NULL, strBuffInfo, _T("ASIOバッファサイズ"), MB_OK | MB_ICONWARNING);
 		}
 
@@ -500,7 +500,8 @@ LRESULT CALLBACK windowfunc(HWND hwnd, UINT message, WPARAM wparam, LPARAM lpara
 		//ファイルのデータ形式の確認
 		if (wf.wFormatTag != WAVE_FORMAT_PCM) {
 			//ファイルのデータ形式がPCMではなかった場合の処理
-			_stprintf_s(str, LENSTR, _T("エラー: PCM形式WAVEデータではないので読み込むことができません\nファイル名: %s"), wavefilename);
+			_stprintf_s(str, LENSTR, 
+			_T("エラー: PCM形式WAVEデータではないので読み込むことができません\nファイル名: %s"), wavefilename);
 			MessageBox(hwnd, str, _T("ファイルを開く"), MB_ICONSTOP | MB_OK);
 			return(0);
 		}
@@ -1746,4 +1747,5 @@ bool SetStddev2Window(const vector<string> mTime) {
 
 	return true;
 }
-\end{verbatim}
+\end{lstlisting}
+	
