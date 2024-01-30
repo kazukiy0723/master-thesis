@@ -1,4 +1,4 @@
-This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.sjis) (TeX Live 2023) (preloaded format=platex 2023.10.26)  30 JAN 2024 02:02
+This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.sjis) (TeX Live 2023) (preloaded format=platex 2023.10.26)  30 JAN 2024 12:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -127,12 +127,7 @@ See the caption package documentation for explanation.
 
 \c@caption@flags=\count197
 \c@continuedfloat=\count198
-) (c:/texlive/2023/texmf-dist/tex/latex/base/inputenc.sty
-Package: inputenc 2021/02/14 v1.3d Input encoding file
-\inpenc@prehook=\toks20
-\inpenc@posthook=\toks21
-)
-(c:/texlive/2023/texmf-dist/tex/latex/graphics/color.sty
+) (c:/texlive/2023/texmf-dist/tex/latex/graphics/color.sty
 Package: color 2022/01/06 v1.3d Standard LaTeX Color (DPC)
 
 (c:/texlive/2023/texmf-dist/tex/latex/graphics-cfg/color.cfg
@@ -150,7 +145,7 @@ File: dvipsnam.def 2016/06/17 v3.0m Driver-dependent file (DPC,SPQR)
 (c:/texlive/2023/texmf-dist/tex/latex/listings/listings.sty
 \lst@mode=\count199
 \lst@gtempboxa=\box70
-\lst@token=\toks22
+\lst@token=\toks20
 \lst@length=\count266
 \lst@currlwidth=\dimen173
 \lst@column=\count267
@@ -172,10 +167,6 @@ File: listings.cfg 2023/02/27 1.9 listings configuration
 ))
 Package: listings 2023/02/27 1.9 (Carsten Heinz)
 
-(c:/texlive/2023/texmf-dist/tex/latex/url/url.sty
-\Urlmuskip=\muskip16
-Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
-)
 (c:/texlive/2023/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
@@ -268,6 +259,11 @@ Package hyperref Info: Backreferencing OFF on input line 4188.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4435.
 \c@Hy@tempcnt=\count278
+
+(c:/texlive/2023/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip16
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
 LaTeX Info: Redefining \url on input line 4773.
 \XeTeXLinkMargin=\dimen178
 
@@ -376,24 +372,24 @@ Package hyperref Info: Link coloring ON on input line 64.
 \openout3 = `thesis.out'.
 
 LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
-(Font)              scaled to size 16.60605pt on input line 67.
+(Font)              scaled to size 16.60605pt on input line 65.
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 16.60605pt on input line 67.
+(Font)              scaled to size 16.60605pt on input line 65.
 LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
-(Font)              scaled to size 23.90964pt on input line 67.
+(Font)              scaled to size 23.90964pt on input line 65.
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 23.90964pt on input line 67.
+(Font)              scaled to size 23.90964pt on input line 65.
  [1
 
 ]
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 9.60999pt on input line 68.
+(Font)              scaled to size 9.60999pt on input line 66.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 9.60999pt on input line 68.
+(Font)              scaled to size 9.60999pt on input line 66.
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 23.90964pt on input line 68.
+(Font)              scaled to size 23.90964pt on input line 66.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 23.90964pt on input line 68.
+(Font)              scaled to size 23.90964pt on input line 66.
  (./thesis.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 2.
@@ -441,40 +437,44 @@ LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
 
 ] [5] [6]) (./chapter2.tex
 第2章
-) (./chapter3.tex [7
+[7
 
-] [8]
+]) (./chapter3.tex [8] [9]
 第3章
-[9
+[10
 
 ]
-File: figures/Syukann/gamen_1.png Graphic file (type bmp)
- <figures/Syukann/gamen_1.png>
-File: figures/Syukann/app_2.png Graphic file (type bmp)
- <figures/Syukann/app_2.png> [10]
-LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
-(Font)              scaled to size 11.53198pt on input line 35.
-LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 11.53198pt on input line 35.
-LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 11.53198pt on input line 35.
-LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 11.53198pt on input line 35.
+File: figures/Syukann/gamen_1.pdf Graphic file (type pdf)
+<figures/Syukann/gamen_1.pdf>
+File: figures/Syukann/app_2.pdf Graphic file (type pdf)
+<figures/Syukann/app_2.pdf>
  [11]
-[12] [13]) (./chapter4.tex [14]
+LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
+(Font)              scaled to size 11.53198pt on input line 36.
+LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
+(Font)              scaled to size 11.53198pt on input line 36.
+LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
+(Font)              scaled to size 11.53198pt on input line 36.
+LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
+(Font)              scaled to size 11.53198pt on input line 36.
+ [12] [13] [14]) (./chapter4.tex [15]
 第4章
-[15
+[16
 
-] [16]
+] [17]
 File: figures/system_button_click.pdf Graphic file (type pdf)
 <figures/system_button_click.pdf>
- [17]
-File: figures/Apprication/App_kyakkann.png Graphic file (type bmp)
- <figures/Apprication/App_kyakkann.png> [18] [19] [20] [21]
+ [18]
+File: figures/Apprication/App_kyakkann.pdf Graphic file (type pdf)
+<figures/Apprication/App_kyakkann.pdf>
+ [19] [20] [21]
 File: figures/System/Delay_theory.pdf Graphic file (type pdf)
 <figures/System/Delay_theory.pdf>
 
-[22]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[22] [23]
 LaTeX Font Info:    Trying to load font information for OML+cmr on input line 1
 35.
  (c:/texlive/2023/texmf-dist/tex/latex/base/omlcmr.fd
@@ -484,48 +484,46 @@ LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
 (Font)              Font shape `OML/cmm/m/it' tried instead on input line 135.
 File: figures/DelayCheck/DelayCheck_EX.pdf Graphic file (type pdf)
 <figures/DelayCheck/DelayCheck_EX.pdf>
- [23]
+ [24]
 File: figures/DelayCheck/SuperFamicom_delayCheck.png Graphic file (type bmp)
 
-<figures/DelayCheck/SuperFamicom_delayCheck.png> [24]) (./chapter5.tex [25]
-[26]
+<figures/DelayCheck/SuperFamicom_delayCheck.png> [25]) (./chapter5.tex [26]
+[27]
 第5章
-[27
+[28
 
-] [28] [29]) (./chapter6.tex [30]
+] [29] [30]) (./chapter6.tex [31]
 第6章
 File: figures/Yobi/Var/BPM-Change-Var.pdf Graphic file (type pdf)
 <figures/Yobi/Var/BPM-Change-Var.pdf>
-[31
+[32
 
 ]
 File: figures/Yobi/Var/NumberOfSamples_varSaSc.pdf Graphic file (type pdf)
 <figures/Yobi/Var/NumberOfSamples_varSaSc.pdf>
 File: figures/Yobi/Var/NumberOfSamples_varSb.pdf Graphic file (type pdf)
 <figures/Yobi/Var/NumberOfSamples_varSb.pdf>
- [32] [33] [34] [35]
+ [33] [34] [35] [36]
 File: figures/Yobi/Var/Var-Normal.pdf Graphic file (type pdf)
 <figures/Yobi/Var/Var-Normal.pdf>
 File: figures/Yobi/Var/Var-Yobi-Unique.pdf Graphic file (type pdf)
 <figures/Yobi/Var/Var-Yobi-Unique.pdf>
 File: figures/Yobi/Var/Yobi-MSE-MedSE.pdf Graphic file (type pdf)
 <figures/Yobi/Var/Yobi-MSE-MedSE.pdf>
- [36] [37] [38]) (./chapter7.tex [39]
+ [37] [38] [39]) (./chapter7.tex [40]
 第7章
-[40
+[41
 
-] [41] [42] [43]
-File: figures/Honbann/BOXPLOT/BoxPlot_young_110ms.png Graphic file (type bmp)
- <figures/Honbann/BOXPLOT/BoxPlot_young_110ms.png>
-File: figures/Honbann/BOXPLOT/BoxPlot_young_40ms.png Graphic file (type bmp)
-
-<figures/Honbann/BOXPLOT/BoxPlot_young_40ms.png>
-File: figures/Honbann/BOXPLOT/BoxPlot_old_110ms.png Graphic file (type bmp)
-
-<figures/Honbann/BOXPLOT/BoxPlot_old_110ms.png>
-File: figures/Honbann/BOXPLOT/BoxPlot_old_40ms.png Graphic file (type bmp)
-
-<figures/Honbann/BOXPLOT/BoxPlot_old_40ms.png> [44] [45] [46] [47] [48]
+] [42] [43] [44]
+File: figures/Honbann/BOXPLOT/young_110_boxplot.pdf Graphic file (type pdf)
+<figures/Honbann/BOXPLOT/young_110_boxplot.pdf>
+File: figures/Honbann/BOXPLOT/young_40_boxplot.pdf Graphic file (type pdf)
+<figures/Honbann/BOXPLOT/young_40_boxplot.pdf>
+File: figures/Honbann/BOXPLOT/old_110_boxplot.pdf Graphic file (type pdf)
+<figures/Honbann/BOXPLOT/old_110_boxplot.pdf>
+File: figures/Honbann/BOXPLOT/old_40_boxplot.pdf Graphic file (type pdf)
+<figures/Honbann/BOXPLOT/old_40_boxplot.pdf>
+ [45] [46] [47] [48] [49]
 File: figures/Honbann/Comparison_young_old/110_var_SaSb.pdf Graphic file (type 
 pdf)
 <figures/Honbann/Comparison_young_old/110_var_SaSb.pdf>
@@ -556,17 +554,17 @@ pdf)
 File: figures/Honbann/Comparison_young_old/40_MSE-MedSE_normalized.pdf Graphic 
 file (type pdf)
 <figures/Honbann/Comparison_young_old/40_MSE-MedSE_normalized.pdf>
-)
-(./chapter8.tex [49] [50] [51] [52] [53] [54]
+) (./chapter8.tex [50] [51]
+[52] [53] [54] [55]
 第8章
-[55
+[56
 
-]) [56] [57
+]) [57] [58
 
-] [58] [59
+] [59] [60
 
 ] (./acknowledgement.tex) (./furoku-Tex/furoku-A.tex
-[60
+[61
 
 ]
 付録A 
@@ -597,9 +595,9 @@ File: furoku_A/Less60_Tezyunn.pdf Graphic file (type pdf)
 <furoku_A/Less60_Tezyunn.pdf>
 File: furoku_A/Onnryou.pdf Graphic file (type pdf)
 <furoku_A/Onnryou.pdf>
-) (./furoku-Tex/furoku-B.tex [61
+) (./furoku-Tex/furoku-B.tex [62
 
-] [62] [63] [64] [65] [66] [67] [68] [69]
+] [63] [64] [65] [66] [67] [68] [69] [70]
 付録B 
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
 nput line 7.
@@ -613,15 +611,15 @@ LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
 (Font)              scaled to size 9.60999pt on input line 12.
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10> not available
 (Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 12.
-[70
+[71
 
-] [71] [72] [73] [74]
+] [72] [73] [74] [75]
 Overfull \hbox (586.17258pt too wide) in paragraph at lines 174--175
 [][] 
  []
 
-[75] [76] [77] [78] [79] [80] [81] [82] [83] [84] [85] [86] [87] [88] [89]
-[90] [91] [92] [93] [94]
+[76] [77] [78] [79] [80] [81] [82] [83] [84] [85] [86] [87] [88] [89] [90]
+[91] [92] [93] [94] [95]
 LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 8
 42.
  (c:/texlive/2023/texmf-dist/tex/latex/base/omscmr.fd
@@ -630,28 +628,32 @@ File: omscmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 842.
 
-[95] [96] [97] [98] [99] [100] [101] [102] [103] [104] [105] [106] [107]
-[108] [109] [110] [111] [112] [113] [114] [115] [116] [117] [118] [119]
-[120] [121] [122] [123] [124] [125] [126] [127] [128] [129] [130] [131]
-[132] [133] [134] [135] [136] [137] [138] [139] [140] [141] [142] [143]
-[144] [145] [146] [147] [148] [149] [150] [151] [152] [153] [154] [155]
-[156] [157] [158] [159] [160] [161] [162] [163] [164] [165] [166] [167]
-[168] [169] [170] [171] [172] [173] [174] [175]) [176] (./thesis.aux)
+[96] [97] [98] [99] [100] [101] [102] [103] [104] [105] [106] [107] [108]
+[109] [110] [111] [112] [113] [114] [115] [116] [117] [118] [119] [120]
+[121] [122] [123] [124] [125] [126] [127] [128] [129] [130] [131] [132]
+[133] [134] [135] [136] [137] [138] [139] [140] [141] [142] [143] [144]
+[145] [146] [147] [148] [149] [150] [151] [152] [153] [154] [155] [156]
+[157] [158] [159] [160] [161] [162] [163] [164] [165] [166] [167] [168]
+[169] [170] [171] [172] [173] [174] [175] [176]) [177] (./thesis.aux)
  ***********
 pLaTeX2e <2023-02-14>+1, based on
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-10-23>
  ***********
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: A91BAF596CA006FB5FBB214EAFED4915;6995.
+(rerunfilecheck)             Checksum: 7F9BD65D9D81E5CA378B27EB43CAAA0C;7009.
  ) 
 Here is how much of TeX's memory you used:
- 14118 strings out of 476504
- 225310 string characters out of 5801731
+ 14092 strings out of 476504
+ 224656 string characters out of 5801731
  2210881 words of memory out of 5000000
- 35867 multiletter control sequences out of 15000+600000
+ 35844 multiletter control sequences out of 15000+600000
  569937 words of font info for 94 fonts, out of 8000000 for 9000
  41 hyphenation exceptions out of 8191
  73i,15n,79p,670b,2181s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on thesis.dvi (177 pages, 752284 bytes).
+Output written on thesis.dvi (178 pages, 756772 bytes).
