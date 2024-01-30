@@ -1,0 +1,129 @@
+% タイトル ----------------------------
+\def\@maketitle{%
+\newpage\null
+\begin{center}%
+\let\footnote\thanks
+{\LARGE \bfseries \@title \par}%
+\vskip 1.0em%
+{\large 理工学研究科電気工学専攻\hspace{2zw}\@author}
+\end{center}%
+\vskip 1em
+}
+
+% section ----------------------------
+\renewcommand{\section}{\@startsection{section}{1}{\z@}%
+   {0.3\Cvs \@plus.5\Cvs \@minus.2\Cvs}%
+   {.2\Cvs \@plus.3\Cvs}%
+   {\normalfont\large\headfont\raggedright}}
+% subsection ----------------------------
+\renewcommand{\subsection}{\@startsection{subsection}{2}{\z@}%
+   {0.3\Cvs \@plus.5\Cvs \@minus.2\Cvs}%
+   {.2\Cvs \@plus.3\Cvs}%
+   {\normalfont\normalsize\headfont}}
+% subsubsection ----------------------------
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{\z@}%
+   {0.3\Cvs \@plus.5\Cvs \@minus.2\Cvs}%
+   {.2\Cvs \@plus.3\Cvs}%
+   {\normalfont\normalsize\headfont}}
+
+% caption ----------------------------
+\long\def\@makecaption#1#2{\small%
+  \vskip\abovecaptionskip
+  \iftdir\sbox\@tempboxa{#1\hskip1zw#2}%
+    \else\sbox\@tempboxa{#1\hspace{1zw}#2}%
+  \fi
+  \ifdim \wd\@tempboxa >\hsize
+    \iftdir #1\hskip1zw#2\relax\par
+      \else #1\hspace{1zw}#2\relax\par\fi
+  \else
+    \global \@minipagefalse
+    \hbox to\hsize{\hfil\box\@tempboxa\hfil}%
+  \fi
+  \vskip\belowcaptionskip}
+
+% bibliography ----------------------------
+\newcommand\reftitle{
+\@startsection{subsubsection}{3}{\z@}%
+   {0.3\Cvs \@plus.5\Cvs \@minus.2\Cvs}%
+   {.3\Cvs \@plus.3\Cvs}%
+   {\reset@font\normalsize\bfseries}}
+\renewcommand\refname{文献}
+\renewenvironment{thebibliography}[1]
+{
+\reftitle*{\refname\@mkboth{\refname}{\refname}}%
+   \list{\@biblabel{\@arabic\c@enumiv}}%
+        {\small%
+        \settowidth\labelwidth{\@biblabel{#1}}%
+         \setlength\leftmargin{1.0em}
+         \setlength\parsep{0.0em}
+         \advance\leftmargin\labelsep
+         \@openbib@code
+         \usecounter{enumiv}%
+         \let\p@enumiv\@empty
+         \renewcommand\theenumiv{\@arabic\c@enumiv}}%
+   \sloppy
+   \clubpenalty4000
+   \@clubpenalty\clubpenalty
+   \widowpenalty4000%
+   \sfcode`\.\@m
+   \scriptsize}
+  {\def\@noitemerr
+    {\@latex@warning{Empty `thebibliography' environment}}%
+   \endlist}
+\let\@openbib@code\@empty
+
+% thepublished ----------------------------
+\newcommand\pubname{発表履歴}
+\def\editthepublished
+{
+\renewcommand\bibitem{\@ifnextchar[\@lbibitem\@bibitem}
+\def\bibitem{\@ifnextchar[\@lbibitem\@bibitem}
+\def\@bibitem##1{\item\if@filesw \immediate\write\@auxout
+       {\string\bibcite{##1}{P\@arabic\c@enumiv}}\fi\ignorespaces}
+}
+\newenvironment{thepublished}[1]
+{%
+\editthepublished%
+\setcounter{enumiv}{\z@}
+\reftitle*{\pubname\@mkboth{\pubname}{\pubname}}%
+   \list{\@biblabel{P\@arabic\c@enumiv}}%
+        {\small%
+        \settowidth\labelwidth{\@biblabel{#1}}%
+         \setlength\leftmargin{1.0em}
+         \setlength\parsep{0.0em}
+         \advance\leftmargin\labelsep
+         \@openbib@code
+         \usecounter{enumiv}%
+         \let\p@enumiv\@empty
+         \renewcommand\theenumiv{\@arabic\c@enumiv}}%
+   \sloppy
+   \clubpenalty4000
+   \@clubpenalty\clubpenalty
+   \widowpenalty4000%
+   \sfcode`\.\@m
+   \scriptsize}
+  {\def\@noitemerr
+    {\@latex@warning{Empty `thebibliography' environment}}%
+   \endlist}
+\let\@openbib@code\@empty
+
+
+%上3.0
+%左3.0
+%右3.0
+%下3.0
+\setlength\voffset{0.46cm}
+\setlength\topmargin{0cm}
+\setlength\headheight{0cm}
+\setlength\headsep{0cm}
+%
+\setlength\hoffset{0.46cm}
+\setlength\oddsidemargin{0cm}
+\setlength\textwidth{15.0cm}
+\setlength\marginparsep{0cm}
+\setlength\marginparwidth{0cm}
+%
+\setlength\textheight{23.2cm}
+\setlength\footskip{0.5cm}
+%
+\setlength{\columnsep}{0.25cm}
