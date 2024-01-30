@@ -1,4 +1,4 @@
-This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.sjis) (TeX Live 2023) (preloaded format=platex 2023.10.26)  30 JAN 2024 15:51
+This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.sjis) (TeX Live 2023) (preloaded format=platex 2023.10.26)  30 JAN 2024 20:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -484,8 +484,12 @@ File: figures/DelayCheck/DelayCheck_EX.pdf Graphic file (type pdf)
  [24]
 File: figures/DelayCheck/SuperFamicom_delayCheck.pdf Graphic file (type pdf)
 <figures/DelayCheck/SuperFamicom_delayCheck.pdf>
- [25])
-(./chapter5.tex [26] [27]
+
+Overfull \hbox (9.6128pt too wide) in paragraph at lines 180--192
+ [][][][] 
+ []
+
+[25]) (./chapter5.tex [26] [27]
 第5章
 [28
 
@@ -576,9 +580,6 @@ LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
 (Font)              scaled to size 19.9311pt on input line 1.
 File: furoku_A/douisyo_meiji.pdf Graphic file (type pdf)
 <furoku_A/douisyo_meiji.pdf>
-
-LaTeX Warning: Float too large for page by 24.56535pt on input line 9.
-
 File: furoku_A/Douisyo_Not60NotMeiji.pdf Graphic file (type pdf)
 <furoku_A/Douisyo_Not60NotMeiji.pdf>
 File: furoku_A/Douisyo_60NotMeiji.pdf Graphic file (type pdf)
@@ -597,57 +598,1454 @@ File: furoku_A/Onnryou.pdf Graphic file (type pdf)
 
 ] [62] [63] [64] [65] [66] [67] [68] [69]
 付録B 
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 7.
-LaTeX Font Info:    Font shape `JT1/gt/bx/n' in size <10> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 12.
-LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 9.60999pt on input line 12.
-LaTeX Font Info:    Font shape `JY1/gt/bx/n' in size <10> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 12.
-LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 9.60999pt on input line 12.
-LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 12.
 [70
 
-] [71] [72] [73] [74]
-Overfull \hbox (586.17258pt too wide) in paragraph at lines 174--175
-[][] 
+] [71]
+Overfull \hbox (52.77293pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 #define GetMonitorRect(rc)  SystemParametersInfo(SPI_GETWORK
+AREA,0,rc,0)  // \JY1/gt/m/n/10 ワ ー
  []
 
-[75] [76] [77] [78] [79] [80] [81] [82] [83] [84] [85] [86] [87] [88] [89]
-[90] [91] [92] [93] [94]
-LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 8
-42.
- (c:/texlive/2023/texmf-dist/tex/latex/base/omscmr.fd
-File: omscmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 842.
+[72]
+Overfull \hbox (29.12164pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 extern const HBRUSH BackGround_clear = CreateSolidBrush(RGB(
+235, 235, 235));[] 
+ []
 
-[95] [96] [97] [98] [99] [100] [101] [102] [103] [104] [105] [106] [107]
-[108] [109] [110] [111] [112] [113] [114] [115] [116] [117] [118] [119]
-[120] [121] [122] [123] [124] [125] [126] [127] [128] [129] [130] [131]
-[132] [133] [134] [135] [136] [137] [138] [139] [140] [141] [142] [143]
-[144] [145] [146] [147] [148] [149] [150] [151] [152] [153] [154] [155]
-[156] [157] [158] [159] [160] [161] [162] [163] [164] [165] [166] [167]
-[168] [169] [170] [171] [172] [173] [174] [175]) [176] (./thesis.aux)
+[73] [74]
+Overfull \hbox (254.86967pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 extern RECT RectButton1, RectButton2, RectButton3, RectButto
+n4, RectButton11, RectButton22, RectButton33, RectButton44;[] 
+ []
+
+
+Overfull \hbox (191.87022pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 RECT Frame4 = { 30, FrameTop.top + 20 - 2, FrameTop.left + 6
+00 + 2, FrameTop.top + 20 + fontsize + 3+2 , };[] 
+ []
+
+
+Overfull \hbox (102.621pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 RECT Frame5 = { FrameTop.left - 2, 130 - 2, FrameTop.left + 
+70+ 2, 130 + fontsize + 3+2 };[] 
+ []
+
+
+Overfull \hbox (139.37068pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 RECT Frame_ReadNumber = { Winsize.left + 30, Frame1.top, Win
+size.right - 30 / 2, Frame1.bottom };[] 
+ []
+
+
+Overfull \hbox (86.87114pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 extern HWND Button1, Button2, Button3, Button4, Button11, Bu
+tton22, Button33, Button44;[] 
+ []
+
+
+Overfull \hbox (244.36977pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 extern HWND hStaticProg, hStaticProg2, hNumberStatic, lateda
+tacombo, hStaticUserDialog, hDialogUser, hStaticSentence;[] 
+ []
+
+[75] [76]
+Overfull \hbox (270.61954pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 /*----------------------------------------------------------
+------------------------------------------------------------*/[] 
+ []
+
+
+Overfull \hbox (239.11981pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 int APIENTRY WinMain(_In_ HINSTANCE hThisInst, _In_opt_ HINS
+TANCE hPrevInst, _In_ LPSTR lpszArgs, _In_ int nWinMode)[] 
+ []
+
+[77]
+Overfull \hbox (186.62027pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 CreateNewWindow(hWndNew, hThisInst, Winsize.right - Winsize.
+left, Winsize.bottom - Winsize.top, nWinMode);[] 
+ []
+
+
+Overfull \hbox (29.12164pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam
+, LPARAM lParam)[] 
+ []
+
+[78] [79] [80]
+Overfull \hbox (2.87187pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 ps.rcPaint.right - ps.rcPaint.left, ps.rcPaint.bottom - ps.r
+cPaint.top,[] 
+ []
+
+
+Overfull \hbox (2.87187pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 ps.rcPaint.right - ps.rcPaint.left, ps.rcPaint.bottom - ps.r
+cPaint.top,[] 
+ []
+
+[81] [82] [83] [84] [85]
+Overfull \hbox (98.83618pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 MessageBox(hWnd, "1, 2, 3, 4 \JY1/gt/m/n/10 いずれかのキ ー
+を押してください 。 \OT1/cmtt/m/n/10 ", NULL, MB_OK | MB_ICONWARNING);[] 
+ []
+
+[86]
+Overfull \hbox (88.00594pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 if (MessageBox(hWnd, "\JY1/gt/m/n/10 終了しますか ？\OT1/cmt
+t/m/n/10 ", "\JY1/gt/m/n/10 終了確認\OT1/cmtt/m/n/10 ", MB_YESNO | MB_ICONQUEST
+ION) == IDYES) {[] 
+ []
+
+
+Overfull \hbox (172.0052pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 if (MessageBox(hWnd, (LPCSTR)"\JY1/gt/m/n/10 終了しますか ？
+\OT1/cmtt/m/n/10 ", (LPCSTR)"\JY1/gt/m/n/10 終了確認\OT1/cmtt/m/n/10 ", MB_YESN
+O | MB_ICONQUESTION) == IDYES) {[] 
+ []
+
+[87]
+Overfull \hbox (8.12183pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 HBRUSH hBrush_ini = (HBRUSH)CreateSolidBrush(color_iniButton
+background);[] 
+ []
+
+[88]
+Overfull \hbox (23.87169pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 DrawText(hDC, szText, -1, &rcItem, DT_CENTER | DT_VCENTER | 
+DT_SINGLELINE);[] 
+ []
+
+
+Overfull \hbox (23.87169pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 DrawText(hDC, szText, -1, &rcItem, DT_CENTER | DT_VCENTER | 
+DT_SINGLELINE);[] 
+ []
+
+[89] [90] [91] [92]
+Overfull \hbox (128.87077pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 hBitmap4 = LoadBitmap(GetModuleHandle(NULL),//(HINSTANCE)Get
+WindowLongPtr(hWnd, GWL_HINSTANCE),[] 
+ []
+
+[93]
+Overfull \hbox (44.8715pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 hRgn = CreateRectRgn(Winsize.left, Winsize.top, Winsize.righ
+t, Winsize.bottom);[] 
+ []
+
+
+Overfull \hbox (34.3716pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 FillRect(hDCMem, &FrameProgTop, (HBRUSH)CreateSolidBrush(RGB
+(70, 130, 180)));[] 
+ []
+
+
+Overfull \hbox (29.12164pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 FillRect(hDCMem, &FrameBottom, (HBRUSH)CreateSolidBrush(RGB(
+70, 130, 180)));[] 
+ []
+
+
+Overfull \hbox (239.11981pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 /*hRgn1 = CreateRectRgn(FrameBottom.left - 30, FrameBottom.b
+ottom - 64, FrameBottom.right + 30, FrameBottom.bottom);[] 
+ []
+
+
+Overfull \hbox (118.37086pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 hRgn2 = CreateRectRgn(0, 0, 30, Winsize.bottom - (FrameBotto
+m.bottom - FrameBottom.top + 5));[] 
+ []
+
+
+Overfull \hbox (275.86949pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 hRgn3 = CreateRectRgn(Winsize.right - 30, 0, Winsize.right, 
+Winsize.bottom - (FrameBottom.bottom - FrameBottom.top + 5));*/[] 
+ []
+
+[94]
+Overfull \hbox (44.8715pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 bool CommandFunc(HWND hWnd, WPARAM wParam, LPARAM lParam, UI
+NT uMsg, HDC hdc) {[] 
+ []
+
+[95] [96] [97] [98] [99]
+Overfull \hbox (65.87132pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 // strTextName = (LPSTR)calloc((GetWindowTextLength(hEditNam
+e) + 1), sizeof(char));[] 
+ []
+
+
+Overfull \hbox (44.8715pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 // GetWindowText(hEditName, strTextName, (GetWindowTextLengt
+h(hEditName) + 1));[] 
+ []
+
+
+Overfull \hbox (55.37141pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 // strTextOld = (LPSTR)calloc((GetWindowTextLength(hEditOld)
+ + 1), sizeof(char));[] 
+ []
+
+
+Overfull \hbox (29.12164pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 // GetWindowText(hEditOld, strTextOld, (GetWindowTextLength(
+hEditOld) + 1));[] 
+ []
+
+[100] [101] [102]
+Underfull \hbox (badness 1383) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 FileWriteInfo = true; // \JY1/gt/m/n/10 フ ァイルに書き込み
+済みであることを知らせる
+ []
+
+[103] [104] [105] [106] [107]
+Overfull \hbox (166.62343pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 if (MessageBox(hWnd, _T("\JY1/gt/m/n/10 リセ ットしますか ？
+\OT1/cmtt/m/n/10 "), _T("\JY1/gt/m/n/10 リセ ット確認\OT1/cmtt/m/n/10 "), MB_YE
+SNO | MB_ICONQUESTION) == IDYES) {[] 
+ []
+
+
+Overfull \hbox (123.62082pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 ResetFunc(hWnd, hInst, szWinName, Winsize.right - Winsize.le
+ft, Winsize.bottom - Winsize.top);[] 
+ []
+
+[108]
+Overfull \hbox (76.37123pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 intCurrentIndex = SendMessage(GetDlgItem(hWnd, (int)ID_LATEI
+NI), CB_GETCURSEL, 0, 0);[] 
+ []
+
+
+Overfull \hbox (155.12054pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 int intTxtLen = SendMessage(GetDlgItem(hWnd, (int)ID_LATEINI
+), CB_GETLBTEXTLEN, intCurrentIndex, 0);[] 
+ []
+
+
+Overfull \hbox (207.62009pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 if (SendMessage(GetDlgItem(hWnd, (int)ID_LATEINI), CB_GETLBT
+EXT, intCurrentIndex, (LPARAM)pszBuf) != CB_ERR) {[] 
+ []
+
+[109]
+Overfull \hbox (71.12128pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 char drive[MAX_PATH + 1], dir[MAX_PATH + 1], fname[MAX_PATH 
++ 1], ext[MAX_PATH + 1];[] 
+ []
+
+
+Overfull \hbox (18.62173pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 _stprintf_s(settingpath, MAX_PATH + 1, _T("%s%ssetting.ini")
+, drive, dir);[] 
+ []
+
+
+Overfull \hbox (144.62064pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 GetPrivateProfileString(pszBuf, _T("data"), _T("error"), lat
+edata, sizeof(latedata), settingpath);[] 
+ []
+
+[110] [111] [112] [113]
+Overfull \hbox (105.43158pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 sprintf_s(temp3, sizeof(temp3), "%d \JY1/gt/m/n/10 番の文章
+を読み上げてください 。 \OT1/cmtt/m/n/10 ", P_SNumber[tempSetNumber]);[] 
+ []
+
+[114]
+Overfull \hbox (13.37178pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 unsigned int CancelFunc(HWND hWnd, HDC hdc, unsigned int Num
+berOfTimes) {[] 
+ []
+
+
+Overfull \hbox (16.97322pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 MessageBox(hWnd, "\JY1/gt/m/n/10 取り消す対象がありません 。
+ \OT1/cmtt/m/n/10 ", NULL, MB_OK | MB_ICONWARNING);[] 
+ []
+
+[115] [116]
+Overfull \hbox (76.02875pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 MessageBox(hWnd, _T("\JY1/gt/m/n/10 正しく回答できていません
+ 。 \OT1/cmtt/m/n/10 "), _T("\JY1/gt/m/n/10 エラ ー\OT1/cmtt/m/n/10 "), MB_OK |
+ MB_ICONWARNING);[] 
+ []
+
+[117]
+Overfull \hbox (8.12183pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 //TextOut(hdc, NumberTest_i[0], NumberTest_i[1], temp1, lstr
+len(temp1));[] 
+ []
+
+[118]
+Overfull \hbox (37.64958pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 //TextOut(hdc, Winsize.left + 70, 280 + 30, temp3, (int)strl
+en(temp3)); //  \JY1/gt/m/n/10 （ 真
+ []
+
+[119] [120]
+Overfull \hbox (202.37013pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 bool ResetFunc(HWND hWnd, HINSTANCE hThisInst, const char sz
+WinName[], const int nWidth, const int nHeight) {[] 
+ []
+
+[121] [122] [123]
+Overfull \hbox (39.62155pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 if (CreateProcess(szPath, NULL, NULL, NULL, FALSE, 0, NULL, 
+NULL, &si, &pi)) {[] 
+ []
+
+[124]
+Overfull \hbox (128.87077pt too wide) in paragraph at lines 1385--1385
+[]\OT1/cmtt/m/n/10 return SetWindowPos(hWnd, NULL, cx, cy, 0, 0, (SWP_NOSIZE | 
+SWP_NOZORDER | SWP_NOOWNERZORDER));[] 
+ []
+
+[125]) (./furoku-Tex/furoku-C.tex [126]
+付録C 
+[127
+
+]
+Overfull \hbox (29.12164pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 processorArchitecture='*' publicKeyToken='6595b64144ccf1df' 
+language='*'\"")[] 
+ []
+
+[128]
+Overfull \hbox (8.12183pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 TCHAR strASIOInfo[LENSTR], strWaveFileInfo[LENSTR], strBuffI
+nfo[LENSTR];[] 
+ []
+
+
+Overfull \hbox (29.12164pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 int numInChannels, numOutChannels, idDevice, idChannelClick,
+ idChannelSound;[] 
+ []
+
+
+Overfull \hbox (113.12091pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 extern HWND hStaticNowTime, hStaticTime, hEdit1, htaticNumbe
+rOfloops, hStaticNumberOfloops2;[] 
+ []
+
+[129] [130]
+Overfull \hbox (228.6199pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 int WINAPI WinMain(_In_ HINSTANCE hThisInst, _In_opt_ HINSTA
+NCE hPrevInst, _In_ LPSTR lpszArgs, _In_ int nWinMode)[] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 // MessageBox(NULL, _T("This Application is already running!
+"), _T("\JY1/gt/m/n/10 警
+ []
+
+[131] [132]
+Overfull \hbox (8.12183pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 haccel = LoadAccelerators(hThisInst, MAKEINTRESOURCE(IDR_ACC
+ELERATOR1));[] 
+ []
+
+[133]
+Overfull \hbox (60.62137pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 LRESULT CALLBACK windowfunc(HWND hwnd, UINT message, WPARAM 
+wparam, LPARAM lparam)[] 
+ []
+
+
+Overfull \hbox (102.621pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 long numinchs, numoutchs, minlenbuffer, maxlenbuffer, prefle
+nbuffer, granularity, tmplong;[] 
+ []
+
+[134] [135]
+Overfull \hbox (81.62119pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 MessageBox(NULL, _T("asioDrivers->getDriverNames"), _T("Erro
+r"), MB_ICONSTOP | MB_OK);[] 
+ []
+
+
+Overfull \hbox (113.12091pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 _stprintf_s(str, LENSTR, _T("asioDrivers->loadDriver\nDevice
+ Name: %s\n"), devnames[IDDEV]);[] 
+ []
+
+[136]
+Overfull \hbox (34.3716pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 _stprintf_s(str, LENSTR, _T("ASIOInit\nDevice Name: %s\n"), 
+devnames[IDDEV]);[] 
+ []
+
+
+Overfull \hbox (107.87096pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 _stprintf_s(str, LENSTR, _T("asioDrivers->loadDriver\nDevice
+ Name: %s\n"), devnames[idev]);[] 
+ []
+
+[137]
+Overfull \hbox (29.12164pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 _stprintf_s(str, LENSTR, _T("ASIOInit\nDevice Name: %s\n"), 
+devnames[idev]);[] 
+ []
+
+[138]
+Overfull \hbox (29.12164pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 MessageBox(NULL, _T("ASIOCanSampleRate"), _T("Error"), MB_IC
+ONSTOP | MB_OK);[] 
+ []
+
+
+Overfull \hbox (29.12164pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 MessageBox(NULL, _T("ASIOSetSampleRate"), _T("Error"), MB_IC
+ONSTOP | MB_OK);[] 
+ []
+
+
+Overfull \hbox (18.62173pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 MessageBox(NULL, _T("ASIOGetChannels"), _T("Error"), MB_ICON
+STOP | MB_OK);[] 
+ []
+
+[139]
+Overfull \hbox (107.87096pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 asioresult = ASIOGetBufferSize(&minlenbuffer, &maxlenbuffer,
+ &preflenbuffer, &granularity);[] 
+ []
+
+
+Overfull \hbox (29.12164pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 MessageBox(NULL, _T("ASIOGetBufferSize"), _T("Error"), MB_IC
+ONSTOP | MB_OK);[] 
+ []
+
+[140]
+Underfull \hbox (badness 1033) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 _stprintf_s(strBuffInfo, LENSTR, _T("ASIO \JY1/gt/m/n/10 バ 
+ッフ ァサイズが 「\OT1/cmtt/m/n/10 %d\JY1/gt/m/n/10 」 に設定
+ []
+
+
+Overfull \hbox (42.69579pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 MessageBox(NULL, strBuffInfo, _T("ASIO \JY1/gt/m/n/10 バ ッ
+フ ァサイズ\OT1/cmtt/m/n/10 "), MB_OK | MB_ICONWARNING);[] 
+ []
+
+[141]
+Overfull \hbox (128.87077pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 asioresult = ASIOCreateBuffers(BufInfo, numInChannels + numO
+utChannels, lenBuffer, &CallBacks);[] 
+ []
+
+
+Overfull \hbox (29.12164pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 MessageBox(NULL, _T("ASIOCreateBuffers"), _T("Error"), MB_IC
+ONSTOP | MB_OK);[] 
+ []
+
+
+Overfull \hbox (34.3716pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 MessageBox(NULL, _T("ASIOGetChannelInfo"), _T("Error"), MB_I
+CONSTOP | MB_OK);[] 
+ []
+
+[142]
+Overfull \hbox (23.87169pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 MessageBox(NULL, _T("ASIOGetLatencies"), _T("Error"), MB_ICO
+NSTOP | MB_OK);[] 
+ []
+
+[143] [144]
+Overfull \hbox (55.37141pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 inlatency + outlatency, ((double)inlatency + (double)outlate
+ncy) * 1000.0 / rate,[] 
+ []
+
+
+Overfull \hbox (18.62173pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 SupportASIOOutputReady == true ? _T("Supported.") : _T("Not 
+Supported."));[] 
+ []
+
+[145]
+Overfull \hbox (65.87132pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 if (mmioDescend(hMmio, &mmckinfoparent, NULL, MMIO_FINDRIFF)
+ != MMSYSERR_NOERROR) {[] 
+ []
+
+
+Overfull \hbox (139.37068pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 if (mmioDescend(hMmio, &mmckinfosubchunk, &mmckinfoparent, M
+MIO_FINDCHUNK) != MMSYSERR_NOERROR) {[] 
+ []
+
+[146] [147]
+Overfull \hbox (139.37068pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 if (mmioDescend(hMmio, &mmckinfosubchunk, &mmckinfoparent, M
+MIO_FINDCHUNK) != MMSYSERR_NOERROR) {[] 
+ []
+
+
+Overfull \hbox (44.8715pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 wavefilename, wf.nSamplesPerSec, wf.wBitsPerSample, wf.nChan
+nels, lenWaveData);[] 
+ []
+
+[148]
+Overfull \hbox (8.12183pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 if (mmioRead(hMmio, (HPSTR)tmpWaveData, mmckinfosubchunk.cks
+ize) <= 0) {[] 
+ []
+
+[149]
+Overfull \hbox (128.87077pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 tmplong = ((long)((unsigned char*)tmpWaveData)[isample * wf.
+nChannels + ich] - 0x80L) * 0x100L;[] 
+ []
+
+
+Overfull \hbox (8.12183pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 tmplong = (long)((short int*)tmpWaveData)[isample * wf.nChan
+nels + ich];[] 
+ []
+
+[150] [151] [152]
+Overfull \hbox (35.5064pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 if (IDYES == MessageBox(hwnd, _T("\JY1/gt/m/n/10 終了します
+か ？\OT1/cmtt/m/n/10 "), _T("\JY1/gt/m/n/10 終了確認\OT1/cmtt/m/n/10 "), MB_YE
+SNO)) {[] 
+ []
+
+[153]
+Overfull \hbox (34.3716pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 MessageBox(NULL, _T("ASIODisposeBuffers"), _T("Error"), MB_I
+CONSTOP | MB_OK);[] 
+ []
+
+[154] [155] [156]
+Overfull \hbox (86.87114pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 tmplong += ((unsigned char*)(BufInfo[idChannelClick].buffers
+[index]))[isample * 2 + 1];[] 
+ []
+
+
+Overfull \hbox (65.87132pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 tmplong += ((unsigned char*)(BufInfo[idChannelClick].buffers
+[index]))[isample * 2];[] 
+ []
+
+
+Overfull \hbox (86.87114pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 tmplong += ((unsigned char*)(BufInfo[idChannelClick].buffers
+[index]))[isample * 3 + 2];[] 
+ []
+
+
+Overfull \hbox (86.87114pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 tmplong += ((unsigned char*)(BufInfo[idChannelClick].buffers
+[index]))[isample * 3 + 1];[] 
+ []
+
+
+Overfull \hbox (65.87132pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 tmplong += ((unsigned char*)(BufInfo[idChannelClick].buffers
+[index]))[isample * 3];[] 
+ []
+
+
+Overfull \hbox (86.87114pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 tmplong += ((unsigned char*)(BufInfo[idChannelClick].buffers
+[index]))[isample * 4 + 3];[] 
+ []
+
+[157]
+Overfull \hbox (86.87114pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 tmplong += ((unsigned char*)(BufInfo[idChannelClick].buffers
+[index]))[isample * 4 + 2];[] 
+ []
+
+
+Overfull \hbox (86.87114pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 tmplong += ((unsigned char*)(BufInfo[idChannelClick].buffers
+[index]))[isample * 4 + 1];[] 
+ []
+
+
+Overfull \hbox (65.87132pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 tmplong += ((unsigned char*)(BufInfo[idChannelClick].buffers
+[index]))[isample * 4];[] 
+ []
+
+
+Overfull \hbox (50.12146pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 if (isPlaying == false || idxWaveData + isample > (FS * LENC
+HATTERING) / 1000) {[] 
+ []
+
+[158]
+Overfull \hbox (191.87022pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 CalcLateNumberOfloops(hParentWindow, &DelayTimeUnique, Delay
+Time_ms, lenBuffer, FS, inlatency, outlatency);[] 
+ []
+
+[159]
+Overfull \hbox (75.1182pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 SetStddev2Window(MarginTime);                               
+                    // \JY1/gt/m/n/10 標
+ []
+
+
+Overfull \hbox (8.12183pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 EnableWindow(GetDlgItem(hParentWindow, ID_EDIT_LATEDATA_TIMI
+NG), FALSE);[] 
+ []
+
+
+Overfull \hbox (165.62045pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 SendCountButtonClicked(GetDlgItem(hParentWindow, ID_STATIC_C
+OUNTBUTTONCLICKED_2), CountButtonClicked);[] 
+ []
+
+[160]
+Overfull \hbox (55.37141pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 memset(BufInfo[numInChannels + idChannelClick].buffers[index
+], 0, lenBuffer * 2);[] 
+ []
+
+
+Overfull \hbox (55.37141pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 memset(BufInfo[numInChannels + idChannelClick].buffers[index
+], 0, lenBuffer * 3);[] 
+ []
+
+
+Overfull \hbox (55.37141pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 memset(BufInfo[numInChannels + idChannelClick].buffers[index
+], 0, lenBuffer * 4);[] 
+ []
+
+[161]
+Overfull \hbox (338.86894pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 memcpy_s(BufInfo[numInChannels + idChannelClick].buffers[ind
+ex], lenBuffer * 2, BufInfo[idChannelSound].buffers[index], lenBuffer * 2);[] 
+ []
+
+
+Overfull \hbox (338.86894pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 memcpy_s(BufInfo[numInChannels + idChannelClick].buffers[ind
+ex], lenBuffer * 3, BufInfo[idChannelSound].buffers[index], lenBuffer * 3);[] 
+ []
+
+
+Overfull \hbox (338.86894pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 memcpy_s(BufInfo[numInChannels + idChannelClick].buffers[ind
+ex], lenBuffer * 4, BufInfo[idChannelSound].buffers[index], lenBuffer * 4);[] 
+ []
+
+
+Overfull \hbox (585.61679pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 memcpy_s((void*)&(((char*)(BufInfo[numInChannels + idChannel
+Click].buffers[index]))[position * 2]), tmplenbuffer * 2, (void*)&(((char*)Wave
+Data)[idxWaveData * 2]), tmplenbuffer * 2);[] 
+ []
+
+
+Overfull \hbox (585.61679pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 memcpy_s((void*)&(((char*)(BufInfo[numInChannels + idChannel
+Sound].buffers[index]))[position * 2]), tmplenbuffer * 2, (void*)&(((char*)Wave
+Data)[idxWaveData * 2]), tmplenbuffer * 2);[] 
+ []
+
+
+Overfull \hbox (585.61679pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 memcpy_s((void*)&(((char*)(BufInfo[numInChannels + idChannel
+Click].buffers[index]))[position * 3]), tmplenbuffer * 3, (void*)&(((char*)Wave
+Data)[idxWaveData * 3]), tmplenbuffer * 3);[] 
+ []
+
+
+Overfull \hbox (585.61679pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 memcpy_s((void*)&(((char*)(BufInfo[numInChannels + idChannel
+Sound].buffers[index]))[position * 3]), tmplenbuffer * 3, (void*)&(((char*)Wave
+Data)[idxWaveData * 3]), tmplenbuffer * 3);[] 
+ []
+
+[162]
+Overfull \hbox (585.61679pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 memcpy_s((void*)&(((char*)(BufInfo[numInChannels + idChannel
+Click].buffers[index]))[position * 4]), tmplenbuffer * 4, (void*)&(((char*)Wave
+Data)[idxWaveData * 4]), tmplenbuffer * 4);[] 
+ []
+
+
+Overfull \hbox (585.61679pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 memcpy_s((void*)&(((char*)(BufInfo[numInChannels + idChannel
+Sound].buffers[index]))[position * 4]), tmplenbuffer * 4, (void*)&(((char*)Wave
+Data)[idxWaveData * 4]), tmplenbuffer * 4);[] 
+ []
+
+
+Overfull \hbox (338.86894pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 memcpy_s(BufInfo[numInChannels + idChannelSound].buffers[ind
+ex], lenBuffer * 2, BufInfo[idChannelSound].buffers[index], lenBuffer * 2);[] 
+ []
+
+[163]
+Overfull \hbox (338.86894pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 memcpy_s(BufInfo[numInChannels + idChannelSound].buffers[ind
+ex], lenBuffer * 3, BufInfo[idChannelSound].buffers[index], lenBuffer * 3);[] 
+ []
+
+
+Overfull \hbox (338.86894pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 memcpy_s(BufInfo[numInChannels + idChannelSound].buffers[ind
+ex], lenBuffer * 4, BufInfo[idChannelSound].buffers[index], lenBuffer * 4);[] 
+ []
+
+
+Overfull \hbox (18.62173pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 MessageBox(NULL, _T("ASIOOutputReady"), _T("Error"), MB_ICON
+STOP | MB_OK);[] 
+ []
+
+
+Overfull \hbox (50.12146pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 auto msec = std::chrono::duration_cast<std::chrono::millisec
+onds>(time).count();[] 
+ []
+
+[164]
+Overfull \hbox (50.12146pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 auto msec = std::chrono::duration_cast<std::chrono::millisec
+onds>(time).count();[] 
+ []
+
+[165]
+Overfull \hbox (50.12146pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 bool WriteToCSV(HWND hwnd, vector<string>& MarginTime, const
+ string& filename) {[] 
+ []
+
+[166]
+Overfull \hbox (13.37178pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 SetWindowText(GetDlgItem(hwnd, ID_STATIC_COUNTBUTTONCLICKED_
+2), _T("0"));[] 
+ []
+
+
+Overfull \hbox (13.37178pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 SetWindowText(GetDlgItem(hwnd, ID_STATIC_COUNTBUTTONCLICKED_
+2), _T("0"));[] 
+ []
+
+[167] [168]
+Overfull \hbox (2.87187pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 auto seconds = std::chrono::time_point_cast<std::chrono::sec
+onds>(now);[] 
+ []
+
+
+Overfull \hbox (97.37105pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 auto milliseconds = std::chrono::duration_cast<std::chrono::
+milliseconds>(now - seconds);[] 
+ []
+
+[169]
+Overfull \hbox (134.12073pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 ASIOTime* bufferswitchtimeinfo(ASIOTime* params, long double
+BufferIndex, ASIOBool directProcess)[] 
+ []
+
+[170]
+Overfull \hbox (2.87187pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 long asiomessage(long selector, long value, void* message, d
+ouble* opt)[] 
+ []
+
+[171]
+Overfull \hbox (165.62045pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 hFont1 = CreateFont(25, 0, 0, 0, FW_MEDIUM, false, false, fa
+lse, SHIFTJIS_CHARSET, OUT_DEFAULT_PRECIS,[] 
+ []
+
+
+Overfull \hbox (18.62173pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, (VARIABLE_PITCH | FF_D
+ONTCARE), _T("
+ []
+
+
+Overfull \hbox (165.62045pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 hFont2 = CreateFont(22, 0, 0, 0, FW_MEDIUM, false, false, fa
+lse, SHIFTJIS_CHARSET, OUT_DEFAULT_PRECIS,[] 
+ []
+
+
+Overfull \hbox (18.62173pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, (VARIABLE_PITCH | FF_D
+ONTCARE), _T("
+ []
+
+
+Overfull \hbox (155.12054pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 hFont3 = CreateFont(45, 0, 0, 0, FW_BOLD, false, false, fals
+e, SHIFTJIS_CHARSET, OUT_DEFAULT_PRECIS,[] 
+ []
+
+
+Overfull \hbox (18.62173pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, (VARIABLE_PITCH | FF_D
+ONTCARE), _T("
+ []
+
+
+Overfull \hbox (165.62045pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 hFont4 = CreateFont(18, 0, 0, 0, FW_MEDIUM, false, false, fa
+lse, SHIFTJIS_CHARSET, OUT_DEFAULT_PRECIS,[] 
+ []
+
+
+Overfull \hbox (18.62173pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, (VARIABLE_PITCH | FF_D
+ONTCARE), _T("
+ []
+
+
+Overfull \hbox (155.12054pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 hFont5 = CreateFont(30, 0, 0, 0, FW_BOLD, false, false, fals
+e, SHIFTJIS_CHARSET, OUT_DEFAULT_PRECIS,[] 
+ []
+
+
+Overfull \hbox (18.62173pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, (VARIABLE_PITCH | FF_D
+ONTCARE), _T("
+ []
+
+
+Overfull \hbox (23.87169pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 SendMessage(hStaticTime, WM_SETFONT, (WPARAM)hFont1, MAKELPA
+RAM(false, 0));[] 
+ []
+
+
+Overfull \hbox (176.12036pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 SendMessage(GetDlgItem(hwnd, ID_STATIC_NUMBERDELAY1), WM_SET
+FONT, (WPARAM)hFont2, MAKELPARAM(false, 0));[] 
+ []
+
+[172]
+Overfull \hbox (176.12036pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 SendMessage(GetDlgItem(hwnd, ID_STATIC_NUMBERDELAY2), WM_SET
+FONT, (WPARAM)hFont2, MAKELPARAM(false, 0));[] 
+ []
+
+
+Overfull \hbox (207.62009pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 SendMessage(GetDlgItem(hwnd, ID_STATIC_COUNTBUTTONCLICKED), 
+WM_SETFONT, (WPARAM)hFont2, MAKELPARAM(false, 0));[] 
+ []
+
+
+Overfull \hbox (218.12pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 SendMessage(GetDlgItem(hwnd, ID_STATIC_COUNTBUTTONCLICKED_2)
+, WM_SETFONT, (WPARAM)hFont3, MAKELPARAM(false, 0));[] 
+ []
+
+
+Overfull \hbox (176.12036pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 SendMessage(GetDlgItem(hwnd, ID_STATIC_NUMBERDELAY1), WM_SET
+FONT, (WPARAM)hFont2, MAKELPARAM(false, 0));[] 
+ []
+
+
+Overfull \hbox (176.12036pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 SendMessage(GetDlgItem(hwnd, ID_STATIC_NUMBERDELAY2), WM_SET
+FONT, (WPARAM)hFont2, MAKELPARAM(false, 0));[] 
+ []
+
+
+Overfull \hbox (144.62064pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 SendMessage(GetDlgItem(hwnd, ID_GROUP_SETTING), WM_SETFONT, 
+(WPARAM)hFont2, MAKELPARAM(false, 0));[] 
+ []
+
+
+Overfull \hbox (128.87077pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 SendMessage(GetDlgItem(hwnd, ID_STATIC_BPM), WM_SETFONT, (WP
+ARAM)hFont2, MAKELPARAM(false, 0));[] 
+ []
+
+
+Overfull \hbox (144.62064pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 SendMessage(GetDlgItem(hwnd, ID_STATIC_BPMNUM), WM_SETFONT, 
+(WPARAM)hFont2, MAKELPARAM(false, 0));[] 
+ []
+
+
+Overfull \hbox (144.62064pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 SendMessage(GetDlgItem(hwnd, ID_STATIC_TRIALS), WM_SETFONT, 
+(WPARAM)hFont2, MAKELPARAM(false, 0));[] 
+ []
+
+
+Overfull \hbox (165.62045pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 SendMessage(GetDlgItem(hwnd, ID_STATIC_TRIALS_NUM), WM_SETFO
+NT, (WPARAM)hFont2, MAKELPARAM(false, 0));[] 
+ []
+
+
+Overfull \hbox (128.87077pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 SendMessage(GetDlgItem(hwnd, ID_STATIC_LAB), WM_SETFONT, (WP
+ARAM)hFont2, MAKELPARAM(false, 0));[] 
+ []
+
+
+Overfull \hbox (181.37032pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 SendMessage(GetDlgItem(hwnd, ID_STATIC_NORMALORIRREG), WM_SE
+TFONT, (WPARAM)hFont2, MAKELPARAM(false, 0));[] 
+ []
+
+
+Overfull \hbox (149.87059pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 SendMessage(GetDlgItem(hwnd, ID_GROUP_LATEDATA), WM_SETFONT,
+ (WPARAM)hFont2, MAKELPARAM(false, 0));[] 
+ []
+
+
+Overfull \hbox (160.3705pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 SendMessage(GetDlgItem(hwnd, ID_GROUP_LATEDATA_2), WM_SETFON
+T, (WPARAM)hFont2, MAKELPARAM(false, 0));[] 
+ []
+
+
+Overfull \hbox (155.12054pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 SendMessage(GetDlgItem(hwnd, ID_STATIC_FILENAME), WM_SETFONT
+, (WPARAM)hFont2, MAKELPARAM(false, 0));[] 
+ []
+
+
+Overfull \hbox (128.87077pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 SendMessage(GetDlgItem(hwnd, ID_STATIC_OLD), WM_SETFONT, (WP
+ARAM)hFont2, MAKELPARAM(false, 0));[] 
+ []
+
+
+Overfull \hbox (134.12073pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 SendMessage(GetDlgItem(hwnd, ID_STATIC_NAME), WM_SETFONT, (W
+PARAM)hFont2, MAKELPARAM(false, 0));[] 
+ []
+
+
+Overfull \hbox (165.62045pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 SendMessage(GetDlgItem(hwnd, ID_GROUP_SUBJECTINFO), WM_SETFO
+NT, (WPARAM)hFont2, MAKELPARAM(false, 0));[] 
+ []
+
+
+Overfull \hbox (118.37086pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 SendMessage(GetDlgItem(hwnd, ID_EDIT_OLD), WM_SETFONT, (WPAR
+AM)hFont2, MAKELPARAM(false, 0));[] 
+ []
+
+
+Overfull \hbox (123.62082pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 SendMessage(GetDlgItem(hwnd, ID_EDIT_NAME), WM_SETFONT, (WPA
+RAM)hFont2, MAKELPARAM(false, 0));[] 
+ []
+
+
+Overfull \hbox (155.12054pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 SendMessage(GetDlgItem(hwnd, ID_STATIC_COMBO_MS), WM_SETFONT
+, (WPARAM)hFont2, MAKELPARAM(false, 0));[] 
+ []
+
+
+Overfull \hbox (165.62045pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 SendMessage(GetDlgItem(hwnd, ID_STATIC_COMBO_MS_2), WM_SETFO
+NT, (WPARAM)hFont2, MAKELPARAM(false, 0));[] 
+ []
+
+
+Overfull \hbox (186.62027pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 SendMessage(GetDlgItem(hwnd, ID_STATIC_LATEDATATIMING), WM_S
+ETFONT, (WPARAM)hFont2, MAKELPARAM(false, 0));[] 
+ []
+
+
+Overfull \hbox (144.62064pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 SendMessage(GetDlgItem(hwnd, ID_STATIC_STDDEV), WM_SETFONT, 
+(WPARAM)hFont2, MAKELPARAM(false, 0));[] 
+ []
+
+[173]
+Overfull \hbox (113.12091pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 SendMessage(GetDlgItem(hwnd, ID_LATEINI), WM_SETFONT, (WPARA
+M)hFont1, MAKELPARAM(false, 0));[] 
+ []
+
+
+Overfull \hbox (123.62082pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 SendMessage(GetDlgItem(hwnd, ID_LATEINI_2), WM_SETFONT, (WPA
+RAM)hFont4, MAKELPARAM(false, 0));[] 
+ []
+
+
+Overfull \hbox (134.12073pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 SendMessage(GetDlgItem(hwnd, ID_LATESETTING), WM_SETFONT, (W
+PARAM)hFont1, MAKELPARAM(false, 0));[] 
+ []
+
+
+Overfull \hbox (144.62064pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 SendMessage(GetDlgItem(hwnd, ID_LATESETTING_2), WM_SETFONT, 
+(WPARAM)hFont1, MAKELPARAM(false, 0));[] 
+ []
+
+
+Overfull \hbox (181.37032pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 SendMessage(GetDlgItem(hwnd, ID_STATIC_LATESETTING_2), WM_SE
+TFONT, (WPARAM)hFont2, MAKELPARAM(false, 0));[] 
+ []
+
+
+Overfull \hbox (2.87187pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 SendMessage(GetDlgItem(hwnd, ID_BUTTON_CSV), WM_SETFONT, (WP
+ARAM)hFont5[] 
+ []
+
+
+Overfull \hbox (181.37032pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 SendMessage(GetDlgItem(hwnd, ID_EDIT_LATEDATA_TIMING), WM_SE
+TFONT, (WPARAM)hFont2, MAKELPARAM(false, 0));[] 
+ []
+
+
+Overfull \hbox (144.62064pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 SendMessage(GetDlgItem(hwnd, ID_EDIT_FILEPATH), WM_SETFONT, 
+(WPARAM)hFont2, MAKELPARAM(false, 0));[] 
+ []
+
+[174]
+Overfull \hbox (86.87114pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 CalcLateNumberOfloops(hWnd, &NumberOfloops, Num, lenBuffer, 
+FS, inlatency, outlatency);[] 
+ []
+
+
+Overfull \hbox (60.62137pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 GetWindowText(GetDlgItem(hWnd, ID_EDIT_LATEDATA_TIMING), lps
+tringDelayTiming, 50);[] 
+ []
+
+[175]
+Overfull \hbox (97.37105pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 int intCurrentIndex = SendMessage(GetDlgItem(hwnd, (int)ID_L
+ATEINI), CB_GETCURSEL, 0, 0);[] 
+ []
+
+
+Overfull \hbox (155.12054pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 int intTxtLen = SendMessage(GetDlgItem(hwnd, (int)ID_LATEINI
+), CB_GETLBTEXTLEN, intCurrentIndex, 0);[] 
+ []
+
+
+Overfull \hbox (181.37032pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 if (SendMessage(GetDlgItem(hwnd, ID_LATEINI), CB_GETLBTEXT, 
+intCurrentIndex, (LPARAM)pszBuf) != CB_ERR) {[] 
+ []
+
+
+Overfull \hbox (71.12128pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 char drive[MAX_PATH + 1], dir[MAX_PATH + 1], fname[MAX_PATH 
++ 1], ext[MAX_PATH + 1];[] 
+ []
+
+[176]
+Overfull \hbox (144.62064pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 GetPrivateProfileString(pszBuf, _T("data"), _T("Error"), lat
+edata, sizeof(latedata), settingpath);[] 
+ []
+
+
+Overfull \hbox (144.62064pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 GetPrivateProfileString(pszBuf, _T("data"), _T("Error"), lat
+edata, sizeof(latedata), IniFilepath);[] 
+ []
+
+
+Overfull \hbox (39.62155pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 while (SendMessage(GetDlgItem(hwnd, (int)ID_LATESETTING), CB
+_GETCOUNT, 0, 0)){[] 
+ []
+
+
+Overfull \hbox (18.62173pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 SendMessage(GetDlgItem(hwnd, (int)ID_LATESETTING), CB_DELETE
+STRING, 0, 0);[] 
+ []
+
+[177]
+Overfull \hbox (50.12146pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 SendMessage(GetDlgItem(hwnd, ID_LATESETTING), CB_INSERTSTRIN
+G, i, (LPARAM)cstr);[] 
+ []
+
+
+Overfull \hbox (107.87096pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 int intCurrentIndex = SendMessage(GetDlgItem(hwnd, (int)ID_L
+ATEINI_2), CB_GETCURSEL, 0, 0);[] 
+ []
+
+
+Overfull \hbox (165.62045pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 int intTxtLen = SendMessage(GetDlgItem(hwnd, (int)ID_LATEINI
+_2), CB_GETLBTEXTLEN, intCurrentIndex, 0);[] 
+ []
+
+[178]
+Overfull \hbox (191.87022pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 if (SendMessage(GetDlgItem(hwnd, ID_LATEINI_2), CB_GETLBTEXT
+, intCurrentIndex, (LPARAM)pszBuf) != CB_ERR) {[] 
+ []
+
+
+Overfull \hbox (71.12128pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 char drive[MAX_PATH + 1], dir[MAX_PATH + 1], fname[MAX_PATH 
++ 1], ext[MAX_PATH + 1];[] 
+ []
+
+
+Overfull \hbox (144.62064pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 GetPrivateProfileString(pszBuf, _T("data"), _T("Error"), lat
+edata, sizeof(latedata), settingpath);[] 
+ []
+
+
+Overfull \hbox (144.62064pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 GetPrivateProfileString(pszBuf, _T("data"), _T("Error"), lat
+edata, sizeof(latedata), IniFilepath);[] 
+ []
+
+
+Overfull \hbox (55.37141pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 while (SendMessage(GetDlgItem(hwnd, (int)ID_LATESETTING_2), 
+CB_GETCOUNT, 0, 0)) {[] 
+ []
+
+
+Overfull \hbox (29.12164pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 SendMessage(GetDlgItem(hwnd, (int)ID_LATESETTING_2), CB_DELE
+TESTRING, 0, 0);[] 
+ []
+
+[179]
+Overfull \hbox (60.62137pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 SendMessage(GetDlgItem(hwnd, ID_LATESETTING_2), CB_INSERTSTR
+ING, i, (LPARAM)cstr);[] 
+ []
+
+[180]
+Overfull \hbox (81.62119pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 int intCurrentIndex = SendMessage(GetDlgItem(hWnd, (int)comb
+oID), CB_GETCURSEL, 0, 0);[] 
+ []
+
+
+Overfull \hbox (139.37068pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 int intTxtLen = SendMessage(GetDlgItem(hWnd, (int)comboID), 
+CB_GETLBTEXTLEN, intCurrentIndex, 0);[] 
+ []
+
+
+Overfull \hbox (191.87022pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 if (SendMessage(GetDlgItem(hWnd, (int)comboID), CB_GETLBTEXT
+, intCurrentIndex, (LPARAM)pszBuf) != CB_ERR) {[] 
+ []
+
+
+Overfull \hbox (291.61935pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 bool CalcLateNumberOfloops(HWND hwnd, int* NumberOfloops, in
+t  Num, int lenbuffer, int rate, long inlatency, long outlatency){[] 
+ []
+
+[181]
+Overfull \hbox (228.6199pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 double inlatency_ms = (double)inlatency * 1000.0 / (double)r
+ate - (double)lenbuffer * 2.0 * 1000.0 / (double)rate;[] 
+ []
+
+
+Overfull \hbox (249.61972pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 *NumberOfloops = ((double)Num - (inlatency_ms + outlatency_m
+s + kairo)) * (double)rate / ((double)lenbuffer * 1000.0);[] 
+ []
+
+[182]
+Overfull \hbox (186.62027pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 // inlatency_ms, outlatency_ms, inlatency_ms + outlatency_ms
+, Num, kairo, lenbuffer, rate, *NumberOfloops,[] 
+ []
+
+
+Overfull \hbox (181.37032pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 // ((double)Num - (inlatency_ms + outlatency_ms + kairo)) * 
+(double)rate / ((double)lenbuffer * 1000.0));[] 
+ []
+
+[183]
+Overfull \hbox (281.11945pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 RECT rButtonSendCSV = {rGroupIni.left + 294 , 374, rGroupIni
+.left + 294  + rGroupIni2.right - rGroupIni2.left + 52, 373 + 52[] 
+ []
+
+[184]
+Overfull \hbox (160.3705pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 Rectangle(hdc, rButtonSendCSV.left, rButtonSendCSV.top, rBut
+tonSendCSV.right, rButtonSendCSV.bottom);[] 
+ []
+
+
+Overfull \hbox (35.5064pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 if (IDYES == MessageBox(hwnd, _T("\JY1/gt/m/n/10 終了します
+か ？\OT1/cmtt/m/n/10 "), _T("\JY1/gt/m/n/10 終了確認\OT1/cmtt/m/n/10 "), MB_YE
+SNO)) {[] 
+ []
+
+[185] [186]
+Overfull \hbox (18.62173pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 RelativepathFromAbsolutepath(FileNameINI, hwnd, ID_GROUP_LAT
+EDATA, false);[] 
+ []
+
+
+Overfull \hbox (23.87169pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 RelativepathFromAbsolutepath(FileNameINI, hwnd, ID_GROUP_LAT
+EDATA_2, true);[] 
+ []
+
+[187] [188]
+Overfull \hbox (92.1211pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 int itemIndex = SendMessage(GetDlgItem(hwnd, ID_STATIC_TRIAL
+S_NUM), CB_GETCURSEL, 0, 0);[] 
+ []
+
+
+Overfull \hbox (128.87077pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 SendMessage(GetDlgItem(hwnd, ID_STATIC_TRIALS_NUM), CB_GETLB
+TEXT, itemIndex, (LPARAM)itemData);[] 
+ []
+
+
+Overfull \hbox (107.87096pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 int itemIndex = SendMessage(GetDlgItem(hwnd, ID_STATIC_NORMA
+LORIRREG), CB_GETCURSEL, 0, 0);[] 
+ []
+
+[189]
+Overfull \hbox (134.12073pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 /*if (DialogBox(GetModuleHandle(NULL), MAKEINTRESOURCE(IDD_M
+YDIALOG), hwnd, DialogProc) == -1) {[] 
+ []
+
+
+Overfull \hbox (60.62137pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 GetWindowText(GetDlgItem(hwnd, ID_EDIT_LATEDATA_TIMING), lps
+tringDelayTiming, 50);[] 
+ []
+
+[190]
+Overfull \hbox (71.12128pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 int itemIndex = SendMessage(GetDlgItem(hwnd, ID_STATIC_BPMNU
+M), CB_GETCURSEL, 0, 0);[] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 SetWindowText(GetDlgItem(hParentWindow, ID_STATIC_NORMALORIR
+REG), _T("
+ []
+
+[191]
+Underfull \hbox (badness 10000) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 SetWindowText(GetDlgItem(hParentWindow, ID_STATIC_NORMALORIR
+REG), _T("
+ []
+
+
+Overfull \hbox (13.37178pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 RelativepathFromAbsolutepath(FileNameCSV, hwnd, ID_EDIT_FILE
+PATH, false);[] 
+ []
+
+[192] [193]
+Overfull \hbox (139.37068pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 NumWritten = GetWindowText(GetDlgItem(hwnd, ID_LATEINI_2), &
+delay_group[0], sizeof(delay_group));[] 
+ []
+
+
+Overfull \hbox (128.87077pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 NumWritten = GetWindowText(GetDlgItem(hwnd, ID_LATEINI), &de
+lay_group[0], sizeof(delay_group));[] 
+ []
+
+
+Overfull \hbox (76.37123pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 int NumBpm = GetWindowText(GetDlgItem(hwnd, ID_STATIC_BPMNUM
+), &bpm[0], sizeof(bpm));[] 
+ []
+
+
+Overfull \hbox (55.37141pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 MarginTime.insert(MarginTime.begin(), bpm);                 
+               // BPM
+ []
+
+
+Overfull \hbox (64.61829pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 GetEditBoxTextFunc(hParentWindow);                          
+                  // \JY1/gt/m/n/10 被
+ []
+
+
+Overfull \hbox (33.11856pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 MarginTime.insert(MarginTime.begin(), delay_group);         
+            // \JY1/gt/m/n/10 遅
+ []
+
+
+Overfull \hbox (27.8686pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 MarginTime.insert(MarginTime.begin(), to_string(Num));      
+           // \JY1/gt/m/n/10 遅
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 MarginTime.insert(MarginTime.begin(), TimeStampButtonClicked
+);   // \JY1/gt/m/n/10 押
+ []
+
+[194]
+Underfull \hbox (badness 10000) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 MarginTime.insert(MarginTime.begin(), stringDelayTiming);   
+     // \JY1/gt/m/n/10 遅
+ []
+
+
+Overfull \hbox (39.62155pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 MarginTime.insert(MarginTime.begin(), tempunique);          
+      // irregular[] 
+ []
+
+
+Overfull \hbox (2.87187pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 EnableWindow(GetDlgItem(hParentWindow, ID_EDIT_LATEDATA_TIMI
+NG), TRUE);[] 
+ []
+
+
+Overfull \hbox (174.86732pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 // int NumberOfCursel = SendMessage(GetDlgItem(hParentWindow
+, ID_LATESETTING), CB_GETCOUNT, 0, 0); // \JY1/gt/m/n/10 選
+ []
+
+
+Overfull \hbox (190.61719pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 // int NowCursel = SendMessage(GetDlgItem(hParentWindow, ID_
+LATESETTING), CB_GETCURSEL, 0, 0);        // \JY1/gt/m/n/10 現
+ []
+
+
+Overfull \hbox (69.86824pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 // SendMessage(GetDlgItem(hParentWindow, ID_LATESETTING), CB
+_SETCURSEL, 0, 0); // \JY1/gt/m/n/10 先
+ []
+
+
+Overfull \hbox (159.11746pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 // else SendMessage(GetDlgItem(hParentWindow, ID_LATESETTING
+), CB_SETCURSEL, NowCursel + 1, 0); // \JY1/gt/m/n/10 次
+ []
+
+
+Overfull \hbox (185.36723pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 // int NumberOfCursel = SendMessage(GetDlgItem(hParentWindow
+, ID_LATESETTING_2), CB_GETCOUNT, 0, 0); // \JY1/gt/m/n/10 選
+ []
+
+[195]
+Overfull \hbox (201.1171pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 // int NowCursel = SendMessage(GetDlgItem(hParentWindow, ID_
+LATESETTING_2), CB_GETCURSEL, 0, 0);        // \JY1/gt/m/n/10 現
+ []
+
+
+Overfull \hbox (80.36815pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 // SendMessage(GetDlgItem(hParentWindow, ID_LATESETTING_2), 
+CB_SETCURSEL, 0, 0); // \JY1/gt/m/n/10 先
+ []
+
+
+Overfull \hbox (169.61737pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 // else SendMessage(GetDlgItem(hParentWindow, ID_LATESETTING
+_2), CB_SETCURSEL, NowCursel + 1, 0); // \JY1/gt/m/n/10 次
+ []
+
+
+Underfull \hbox (badness 3646) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 EnableWindow(GetDlgItem(hwnd, ID_LATESETTING), TRUE);       
+ // \JY1/gt/m/n/10 コンボ
+ []
+
+[196] [197]
+Overfull \hbox (50.12146pt too wide) in paragraph at lines 1749--1749
+[]\OT1/cmtt/m/n/10 SetWindowText(GetDlgItem(hParentWindow, ID_STATIC_STDDEV), s
+td_dev_str.c_str());[] 
+ []
+
+) (./furoku-Tex/furoku-D.tex [198]
+付録D 
+[199
+
+] [200] [201]
+Overfull \hbox (8.12183pt too wide) in paragraph at lines 116--116
+[]        \OT1/cmtt/m/n/10 index1 = find(abs(data_to_analyze) > threshold1, 1) 
++ start - 1;[] 
+ []
+
+[202]
+Overfull \hbox (197.12018pt too wide) in paragraph at lines 116--116
+[]    \OT1/cmtt/m/n/10 line([Channel1_ExceedTime, Channel1_ExceedTime], ylim, '
+Color', 'g', 'LineStyle', '--', 'LineWidth', 2);[] 
+ []
+
+
+Overfull \hbox (197.12018pt too wide) in paragraph at lines 116--116
+[]    \OT1/cmtt/m/n/10 line([Channel2_ExceedTime, Channel2_ExceedTime], ylim, '
+Color', 'b', 'LineStyle', '--', 'LineWidth', 2);[] 
+ []
+
+) [203] (./thesis.aux)
  ***********
 pLaTeX2e <2023-02-14>+1, based on
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-10-23>
  ***********
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 53C65D066F575A84C0315104BFD6739C;7023.
+(rerunfilecheck)             Checksum: 47B0C9256A2AB4E5DB017744D38F5B25;8253.
  ) 
 Here is how much of TeX's memory you used:
- 14092 strings out of 476504
- 224662 string characters out of 5801731
- 2210881 words of memory out of 5000000
- 35845 multiletter control sequences out of 15000+600000
- 569937 words of font info for 94 fonts, out of 8000000 for 9000
+ 12070 strings out of 476504
+ 197557 string characters out of 5801731
+ 1931881 words of memory out of 5000000
+ 33821 multiletter control sequences out of 15000+600000
+ 569602 words of font info for 93 fonts, out of 8000000 for 9000
  41 hyphenation exceptions out of 8191
- 73i,15n,79p,670b,2181s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 73i,15n,79p,670b,631s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on thesis.dvi (177 pages, 758608 bytes).
+Output written on thesis.dvi (204 pages, 374936 bytes).
