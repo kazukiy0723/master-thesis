@@ -14,7 +14,8 @@
   \label{fig:button-click-system}
 \end{figure}
 \subsection{音響信号への遅延生成アプリケーション}
-本研究で使用する音響信号への遅延生成アプリケーションは，Microsoft社が提供する統合開発環境であるVisual Studio 2022を用いてC++で開発する．
+本研究で使用する音響信号への遅延生成アプリケーションは，オーディオドライバにASIOを使用し，
+コントローラーのボタンが押下されてから任意の時間だけ遅延を加えて音響信号を出力する．
 このアプリケーションの表示例を図\ref{fig:app_kyakkann}に示す．
 \begin{figure}[tbp]
   \centering
