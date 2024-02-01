@@ -1,4 +1,4 @@
-This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.sjis) (TeX Live 2023) (preloaded format=platex 2023.10.26)  31 JAN 2024 01:02
+This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.sjis) (TeX Live 2023) (preloaded format=platex 2023.10.26)  1 FEB 2024 10:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -656,10 +656,6 @@ pLaTeX2e <2023-02-14>+1, based on
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-10-23>
  ***********
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
 Package rerunfilecheck Info: File `thesis.out' has not changed.
 (rerunfilecheck)             Checksum: DD027A4CEBF7C5033351351548F50226;7407.
  ) 
@@ -672,4 +668,4 @@ Here is how much of TeX's memory you used:
  41 hyphenation exceptions out of 8191
  73i,15n,79p,670b,2171s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on thesis.dvi (177 pages, 749052 bytes).
+Output written on thesis.dvi (177 pages, 749048 bytes).
