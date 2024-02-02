@@ -5,112 +5,112 @@
 遅延時間測定のために用いたMATLABファイルとCPUの利用率を100％にするために用いたPythonファイルを以下に示す．
 
 \begin{lstlisting}[caption=cpu100.py]
-    import multiprocessing
-    import time
-    import numpy as np
-    import gc
+import multiprocessing
+import time
+import numpy as np
+import gc
 
-    def cpu_100():
-        while True:
-            a = np.random.rand(5000, 5000)
-            b = np.random.rand(5000, 5000)
-            np.dot(a, b)
+def cpu_100():
+while True:
+    a = np.random.rand(5000, 5000)
+    b = np.random.rand(5000, 5000)
+    np.dot(a, b)
 
-    if __name__ == "__main__":
-        processes = []
-        for _ in range(multiprocessing.cpu_count()):
-            p = multiprocessing.Process(target=cpu_100)
-            p.start()
-            processes.append(p)
+if __name__ == "__main__":
+processes = []
+for _ in range(multiprocessing.cpu_count()):
+    p = multiprocessing.Process(target=cpu_100)
+    p.start()
+    processes.append(p)
 
-        # プロセスが終了しないように待機
-        try:
-            while True:
-                time.sleep(1)
-        except KeyboardInterrupt:
-            for p in processes:
-                p.terminate()
+# プロセスが終了しないように待機
+try:
+    while True:
+        time.sleep(1)
+except KeyboardInterrupt:
+    for p in processes:
+        p.terminate()
 
 \end{lstlisting}
     
 \begin{lstlisting}[caption=MeasureDelayTime.m]
-    clear all
+clear all
 
-    filename = 'delayTime_test2.csv'; % 出力先ファイル
-    fs = 48000; 
-    nbits = 16; %  量子ビット数
-    nChannel = 2; 
-    buffer = 5000; % 標準偏差を算出するときのサンプル数
-    length_record = 10; 
+filename = 'delayTime_test2.csv'; % 出力先ファイル
+fs = 48000; 
+nbits = 16; %  量子ビット数
+nChannel = 2; 
+buffer = 5000; % 標準偏差を算出するときのサンプル数
+length_record = 10; 
 
-    recorder = audiorecorder(fs, nbits, nChannel);
+recorder = audiorecorder(fs, nbits, nChannel);
 
-    % 録音
-    recordblocking(recorder, length_record); 
+% 録音
+recordblocking(recorder, length_record); 
 
-    % 配列の取得
-    myRecording = getaudiodata(recorder);
+% 配列の取得
+myRecording = getaudiodata(recorder);
 
-    % 分割
-    channel1 = myRecording(:, 1);
-    if(nChannel == 2)
-        channel2 = myRecording(:, 2);
-    end
+% 分割
+channel1 = myRecording(:, 1);
+if(nChannel == 2)
+    channel2 = myRecording(:, 2);
+end
 
-    % index2の計算
-    analyzed_segment = channel2(1000:6000);
-    % mean_val = mean(analyzed_segment);
-    std_val = std(analyzed_segment);
-    threshold2 = 2 * std_val;
-    % threshold2 = 0.2;
-    index2 = find(abs(channel2) > threshold2); 
+% index2の計算
+analyzed_segment = channel2(1000:6000);
+% mean_val = mean(analyzed_segment);
+std_val = std(analyzed_segment);
+threshold2 = 2 * std_val;
+% threshold2 = 0.2;
+index2 = find(abs(channel2) > threshold2); 
 
-    try
-        % index2からbuffer点前までの信号を切り取る
-        start = max(1, index2(1)-buffer);  
-        data_to_analyze = channel1(start:index2(1)-1);
+try
+    % index2からbuffer点前までの信号を切り取る
+    start = max(1, index2(1)-buffer);  
+    data_to_analyze = channel1(start:index2(1)-1);
 
-        % index1の計算
-        mean_val1 = mean(data_to_analyze);
-        std_val1 = std(data_to_analyze);
-        threshold1 = 2 * std_val1;
-        % 平均+2標準偏差を初めて超えた点をindex1
-        index1 = find(abs(data_to_analyze) > threshold1, 1) + start - 1;
+    % index1の計算
+    mean_val1 = mean(data_to_analyze);
+    std_val1 = std(data_to_analyze);
+    threshold1 = 2 * std_val1;
+    % 平均+2標準偏差を初めて超えた点をindex1
+    index1 = find(abs(data_to_analyze) > threshold1, 1) + start - 1;
 
-        
-        time = (1/fs) * (0:length(channel1)-1) * 1000;
-        Channel1_ExceedTime = time(index1);
-        fprintf("Channel.1: %f\r\n", Channel1_ExceedTime);
-
-        if(nChannel == 2)
-            Channel2_ExceedTime = time(index2(1));
-            fprintf("Channel.2: %f\r\n", Channel2_ExceedTime);
-            delayTime = Channel2_ExceedTime - Channel1_ExceedTime;
-            fprintf("Delay: %f\r\n", delayTime);
-
-            % CSVファイルへの書き込み
-            writematrix(delayTime, filename, 'WriteMode', 'append');
-
-        end
-    catch
-        disp('エラー');
-        return;
-    end
-
-    figure(1); 
-    plot(time, channel1);
-    hold on;
-    plot(time, channel2);
-    line([Channel1_ExceedTime, Channel1_ExceedTime], ylim, 'Color', 'g', 'LineStyle', '--', 'LineWidth', 2);
-    line([Channel2_ExceedTime, Channel2_ExceedTime], ylim, 'Color', 'b', 'LineStyle', '--', 'LineWidth', 2);
     
-    xlabel('Time [ms]', 'FontSize', 20);  
-    ylabel('Amplitude', 'FontSize', 20);  
+    time = (1/fs) * (0:length(channel1)-1) * 1000;
+    Channel1_ExceedTime = time(index1);
+    fprintf("Channel.1: %f\r\n", Channel1_ExceedTime);
 
-    % 凡例の設定
-    legend('Channel 1','Channel 2', 'FontSize', 20);
+    if(nChannel == 2)
+        Channel2_ExceedTime = time(index2(1));
+        fprintf("Channel.2: %f\r\n", Channel2_ExceedTime);
+        delayTime = Channel2_ExceedTime - Channel1_ExceedTime;
+        fprintf("Delay: %f\r\n", delayTime);
 
-    hold off;
+        % CSVファイルへの書き込み
+        writematrix(delayTime, filename, 'WriteMode', 'append');
+
+    end
+catch
+    disp('エラー');
+    return;
+end
+
+figure(1); 
+plot(time, channel1);
+hold on;
+plot(time, channel2);
+line([Channel1_ExceedTime, Channel1_ExceedTime], ylim, 'Color', 'g', 'LineStyle', '--', 'LineWidth', 2);
+line([Channel2_ExceedTime, Channel2_ExceedTime], ylim, 'Color', 'b', 'LineStyle', '--', 'LineWidth', 2);
+
+xlabel('Time [ms]', 'FontSize', 20);  
+ylabel('Amplitude', 'FontSize', 20);  
+
+% 凡例の設定
+legend('Channel 1','Channel 2', 'FontSize', 20);
+
+hold off;
 
 \end{lstlisting}
     

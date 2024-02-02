@@ -7,7 +7,7 @@
 関数の目的別にファイルを分けて作成している．
 
 \begin{lstlisting}[caption=main.cpp]
-	#include<windows.h>
+#include<windows.h>
 #include<tchar.h>
 #include<stdio.h>
 #include<Xinput.h>
@@ -1748,4 +1748,864 @@ bool SetStddev2Window(const vector<string> mTime) {
 	return true;
 }
 \end{lstlisting}
+
+\begin{lstlisting}[caption=window.cpp]
+#include<Windows.h>
+#include<tchar.h>
+#include<sstream>
+#include<fstream>
+#include"resource.h"
+#include"window.h"
+#include"main.h"
+
+using namespace std;
+// RECT構造体の定義
+RECT rButtonClickedTime = {30, 70, 530, 430};
+RECT rGroupIni = {rButtonClickedTime.right + 15, rButtonClickedTime.top, 725, 260};
+RECT rGroupSetting = {rGroupIni.right + 5, rGroupIni.top, rGroupIni.right + 5 + 190, 260};
+RECT rGroupIni2 = { rGroupSetting.right + 5, rGroupSetting.top, rGroupSetting.right + 5 + 190, 260 };
+
+HWND hStaticNowTime, hStaticTime, hEdit1, htaticNumberOfloops, hStaticNumberOfloops2;
+
+// ソース.cppと共有する変数
+int Num = 0;
+long inlatency, outlatency;
+int lenBuffer, NumberOfloops;
+
+//ウィンドウの作成
+bool CreateControl(HWND hWnd, WPARAM wParam, LPARAM lParam) {
+
+	hStaticTime = CreateWindow(
+		_T("STATIC"),
+		_T("カウント"),
+		WS_CHILD | WS_VISIBLE | SS_LEFT,
+		rButtonClickedTime.left,rButtonClickedTime.top - 40, 100, 30,
+		hWnd, (HMENU)ID_STATIC2, 
+		((LPCREATESTRUCT)(lParam))->hInstance, NULL
+	);
+
+	hEdit1 = CreateWindow(
+		_T("EDIT"),
+		_T(""),
+		WS_CHILD | WS_VISIBLE | WS_VSCROLL |
+		ES_LEFT | ES_MULTILINE | ES_AUTOVSCROLL| WS_BORDER,
+		rButtonClickedTime.left, rButtonClickedTime.top, 
+		rButtonClickedTime.right - rButtonClickedTime.left, rButtonClickedTime.bottom - rButtonClickedTime.top,
+		hWnd,
+		NULL,
+		((LPCREATESTRUCT)(lParam))->hInstance,
+		NULL
+	);
+
+	htaticNumberOfloops = CreateWindow(
+		_T("STATIC"),
+		_T("ループ:"),
+		WS_CHILD | WS_VISIBLE | SS_RIGHT,
+		rGroupSetting.left + 10, rGroupSetting.top + 145, 65, 25,
+		hWnd, (HMENU)ID_STATIC_NUMBERDELAY1,
+		((LPCREATESTRUCT)(lParam))->hInstance, NULL
+	);
+
+	hStaticNumberOfloops2 = CreateWindow(
+		_T("STATIC"),
+		_T("1"),
+		WS_CHILD | WS_VISIBLE | SS_LEFT,
+		rGroupSetting.left + 100, rGroupSetting.top + 145, 50, 25, 
+		hWnd, (HMENU)ID_STATIC_NUMBERDELAY2,
+		((LPCREATESTRUCT)(lParam))->hInstance, NULL
+	);
+
+	HWND hButtonSendCSV = CreateWindow(
+		_T("BUTTON"),
+		_T("↓ファイルを出力"),
+		WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
+		rGroupIni.left + 260 + 35, 375, rGroupIni2.right - rGroupIni2.left + 50, 50,
+		hWnd, (HMENU)ID_BUTTON_CSV,
+		((LPCREATESTRUCT)(lParam))->hInstance, NULL
+	);
+	HWND hStaticFilename = CreateWindow(
+		_T("STATIC"),
+		_T("保存先:"),
+		WS_CHILD | WS_VISIBLE | SS_LEFT,
+		rGroupIni.left + 10, 390, 65, 25,
+		hWnd, (HMENU)ID_STATIC_FILENAME,
+		((LPCREATESTRUCT)(lParam))->hInstance, NULL
+	);
+
+	// ファイルの場所を示すエディットボックス
+	HWND hEditFilePath = CreateWindow(
+		_T("EDIT"),
+		_T("No file selected"),
+		WS_CHILD | WS_VISIBLE | ES_LEFT | WS_BORDER | ES_AUTOHSCROLL | ES_READONLY,
+		rGroupIni.left + 70, 390, 200, 25,
+		hWnd,
+		(HMENU)ID_EDIT_FILEPATH,
+		((LPCREATESTRUCT)(lParam))->hInstance,
+		NULL
+	);
+
+	// ボタンの押下回数を表示するウィンドウ
+	HWND hCountButtonClicked_2 = CreateWindow(
+		_T("STATIC"),
+		_T("0"),
+		WS_CHILD | WS_VISIBLE | SS_LEFT,
+		120, 15, 60, 50,
+		hWnd, (HMENU)ID_STATIC_COUNTBUTTONCLICKED_2,
+		((LPCREATESTRUCT)(lParam))->hInstance, NULL
+	);
 	
+	// データ出力後に標準偏差を表示するウィンドウ
+	HWND hStdDev = CreateWindow(
+		_T("STATIC"),
+		_T("Std[ms]: None"),
+		WS_CHILD | WS_VISIBLE | SS_LEFT,
+		370, 30, 120, 30,
+		hWnd, (HMENU)ID_STATIC_STDDEV,
+		((LPCREATESTRUCT)(lParam))->hInstance, NULL
+	);
+
+	// 各設定値の表示
+	HWND hGruoplatedata = CreateWindow(
+		_T("BUTTON"),
+		_T("実験条件"),
+		WS_CHILD | WS_VISIBLE | BS_GROUPBOX,
+		rGroupSetting.left, rGroupSetting.top,
+		rGroupSetting.right - rGroupSetting.left, rGroupSetting.bottom - rGroupSetting.top,
+		hWnd, (HMENU)ID_GROUP_SETTING,
+		((LPCREATESTRUCT)(lParam))->hInstance, NULL
+	);
+
+	HWND hBPM = CreateWindow(
+		_T("STATIC"),
+		_T("BPM:"),
+		WS_CHILD | WS_VISIBLE | SS_RIGHT,
+	    rGroupSetting.left + 10, rGroupSetting.top + 35, 65, 25,
+		hWnd, (HMENU)ID_STATIC_BPM,
+		((LPCREATESTRUCT)(lParam))->hInstance, NULL
+	);
+	// 被験者情報の設定
+	HWND hSubject = CreateWindow(
+		_T("BUTTON"),
+		_T("被験者情報"),
+		WS_CHILD | WS_VISIBLE | BS_GROUPBOX,
+		rGroupIni.left, rGroupIni.bottom + 10,
+		rGroupIni2.right - rGroupIni.left, 90,
+		hWnd, (HMENU)ID_GROUP_SUBJECTINFO,
+		((LPCREATESTRUCT)(lParam))->hInstance, NULL
+	);
+	// 年齢
+	HWND hStaticOld = CreateWindow(
+		_T("STATIC"),
+		_T("年齢:"),
+		WS_CHILD | WS_VISIBLE | SS_LEFT,
+		rGroupIni.left + 10, rGroupIni.bottom + 45, 50, 25,
+		hWnd, (HMENU)ID_STATIC_OLD,
+		((LPCREATESTRUCT)(lParam))->hInstance, NULL
+	);
+
+	HWND hEditOld = CreateWindow(
+		_T("EDIT"),
+		_T(""),
+		WS_CHILD | WS_VISIBLE | ES_LEFT | WS_BORDER | ES_NUMBER,
+		rGroupIni.left + 60, rGroupIni.bottom + 45, 70, 25,
+		hWnd,
+		(HMENU)ID_EDIT_OLD,
+		((LPCREATESTRUCT)(lParam))->hInstance,
+		NULL
+	);
+	// 名前
+		// 年齢
+	HWND hStaticName = CreateWindow(
+		_T("STATIC"),
+		_T("名前:"),
+		WS_CHILD | WS_VISIBLE | SS_LEFT,
+		rGroupIni.left + 150, rGroupIni.bottom + 45, 50, 25,
+		hWnd, (HMENU)ID_STATIC_NAME,
+		((LPCREATESTRUCT)(lParam))->hInstance, NULL
+	);
+
+	HWND hEditName = CreateWindow(
+		_T("EDIT"),
+		_T(""),
+		WS_CHILD | WS_VISIBLE | ES_LEFT | WS_BORDER | ES_AUTOHSCROLL,
+		rGroupIni.left + 200, rGroupIni.bottom + 45, rGroupIni2.right - (rGroupIni.left + 210) - 10, 25,
+		hWnd,
+		(HMENU)ID_EDIT_NAME,
+		((LPCREATESTRUCT)(lParam))->hInstance,
+		NULL
+	);
+	/*HWND hBPM_NUM = CreateWindow(
+		_T("STATIC"),
+		_T("未選択"),
+		WS_CHILD | WS_VISIBLE | SS_LEFT,
+		rGroupSetting.left + 100, rGroupSetting.top + 35, 80, 25,
+		hWnd, (HMENU)ID_STATIC_BPMNUM,
+		((LPCREATESTRUCT)(lParam))->hInstance, NULL
+	);*/
+
+	// BPMの選択用コンボボックス
+	HWND hComboBPM = CreateWindow(
+		_T("COMBOBOX"),
+		NULL,
+		WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST,
+		rGroupSetting.left + 100, rGroupSetting.top + 35, 70, 25,
+		hWnd, (HMENU)ID_STATIC_BPMNUM,
+		((LPCREATESTRUCT)(lParam))->hInstance, NULL
+	);
+
+	// 項目追加
+	SendMessage(hComboBPM, CB_ADDSTRING, 0, (LPARAM)_T("60"));
+	SendMessage(hComboBPM, CB_ADDSTRING, 0, (LPARAM)_T("70"));
+	SendMessage(hComboBPM, CB_ADDSTRING, 0, (LPARAM)_T("80"));
+	SendMessage(hComboBPM, CB_ADDSTRING, 0, (LPARAM)_T("85"));
+	SendMessage(hComboBPM, CB_ADDSTRING, 0, (LPARAM)_T("90"));
+	SendMessage(hComboBPM, CB_ADDSTRING, 0, (LPARAM)_T("100"));
+	SendMessage(hComboBPM, CB_ADDSTRING, 0, (LPARAM)_T("110"));
+	// 初期選択項目を"80"に設定
+	SendMessage(hComboBPM, CB_SETCURSEL, 2, 0);
+
+
+	HWND hTrials = CreateWindow(
+		_T("STATIC"),
+		_T("取得回数:"),
+		WS_CHILD | WS_VISIBLE | SS_LEFT,
+		rGroupSetting.left + 10, rGroupSetting.top + 75, 80, 25,
+		hWnd, (HMENU)ID_STATIC_TRIALS,
+		((LPCREATESTRUCT)(lParam))->hInstance, NULL
+	);
+
+	//HWND hTrialsNum = CreateWindow(
+	//	_T("STATIC"),
+	//	_T("30"),
+	//	WS_CHILD | WS_VISIBLE | SS_LEFT,
+	//	rGroupSetting.left + 100, rGroupSetting.top + 75, 30, 25,
+	//	hWnd, (HMENU)ID_STATIC_TRIALS_NUM,
+	//	((LPCREATESTRUCT)(lParam))->hInstance, NULL
+	//);
+
+	// 取得回数の選択用コンボボックス
+	HWND hComboTraialsNum = CreateWindow(
+		_T("COMBOBOX"),
+		NULL,
+		WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST,
+		rGroupSetting.left + 100, rGroupSetting.top + 75, 70, 25,
+		hWnd, (HMENU)ID_STATIC_TRIALS_NUM,
+		((LPCREATESTRUCT)(lParam))->hInstance, NULL
+	);
+	// 項目追加
+	SendMessage(hComboTraialsNum, CB_ADDSTRING, 0, (LPARAM)_T("20"));
+	SendMessage(hComboTraialsNum, CB_ADDSTRING, 0, (LPARAM)_T("30"));
+	SendMessage(hComboTraialsNum, CB_ADDSTRING, 0, (LPARAM)_T("40"));
+	SendMessage(hComboTraialsNum, CB_ADDSTRING, 0, (LPARAM)_T("18"));
+	SendMessage(hComboTraialsNum, CB_ADDSTRING, 0, (LPARAM)_T("34"));
+	SendMessage(hComboTraialsNum, CB_ADDSTRING, 0, (LPARAM)_T("38"));
+
+
+	// 初期選択項目を"34"に設定
+	SendMessage(hComboTraialsNum, CB_SETCURSEL, 4, 0);
+	
+	HWND hBPM_LAB = CreateWindow(
+		_T("STATIC"),
+		_T("実験方法:"),
+		WS_CHILD | WS_VISIBLE | SS_LEFT,
+		rGroupSetting.left + 10, rGroupSetting.top + 110, 80, 25,
+		hWnd, (HMENU)ID_STATIC_LAB,
+		((LPCREATESTRUCT)(lParam))->hInstance, NULL
+	);
+
+	//HWND hBPM_IRREG = CreateWindow(
+	//	_T("STATIC"),
+	//	_T("通常"),
+	//	WS_CHILD | WS_VISIBLE | SS_LEFT,
+	//	rGroupSetting.left + 100, rGroupSetting.top + 110, 60, 25,
+	//	hWnd, (HMENU)ID_STATIC_NORMALORIRREG,
+	//	((LPCREATESTRUCT)(lParam))->hInstance, NULL
+	//);
+	
+	// 実験方法の選択用コンボボックス
+	HWND hComboLAB = CreateWindow(
+		_T("COMBOBOX"),
+		NULL,
+		WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST,
+		rGroupSetting.left + 100, rGroupSetting.top + 110, 70, 25,
+		hWnd, (HMENU)ID_STATIC_NORMALORIRREG,
+		((LPCREATESTRUCT)(lParam))->hInstance, NULL
+	);
+	// 項目追加
+	SendMessage(hComboLAB, CB_ADDSTRING, 0, (LPARAM)_T("通常"));
+	SendMessage(hComboLAB, CB_ADDSTRING, 0, (LPARAM)_T("変則"));
+	// 初期選択項目を"変則"に設定
+	SendMessage(hComboLAB, CB_SETCURSEL, 1, 0);
+
+
+	return true;
+}
+
+//コンボボックス、 iniファイル読み込み
+bool ReadIniFile(HWND hWnd, LPARAM lParam, char* IniFilePath) {
+	char Path[MAX_PATH + 1];
+	char settingpath[MAX_PATH + 1];
+	char lateName[256];
+
+
+	lateName[0] = '\0';
+	settingpath[0] = '\0';
+
+	if (!IniFilePath) {
+		// IniFIlepathがNULLの場合は、exeファイルと同じ場所にあるiniファイルを読み込む
+		if (GetModuleFileName(NULL, Path, MAX_PATH) != 0) {
+			char drive[MAX_PATH + 1], dir[MAX_PATH + 1], fname[MAX_PATH + 1], ext[MAX_PATH + 1];
+			// パス名を分解
+			_splitpath(Path, drive, dir, fname, ext);
+			_stprintf_s(settingpath, MAX_PATH + 1, INIFILEDEFNAME, drive, dir);
+		}
+		else {
+			MessageBox(hWnd, _T("iniファイルが見つかりませんでした。"), _T("警告"), MB_OK | MB_ICONERROR);
+			return false;
+		}
+		// iniファイルの読み込み
+		GetPrivateProfileString(_T("setting"), _T("latedataname"), _T("Error"), lateName, sizeof(lateName), settingpath);
+	}
+	else{
+		// IniFIlePathがNULLでない場合は、IniFilePathで指定されたiniファイルを読み込む
+		GetPrivateProfileString(_T("setting"), _T("latedataname"), _T("Error"), lateName, sizeof(lateName), IniFilePath);
+	}
+	std::stringstream ss, tt;
+	ss << lateName;
+	string s, t;
+
+	// IniFilePathがNULLの場合は、子ウィンドウを作成する
+	if (!IniFilePath) {
+
+		// 遅延時間設定グループボックスの作成
+		HWND hGruoplatedata = CreateWindow(
+			_T("BUTTON"),
+			_T("setting_110.ini"),
+			WS_CHILD | WS_VISIBLE | BS_GROUPBOX,
+			rGroupIni.left, rGroupIni.top, rGroupIni.right - rGroupIni.left, rGroupIni.bottom - rGroupIni.top,
+			hWnd, (HMENU)ID_GROUP_LATEDATA,
+			((LPCREATESTRUCT)(lParam))->hInstance, NULL
+		);
+		//-------------------------------------------------------------------------
+		//*遅延時間設定用グループボックスの作成1（変則var)*/
+		HWND hGruoplatedata_2 = CreateWindow(
+			_T("BUTTON"),
+			_T("setting_110.ini（変則)"),
+			WS_CHILD | WS_VISIBLE | BS_GROUPBOX,
+			rGroupIni2.left, rGroupIni2.top, rGroupIni2.right - rGroupIni2.left, rGroupIni2.bottom - rGroupIni2.top,
+			hWnd, (HMENU)ID_GROUP_LATEDATA_2,
+			((LPCREATESTRUCT)(lParam))->hInstance, NULL
+		);
+
+		HWND hStaticlatedataTiming = CreateWindow(
+			_T("STATIC"),
+			_T("タイミング:"),
+			WS_CHILD | WS_VISIBLE | SS_LEFT,
+			rGroupIni2.left + 10, rGroupIni2.top + 35, 100, 25,
+			hWnd, (HMENU)ID_STATIC_LATEDATATIMING,
+			((LPCREATESTRUCT)(lParam))->hInstance, NULL
+		);
+		HWND hEditLateDataTiming = CreateWindow(
+			_T("EDIT"),
+			_T("4"),
+			WS_CHILD | WS_VISIBLE | ES_LEFT | WS_BORDER | ES_NUMBER,
+			rGroupIni2.left + 115, rGroupIni2.top + 35, 40, 25,
+			hWnd,
+			(HMENU)ID_EDIT_LATEDATA_TIMING,
+			((LPCREATESTRUCT)(lParam))->hInstance,
+			NULL
+		);
+
+		HWND hStaticlatedataCombo_2 = CreateWindow(
+			_T("STATIC"),
+			_T("基本:"),
+			WS_CHILD | WS_VISIBLE | SS_LEFT,
+			rGroupIni2.left + 10, rGroupIni2.top + 85, 50, 25,
+			hWnd, (HMENU)ID_STATIC_LATEDATACOMBO_2,
+			((LPCREATESTRUCT)(lParam))->hInstance, NULL
+		);
+		HWND lateDataCombo_2 = CreateWindow(
+			_T("COMBOBOX"), NULL, WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST,
+			rGroupIni2.left + 65, rGroupIni2.top + 85, 85, 50,
+			hWnd, (HMENU)ID_LATEINI_2,
+			((LPCREATESTRUCT)(lParam))->hInstance, NULL
+		);
+
+		HWND hStaticlatesetting_2 = CreateWindow(
+			_T("STATIC"),
+			_T("詳細: "),
+			WS_CHILD | WS_VISIBLE | SS_LEFT,
+			rGroupIni2.left + 10, rGroupIni2.top + 135, 50, 25,
+			hWnd, (HMENU)ID_STATIC_LATESETTING_2,
+			((LPCREATESTRUCT)(lParam))->hInstance, NULL
+		);
+		HWND hStaticlatedataCombo_MS_2 = CreateWindow(
+			_T("STATIC"),
+			_T("[ms]"),
+			WS_CHILD | WS_VISIBLE | SS_LEFT,
+			rGroupIni2.right - 37, rGroupIni2.top + 141, 35, 25,
+			hWnd, (HMENU)ID_STATIC_COMBO_MS_2,
+			((LPCREATESTRUCT)(lParam))->hInstance, NULL
+		);
+
+		CreateWindow(
+			_T("COMBOBOX"), NULL,
+			WS_CHILD | WS_VISIBLE | CBS_SORT | CBS_DROPDOWN | ES_NUMBER,
+			rGroupIni2.left + 65, rGroupIni2.top + 135, 85, 50,
+			hWnd, (HMENU)ID_LATESETTING_2,
+			((LPCREATESTRUCT)(lParam))->hInstance, NULL);
+
+		/*-----------------------------------------------------------------------------------*/
+		HWND hStaticlatedataCombo = CreateWindow(
+			_T("STATIC"),
+			_T("基本:"),
+			WS_CHILD | WS_VISIBLE | SS_LEFT,
+			rGroupIni.left + 10, rGroupIni.top + 30, 100, 25,
+			hWnd, (HMENU)ID_STATIC_LATEDATACOMBO,
+			((LPCREATESTRUCT)(lParam))->hInstance, NULL
+		);
+
+		HWND lateDataCombo = CreateWindow(
+			_T("COMBOBOX"), NULL, WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST | WS_DISABLED,
+			rGroupIni.left + 10, rGroupIni.top + 55, 130, 50,
+			hWnd, (HMENU)ID_LATEINI,
+			((LPCREATESTRUCT)(lParam))->hInstance, NULL
+		);
+
+	}
+	// コンボボックスに文字列が既に存在する場合は、すべて削除する
+	SendMessage(GetDlgItem(hWnd, ID_LATEINI), CB_RESETCONTENT, 0, 0);
+	SendMessage(GetDlgItem(hWnd, ID_LATEINI_2), CB_RESETCONTENT, 0, 0);
+	SendMessage(GetDlgItem(hWnd, ID_LATESETTING), CB_RESETCONTENT, 0, 0);
+	SendMessage(GetDlgItem(hWnd, ID_LATESETTING_2), CB_RESETCONTENT, 0, 0);
+
+	int i = 0;
+	while (getline(ss, s, ',')){
+		char* cstr = new char[s.size() + 1];
+		char_traits<char>::copy(cstr, s.c_str(), s.size() + 1);
+		// コンボボックスに文字列を挿入
+		SendMessage(GetDlgItem(hWnd, ID_LATEINI), CB_INSERTSTRING, i, (LPARAM)cstr);
+		SendMessage(GetDlgItem(hWnd, ID_LATEINI_2), CB_INSERTSTRING, i, (LPARAM)cstr);
+		i++;
+	}
+	// コンボボックスに先頭の要素をセット
+	SendMessage(GetDlgItem(hWnd, ID_LATEINI), CB_SETCURSEL, 0, 0);
+	SendMessage(GetDlgItem(hWnd, ID_LATEINI_2), CB_SETCURSEL, 0, 0);
+
+	// IniFilePathがNULLの場合は、子ウィンドウを作成する
+	if (!IniFilePath) {
+		// 2個目のコンボボックス
+		HWND hStaticlatesetting = CreateWindow(
+			_T("STATIC"),
+			_T("詳細: "),
+			WS_CHILD | WS_VISIBLE | SS_LEFT,
+			rGroupIni.left + 10, rGroupIni.top + 115, 100, 25,
+			hWnd, (HMENU)ID_STATIC_LATESETTING,
+			((LPCREATESTRUCT)(lParam))->hInstance, NULL
+		);
+		HWND hStaticlatedataCombo_MS = CreateWindow(
+			_T("STATIC"),
+			_T("[ms]"),
+			WS_CHILD | WS_VISIBLE | SS_LEFT,
+			rGroupIni.right - 37, rGroupIni.top + 146, 35, 25,
+			hWnd, (HMENU)ID_STATIC_COMBO_MS,
+			((LPCREATESTRUCT)(lParam))->hInstance, NULL
+		);
+		CreateWindow(
+			_T("COMBOBOX"), NULL,
+			WS_CHILD | WS_VISIBLE | CBS_SORT | CBS_DROPDOWN | ES_NUMBER | WS_DISABLED,
+			rGroupIni.left + 10, rGroupIni.top + 140, 130, 50,
+			hWnd, (HMENU)ID_LATESETTING,
+			((LPCREATESTRUCT)(lParam))->hInstance, NULL);
+
+	}
+
+	// コンボボックスの一覧内の文字列の長さを取得
+	int intTxtLen = SendMessage(GetDlgItem(hWnd, (int)ID_LATEINI), CB_GETLBTEXTLEN, 0, 0);
+	if (intTxtLen != CB_ERR){
+		char* pszBuf = new char[intTxtLen + 1];
+		// コンボボックスの一覧から選択した文字列を取得
+		if (SendMessage(GetDlgItem(hWnd, (int)ID_LATEINI), CB_GETLBTEXT, 0, (LPARAM)pszBuf) != CB_ERR) {
+			char   latedata[256];
+			if (!IniFilePath) {
+				GetPrivateProfileString(pszBuf, _T("data"), _T("Error"), latedata, sizeof(latedata), settingpath);
+			}
+			else{
+				GetPrivateProfileString(pszBuf, _T("data"), _T("Error"), latedata, sizeof(latedata), IniFilePath);
+			}
+			tt.str("");
+			tt.clear(stringstream::goodbit);
+			tt << latedata;
+			i = 0;
+			while (getline(tt, t, ',')) {
+				char* tstr = new char[t.size() + 1];
+				std::char_traits<char>::copy(tstr, t.c_str(), t.size() + 1);
+				SendMessage(GetDlgItem(hWnd, (int)ID_LATESETTING), CB_INSERTSTRING, i, (LPARAM)tstr);
+				SendMessage(GetDlgItem(hWnd, (int)ID_LATESETTING_2), CB_INSERTSTRING, i, (LPARAM)tstr);
+				i++;
+			}
+		}
+
+		delete[] pszBuf;
+	}
+	SendMessage(GetDlgItem(hWnd, (int)ID_LATESETTING), CB_SETCURSEL, 0, 0);
+	SendMessage(GetDlgItem(hWnd, (int)ID_LATESETTING_2), CB_SETCURSEL, 0, 0);
+
+	//コンボボックスで現在選択されている項目のインデックスを取得
+	GetNowComboStr(hWnd, ID_LATESETTING);
+	// NumberOfloopsを計算
+	CalcLateNumberOfloops(hWnd, &NumberOfloops, Num, lenBuffer, FS, inlatency, outlatency);
+
+	return true;
+}
+\end{lstlisting}
+
+\begin{lstlisting}[caption=file.cpp]
+#include<Windows.h>
+#include<tchar.h>
+#include<string>
+#include<Shlwapi.h>
+#include"file.h"
+#include"window.h"
+
+using namespace std;
+
+#pragma comment(lib, "shlwapi.lib")
+
+//////////////////////////////////////////////
+// [名前を付けて保存]ダイアログボックスの作成（CSVファイル）
+//////////////////////////////////////////////
+bool SelectFile(HWND hWnd, char* FileName) {
+
+	static OPENFILENAME ofn;
+	memset(&ofn, 0, sizeof(ofn));
+	memset(FileName, 0, sizeof(char) * MAX_PATH);
+
+	// OPENFILENAME 構造体の初期化
+	ofn.lStructSize = sizeof(ofn);
+	ofn.hwndOwner = hWnd;
+	//ofn.lpstrFilter = _T("Text Files(*.txt)\0*.txt\0All Files(*.*)\0*.*\0\0"); 
+	ofn.lpstrFilter = _T("CSV Files(*.csv)\0*.csv\0All Files(*.*)\0*.*\0\0");
+	ofn.lpstrFile = FileName;
+	ofn.nMaxFile = MAX_PATH;
+	ofn.lpstrDefExt = _T("csv");
+	ofn.Flags = OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT | OFN_PATHMUSTEXIST;
+	ofn.lpstrTitle = _T("名前を付けて保存");
+
+	if (!GetSaveFileName(&ofn)) {
+		MessageBox(hWnd, _T("CSVファイルを作成できていません。"), _T("警告"), MB_OK | MB_ICONERROR);
+		return false;
+	}
+
+	return true;
+}
+
+//////////////////////////////////////////////
+// [名前を付けて保存]ダイアログボックスの作成（INIファイル）
+// //////////////////////////////////////////
+bool SelectIniFile(HWND hWnd, char* Filename) {
+
+	static OPENFILENAME ofn;
+	memset(&ofn, 0, sizeof(ofn));
+	memset(Filename, 0, sizeof(char) * MAX_PATH);
+
+	// OPENFILENAME 構造体の初期化
+	ofn.lStructSize = sizeof(ofn);
+	ofn.hwndOwner = hWnd;
+	ofn.lpstrFilter = _T("INI Files(*.ini)\0*.ini\0All Files(*.*)\0*.*\0\0");
+	ofn.lpstrFile = Filename;
+	ofn.nMaxFile = MAX_PATH;
+	ofn.lpstrDefExt = _T("ini");
+	ofn.Flags = OFN_HIDEREADONLY | OFN_PATHMUSTEXIST;
+	ofn.lpstrTitle = _T("名前を付けて保存");
+
+	if (!GetSaveFileName(&ofn)) {
+		MessageBox(hWnd, _T("INIファイルを作成できていません。"), _T("警告"), MB_OK | MB_ICONERROR);
+		return false;
+	}
+
+	return true;
+}
+
+// ファイルが書き込み可能かをチェック
+bool CheckCanWriteFile(HWND hWnd, char* FileName) {
+	HANDLE hFile = CreateFile(FileName, GENERIC_WRITE, 0, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+	if (hFile == INVALID_HANDLE_VALUE) {
+		return false;
+	} else {
+		CloseHandle(hFile);
+	}
+	return true;
+}
+
+// 出力先ファイルを絶対パスからカレントディレクトリからの相対パスに変換
+bool RelativepathFromAbsolutepath(char* absolutePath, HWND hwnd, int ID, bool flag) {
+
+	// カレントディレクトリの取得
+	char currentDirectory[MAX_PATH];
+	GetCurrentDirectory(MAX_PATH, currentDirectory);
+
+	char relativePath[MAX_PATH];
+	PathRelativePathTo(
+		relativePath,
+		currentDirectory,
+		FILE_ATTRIBUTE_DIRECTORY,
+		absolutePath,
+		FILE_ATTRIBUTE_NORMAL
+	);
+
+	string temp = relativePath;
+	// ".\\"を削除
+	temp.erase(temp.begin() + 0, temp.begin() + 2);
+	if (flag) {
+		temp += _T(" (変則)");
+	}
+	SetWindowText(GetDlgItem(hwnd, ID), temp.c_str());
+	return true;
+}
+\end{lstlisting}
+
+\begin{lstlisting}[caption=main.h]
+
+\end{lstlisting}
+
+\begin{lstlisting}[caption=window.h]
+\end{lstlisting}
+
+\begin{lstlisting}[caption=file.h]
+\end{lstlisting}
+
+\begin{lstlisting}[caption=resource.h]
+//{{NO_DEPENDENCIES}}
+// Microsoft Visual C++ で生成されたインクルード ファイル。
+// Resource.rc で使用
+//
+#define IDR_MENU1                       101
+#define IDR_ACCELERATOR1                102
+#define IDD_MYDIALOG                    103
+#define IDC_EDIT1                       104
+#define IDC_EDIT2                       105
+#define ID_ASIOINFORMATION              40001
+#define ID_WAVEFILEINFORMATION          40002
+#define ID_EXIT                         40003
+#define ID_40006                        40006
+#define ID_40007                        40007
+#define ID_40008                        40008
+#define ID_40009                        40009
+#define ID_40010                        40010
+#define ID_40011                        40011
+#define ID_40012                        40012
+#define ID_40013                        40013
+#define ID_40014                        40014
+#define ID_40015                        40015
+#define ID_RESTART                      40016
+#define ID_40017                        40017
+#define ID_BPM40018                     40018
+#define ID_BPM40019                     40019
+#define ID_BPM40020                     40020
+#define ID_BPM40021                     40021
+#define ID_BPM40022                     40022
+#define ID_BPM40023                     40023
+#define ID_BPM60                        40024
+#define ID_BPM70                        40025
+#define ID_BPM80                        40026
+#define ID_BPM90                        40027
+#define ID_BPM100                       40028
+#define ID_BPM110                       40029
+#define ID_40030                        40030
+#define ID_40031                        40031
+#define ID_40032                        40032
+#define ID_40033                        40033
+#define ID_DELETE_ARRAY                 40034
+#define ID_40035                        40035
+#define ID_NORMAL                       40036
+#define ID_IRREG                        40037
+#define ID_MENU_IRREG                   40038
+#define ID_MENU_NORMAL                  40039
+#define ID_40040                        40040
+#define ID_40041                        40041
+#define ID_40042                        40042
+#define ID_40043                        40043
+#define ID_MENU_NUM20                   40044
+#define ID_MENU_NUM30                   40045
+#define ID_MENU_NUM40                   40046
+#define ID_40047                        40047
+#define ID_MENU_CSV_OUTPUT              40048
+#define ID_40049                        40049
+#define ID_MENU_RESTART                 40050
+#define ID_MENU_INI_FILE                40051
+
+// Next default values for new objects
+// 
+#ifdef APSTUDIO_INVOKED
+#ifndef APSTUDIO_READONLY_SYMBOLS
+#define _APS_NEXT_RESOURCE_VALUE        107
+#define _APS_NEXT_COMMAND_VALUE         40052
+#define _APS_NEXT_CONTROL_VALUE         1001
+#define _APS_NEXT_SYMED_VALUE           101
+#endif
+#endif
+
+\end{lstlisting}
+
+\begin{lstlisting}[caption=resource.rc]
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "winres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// 日本語 (日本) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
+LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
+#pragma code_page(932)
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+		"resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+		"#include ""winres.h""\r\n"
+		"\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+		"\r\n"
+		"\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU1 MENU
+BEGIN
+		MENUITEM "ファイル(F)",                     ID_MENU_CSV_OUTPUT
+		MENUITEM "やり直し(E)",                     ID_MENU_RESTART
+		MENUITEM "INIファイル",                     ID_MENU_INI_FILE
+		POPUP "Setting(S)", INACTIVE
+		BEGIN
+				POPUP "BPMの選択"
+				BEGIN
+						MENUITEM "60",                          ID_BPM60
+						MENUITEM "70",                          ID_BPM70
+						MENUITEM "80",                          ID_BPM80
+						MENUITEM "90",                          ID_BPM90
+						MENUITEM "100",                         ID_BPM100
+						MENUITEM "110",                         ID_BPM110
+				END
+				POPUP "実験方法"
+				BEGIN
+						MENUITEM "通常",                          ID_MENU_NORMAL
+						MENUITEM "変則",                          ID_MENU_IRREG
+				END
+				POPUP "試行回数"
+				BEGIN
+						MENUITEM "20回",                         ID_MENU_NUM20
+						MENUITEM "30回",                         ID_MENU_NUM30
+						MENUITEM "40回",                         ID_MENU_NUM40
+				END
+		END
+		MENUITEM "ASIO Information",            ID_ASIOINFORMATION
+		MENUITEM "Wave File Information",       ID_WAVEFILEINFORMATION
+		MENUITEM "Exit (Ctrl+X)",               ID_EXIT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_ACCELERATOR1 ACCELERATORS
+BEGIN
+		"X",            ID_EXIT,                VIRTKEY, CONTROL, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_MYDIALOG DIALOGEX 0, 0, 311, 188
+STYLE DS_SETFONT | DS_MODALFRAME | DS_3DLOOK | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dialog"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+		DEFPUSHBUTTON   "OK",IDOK,199,167,50,14,WS_DISABLED
+		PUSHBUTTON      "キャンセル",IDCANCEL,254,167,50,14
+		LTEXT           "遅延のタイミング:",IDC_STATIC,17,42,80,8
+		EDITTEXT        IDC_EDIT1,96,42,100,14,ES_AUTOHSCROLL | ES_NUMBER
+		LTEXT           "遅延時間[ms]:",IDC_STATIC,17,87,80,8
+		EDITTEXT        IDC_EDIT2,96,87,100,14,ES_AUTOHSCROLL | ES_NUMBER
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+		IDD_MYDIALOG, DIALOG
+		BEGIN
+				LEFTMARGIN, 7
+				RIGHTMARGIN, 304
+				TOPMARGIN, 7
+				BOTTOMMARGIN, 181
+		END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_MYDIALOG AFX_DIALOG_LAYOUT
+BEGIN
+		0
+END
+
+#endif    // 日本語 (日本) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+	
+\end{lstlisting}

@@ -1,44 +1,42 @@
 % 実行方法（以下をコマンドプロンプトで実行）
-% >> platex thesis.tex
+% >> platex thesis.tex もしくは uplatex thesis.tex
 % >> dvipdfmx thesis.dvi
 %
 
 \documentclass[a4paper,12pt]{jsreport}
 
-\usepackage{thesis}%				論文の体裁			(必ず付ける)
-\usepackage[dvipdfmx]{graphicx}	%	図を取り込む		(推奨)
-%\usepackage{newtxtext}%				欧文フォントを変える(お好み)
-\usepackage{enumitem}
-\usepackage{caption} % caption パッケージの追加
-\captionsetup[figure]{labelsep=colon} % 図のキャプションの形式を "図6.1:" に設定
-% \usepackage[utf8]{inputenc} % UTF-8エンコーディングを使用
-\usepackage{color} % いろいろな色を使えるようにする
-\usepackage{listings}
-\usepackage{fancyvrb}
-% % \usepackage{jlisting} を削除
+\usepackage{thesis}                   % 論文の体裁			   (必ず付ける)
+\usepackage[dvipdfmx]{graphicx}	      %	図を取り込む		   (推奨)
+%\usepackage{newtxtext}               %	欧文フォントを変える(お好み)
+\usepackage{enumitem}                 %	箇条書きを変更する	
+\usepackage{caption}                  % caption パッケージの追加
+\captionsetup[figure]{labelsep=} % 図のキャプションの形式を "図6.1(スペース)" に設定
+\captionsetup[table]{labelsep=space}  % 表のキャプションの形式を "表6.1(スペース)" に設定
+% \usepackage[utf8]{inputenc}         % UTF-8エンコーディングを使用
+\usepackage{color}                    % いろいろな色を使えるようにする
+\usepackage{url}                      % URLを使えるようにする
 
-% \usepackage{url} % URLを使えるようにする
+%%%%% 以下はソースコードを表示するための設定 %%%%%
+% \usepackage{listings}
+\usepackage{plistings}      % listingsパッケージをpLaTeX上で用いる際の日本語対応処理を強化するためのパッケージ.（plistings.sty）を同一ディレクトリに配置．
 \lstset{
-  language=[ISO]C++,       % 言語の指定
-  language={C++},
-  basicstyle={\ttfamily},  % 等幅フォント
-  commentstyle={\rmfamily}, % コメントのスタイル
-  classoffset=1,          % 日本語対応（削除）
-  morecomment=[l]{//},     % コメントの定義
-  % classoffset=0,           % 削除
-  frame={tb},
-  breaklines=true,
-  numbers=none,
-  xrightmargin=0zw,
-  xleftmargin=0zw,
-  keepspaces=true,
-  columns=[l]{fullflexible},
-  lineskip=-0.5ex
+  language={C++},           % 言語の指定
+  basicstyle={\ttfamily},   % 等幅フォント
+  commentstyle={\ttfamily}, % コメントのスタイル
+  % classoffset=1,          % 日本語対応（削除）
+  morecomment=[l]{//},      % コメントの定義
+  % classoffset=0,          % 削除
+  frame={tb},               % 枠線
+  breaklines=true,          % 行が長くなった場合の改行
+  numbers=none,             % 行番号の有無
+  xrightmargin=0zw,         % 右の余白
+  xleftmargin=0zw,          % 左の余白
+  keepspaces=true,          % スペースの有無
+  columns=[l]{fullflexible},% 文字の間隔の調整
+  lineskip=-0.5ex           % 行間の調整
 }
-
-\renewcommand{\lstlistingname}{ソースコード}
-
-%ここまでソースコードの表示に関する設定
+\renewcommand{\lstlistingname}{ソースコード} % キャプション名を変更
+%%%%% ここまでソースコードの表示に関する設定 %%%%%
 
 
 %著者の情報
@@ -96,7 +94,7 @@
 
 \end{thebibliography}
 \begin{thepublished}{99}
-	\bibitem{cf:c}山下一樹，安田和生，丹治寛樹，村上隆啓，``若年者と高齢者の遅延聴覚フィードバックの身体運動への影響の比較'' 2023年度電子情報通信学会東京支部学生会, Mar.2024.
+	\bibitem{cf:yamashita}山下一樹，安田和生，丹治寛樹，村上隆啓，``若年者と高齢者の遅延聴覚フィードバックの身体運動への影響の比較'' 2023年度電子情報通信学会東京支部学生会, Mar.2024.
 	
 \end{thepublished}
 \newpage
@@ -105,7 +103,6 @@
 
 \appendix
 \input{furoku-Tex/furoku-A.tex}
-% \input{furoku-Tex/furoku-r.tex}
 \input{furoku-Tex/furoku-B.tex}
 \input{furoku-Tex/furoku-C.tex}
 \input{furoku-Tex/furoku-D.tex}
