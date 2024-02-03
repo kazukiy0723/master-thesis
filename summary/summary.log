@@ -1,4 +1,4 @@
-This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.sjis) (TeX Live 2023) (preloaded format=platex 2023.10.26)  3 FEB 2024 15:03
+This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.sjis) (TeX Live 2023) (preloaded format=platex 2023.10.26)  3 FEB 2024 16:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -191,7 +191,10 @@ File: figures/Honbann/Comparison_young_old/110_MSE-MedSE_normalized.pdf Graphic
 File: figures/Honbann/Comparison_young_old/40_MSE-MedSE_normalized.pdf Graphic 
 file (type pdf)
 <figures/Honbann/Comparison_young_old/40_MSE-MedSE_normalized.pdf>
-) (./section6.tex [2])
+) (./section6.tex [2]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+) [3]
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <10> not available
 (Font)              Font shape `JT1/gt/m/n' tried instead on input line 23.
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
@@ -208,7 +211,8 @@ LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
 (Font)              scaled to size 6.72699pt on input line 23.
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
 (Font)              scaled to size 6.72699pt on input line 23.
- [3] [4
+
+[4
 
 ] (./summary.aux)
  ***********
@@ -216,18 +220,14 @@ pLaTeX2e <2023-02-14>+1, based on
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-10-23>
  ***********
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
  ) 
 Here is how much of TeX's memory you used:
  2907 strings out of 476504
  52822 string characters out of 5801731
- 1927881 words of memory out of 5000000
+ 1928881 words of memory out of 5000000
  24874 multiletter control sequences out of 15000+600000
  566891 words of font info for 79 fonts, out of 8000000 for 9000
  41 hyphenation exceptions out of 8191
- 57i,6n,65p,247b,369s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 57i,6n,65p,247b,366s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on summary.dvi (4 pages, 19416 bytes).
+Output written on summary.dvi (4 pages, 20012 bytes).

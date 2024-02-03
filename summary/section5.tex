@@ -8,9 +8,9 @@
 ボタン押下の間隔は毎分80回，ボタン押下回数は34回とした．
 遅延時間の提示順序は，最初に10[ms]を提示し，次に10[ms]以外の中からランダムに選択し提示する．
 その後，残る遅延時間に10[ms]を加えたものをランダムに提示する．
-得られた結果は，遅延時間に応じて各被験者の観測値の四分位範囲(IQR)と第一・第三四分位数を算出し，
-外れ値を除外するために第一四分位数-1.5×IQR以下と第三四分位数+1.5×IQR以上の値を排除して，
-4章で述べた評価方法により分析した．
+得られた結果は，遅延時間に応じて各被験者の観測値の四分位範囲(Interquartile Range, IQR)と第一・第三四分位数を算出し，
+外れ値を除外するためにIQRを1.5倍し，この値を第一四分位数から減算した値より小さい値と第三四分位数に加算した値より大きい値を除外した．
+3章で述べた評価方法により分析した．
 \subsection{調査結果}
 図\ref{fig:Normalized-Var_40ms_SaSbSc}および図\ref{fig:Normalized_40ms_MSE_MedSE}に示した
 10[ms]から40[ms]の短い遅延時間帯における観察結果から，若年者の反応は遅延時間の増加に伴い緩やかに増加する傾向にあるが，
@@ -27,13 +27,13 @@
 \begin{figure}[tbp]
   \centering
   \includegraphics[scale=0.3]{figures/Honbann/Comparison_young_old/110_var_normalized.pdf}
-  \caption{実験Aにおける若年者と高齢者の正規化後の評価値の比較}
+  \caption{実験Aにおける若年者と高齢者の正規化後の分散の比較}
   \label{fig:Normalized-Var_110ms_SaSbSc}
 \end{figure}
 \begin{figure}[tbp]
   \centering
   \includegraphics[scale=0.3]{figures/Honbann/Comparison_young_old/40_var_normalized.pdf}
-  \caption{実験Bにおける若年者と高齢者の正規化後の評価値の比較}
+  \caption{実験Bにおける若年者と高齢者の正規化後の分散の比較}
   \label{fig:Normalized-Var_40ms_SaSbSc}
 \end{figure}
 \begin{figure}[tbp]
