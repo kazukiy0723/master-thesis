@@ -6,10 +6,12 @@
 % \captionsetup[table]{labelsep=space}  % 表のキャプションの形式を "表6.1(スペース)" に設定
 \usepackage{color}                    % いろいろな色を使えるようにする
 \usepackage{url}                      % URLを使えるようにする
+\usepackage[left=20mm,right=20mm]{geometry}
+
 % \usepackage{plistings}      % listingsパッケージをpLaTeX上で用いる際の日本語対応処理を強化するためのパッケージ.（plistings.sty）を同一ディレクトリに配置．
 
-\title{音響信号への遅延生成アプリケーション} % 文書のタイトル
-\author{知能信号処理研究室 修士2年 山下一樹} % 著者名
+\title{音響信号への遅延生成アプリケーション Readme} % 文書のタイトル
+\author{知能信号処理研究室\\\\山下一樹} % 著者名
 % 所属
 \date{\today} % 日付
 
@@ -54,6 +56,13 @@
 \end{enumerate}
 
 \section{INIファイルの設定}
+アプリケーションがiniファイルに記述された遅延時間を読み込むために、exeファイルと同じフォルダ内に、
+「setting」という名前のフォルダを作成し、その中に遅延時間を記述したiniファイルを保存する必要があります。
+setting\_110.iniファイルに遅延時間を設定して置くことができます。iniファイルはテキストエディタで編集可能です。
+以下にiniファイルの例を示します。
+まず、「setting」セクション内の「latedataname」キーに遅延時間のグループ名を設定します。
+次に、設定した遅延時間のグループ名のセクションを作成し、「data」キーにカンマ区切りで遅延時間を設定します。
+これを行うとアプリケーションで遅延時間を読み込むことができます。
 
 \section{改善点}
 \begin{enumerate}
