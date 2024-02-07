@@ -1,4 +1,4 @@
-This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.sjis) (TeX Live 2023) (preloaded format=platex 2023.10.26)  7 FEB 2024 13:34
+This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.sjis) (TeX Live 2023) (preloaded format=platex 2023.10.26)  7 FEB 2024 20:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -461,75 +461,78 @@ LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
 (Font)              scaled to size 11.53198pt on input line 36.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
 (Font)              scaled to size 11.53198pt on input line 36.
- [12] [13] [14]) (./chapter4.tex [15]
+ [12] [13] [14]) (./chapter4.tex [15] [16]
 第4章
-[16
+[17
 
-] [17]
+] [18]
 File: figures/system_button_click.pdf Graphic file (type pdf)
 <figures/system_button_click.pdf>
- [18]
+ [19] [20]
 File: figures/Apprication/App_kyakkann.pdf Graphic file (type pdf)
 <figures/Apprication/App_kyakkann.pdf>
- [19] [20] [21] [22]
+ [21] [22] [23]
 File: figures/System/Delay_theory.pdf Graphic file (type pdf)
 <figures/System/Delay_theory.pdf>
- [23]
-LaTeX Font Info:    Trying to load font information for OML+cmr on input line 1
-42.
 
-(c:/texlive/2023/texmf-dist/tex/latex/base/omlcmr.fd
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[24]
+LaTeX Font Info:    Trying to load font information for OML+cmr on input line 1
+43.
+ (c:/texlive/2023/texmf-dist/tex/latex/base/omlcmr.fd
 File: omlcmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 142.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 143.
 File: figures/DelayCheck/DelayCheck_EX.pdf Graphic file (type pdf)
 <figures/DelayCheck/DelayCheck_EX.pdf>
- [24]
+ [25] [26]
 File: figures/DelayCheck/SuperFamicom_delayCheck.pdf Graphic file (type pdf)
 <figures/DelayCheck/SuperFamicom_delayCheck.pdf>
 
-Overfull \hbox (9.6128pt too wide) in paragraph at lines 184--196
+Overfull \hbox (9.6128pt too wide) in paragraph at lines 185--197
  [][][][] 
  []
 
-[25]) (./chapter5.tex [26] [27]
+[27]) (./chapter5.tex [28] [29]
 第5章
-[28
+[30
 
-] [29] [30]) (./chapter6.tex [31]
+] [31] [32]) (./chapter6.tex [33]
 第6章
 File: figures/Yobi/Var/BPM-Change-Var.pdf Graphic file (type pdf)
 <figures/Yobi/Var/BPM-Change-Var.pdf>
-[32
+[34
 
 ]
 File: figures/Yobi/Var/NumberOfSamples_varSaSc.pdf Graphic file (type pdf)
 <figures/Yobi/Var/NumberOfSamples_varSaSc.pdf>
 File: figures/Yobi/Var/NumberOfSamples_varSb.pdf Graphic file (type pdf)
 <figures/Yobi/Var/NumberOfSamples_varSb.pdf>
- [33] [34] [35] [36]
+ [35] [36] [37] [38]
 File: figures/Yobi/Var/Var-Normal.pdf Graphic file (type pdf)
 <figures/Yobi/Var/Var-Normal.pdf>
 File: figures/Yobi/Var/Var-Yobi-Unique.pdf Graphic file (type pdf)
 <figures/Yobi/Var/Var-Yobi-Unique.pdf>
 File: figures/Yobi/Var/Yobi-MSE-MedSE.pdf Graphic file (type pdf)
 <figures/Yobi/Var/Yobi-MSE-MedSE.pdf>
- [37] [38] [39]) (./chapter7.tex [40]
+ [39] [40] [41]) (./chapter7.tex [42]
 第7章
-[41
+[43
 
-] [42] [43]
+] [44] [45]
 File: figures/Honbann/BOXPLOT/young_110_boxplot.pdf Graphic file (type pdf)
 <figures/Honbann/BOXPLOT/young_110_boxplot.pdf>
- [44]
+ [46]
 File: figures/Honbann/BOXPLOT/young_40_boxplot.pdf Graphic file (type pdf)
 <figures/Honbann/BOXPLOT/young_40_boxplot.pdf>
 File: figures/Honbann/BOXPLOT/old_110_boxplot.pdf Graphic file (type pdf)
 <figures/Honbann/BOXPLOT/old_110_boxplot.pdf>
 File: figures/Honbann/BOXPLOT/old_40_boxplot.pdf Graphic file (type pdf)
 <figures/Honbann/BOXPLOT/old_40_boxplot.pdf>
- [45] [46] [47] [48]
+ [47] [48] [49] [50]
 File: figures/Honbann/Comparison_young_old/110_var_SaSb.pdf Graphic file (type 
 pdf)
 <figures/Honbann/Comparison_young_old/110_var_SaSb.pdf>
@@ -560,16 +563,16 @@ pdf)
 File: figures/Honbann/Comparison_young_old/40_MSE-MedSE_normalized.pdf Graphic 
 file (type pdf)
 <figures/Honbann/Comparison_young_old/40_MSE-MedSE_normalized.pdf>
-) (./chapter8.tex [49] [50] [51]
-[52] [53] [54]
+) (./chapter8.tex [51] [52] [53]
+[54] [55] [56]
 第8章
-[55
+[57
 
-]) [56] [57] [58
+]) [58] [59] [60
 
-] [59] [60
+] [61] [62
 
-] (./acknowledgement.tex) [61
+] (./acknowledgement.tex) [63
 
 ] (./thesis.aux)
  ***********
@@ -578,7 +581,7 @@ LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-10-23>
  ***********
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: E44F2870D146395A5B9A5D8EDDB125F0;6478.
+(rerunfilecheck)             Checksum: CBB162A9D86FC380B9A98CB6E6AF6BC4;6492.
  ) 
 Here is how much of TeX's memory you used:
  12043 strings out of 476504
@@ -587,6 +590,6 @@ Here is how much of TeX's memory you used:
  33815 multiletter control sequences out of 15000+600000
  569295 words of font info for 92 fonts, out of 8000000 for 9000
  41 hyphenation exceptions out of 8191
- 73i,15n,79p,738b,623s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 73i,15n,79p,738b,637s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on thesis.dvi (62 pages, 187980 bytes).
+Output written on thesis.dvi (64 pages, 190240 bytes).
