@@ -107,14 +107,14 @@
   \item 第3四分位数から第1四分位数を引いた値である四分位範囲(Interquartile Range, IQR)を計算する．
   \item (3)で求めたIQRを1.5倍し，この値を第三四分位数に加算および第一四分位数から減算した結果を上下の閾値と定める．
   \item 閾値内の最も遠いデータまで箱からひげを引く．
-  \item 各データと閾値を比較し，4で求めた閾値の外にある値を全て外れ値とし，点で表す．
+  \item 各データと閾値を比較し，(4)で求めた閾値の外にある値を全て外れ値とし，点で表す．
 \end{enumerate}
 これにより，データの基本的な統計的特徴を簡潔に表現し，後続の分析におけるデータの解釈を支援する．
 図\ref{fig:110ms_Distribution_of_observations}，図\ref{fig:40ms_Distribution_of_observations}，
 図\ref{fig:110ms_Distribution_of_observations_by_old}および図\ref{fig:40ms_Distribution_of_observations_by_old}に遅延時間ごとのボタンの押下時間間隔のデータの分布を示す．
 これらの図より，それぞれの遅延時間でのボタンの押下時間間隔のデータには，一定数の外れ値が存在することがわかる．
 したがって，本研究では外れ値を除外したデータを用いて分析を行う．
-この方法により，これから行う分析において，外れ値の影響を排除し，適切な評価を行うためのデータを用いることができる．
+この方法により，これから行う分析において，外れ値の影響を排除し，データの適切な評価を行うことができる．
 
 \begin{figure}[tbp]
   \centering
@@ -144,14 +144,14 @@
 % 結果の考察
 \subsection{遅延時間と評価指標の関係}
 本節では，7.3.1項で説明した方法によりデータの外れ値を除去した後の遅延聴覚フィードバックが身体運動に与える影響の調査結果を標本全体の分散，
-遅延直前後の押下間隔の差の二乗の平均値（Mean Squared Error, MSE），遅延直前後の押下間隔の差の中央値（Median Squared Error, MedSE）
+遅延直前および直後の押下時間間隔の差の二乗の平均値（Mean Squared Error, MSE），遅延直前および直後の押下間隔の差の中央値（Median Squared Error, MedSE）
 の3つの評価指標を用いて示す．
 遅延時間と評価値の関係が若年者と高齢者で異なるかどうかを検証するために，若年者と高齢者それぞれの結果を同一グラフ上に表示し，比較する．
 図\ref{fig:Var_110ms_Sa_Sb}，図\ref{fig:Var_110ms_Sc}に実験Aにおける遅延時間と分散の関係，
 図\ref{fig:Var_40ms_Sa_Sb}，図\ref{fig:Var_40ms_Sc}に実験Bにおける遅延時間と分散の関係，
-図\ref{fig:Normalized-Var_110ms_SaSbSc}，図\ref{fig:Normalized-Var_40ms_SaSbSc}に実験A，実験Bにおける遅延時間と分散の関係において，10ms時の評価値を基準に正規化した場合の結果を示す．
+図\ref{fig:Normalized-Var_110ms_SaSbSc}，図\ref{fig:Normalized-Var_40ms_SaSbSc}に実験A，実験Bにおける遅延時間と分散の関係において，遅延時間が10[ms]時の評価値を基準に正規化した場合の結果を示す．
 図\ref{fig:110ms_MSE_MedSE}，図\ref{fig:Normalized_110ms_MSE_MedSE}にMSEおよびMedSEの結果を，
-図\ref{fig:40ms_MSE_MedSE}，図\ref{fig:Normalized_40ms_MSE_MedSE}にMSEおよびMedSEの結果を10ms時の評価値で正規化した場合の結果を示す．
+図\ref{fig:40ms_MSE_MedSE}，図\ref{fig:Normalized_40ms_MSE_MedSE}にMSEおよびMedSEの結果を遅延時間が10[ms]時の評価値で正規化した場合の結果を示す．
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 実験A
@@ -204,27 +204,27 @@
 \begin{figure}[tbp]
   \centering
   \includegraphics[scale=0.5]{figures/Honbann/Comparison_young_old/110_var_SaSb.pdf}
-  \caption{実験Aにおける若年者と高齢者の分散の比較}
+  \caption{実験Aにおける若年者と高齢者の分散の比較1}
   \label{fig:Var_110ms_Sa_Sb}
 \end{figure}
 \begin{figure}[tbp]
   \centering
   \includegraphics[scale=0.5]{figures/Honbann/Comparison_young_old/110_var_Sc.pdf}
-  \caption{実験Aにおける若年者と高齢者の分散の比較}
+  \caption{実験Aにおける若年者と高齢者の分散の比較2}
   \label{fig:Var_110ms_Sc}
 \end{figure}
 
 \begin{figure}[tbp]
   \centering
   \includegraphics[scale=0.5]{figures/Honbann/Comparison_young_old/40_var_SaSb.pdf}
-  \caption{実験Bにおける若年者と高齢者の分散の比較}
+  \caption{実験Bにおける若年者と高齢者の分散の比較1}
   \label{fig:Var_40ms_Sa_Sb}
 \end{figure}
 
 \begin{figure}[tbp]
   \centering
   \includegraphics[scale=0.5]{figures/Honbann/Comparison_young_old/40_var_Sc.pdf}
-  \caption{実験Bにおける若年者と高齢者の分散の比較}
+  \caption{実験Bにおける若年者と高齢者の分散の比較2}
   \label{fig:Var_40ms_Sc}
 \end{figure}
 

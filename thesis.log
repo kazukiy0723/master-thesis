@@ -1,4 +1,4 @@
-This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.sjis) (TeX Live 2023) (preloaded format=platex 2023.10.26)  7 FEB 2024 12:29
+This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.sjis) (TeX Live 2023) (preloaded format=platex 2023.10.26)  7 FEB 2024 13:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -565,11 +565,11 @@ file (type pdf)
 第8章
 [55
 
-]) [56] [57
+]) [56] [57] [58
 
-] [58] [59
+] [59] [60
 
-] (./acknowledgement.tex) [60
+] (./acknowledgement.tex) [61
 
 ] (./thesis.aux)
  ***********
@@ -577,18 +577,8 @@ pLaTeX2e <2023-02-14>+1, based on
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-10-23>
  ***********
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-
-Package rerunfilecheck Warning: File `thesis.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `thesis.out':
-(rerunfilecheck)             Before: FF7E6B56B25B203120463E36E21ACBA5;6464
-(rerunfilecheck)             After:  AE3EF3E160652358B9A2C54925187204;6457.
+Package rerunfilecheck Info: File `thesis.out' has not changed.
+(rerunfilecheck)             Checksum: E44F2870D146395A5B9A5D8EDDB125F0;6478.
  ) 
 Here is how much of TeX's memory you used:
  12043 strings out of 476504
@@ -599,4 +589,4 @@ Here is how much of TeX's memory you used:
  41 hyphenation exceptions out of 8191
  73i,15n,79p,738b,623s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on thesis.dvi (61 pages, 187120 bytes).
+Output written on thesis.dvi (62 pages, 187980 bytes).
