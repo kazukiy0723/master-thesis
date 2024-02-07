@@ -10,8 +10,8 @@
 %\usepackage{newtxtext}               %	欧文フォントを変える(お好み)
 \usepackage{enumitem}                 %	箇条書きを変更する	
 \usepackage{caption}                  % caption パッケージの追加
-\captionsetup[figure]{labelsep=} % 図のキャプションの形式を "図6.1(スペース)" に設定
-\captionsetup[table]{labelsep=space}  % 表のキャプションの形式を "表6.1(スペース)" に設定
+\captionsetup[figure]{labelsep=quad}      % 図のキャプションの形式を "図6.1(スペース)" に設定
+\captionsetup[table]{labelsep=quad}  % 表のキャプションの形式を "表6.1(スペース)" に設定
 % \usepackage[utf8]{inputenc}         % UTF-8エンコーディングを使用
 \usepackage{color}                    % いろいろな色を使えるようにする
 \usepackage{url}                      % URLを使えるようにする
@@ -48,7 +48,7 @@
 \course{博士前期課程}% 学部生は\course{}にしてください
 \academicyear{2023}%年度 (表紙に「\academicyear年度\degree学位請求論文」と表示されます)
 \degree{修士}% 学部生は\degree{学士}にしてください
-\ymd{2024}{2}{9}%年月日
+\ymd{2024}{2}{8}%年月日
 \author{山下\hspace{1zw}一樹}% 著者
 \supervisor{村上隆啓}% 指導教員
 \labolatory{知能信号処理研究室}% 所属研究室
@@ -78,23 +78,23 @@
 
 %参考文献
 \begin{thebibliography}{99}
-	\bibitem{EaringAids_20}細井裕司，``補聴器この20年間の進歩'' 日本耳鼻咽喉科科学会会報, 114巻, 12号, pp.905-911, Jan.2015.
-  \bibitem{EaringAids-2}神田幸彦，``補聴器の進歩と聴覚医学「補聴器の歴史と変遷-最新補聴器の紹介-」'' Audiology Japan, 60巻, 2号, pp. 121-128, Apr.2017.
-  \bibitem{Manzokudo}西山崇経，新田清一，鈴木大介，岡崎宏，坂本耕二，中村伸太郎，上野恵，小川郁，``補聴器装用者の満足度に関わる要因の検討'' Audiology Japan, 57巻，3号，pp.189-194, Jun.2014.
-  \bibitem{DAF}河原英紀，``聴覚フィードバックの発話への影響:ヒトは自分の話声を聞いているのか？'' 日本音響学会誌, 59巻, 11号, pp.670-675, Nov.2003.
-  \bibitem{DelayTime-ninnchi}硲田猛真，中村陽裕，福本儀智，長谷川賢作，北野博也，``ディレイタイムの認知閾値'' Ausiology Japan, 46巻, 5号, pp.465-467, Sep.2007.
-  \bibitem{shigematu}重松颯人，丹治寛樹，村上隆啓，松本直樹，``遅延聴覚フィードバックが身体運動に与える影響の客観的な評価方法の検討'' 日本音響学会聴覚研究会資料, pp.499-504, Nov.2019.
-  \bibitem{kayama}香山実結花，山下一樹，丹治寛樹，村上隆啓，``若年者と高齢者の聴覚フィードバックにおける遅延時間の許容量の統計的分析による比較'' 2022年度電子情報通信学会東京支部学生会研究発表会, pp.113, Mar.2023.
-  \bibitem{shigematu-toukyoushibu}重松颯人，村上隆啓，``高齢者の聴覚における遅延時間の許容量の評価'' 平成29年度電子情報通信学会東京支部学生会研究発表会講演論文集，pp.143, Mar.2018.
-  \bibitem{Syuuronn-shigematu}重松颯人，``補聴器を想定した音声おける入出力の遅延時間の許容範囲についての検討''，明治大学理工学部電気電子生命学科知能信号処理研究室，2019年度修士学位請求論文.
-  \bibitem{Win32API-reference}Microsoft，``Win32 API のプログラミング リファレンス'' \url{https://docs.microsoft.com/ja-jp/windows/win32/api/}, 参照2024年1月24日.
-  \bibitem{timing-music}P. Q. Pfordresher and C. Palmer, ``Effects of delayed auditory feedback on timing of music performance'' Psychological Research, Vol. 16, pp.71-79, Jan.2002.
-  \bibitem{shimada-DAF}樋田浩一，上野佳奈子，嶋田総太郎，``身体運動に伴う遅延聴覚フィードバックの知覚順応''，日本認知科学会大会，pp.493-497，Dec.2013．
-  \bibitem{Soturonn-takahashi}高橋浩貴，村上隆啓，``補聴器における遅延時間の許容量の評価'' 平成26年度電子情報通信学会東京支部学生会研究発表会講演論文集, p168, pp.71--79, Sep.2015.
+	\bibitem{EaringAids_20}細井裕司，``補聴器この20年間の進歩''，日本耳鼻咽喉科科学会会報, 114巻, 12号, pp.905-911, Jan. 2015.
+  \bibitem{EaringAids-2}神田幸彦，``補聴器の進歩と聴覚医学「補聴器の歴史と変遷-最新補聴器の紹介-」''，Audiology Japan, 60巻, 2号, pp. 121-128, Apr. 2017.
+  \bibitem{Manzokudo}西山崇経，新田清一，鈴木大介，岡崎宏，坂本耕二，中村伸太郎，上野恵，小川郁，``補聴器装用者の満足度に関わる要因の検討''，Audiology Japan, 57巻，3号，pp.189-194, Jun. 2014.
+  \bibitem{DAF}河原英紀，``聴覚フィードバックの発話への影響:ヒトは自分の話声を聞いているのか？''，日本音響学会誌, 59巻, 11号, pp.670-675, Nov. 2003.
+  \bibitem{DelayTime-ninnchi}硲田猛真，中村陽裕，福本儀智，長谷川賢作，北野博也，``ディレイタイムの認知閾値''，Ausiology Japan, 46巻, 5号, pp.465-467, Sep. 2007.
+  \bibitem{shigematu}重松颯人，丹治寛樹，村上隆啓，松本直樹，``遅延聴覚フィードバックが身体運動に与える影響の客観的な評価方法の検討''，日本音響学会聴覚研究会資料, pp.499-504, Nov. 2019.
+  \bibitem{kayama}香山実結花，山下一樹，丹治寛樹，村上隆啓，``若年者と高齢者の聴覚フィードバックにおける遅延時間の許容量の統計的分析による比較''，2022年度電子情報通信学会東京支部学生会研究発表会, pp.113, Mar. 2023.
+  \bibitem{shigematu-toukyoushibu}重松颯人，村上隆啓，``高齢者の聴覚における遅延時間の許容量の評価''，平成29年度電子情報通信学会東京支部学生会研究発表会講演論文集，pp.143, Mar. 2018.
+  \bibitem{Syuuronn-shigematu}重松颯人，``補聴器を想定した音声における入出力の遅延時間の許容範囲についての検討''，明治大学大学院理工学研究科電気工学専攻知能信号処理研究室，2019年度修士学位請求論文.
+  \bibitem{Win32API-reference}Microsoft，``Win32 API のプログラミング リファレンス''，\url{https://docs.microsoft.com/ja-jp/windows/win32/api/}, 参照2024年1月24日.
+  \bibitem{timing-music}P. Q. Pfordresher and C. Palmer, ``Effects of delayed auditory feedback on timing of music performance''，Psychological Research, Vol. 16, pp.71-79, Jan. 2002.
+  \bibitem{shimada-DAF}樋田浩一，上野佳奈子，嶋田総太郎，``身体運動に伴う遅延聴覚フィードバックの知覚順応''，日本認知科学会大会，pp.493-497，Dec. 2013．
+  \bibitem{Soturonn-takahashi}高橋浩貴，村上隆啓，``補聴器における遅延時間の許容量の評価''，平成26年度電子情報通信学会東京支部学生会研究発表会講演論文集, p168, Sep. 2015.
 
 \end{thebibliography}
 \begin{thepublished}{99}
-	\bibitem{cf:yamashita}山下一樹，安田和生，丹治寛樹，村上隆啓，``若年者と高齢者の遅延聴覚フィードバックの身体運動への影響の比較'' 2023年度電子情報通信学会東京支部学生会, Mar.2024.
+	\bibitem{cf:yamashita}山下一樹，安田和生，丹治寛樹，村上隆啓，``若年者と高齢者の遅延聴覚フィードバックの身体運動への影響の比較''，2023年度電子情報通信学会東京支部学生会研究発表会, Mar. 2024.
 	
 \end{thepublished}
 \newpage
@@ -102,9 +102,9 @@
 \input{acknowledgement.tex}
 
 \appendix
-\input{furoku-Tex/furoku-A.tex}
-\input{furoku-Tex/furoku-B.tex}
-\input{furoku-Tex/furoku-C.tex}
-\input{furoku-Tex/furoku-D.tex}
+% \input{furoku-Tex/furoku-A.tex}
+% \input{furoku-Tex/furoku-B.tex}
+% \input{furoku-Tex/furoku-C.tex}
+% \input{furoku-Tex/furoku-D.tex}
 
 \end{document}

@@ -1,4 +1,4 @@
-This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.sjis) (TeX Live 2023) (preloaded format=platex 2023.10.26)  2 FEB 2024 11:33
+This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.sjis) (TeX Live 2023) (preloaded format=platex 2023.10.26)  7 FEB 2024 12:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -468,28 +468,28 @@ LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
 ] [17]
 File: figures/system_button_click.pdf Graphic file (type pdf)
 <figures/system_button_click.pdf>
- [18] [19]
+ [18]
 File: figures/Apprication/App_kyakkann.pdf Graphic file (type pdf)
 <figures/Apprication/App_kyakkann.pdf>
- [20] [21] [22]
+ [19] [20] [21] [22]
 File: figures/System/Delay_theory.pdf Graphic file (type pdf)
 <figures/System/Delay_theory.pdf>
  [23]
 LaTeX Font Info:    Trying to load font information for OML+cmr on input line 1
-40.
+42.
 
 (c:/texlive/2023/texmf-dist/tex/latex/base/omlcmr.fd
 File: omlcmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 140.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 142.
 File: figures/DelayCheck/DelayCheck_EX.pdf Graphic file (type pdf)
 <figures/DelayCheck/DelayCheck_EX.pdf>
  [24]
 File: figures/DelayCheck/SuperFamicom_delayCheck.pdf Graphic file (type pdf)
 <figures/DelayCheck/SuperFamicom_delayCheck.pdf>
 
-Overfull \hbox (9.6128pt too wide) in paragraph at lines 182--194
+Overfull \hbox (9.6128pt too wide) in paragraph at lines 184--196
  [][][][] 
  []
 
@@ -569,226 +569,34 @@ file (type pdf)
 
 ] [58] [59
 
-] (./acknowledgement.tex) (./furoku-Tex/furoku-A.tex
-[60
+] (./acknowledgement.tex) [60
 
-]
-付録A 
-LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <20.74> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 1.
-LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 19.9311pt on input line 1.
-LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <20.74> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 1.
-LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 19.9311pt on input line 1.
-File: furoku_A/douisyo_meiji.pdf Graphic file (type pdf)
-<furoku_A/douisyo_meiji.pdf>
-File: furoku_A/Douisyo_Not60NotMeiji.pdf Graphic file (type pdf)
-<furoku_A/Douisyo_Not60NotMeiji.pdf>
-File: furoku_A/Douisyo_60NotMeiji.pdf Graphic file (type pdf)
-<furoku_A/Douisyo_60NotMeiji.pdf>
-File: furoku_A/Less60_gaiyou.pdf Graphic file (type pdf)
-<furoku_A/Less60_gaiyou.pdf>
-File: furoku_A/MoreThan60_Gaiyou.pdf Graphic file (type pdf)
-<furoku_A/MoreThan60_Gaiyou.pdf>
-File: furoku_A/MoreThan60_tyouryoku.pdf Graphic file (type pdf)
-<furoku_A/MoreThan60_tyouryoku.pdf>
-File: furoku_A/Less60_Tezyunn.pdf Graphic file (type pdf)
-<furoku_A/Less60_Tezyunn.pdf>
-File: furoku_A/Onnryou.pdf Graphic file (type pdf)
-<furoku_A/Onnryou.pdf>
-) (./furoku-Tex/furoku-B.tex [61
-
-] [62] [63] [64] [65] [66] [67] [68] [69]
-付録B 
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 8.
-LaTeX Font Info:    Font shape `JT1/gt/bx/n' in size <10> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 1.
-LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 9.60999pt on input line 1.
-LaTeX Font Info:    Font shape `JY1/gt/bx/n' in size <10> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 1.
-LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 9.60999pt on input line 1.
-LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 1.
-[70
-
-] [71] [72] [73]
-Overfull \hbox (269.61972pt too wide) in paragraph at lines 1--1
-[][] 
- []
-
-[74] [75] [76] [77] [78] [79] [80] [81] [82] [83] [84] [85] [86] [87] [88]
-[89] [90] [91] [92] [93] [94] [95] [96] [97] [98] [99] [100] [101] [102]
-[103] [104] [105] [106] [107] [108] [109] [110] [111] [112] [113] [114]
-[115] [116] [117] [118] [119] [120] [121] [122] [123] [124] [125] [126]
-[127] [128] [129] [130] [131] [132] [133] [134] [135] [136] [137] [138]
-[139] [140] [141] [142] [143] [144] [145] [146] [147] [148] [149] [150]
-[151] [152] [153] [154] [155] [156] [157] [158] [159] [160] [161] [162]
-[163] [164] [165] [166] [167] [168] [169] [170] [171] [172] [173] [174]
-[175] [176] [177] [178]
-Overfull \hbox (43.87169pt too wide) in paragraph at lines 1--1
-[][] 
- []
-
-
-Overfull \hbox (43.87169pt too wide) in paragraph at lines 1--1
-[][] 
- []
-
-
-Overfull \hbox (43.87169pt too wide) in paragraph at lines 1--1
-[][] 
- []
-
-[179]
-Overfull \hbox (43.87169pt too wide) in paragraph at lines 1--1
-[][] 
- []
-
-
-Overfull \hbox (43.87169pt too wide) in paragraph at lines 1--1
-[][] 
- []
-
-[180] [181]
-Overfull \hbox (43.87169pt too wide) in paragraph at lines 1--1
-[][] 
- []
-
-[182]
-Overfull \hbox (43.87169pt too wide) in paragraph at lines 1--1
-[][] 
- []
-
-
-Overfull \hbox (43.87169pt too wide) in paragraph at lines 1--1
-[][] 
- []
-
-[183]
-Overfull \hbox (43.87169pt too wide) in paragraph at lines 1--1
-[][] 
- []
-
-[184]
-Overfull \hbox (43.87169pt too wide) in paragraph at lines 1--1
-[][] 
- []
-
-
-Overfull \hbox (43.87169pt too wide) in paragraph at lines 1--1
-[][] 
- []
-
-[185]
-Overfull \hbox (43.87169pt too wide) in paragraph at lines 1--1
-[][] 
- []
-
-
-Overfull \hbox (43.87169pt too wide) in paragraph at lines 1--1
-[][] 
- []
-
-
-Overfull \hbox (43.87169pt too wide) in paragraph at lines 1--1
-[][] 
- []
-
-) (./furoku-Tex/furoku-C.tex [186]
-付録C 
-[187
-
-] [188] [189] [190] [191] [192] [193] [194] [195] [196] [197] [198]
-[199] [200] [201] [202] [203] [204] [205] [206] [207] [208] [209] [210]
-[211] [212] [213] [214] [215] [216] [217] [218] [219] [220] [221] [222]
-[223] [224] [225] [226] [227] [228] [229] [230] [231] [232] [233] [234]
-[235] [236] [237] [238] [239] [240] [241] [242] [243] [244] [245] [246]
-[247] [248] [249] [250] [251] [252] [253] [254] [255] [256]
-Overfull \hbox (33.37178pt too wide) in paragraph at lines 1--1
-[][] 
- []
-
-[257] [258]
-Overfull \hbox (85.87132pt too wide) in paragraph at lines 1--1
-[][] 
- []
-
-[259] [260] [261] [262] [263] [264] [265] [266] [267]
-Overfull \hbox (43.87169pt too wide) in paragraph at lines 1--1
-[][] 
- []
-
-[268]
-Overfull \hbox (43.87169pt too wide) in paragraph at lines 1--1
-[][] 
- []
-
-
-Overfull \hbox (43.87169pt too wide) in paragraph at lines 1--1
-[][] 
- []
-
-
-Overfull \hbox (43.87169pt too wide) in paragraph at lines 1--1
-[][] 
- []
-
-[269]
-Overfull \hbox (43.87169pt too wide) in paragraph at lines 1--1
-[][] 
- []
-
-[270]
-Overfull \hbox (43.87169pt too wide) in paragraph at lines 1--1
-[][] 
- []
-
-[271]
-Overfull \hbox (43.87169pt too wide) in paragraph at lines 1--1
-[][] 
- []
-
-[272]
-Overfull \hbox (43.87169pt too wide) in paragraph at lines 1--1
-[][] 
- []
-
-
-Overfull \hbox (43.87169pt too wide) in paragraph at lines 1--1
-[][] 
- []
-
-
-Overfull \hbox (43.87169pt too wide) in paragraph at lines 1--1
-[][] 
- []
-
-[273]
-Overfull \hbox (43.87169pt too wide) in paragraph at lines 1--1
-[][] 
- []
-
-
-Overfull \hbox (43.87169pt too wide) in paragraph at lines 1--1
-[][] 
- []
-
-) (./furoku-Tex/furoku-D.tex [274]
-付録D 
-[275
-
-] [276] [277]) [278] (./thesis.aux)
+] (./thesis.aux)
  ***********
 pLaTeX2e <2023-02-14>+1, based on
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-10-23>
  ***********
-Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: DD027A4CEBF7C5033351351548F50226;7407.
- )
-Output written on thesis.dvi (279 pages, 1366324 bytes).
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `thesis.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `thesis.out':
+(rerunfilecheck)             Before: FF7E6B56B25B203120463E36E21ACBA5;6464
+(rerunfilecheck)             After:  AE3EF3E160652358B9A2C54925187204;6457.
+ ) 
+Here is how much of TeX's memory you used:
+ 12043 strings out of 476504
+ 196369 string characters out of 5801731
+ 1932881 words of memory out of 5000000
+ 33815 multiletter control sequences out of 15000+600000
+ 569295 words of font info for 92 fonts, out of 8000000 for 9000
+ 41 hyphenation exceptions out of 8191
+ 73i,15n,79p,738b,623s stack positions out of 10000i,1000n,20000p,200000b,200000s
+
+Output written on thesis.dvi (61 pages, 187120 bytes).

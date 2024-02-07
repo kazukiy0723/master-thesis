@@ -1,4 +1,4 @@
-This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.sjis) (TeX Live 2023) (preloaded format=platex 2023.10.26)  6 FEB 2024 14:44
+This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.sjis) (TeX Live 2023) (preloaded format=platex 2023.10.26)  7 FEB 2024 01:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -164,37 +164,46 @@ LaTeX Font Info:    ... okay on input line 18.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 19.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 19.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 19.
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <14.4> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 21.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 27.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <14.4> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 21.
-File: figures_app_1.pdf Graphic file (type pdf)
-<figures_app_1.pdf>
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 27.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 28.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 28.
 [1
 
 ]
-File: setting-ini.pdf Graphic file (type pdf)
-<setting-ini.pdf>
- [2] [3] (./Readme-1.aux)
+LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <10> not available
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 87.
+LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <10> not available
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 87.
+
+
+LaTeX Warning: Reference `eq:MedSE' on page 2 undefined on input line 87.
+
+[2] (./Readme-1.aux)
  ***********
 pLaTeX2e <2023-02-14>+1, based on
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-10-23>
  ***********
+
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
  ) 
 Here is how much of TeX's memory you used:
- 2056 strings out of 476504
- 33718 string characters out of 5801731
+ 2014 strings out of 476504
+ 32953 string characters out of 5801731
  1927881 words of memory out of 5000000
- 24029 multiletter control sequences out of 15000+600000
- 566969 words of font info for 71 fonts, out of 8000000 for 9000
+ 24000 multiletter control sequences out of 15000+600000
+ 563779 words of font info for 60 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 57i,6n,65p,243b,305s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 57i,6n,65p,289b,181s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on Readme-1.dvi (3 pages, 9672 bytes).
+Output written on Readme-1.dvi (2 pages, 11196 bytes).
