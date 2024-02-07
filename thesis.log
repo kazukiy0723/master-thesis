@@ -1,4 +1,4 @@
-This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.sjis) (TeX Live 2023) (preloaded format=platex 2023.10.26)  7 FEB 2024 20:43
+This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.sjis) (TeX Live 2023) (preloaded format=platex 2023.10.26)  8 FEB 2024 01:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -430,13 +430,13 @@ LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
 (Font)              scaled to size 19.9311pt on input line 1.
 LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
-(Font)              scaled to size 13.83836pt on input line 3.
+(Font)              scaled to size 13.83836pt on input line 2.
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 13.83836pt on input line 3.
+(Font)              scaled to size 13.83836pt on input line 2.
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 13.83836pt on input line 3.
+(Font)              scaled to size 13.83836pt on input line 2.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 13.83836pt on input line 3.
+(Font)              scaled to size 13.83836pt on input line 2.
 [4
 
 ] [5] [6]) (./chapter2.tex
@@ -472,8 +472,8 @@ File: figures/system_button_click.pdf Graphic file (type pdf)
 File: figures/Apprication/App_kyakkann.pdf Graphic file (type pdf)
 <figures/Apprication/App_kyakkann.pdf>
  [21] [22] [23]
-File: figures/System/Delay_theory.pdf Graphic file (type pdf)
-<figures/System/Delay_theory.pdf>
+File: figures/System/Delay_theory_2.pdf Graphic file (type pdf)
+<figures/System/Delay_theory_2.pdf>
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -585,11 +585,11 @@ Package rerunfilecheck Info: File `thesis.out' has not changed.
  ) 
 Here is how much of TeX's memory you used:
  12043 strings out of 476504
- 196369 string characters out of 5801731
+ 196381 string characters out of 5801731
  1932881 words of memory out of 5000000
  33815 multiletter control sequences out of 15000+600000
  569295 words of font info for 92 fonts, out of 8000000 for 9000
  41 hyphenation exceptions out of 8191
  73i,15n,79p,738b,637s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on thesis.dvi (64 pages, 190240 bytes).
+Output written on thesis.dvi (64 pages, 190532 bytes).
