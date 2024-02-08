@@ -1,4 +1,4 @@
-This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.sjis) (TeX Live 2023) (preloaded format=platex 2023.10.26)  8 FEB 2024 15:51
+This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.sjis) (TeX Live 2023) (preloaded format=platex 2023.10.26)  8 FEB 2024 18:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -519,10 +519,9 @@ File: figures/Yobi/Var/Yobi-MSE-MedSE.pdf Graphic file (type pdf)
 第7章
 [43
 
-] [44] [45]
+] [44] [45] [46]
 File: figures/Honbann/BOXPLOT/young_110_boxplot.pdf Graphic file (type pdf)
 <figures/Honbann/BOXPLOT/young_110_boxplot.pdf>
- [46]
 File: figures/Honbann/BOXPLOT/young_40_boxplot.pdf Graphic file (type pdf)
 <figures/Honbann/BOXPLOT/young_40_boxplot.pdf>
 File: figures/Honbann/BOXPLOT/old_110_boxplot.pdf Graphic file (type pdf)
@@ -788,7 +787,11 @@ pLaTeX2e <2023-02-14>+1, based on
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-10-23>
  ***********
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 2B425D6CA700D78B041D8AAF3C8CA559;7449.
+(rerunfilecheck)             Checksum: 73B7D8D7418ACFCC36695A8F86A77F70;7463.
  )
-Output written on thesis.dvi (291 pages, 1424796 bytes).
+Output written on thesis.dvi (291 pages, 1424884 bytes).

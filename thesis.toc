@@ -12,7 +12,7 @@
 \contentsline {chapter}{\numberline {第4章}ボタン押し課題のシステム}{17}{chapter.4}%
 \contentsline {section}{\numberline {4.1}ボタン押し課題}{17}{section.4.1}%
 \contentsline {section}{\numberline {4.2}音響信号への遅延生成アプリケーション}{20}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}ASIOにおける音声の同時入出力}{22}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.1}ASIOにおける音響信号の同時入出力}{22}{subsection.4.2.1}%
 \contentsline {subsection}{\numberline {4.2.2}任意の遅延時間後にボタン押下の合図音を再生させる機能}{24}{subsection.4.2.2}%
 \contentsline {subsection}{\numberline {4.2.3}ボタンの押下時間間隔を記録する機能}{25}{subsection.4.2.3}%
 \contentsline {section}{\numberline {4.3}生成する遅延時間の正確性の調査}{26}{section.4.3}%
@@ -29,7 +29,7 @@
 \contentsline {subsection}{\numberline {6.3.2}調査条件および調査対象}{38}{subsection.6.3.2}%
 \contentsline {subsection}{\numberline {6.3.3}調査結果}{39}{subsection.6.3.3}%
 \contentsline {chapter}{\numberline {第7章}遅延聴覚フィードバックが身体運動に与える影響の調査}{43}{chapter.7}%
-\contentsline {section}{\numberline {7.1}調査方法}{43}{section.7.1}%
+\contentsline {section}{\numberline {7.1}調査方法}{44}{section.7.1}%
 \contentsline {section}{\numberline {7.2}調査条件および調査対象}{44}{section.7.2}%
 \contentsline {section}{\numberline {7.3}調査結果}{46}{section.7.3}%
 \contentsline {subsection}{\numberline {7.3.1}観測値の分布}{46}{subsection.7.3.1}%

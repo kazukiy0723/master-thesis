@@ -1,4 +1,4 @@
-This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.sjis) (TeX Live 2023) (preloaded format=platex 2023.10.26)  8 FEB 2024 12:11
+This is e-upTeX, Version 3.141592653-p4.1.0-u1.29-230214-2.6 (utf8.sjis) (TeX Live 2023) (preloaded format=platex 2023.10.26)  8 FEB 2024 20:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -169,17 +169,14 @@ LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
 (Font)              scaled to size 9.60999pt on input line 2.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
 (Font)              scaled to size 9.60999pt on input line 2.
-) (./section3.tex
-File: figures/system_button_click.pdf Graphic file (type pdf)
-<figures/system_button_click.pdf>
- [1
+) (./section3.tex [1
 
 
 ]
 File: figures/Apprication/App_kyakkann.pdf Graphic file (type pdf)
 <figures/Apprication/App_kyakkann.pdf>
 ) (./section4.tex)
-(./section5.tex [2]
+(./section5.tex
 File: figures/Honbann/Comparison_young_old/110_var_normalized.pdf Graphic file 
 (type pdf)
 <figures/Honbann/Comparison_young_old/110_var_normalized.pdf>
@@ -192,7 +189,7 @@ File: figures/Honbann/Comparison_young_old/110_MSE-MedSE_normalized.pdf Graphic
 File: figures/Honbann/Comparison_young_old/40_MSE-MedSE_normalized.pdf Graphic 
 file (type pdf)
 <figures/Honbann/Comparison_young_old/40_MSE-MedSE_normalized.pdf>
-) (./section6.tex [3])
+) (./section6.tex [2] [3])
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <10> not available
 (Font)              Font shape `JT1/gt/m/n' tried instead on input line 25.
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
@@ -214,7 +211,9 @@ LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
 Package caption Warning: Unused \captionsetup[table] on input line 11.
 See the caption package documentation for explanation.
 
-[4] (./summary.aux)
+[4
+
+] (./summary.aux)
  ***********
 pLaTeX2e <2023-02-14>+1, based on
 LaTeX2e <2023-06-01> patch level 1
@@ -222,12 +221,12 @@ L3 programming layer <2023-10-23>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 2911 strings out of 476504
- 52912 string characters out of 5801731
- 1927881 words of memory out of 5000000
- 24878 multiletter control sequences out of 15000+600000
+ 2902 strings out of 476504
+ 52628 string characters out of 5801731
+ 1928881 words of memory out of 5000000
+ 24872 multiletter control sequences out of 15000+600000
  566891 words of font info for 79 fonts, out of 8000000 for 9000
  41 hyphenation exceptions out of 8191
- 57i,6n,65p,269b,387s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 57i,6n,65p,275b,387s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on summary.dvi (4 pages, 22408 bytes).
+Output written on summary.dvi (4 pages, 22532 bytes).
