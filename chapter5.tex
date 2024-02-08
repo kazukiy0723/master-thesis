@@ -65,9 +65,9 @@ MSE = \frac{1}{f(n)} \sum_{i=0}^{s(n)} (d_{t-1+ti} - d_{t+ti})^2
 この計算法により，誤差の中に極端な値が存在しても適切なばらつきの評価が行える可能性がある．
 誤差の中央値MedSEは以下の式で定義される．
 \begin{equation}
-MedSE = Med\left((d_{t-1}-d_{t})^2, (d_{2t-1}-d_{2t})^2, \ldots, (d_{(1+s(n))t-1}-d_{(1+s(n))t})^2\right) \label{eq:MedSE}
+MedSE = Med\left((d_{t-1}-d_{t})^2, (d_{2t-1}-d_{2t})^2, \ldots, (d_{\left(1+s(n)\right)t-1}-d_{\left(1+s(n)\right)t})^2\right) \label{eq:MedSE}
 \end{equation}
-式\ref{eq:MedSE}における$Med()$は中央値を計算する関数であり，
+式(\ref{eq:MedSE})における$Med()$は中央値を計算する関数であり，
 括弧内の各項はボタンの押下回数が$t$の倍数に到達する直前のボタン押下時間間隔と$t$の倍数に到達した直後のボタン押下時間間隔の差の二乗を表す．
 このように，MedSEを用いることで，データの極端なばらつきがあった場合でも，
 遅延聴覚フィードバックがボタン押下時間間隔に与える影響を適切に評価することが可能になると考えられる．

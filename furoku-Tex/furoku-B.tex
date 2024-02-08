@@ -3335,6 +3335,200 @@ HANDLE FileOpenReadOnly(LPCSTR FileName, HANDLE hFile) {
 }
 \end{lstlisting}
 
+\begin{lstlisting}[caption=main.h]
+#include<Windows.h>
+
+#define STRLEN 256
+////
+//プロトタイプ宣言
+////
+
+// メインウィンドウの定義
+HWND CreateParentWindow(HWND, HINSTANCE, int, const char szWinName[], const int, const int);
+
+//HWND CreateUserInfoWindow(HWND, HINSTANCE, const char szWinName2[], int, HMENU);
+
+LRESULT CALLBACK	WndProc(HWND, UINT, WPARAM, LPARAM);      // メインのウィンドウ
+			
+//LRESULT CALLBACK    windowfuncUser(HWND, UINT, WPARAM, LPARAM);  // 最初に表示させるウィンドウ
+bool OnTouch(HWND, WPARAM, LPARAM);                        // WM_TOUCH内の処理を記述する関数
+
+bool ResetFunc(HWND, HINSTANCE, const char szWinName[], const int, const int);
+char CountNumberFunc(unsigned int);      // 実験回数を計算するための関数
+bool ResultGrade(char);                  // 評価結果を保持するための関数
+
+
+// WM_COMMAND内の処理
+bool CommandFunc(HWND, WPARAM, LPARAM, UINT, HDC);   // WM_COMMANDメッセージ内の処理
+bool LateIniFunc(HWND, WPARAM);   // コンボボックスの項目が押された時の処理
+bool CheckBoxFunc(HWND, LPARAM);  // チェックボックス用グループボックス
+bool CountGroup(HWND, LPARAM);    // 実験回数表示用グループボックス
+bool TextTemp(HDC);
+unsigned int CancelFunc(HWND, HDC, unsigned int);     // 評価結果を取り消す時の操作
+bool UserInfoPopup(HWND, LPARAM); // ユーザー情報入力用ポップアップ
+bool NextButtonFunc(HWND, HDC);                 // 「次へ」ボタンが押された時の処理
+bool GroupBoxFunc(HWND, LPARAM);
+bool ComboboxFunc(HWND, LPARAM);         // iniファイルの読み込み
+bool ButtonEnableFunc();
+
+// WM_CREATE内の処理
+bool WM_CREATE_Func(HWND, LPARAM); // WM_CREAT内の処理をまとめる関数
+bool EditContorolName(HWND, LPARAM);    // エディットコントロール
+bool EditContorolOld(HWND, LPARAM);
+bool ReserchStartFunc(HWND, LPARAM); // 実験開始ボタン
+bool GradeButtonFunc(HWND, LPARAM);   // 評価結果入力ボタン
+bool CreateProgressBar(HWND, int, LPARAM); // 進行状況確認用プログレスバー
+bool FontFunc();                      // ウィンドウのフォントを指定
+bool PaintFunc(HWND);
+bool GetWindowMemDCFunc(HWND);
+bool CreateOwnerDrawButton(HWND, LPARAM);
+
+// 読み上げる文章の番号指定
+int GetRandom(unsigned int, unsigned int); // [low, high]の範囲で乱数を返す
+int* ShuffleFunc(int*, unsigned int);         // 配列のシャッフル
+char* SetNumber(int*, short int);                   // 読み上げる文章の番号指定
+int* Getarray(int*, unsigned int);                  // 配列arrayの操作
+
+// フォント
+bool DispNumberSentence(HDC);
+
+bool ChangeProgBarMAX(int);     // プログレスバーの最大値を遅延時間設定で選択された項目によって決定する関数
+long SetCtlColor(WPARAM, LPARAM); // コントロールの背景色を決定
+bool MyDrawEdge(HDC, RECT);
+bool OnDrawItem(bool, HDC, RECT, HWND);
+BOOL DesktopCenterWindow(HWND);
+
+// dialogbox.cppで使用
+bool PaintFuncDialog();   // 描画処理
+BOOL CALLBACK DialogProc(HWND, UINT, WPARAM, LPARAM);
+
+// メニューバー
+bool EnableAllButton();
+bool API_GOINI(HWND);
+
+//変数
+extern HINSTANCE hInst;
+
+extern LPTSTR strTextName;                   // ユーザーの名前
+extern LPTSTR strTextOld;                    // ユーザーの年齢
+extern LPCSTR strMenLady;                    // ユーザーの性別
+
+extern const char* IpBuffer;
+extern char latedata[STRLEN];
+\end{lstlisting}
+
+\begin{lstlisting}[caption=window.h]
+RECT Button_ScreenToClient(HWND, HWND, RECT, int);  // ラジオボタンの枠線を描画
+//bool CreateToolBarFunc(HWND, LPARAM);   // ツールバーの作成
+bool DialogUserButton(HWND, LPARAM);    // ユーザー情報入力用ダイアログボックス
+
+//ツールバー
+#define IDW_TOOL  100
+#define IDB_TOOL  101
+
+// 子ウィンドウハンドル
+extern HWND CheckMen;
+extern HWND CheckLady;
+extern HWND CheckLGBT;
+extern HWND CheckNot;
+extern HWND hEditName;     // 名前入力エディットボックス用ハンドル
+extern HWND hEditOld;      // 年齢入力エディットボックス用ハンドル
+extern HWND hReserch;
+extern HWND hNext;
+extern HWND hQuit;
+extern HWND hCancel;
+extern HWND hSpeak;
+extern HWND hLate;
+extern HWND hProg; // プログレスバー
+extern HWND hNumberStatic;
+extern HWND latedatacombo;
+
+//　フォント
+extern HFONT hFont;
+extern HFONT hFont1;
+extern HFONT hFont2;
+extern HFONT hFontTitle;
+
+// RECT構造体
+extern RECT FrameBottom;
+extern RECT Winsize;
+
+// 子ウィンドウ識別用ID
+#define ID_LATEINI        10
+#define ID_GROUPBOX     2301
+
+#define ID_RADIOMEN     1200
+#define ID_RADIOLADY    1201
+#define ID_CHECKBOXLGBT 1202
+#define ID_CHECKBOXNOT  1203
+
+#define ID_GROUPX       2304
+#define ID_COUNTGROUP   2305
+#define ID_USERGROUP    2306
+#define ID_QUIT         2307
+#define ID_CANCEL       2308
+#define ID_EDITNAME     2309
+#define ID_EDITOLD      2310
+#define ID_ReserchStart 2311
+#define ID_PROG         2312
+#define ID_STATICPROG   2313
+#define ID_STATICNUMBER 2314
+#define ID_STATICPROG2  2315
+#define ID_STATICSENTENCE 2316
+
+#define ID_NEXTBUTTON   2401
+#define ID_HSPEAK       2402
+#define ID_HLATE        2403
+
+#define ID_BUTTON1      2412
+#define ID_BUTTON2      2413
+#define ID_BUTTON3      2414
+#define ID_BUTTON4      2415
+#define ID_BUTTON11     2416
+#define ID_BUTTON22     2417
+#define ID_BUTTON33     2418
+#define ID_BUTTON44     2419
+
+#define ID_CHILD_USER   501
+
+#define ID_CHILD_WINDOW_OPEN  502
+
+// ダイアログボックス内
+#define ID_DIALOG_OPEN   6001
+#define ID_STATIC_DIALOG 6002
+
+// UserInfoWindow
+#define ID2_PUSHBUTTON1    7001
+#define ID2_STATICNAME     7002
+#define ID2_STATICOLD      7003
+#define ID2_STATICS        7004
+#define ID2_RADIOMEN       7005
+#define ID2_RADIOLADY      7006
+#define ID2_STATICCOMMENT1 7007
+#define ID2_STATICCOMBO    7008
+#define ID2_STATICUSERINFO 7009
+#define ID2_PUSHBUTTONERASE_1 7010
+#define ID2_PUSHBUTTONERASE_2 7020
+#define IDT_TOOLBAR_PEN       7021
+#define IDT_TOOLBAR_ERASER 7022
+#define IDT_TOOLBAR               7023
+\end{lstlisting}
+
+\begin{lstlisting}[caption=file.h]
+#include<Windows.h>
+
+/// file.cppで使用
+bool file_open(HWND);                 // ファイルオープンのための関数
+bool file_write();                // ファイルへ書き込むための関数
+bool WriteFileFunc();             // 遅延時間のファイルへの書き込み用関数
+bool DivideGradeFunc();           // 評価結果を2つに分ける(「しゃべりにくさ」と「遅れが気になるか」）
+bool WriteFileStr(LPCSTR);        // 引数で指定された文字列をファイルへ書き込む
+bool SelectFile(HWND);            // [名前を付けて保存]ダイアログボックスの作成
+bool WriteFileResult(DWORD);      // 入力結果のファイルへの書き込み
+HANDLE FileOpenReadOnly(LPCSTR, HANDLE); // ファイルを読み取り専用でオープン
+bool WarningFileOpen(HWND);       // 指定ファイルが既に開かれていた時の処理
+\end{lstlisting}
+
 \begin{lstlisting}[caption=resource.h]
 //{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ で生成されたインクルード ファイル。
