@@ -16,7 +16,7 @@
 #include<iomanip>
 #include<stdlib.h>
 #include<windowsx.h>
-#include<manipulations.h> // Touch Input用
+#include<manipulations.h> 
 
 #include"main.h"
 #include"window.h"
@@ -39,7 +39,7 @@ using namespace std;
 // 定数
 ///////////
 #define STRLEN 256   // 文字列の最大長
-#define GetMonitorRect(rc)  SystemParametersInfo(SPI_GETWORKAREA,0,rc,0)  // ワークエリア領域の取得
+#define GetMonitorRect(rc)  SystemParametersInfo(SPI_GETWORKAREA,0,rc,0)  
 #define CONBOMAX9 9  // コンボボックスの項目数（Group1～5)
 #define CONBOMAX8 8  // コンボボックスの項目数（Group6～10）
 #define LENSNUMBER 128
@@ -52,8 +52,8 @@ extern char WindowTitleText[32];
 extern int intCurrentIndex;
 
 //ButtonEnableFunc()で利用
-bool boolstart;  // true: 「ウィンドウが生成されてから1回以上次へボタンを押した」 false: 「ウィンドウが生成されてからまだ次へボタンを押していない」
-bool ZeroOrNot;  // true: 「変数NumberOfTimesが0である」 false: 「変数NumberOfTimesが0以外である」
+bool boolstart;
+bool ZeroOrNot;  
 
 // ファイルに書き込んだか否かの取得
 bool FileWriteInfo;
@@ -66,7 +66,7 @@ extern const COLORREF TextBackground = RGB(235, 235, 235);
 const COLORREF ColorEdgeButton = RGB(100, 149, 237);
 
 // フォントサイズ
-extern int fontsize;   // エディットボックスのフォント
+extern int fontsize;   
 extern int fontsize2;
 
 // その他変数
@@ -155,10 +155,7 @@ char szText[50];
 bool ButtonBool = false;
 bool Clicked_1 = false;
 bool Clicked_2 = false;
-/*----------------------------------------------------------------------------------------------------------------------*/
-////////////////////
-//WinMain関数の定義
-////////////////////
+
 int APIENTRY WinMain(_In_ HINSTANCE hThisInst, _In_opt_ HINSTANCE hPrevInst, _In_ LPSTR lpszArgs, _In_ int nWinMode)
 {
 	HWND		hWnd = NULL;
@@ -176,16 +173,12 @@ int APIENTRY WinMain(_In_ HINSTANCE hThisInst, _In_opt_ HINSTANCE hPrevInst, _In
 
 	//メッセージループの生成
 	while (GetMessage(&uMsg, NULL, 0, 0)) {
-		// GetMessage()関数の戻り値が0になったら（WM_QUITを受け取ったら）ループを抜ける
 		TranslateMessage(&uMsg);
 		DispatchMessage(&uMsg);
 	}
 	return((int)uMsg.wParam);
 }
 
-//////////////////////////////////////
-// ウィンドウプロージャの定義
-//////////////////////////////////////
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	short int IGrade;                       
@@ -218,9 +211,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		DeleteDC(hDCMem);
 		DeleteDC(hDCMem4);
 		
-		//DeleteObject(hBrush); // オーナードローボタンで使用
-
-		// WM_QUITをメッセージキューにポスト
 		PostQuitMessage(0);
 		return 0;
 
@@ -278,7 +268,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 		return 0;
 
 	case WM_ERASEBKGND:
-		// 何も処理しない(画面のちらつき防止）
 		return 1;
 		break;
 
@@ -549,12 +538,10 @@ bool GetWindowMemDCFunc(HWND hWnd) {
 		MAKEINTRESOURCE(IDB_BITMAP3));
 	// ビットマップ画像のサイズ取得
 	GetObject(hBitmap4, sizeof(BITMAP), &bitmap4);
-	// デバイスコンテキストの解放（メモリデバイスコンテキストを取得するためだけに使うからもう不要）
 	ReleaseDC(hWnd, hDC);
 	// メモリDCにビットマップを割りつけ
 	hDCMemOld = SelectObject(hDCMem, hBitmap);
 	hDCMemOld4 = SelectObject(hDCMem4, hBitmap4);
-	// ビットマップの削除（ビットマップはメモリデバイスコンテキストの情報を設定するためだけに使うからもう不要）
 	DeleteObject(hBitmap);
 	DeleteObject(hBitmap4);
 
@@ -695,63 +682,10 @@ bool CommandFunc(HWND hWnd, WPARAM wParam, LPARAM lParam, UINT uMsg, HDC hdc) {
 		
 	break;
 
-	case ID_DIALOG_OPEN:
-		//if (HIWORD(wParam) == BN_CLICKED) {
-		//	// ユーザー情報入力用ダイアログボックスのオープン
-		//	DialogBox(
-		//		//((LPCREATESTRUCT)(lParam))->hInstance,
-		//		hInst,
-		//		MAKEINTRESOURCE(IDD_DIALOG1),
-		//		hWnd,
-		//		(DLGPROC)DialogProc);
-		//}
-			break;
-
 	case ID_LATEINI:
 		LateIniFunc(hWnd, wParam);
 		break;
 
-	//case ID_EDITNAME:
-	//	if (HIWORD(wParam) == EN_KILLFOCUS){
-	//		// エディットボックスに書き込まれた文字数+終端null文字分のメモリを確保
-	//		strTextName = (LPSTR)calloc((GetWindowTextLength(hEditName) + 1), sizeof(char));
-	//		if (strTextName) { //strTextがNULLでなければ以下の処理をする 
-	//			// エディットボックス内のテキスト取得
-	//			GetWindowText(hEditName, strTextName, (GetWindowTextLength(hEditName) + 1));
-	//		}
-	//	}
-	//	break;
-
-	//case ID_EDITOLD:
-	//	if (HIWORD(wParam) == EN_KILLFOCUS) {
-	//		// エディットボックスに書き込まれた文字数+終端null文字分のメモリを確保
-	//		strTextOld = (LPSTR)calloc((GetWindowTextLength(hEditOld) + 1), sizeof(char));
-	//		if (strTextOld) { //strTextがNULLでなければ以下の処理をする 
-	//			// エディットボックス内のテキスト取得
-	//			GetWindowText(hEditOld, strTextOld, (GetWindowTextLength(hEditOld) + 1));
-	//		}
-	//	}
-	//	break;
-
-	//case ID_RADIOMEN:
-	//	if (BST_CHECKED == SendMessage(CheckMen, BM_GETCHECK, 0, 0)) {
-	//		strMenLady = Men;
-	//	}
-	//	break;
-
-	//case ID_RADIOLADY:
-	//	if (BST_CHECKED == SendMessage(CheckLady, BM_GETCHECK, 0, 0)) {
-	//		strMenLady = Lady; 
-	//	}
-	//	break;
-
-	//case ID_CHECKBOXLGBT:
-	//	strMenLady = Other; // ファイル出力のため選択結果を保存
-	//	break;
-
-	//case ID_CHECKBOXNOT:
-	//	strMenLady = Not; // ファイル出力のため選択結果を保存
-	//	break;
 
 	case ID_ReserchStart:
 		if (HIWORD(wParam) == BN_CLICKED) {
@@ -766,7 +700,7 @@ bool CommandFunc(HWND hWnd, WPARAM wParam, LPARAM lParam, UINT uMsg, HDC hdc) {
 			EnableWindow(Button22, TRUE);
 			EnableWindow(Button33, TRUE);
 			EnableWindow(Button44, TRUE);
-			//　遅延時間設定用コンボボックスの無効化
+			// 遅延時間設定用コンボボックスの無効化
 			EnableWindow(latedatacombo, false);
 			MessageBox(hWnd, _T("調査を開始します。"), _T("開始確認"), MB_OK);
 			// 読み上げる文章の番号を計算し、表示
@@ -1188,23 +1122,6 @@ bool NextButtonFunc(HWND hWnd, HDC hdc) {
 //////////////////////////////////////
 bool DispNumberSentence(HDC hdc) {
 
-	////フォントの作成
-	//hFont = CreateFont(
-	//	50, 0, 0, 0,
-	//	FW_MEDIUM,
-	//	false, false, false,
-	//	SHIFTJIS_CHARSET, OUT_DEFAULT_PRECIS,
-	//	CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY,
-	//	(VARIABLE_PITCH | FF_DONTCARE), _T("メイリオ"));
-
-	//SelectObject(hdc, hFont);
-	//SetTextColor(hdc, RGB(0, 112, 192));
-	//SetBkColor(hdc, RGB(255, 255, 255));
-	
-	// 読み上げる文章の番号を表示
-	//TextOut(hdc, Winsize.left + 70, 280 + 30, temp3, (int)strlen(temp3)); // （真ん中）
-	//TextOut(hdc, Winsize.left + 300, 90, temp3, (int)strlen(temp3));
-	/*DeleteObject(hFont);*/
 	SendMessage(hStaticSentence, WM_SETTEXT, 0, (LPARAM)temp3);
 
 	return true;
@@ -1248,31 +1165,9 @@ bool MyDrawEdge(HDC hdc, RECT rc) {
 }
 
 /////////////////////////////
-// リセットボタン押下時の処理（要改善）
+// リセットボタン押下時の処理
 /////////////////////////////
 bool ResetFunc(HWND hWnd, HINSTANCE hThisInst, const char szWinName[], const int nWidth, const int nHeight) {
-
-	//// CREATESTRUCT構造体の宣言
-	//CREATESTRUCT cs;
-	//// CREATESTRUCT構造体の初期化
-	//cs.lpCreateParams = NULL;
-	//cs.hInstance = hThisInst;
-	//cs.hMenu = NULL;
-	//cs.hwndParent = HWND_DESKTOP;
-	//cs.cy = nHeight;
-	//cs.cx = nWidth;
-	//cs.y = CW_USEDEFAULT;
-	//cs.x = CW_USEDEFAULT;
-	//cs.style = WS_OVERLAPPEDWINDOW;
-	//cs.lpszName = szWinName;
-	//cs.lpszClass = szWinName;
-	//cs.dwExStyle = NULL;
-
-	//if (!SendMessage(hWnd, WM_CREATE, (WPARAM)0, (LPARAM)&cs)) {
-	//	return false;
-	//}
-	//TempResult = true;
-
 
 	return true;
 }
@@ -2107,7 +2002,7 @@ HWND CreateNewWindow(HWND hWnd, HINSTANCE hThisInst, const int nWidth, const int
 	wcl2.hInstance = hThisInst;						//このプログラムのインスタンスへのハンドル
 	wcl2.hIcon = LoadIcon(NULL, IDI_APPLICATION);	//アイコンへのハンドル
 	wcl2.hCursor = LoadCursor(NULL, IDC_ARROW);		//カーソルへのハンドル
-	wcl2.hbrBackground = BackGround_clear;           //(HBRUSH)GetStockObject(NULL_BRUSH); //背景ブラシへのハンドル
+	wcl2.hbrBackground = BackGround_clear;            //背景ブラシへのハンドル
 	wcl2.lpszMenuName = MAKEINTRESOURCE(IDR_MENU2);;	//メニュー
 	wcl2.lpszClassName = _T("NewWindowClass");					//ウィンドウクラス名
 	wcl2.hIconSm = LoadIcon(NULL, IDI_WINLOGO);		//スモールアイコンへのハンドル
@@ -2118,9 +2013,9 @@ HWND CreateNewWindow(HWND hWnd, HINSTANCE hThisInst, const int nWidth, const int
 
 	hWnd = CreateWindowEx(
 		0,                                                                                            
-		_T("NewWindowClass"),                                                                          //ウィンドウクラス名
-		_T("ユーザー情報の入力"),				                                                         //ウィンドウ名
-		WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX,	 //ウィンドウスタイル
+		_T("NewWindowClass"),                                                                          
+		_T("ユーザー情報の入力"),				                                                         
+		WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX,	 
 		CW_USEDEFAULT, CW_USEDEFAULT,			 
 		nWidth,	 nHeight,			    
 		HWND_DESKTOP,	//親ウィンドウへのハンドル
@@ -2143,7 +2038,7 @@ HWND CreateNewWindow(HWND hWnd, HINSTANCE hThisInst, const int nWidth, const int
 		return FALSE;
 	}
 
-	// POINT構造体の配列の初期化（WM_TOUCHで使用）
+	// POINT構造体の配列の初期化
 	for (size_t i = 0; i < MAX_TOUCH_POINTS; i++) {
 		g_ptPrevious[i].x = -1;
 		g_ptPrevious[i].y = -1;
@@ -2202,7 +2097,7 @@ HWND CreateToolbarFunc(HWND hWnd, LPARAM lParam) {
 	tb.nID = (UINT_PTR)LoadBitmap(((LPCREATESTRUCT)(lParam))->hInstance, MAKEINTRESOURCE(IDB_BITMAP10));
 	SendMessage(hToolbar, TB_ADDBITMAP, (WPARAM)numButtons, (LPARAM)&tb);
 
-	//　ボタンの定義と登録
+	// ボタンの定義と登録
 	TBBUTTON tbb[numButtons] = {
 		{0, IDT_TOOLBAR_PEN, TBSTATE_ENABLED,
 		BTNS_BUTTON | BTNS_CHECKGROUP, 
@@ -2217,14 +2112,10 @@ HWND CreateToolbarFunc(HWND hWnd, LPARAM lParam) {
 	return hToolbar;
 }
 
-//////////////////////////////
-// ウィンドウプロージャの定義
-//////////////////////////////
 LRESULT CALLBACK WndProc2(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam){
 	switch (uMsg) {
 		
 	case WM_DESTROY:
-		// 後始末
 		DeleteObject(hFontUserInfoWindow1);
 		DeleteObject(hFontUserInfoWindowRadio);
 		DeleteObject(hToolbarBackGroundBrush);
@@ -2358,9 +2249,6 @@ bool OnTouch(HWND hWnd, WPARAM wParam, LPARAM lParam) {
 	return true;
 }
 
-//////////////////////////////////////////////////////////////////////
-// タッチイベント情報用配列のインデックス番号への変換と取得
-/////////////////////////////////////////////////////////////////////
 int GetContactIndex(int dwID) {
 	for (int i = 0; i < MAX_TOUCH_POINTS; i++) {
 		if (idLookup[i] == -1) {
@@ -2376,9 +2264,7 @@ int GetContactIndex(int dwID) {
 	// Out of contacts
 	return -1;
 }
-////////////////////
-// ペンの色の選定
-////////////////////
+
 HPEN SelectPenColor(HPEN hNewPen) {
 	// ペンの選定
 	switch (PenColor) {
@@ -2993,7 +2879,6 @@ bool EraseFunc(HWND hWnd, RECT rc){
 //フォントの変更
 /////////////////////
 bool OnFont() {
-	// 新しくHFONT型変数を追加する場合は、WM_DESTROYメッセージ内でのDeleteObject(HFONT)を忘れないように。
 
 	hFontUserInfoWindow1 = CreateFont(
 		40, 0, 0, 0,
@@ -3080,12 +2965,7 @@ char GradeSpeak[STRLEN], GradeLate[STRLEN];
 DWORD dWFileSizeByte;                                    // WriteFile()で使用
 std::string fileNameCapture;
 
-///////////////////////////////////////
-//　グローバル変数（file.cppでのみ使用）
-///////////////////////////////////////
 static char FileName[MAX_PATH];             // ユーザーが入力したファイル名
-
-
 ///////////////////////
 // ファイルのオープン
 ///////////////////////
@@ -3128,13 +3008,6 @@ bool file_write() {
 	DWORD dwWriteSize;
 	string GradeS_str, GradeL_str;
 
-	//const char* IpBuffer1;
-	//const char* IpBuffer2;
-	//// 入力結果を二つに分ける(「しゃべりにくさ」と「遅れが気になるか」）
-	//DivideGradeFunc();
-	//IpBuffer1 = GradeSpeak;
-	//IpBuffer2 = GradeLate;
-	//
 	unsigned int tempS = 0;
 	for (unsigned int item : GradeS) {
 		if (tempS >= NumberOfTimes / 2) break;

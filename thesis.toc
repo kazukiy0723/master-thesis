@@ -42,5 +42,5 @@
 \contentsline {chapter}{謝辞}{63}{chapter*.42}%
 \contentsline {chapter}{\numberline {付録A }遅延聴覚フィードバックが身体運動に与える影響の調査の資料}{64}{appendix.A}%
 \contentsline {chapter}{\numberline {付録B }主観調査におけるアプリケーションのプログラム}{73}{appendix.B}%
-\contentsline {chapter}{\numberline {付録C }ボタン押し課題におけるアプリケーションのプログラム}{196}{appendix.C}%
-\contentsline {chapter}{\numberline {付録D }遅延時間の測定に用いたプログラム}{287}{appendix.D}%
+\contentsline {chapter}{\numberline {付録C }ボタン押し課題におけるアプリケーションのプログラム}{192}{appendix.C}%
+\contentsline {chapter}{\numberline {付録D }遅延時間の測定に用いたプログラム}{279}{appendix.D}%

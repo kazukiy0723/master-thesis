@@ -16,7 +16,6 @@
 #include"asio.h"
 #include"asiodrivers.h"
 
-// 追加ファイル
 #include<chrono>
 #include<iostream>
 #include<sstream>
@@ -32,7 +31,6 @@
 #include"file.h"
 #include"dialogbox.h"
 
-// Visualスタイル有効化
 #pragma comment(linker,"\"/manifestdependency:type='win32' \
 name='Microsoft.Windows.Common-Controls' version='6.0.0.0' \
 processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
@@ -72,36 +70,28 @@ RECT recthEdit1 = { 198, 98, 702, 402 };
 int call_count, temp_count;
 bool wavePlayed = false;
 extern int NumberOfloops;
-// 処理時間計測用
 std::chrono::system_clock::time_point start, before_start;
 extern int Num;
-//　時間差を保存するためのベクタ
 vector<string> MarginTime;
-// ボタンの押下回数を保持する変数
 int CountButtonClicked;
-// 親ウィンドウのハンドルを保持
 HWND hParentWindow;
-// 結果の出力先のパスを保持する変数
 string CSVFILENAME;
-// 実験方法の選択
 bool LABNormal;
 int TempNumberOfLoops;
-// 試行回数を保持する変数
 int TempNumberOfTrials;
-// ファイル名
 static char FileNameCSV[MAX_PATH];
 static char FileNameINI[MAX_PATH];
 
 // タイムスタンプ
 string TimeStampButtonClicked = _T("Nothing");
 
-// dialogbox.cppと共有
 extern int DelayTiming, DelayTime_ms;
 int DelayTimeUnique;
 
 // window.cppと共有
 extern RECT rGroupIni;
 extern RECT rGroupIni2;
+
 //WinMain関数
 int WINAPI WinMain(_In_ HINSTANCE hThisInst, _In_opt_ HINSTANCE hPrevInst, _In_ LPSTR lpszArgs, _In_ int nWinMode)
 {
@@ -109,13 +99,6 @@ int WINAPI WinMain(_In_ HINSTANCE hThisInst, _In_opt_ HINSTANCE hPrevInst, _In_ 
 	MSG				msg;
 	WNDCLASSEX		wcl;
 	HACCEL			haccel;
-
-	//// 二重起動防止
-	//HANDLE hMutex = CreateMutex(NULL, TRUE, _T("MyAppMutex"));
-	//if (GetLastError() == ERROR_ALREADY_EXISTS) {
-	//	MessageBox(NULL, _T("This Application is already running!"), _T("警告"), MB_OK |  MB_ICONWARNING);
-	//	return 0;
-	//}
 
 	//ウィンドウクラスの定義
 	wcl.cbSize = sizeof(WNDCLASSEX);				//WNDCLASSEX構造体のサイズ
@@ -796,12 +779,7 @@ void bufferswitch(long index, ASIOBool processNow) {
 					ScrollToBottom(hEdit1);
 				}
 				if (!LABNormal) {
-					/////////////////////////
-					// 実験方法が変則の場合
-					// ///////////////////////
-					/*ここにクリック音の再生タイミングをずらすためのプログラムを書く。*/
 					if (!((CountButtonClicked+1) % DelayTiming)) {
-						// 再生タイミングをずらす（1回目以外）
 						CalcLateNumberOfloops(hParentWindow, &DelayTimeUnique, DelayTime_ms, lenBuffer, FS, inlatency, outlatency);
 						NumberOfloops = NumberOfloops + DelayTimeUnique;
 					}
@@ -813,9 +791,8 @@ void bufferswitch(long index, ASIOBool processNow) {
 				if (CountButtonClicked == TempNumberOfTrials) {
 					string TempNumberString = _T("指定回数に達しました。");
 					MessageBox(NULL, TempNumberString.c_str(), _T("終了の合図"), MB_OK);
-					SetStddev2Window(MarginTime);                                                   // 標準偏差を計算し、ウィンドウに表示
+					SetStddev2Window(MarginTime);                                                   
 					
-					// 無効化
 					EnableWindow(GetDlgItem(hParentWindow, ID_LATESETTING), FALSE);
 					EnableWindow(GetDlgItem(hParentWindow, ID_LATESETTING_2), FALSE);
 					EnableWindow(GetDlgItem(hParentWindow, ID_LATEINI_2), FALSE);
@@ -855,9 +832,8 @@ void bufferswitch(long index, ASIOBool processNow) {
 		else {
 			tmplenbuffer = lenBuffer - position;
 		}
-		// ボタンが押されてから(NumberOfloops)回目のbufferswitch呼び出し時にWaveデータをコピー
 		if (call_count % NumberOfloops != 0) {
-			// 録音データ(音声信号)のコピー（出力バッファー2にコピー）
+			// 録音データ(音声信号)のコピー
 			switch (SampleType) {
 			case ASIOSTInt16LSB:
 				memcpy_s(BufInfo[numInChannels + idChannelClick].buffers[index], lenBuffer * 2, BufInfo[idChannelSound].buffers[index], lenBuffer * 2);
@@ -874,7 +850,7 @@ void bufferswitch(long index, ASIOBool processNow) {
 			call_count++;
 		}
 		else {
-			//WAVEデータのクリック音再生用バッファへのコピー（出力バッファー1と2にコピー）
+			//WAVEデータのクリック音再生用バッファへのコピー
 			switch (SampleType) {
 			case ASIOSTInt16LSB:
 				memcpy_s((void*)&(((char*)(BufInfo[numInChannels + idChannelClick].buffers[index]))[position * 2]), tmplenbuffer * 2, (void*)&(((char*)WaveData)[idxWaveData * 2]), tmplenbuffer * 2);
@@ -903,7 +879,7 @@ void bufferswitch(long index, ASIOBool processNow) {
 			
 		}
 	}
-		//録音データ(音声信号)のコピー（出力バッファー1にコピー）
+		//録音データ(音声信号)のコピー
 		switch (SampleType) {
 		case ASIOSTInt16LSB:
 			memcpy_s(BufInfo[numInChannels + idChannelSound].buffers[index], lenBuffer * 2, BufInfo[idChannelSound].buffers[index], lenBuffer * 2);
@@ -1032,7 +1008,6 @@ bool SendNowTimeToEdit(HWND hwndEdit, const char* timeStr) {
 	// 新しくエディットボックスに文字をセット
 	SetWindowText(hwndEdit, newText);
 
-	// 後始末
 	delete[] existingText;
 	delete[] newText;
 
@@ -1052,7 +1027,7 @@ const char* getMilliTime(std::chrono::system_clock::time_point now) {
 	std::time_t tt = std::chrono::system_clock::to_time_t(seconds);
 
 	// 時刻をローカルタイムに変換
-	std::tm* tm = std::localtime(&tt); // この関数はスレッドセーフではない
+	std::tm* tm = std::localtime(&tt); 
 
 	// 指定された形式で出力
 	std::ostringstream oss, oss2;
@@ -1071,7 +1046,6 @@ const char* getMilliTime(std::chrono::system_clock::time_point now) {
 	// グローバル変数に時刻を記憶（csvファイルに書き込む際に必要)
 	TimeStampButtonClicked = str2;
 	a = _T("ボタン押下時刻: ");
-	// 結果のconst char*を返す
 	str = a + str;
 	return str.c_str();
 }
@@ -1345,42 +1319,16 @@ int GetNowComboStr(HWND hWnd, int comboID) {
 
 // コンボボックスの選択項目から遅延時間を算出
 bool CalcLateNumberOfloops(HWND hwnd, int* NumberOfloops, int  Num, int lenbuffer, int rate, long inlatency, long outlatency){
-	/* 引数: ウィンドウハンドル, コンボボックスから得る文字列, バッファ長, サンプリング周波数, 
-	*          インプットレイテンシ, アウトプットレイテンシ
-	*/
-	////////////////////////
-	// 変数をms単位に変換
-	//////////////////////////
+	
 	TCHAR NumberOfloopsInfo[LENSTR];
-	// 入力レイテンシー（バッファ2個分の時間を減算）
 	double inlatency_ms = (double)inlatency * 1000.0 / (double)rate - (double)lenbuffer * 2.0 * 1000.0 / (double)rate;
-	// 出力レイテンシー
 	double outlatency_ms = (double)outlatency * 1000.0 / (double)rate;
-	// マイコンでの遅延
 	double kairo = (double)KAIROLATE;
 
-	// NumberOfloopsの計算
 	*NumberOfloops = ((double)Num - (inlatency_ms + outlatency_ms + kairo)) * (double)rate / ((double)lenbuffer * 1000.0);
 
 	// NumberOfloops == 0のとき、1に更新
 	if (*NumberOfloops < 1) *NumberOfloops = 1;
-
-
-	////メッセージボックスへの出力
-	//_stprintf_s(NumberOfloopsInfo, LENSTR,
-	//	_T("入力レイテンシ: %f [ms]\n"
-	//	"出力レイテンシ: %f [ms]\n"
-	//	"入出力レイテンシ: %f [ms]\n"
-	//	"遅延させたい時間: %d [ms]\n"
-	//	"回路による遅延: %f [ms]\n"
-	//	"バッファ長: %d [points]\n"
-	//	"Fs: %d [Hz]\n"
-	//	"NumberOfloops = %d\n"
-	//	"NumberOfloops(double) = %f"),
-	//	inlatency_ms, outlatency_ms, inlatency_ms + outlatency_ms, Num, kairo, lenbuffer, rate, *NumberOfloops,
-	//	((double)Num - (inlatency_ms + outlatency_ms + kairo)) * (double)rate / ((double)lenbuffer * 1000.0));
-
-	//MessageBox(hwnd, NumberOfloopsInfo, _T("計算結果"), MB_OK);
 
 	return true;
 
@@ -1449,8 +1397,6 @@ bool OnCommand(HWND hwnd, WPARAM wparam, LPARAM lparam) {
 		}
 		break;
 		
-		// 遅延時間の設定
-		// 配列の削除
 	case ID_MENU_RESTART:
 		if (MessageBox(hwnd, _T("結果をファイルに書き込みましたか？"), _T("確認"), MB_YESNO) == IDYES) {
 			if (ClearMarginTime(hwnd, MarginTime)) {
@@ -1669,25 +1615,9 @@ bool OnCommand(HWND hwnd, WPARAM wparam, LPARAM lparam) {
 				EnableWindow(GetDlgItem(hParentWindow, ID_LATEINI_2), TRUE);
 				EnableWindow(GetDlgItem(hParentWindow, ID_EDIT_LATEDATA_TIMING), TRUE);
 			}
-			// コンボボックスの更新
-			// コンボボックスの表示を次の選択肢に更新
-			//if (LABNormal) {
-			//	int NumberOfCursel = SendMessage(GetDlgItem(hParentWindow, ID_LATESETTING), CB_GETCOUNT, 0, 0); // 選択肢の数
-			//	int NowCursel = SendMessage(GetDlgItem(hParentWindow, ID_LATESETTING), CB_GETCURSEL, 0, 0);        // 現在の選択項目
-			//	if (NowCursel == NumberOfCursel - 1)
-			//		SendMessage(GetDlgItem(hParentWindow, ID_LATESETTING), CB_SETCURSEL, 0, 0); // 先頭項目に戻す
-			//	else SendMessage(GetDlgItem(hParentWindow, ID_LATESETTING), CB_SETCURSEL, NowCursel + 1, 0); // 次の項目に更新
-			//}
-			//else
-			//{
-			//	int NumberOfCursel = SendMessage(GetDlgItem(hParentWindow, ID_LATESETTING_2), CB_GETCOUNT, 0, 0); // 選択肢の数
-			//	int NowCursel = SendMessage(GetDlgItem(hParentWindow, ID_LATESETTING_2), CB_GETCURSEL, 0, 0);        // 現在の選択項目
-			//	if (NowCursel == NumberOfCursel - 1)
-			//		SendMessage(GetDlgItem(hParentWindow, ID_LATESETTING_2), CB_SETCURSEL, 0, 0); // 先頭項目に戻す
-			//	else SendMessage(GetDlgItem(hParentWindow, ID_LATESETTING_2), CB_SETCURSEL, NowCursel + 1, 0); // 次の項目に更新
-			//}
+			
 			WriteToCSV(hwnd, MarginTime, CSVFILENAME);
-			EnableWindow(GetDlgItem(hwnd, ID_LATESETTING), TRUE);        // コンボボックスの有効化
+			EnableWindow(GetDlgItem(hwnd, ID_LATESETTING), TRUE);        
 			EnableWindow(GetDlgItem(hParentWindow, ID_LATEINI), TRUE);
 
 		}
@@ -1733,7 +1663,6 @@ bool SetStddev2Window(const vector<string> mTime) {
 	}
 	// 不偏標準偏差を取得
 	double std_dev = calculate_unbiased_stddev(numbers);
-	// 小数点以下1桁までに丸める（中間の値（2.5や3.5など）は、最も近い偶数整数に四捨五入される）
 	std_dev = round(std_dev * 10.0) / 10.0;
 
 	// string型の文字列に変換
@@ -2013,15 +1942,6 @@ bool CreateControl(HWND hWnd, WPARAM wParam, LPARAM lParam) {
 		((LPCREATESTRUCT)(lParam))->hInstance, NULL
 	);
 
-	//HWND hBPM_IRREG = CreateWindow(
-	//	_T("STATIC"),
-	//	_T("通常"),
-	//	WS_CHILD | WS_VISIBLE | SS_LEFT,
-	//	rGroupSetting.left + 100, rGroupSetting.top + 110, 60, 25,
-	//	hWnd, (HMENU)ID_STATIC_NORMALORIRREG,
-	//	((LPCREATESTRUCT)(lParam))->hInstance, NULL
-	//);
-	
 	// 実験方法の選択用コンボボックス
 	HWND hComboLAB = CreateWindow(
 		_T("COMBOBOX"),
@@ -2086,7 +2006,6 @@ bool ReadIniFile(HWND hWnd, LPARAM lParam, char* IniFilePath) {
 			hWnd, (HMENU)ID_GROUP_LATEDATA,
 			((LPCREATESTRUCT)(lParam))->hInstance, NULL
 		);
-		//-------------------------------------------------------------------------
 		//*遅延時間設定用グループボックスの作成1（変則var)*/
 		HWND hGruoplatedata_2 = CreateWindow(
 			_T("BUTTON"),
@@ -2155,7 +2074,6 @@ bool ReadIniFile(HWND hWnd, LPARAM lParam, char* IniFilePath) {
 			hWnd, (HMENU)ID_LATESETTING_2,
 			((LPCREATESTRUCT)(lParam))->hInstance, NULL);
 
-		/*-----------------------------------------------------------------------------------*/
 		HWND hStaticlatedataCombo = CreateWindow(
 			_T("STATIC"),
 			_T("基本:"),
@@ -2272,9 +2190,6 @@ using namespace std;
 
 #pragma comment(lib, "shlwapi.lib")
 
-//////////////////////////////////////////////
-// [名前を付けて保存]ダイアログボックスの作成（CSVファイル）
-//////////////////////////////////////////////
 bool SelectFile(HWND hWnd, char* FileName) {
 
 	static OPENFILENAME ofn;
@@ -2300,9 +2215,6 @@ bool SelectFile(HWND hWnd, char* FileName) {
 	return true;
 }
 
-//////////////////////////////////////////////
-// [名前を付けて保存]ダイアログボックスの作成（INIファイル）
-// //////////////////////////////////////////
 bool SelectIniFile(HWND hWnd, char* Filename) {
 
 	static OPENFILENAME ofn;
@@ -2355,7 +2267,6 @@ bool RelativepathFromAbsolutepath(char* absolutePath, HWND hwnd, int ID, bool fl
 	);
 
 	string temp = relativePath;
-	// ".\\"を削除
 	temp.erase(temp.begin() + 0, temp.begin() + 2);
 	if (flag) {
 		temp += _T(" (変則)");

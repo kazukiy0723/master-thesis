@@ -23,7 +23,6 @@ for _ in range(multiprocessing.cpu_count()):
     p.start()
     processes.append(p)
 
-# プロセスが終了しないように待機
 try:
     while True:
         time.sleep(1)
@@ -38,9 +37,9 @@ clear all
 
 filename = 'delayTime_test2.csv'; % 出力先ファイル
 fs = 48000; 
-nbits = 16; %  量子ビット数
+nbits = 16; 
 nChannel = 2; 
-buffer = 5000; % 標準偏差を算出するときのサンプル数
+buffer = 5000; 
 length_record = 10; 
 
 recorder = audiorecorder(fs, nbits, nChannel);
@@ -57,7 +56,6 @@ if(nChannel == 2)
     channel2 = myRecording(:, 2);
 end
 
-% index2の計算
 analyzed_segment = channel2(1000:6000);
 % mean_val = mean(analyzed_segment);
 std_val = std(analyzed_segment);
@@ -66,7 +64,6 @@ threshold2 = 2 * std_val;
 index2 = find(abs(channel2) > threshold2); 
 
 try
-    % index2からbuffer点前までの信号を切り取る
     start = max(1, index2(1)-buffer);  
     data_to_analyze = channel1(start:index2(1)-1);
 
@@ -74,7 +71,6 @@ try
     mean_val1 = mean(data_to_analyze);
     std_val1 = std(data_to_analyze);
     threshold1 = 2 * std_val1;
-    % 平均+2標準偏差を初めて超えた点をindex1
     index1 = find(abs(data_to_analyze) > threshold1, 1) + start - 1;
 
     
@@ -106,11 +102,8 @@ line([Channel2_ExceedTime, Channel2_ExceedTime], ylim, 'Color', 'b', 'LineStyle'
 
 xlabel('Time [ms]', 'FontSize', 20);  
 ylabel('Amplitude', 'FontSize', 20);  
-
-% 凡例の設定
 legend('Channel 1','Channel 2', 'FontSize', 20);
 
 hold off;
-
 \end{lstlisting}
     
